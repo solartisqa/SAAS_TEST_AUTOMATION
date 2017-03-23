@@ -31,14 +31,74 @@ public void perform(String p,String operation,String objectType,String value,Str
        
 switch (operation.toUpperCase())
 {
+//--------------------------------------------------------WAITING FOR IMG INVISIBILITY----------------------------------------------------------------------------     
+case "WAIT FOR IMGIDVISIBLE":	
+		try
+		{
+			wait = new WebDriverWait(driver, waitingTimeinseconds);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(p,objectType)));
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(this.getObject(p,objectType)));
+			break;
+		}
+		catch(Exception e)
+		{
+			System.out.println("waited for invisibility");
+			break;
+		}		
+//--------------------------------------------------------WAITING FOR PRESENCE-CLICKABLE-VISIBILITY----------------------------------------------------------------------------     		
+case "WAIT FOR PRESENCE-CLICKABLE-VISIBILITY ":
+		try 
+		{
+			wait = new WebDriverWait(driver, waitingTimeinseconds);
+    	    wait.until(ExpectedConditions.presenceOfElementLocated(this.getObject(p,objectType)));
+    	    wait.until(ExpectedConditions.elementToBeClickable(this.getObject(p,objectType)));
+    	    wait.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(p,objectType)));
+		}
+		catch(Exception e)
+		{
+			wait = new WebDriverWait(driver, waitingTimeinseconds);
+    	    wait.until(ExpectedConditions.presenceOfElementLocated(this.getObject(p,objectType)));
+    	    wait.until(ExpectedConditions.elementToBeClickable(this.getObject(p,objectType)));
+    	    wait.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(p,objectType)));
+		}
+//--------------------------------------------------------WAITING FOR PRESENCE-VISIBILITY----------------------------------------------------------------------------     				
+case "WAIT FOR PRESENCE-VISIBILITY":		
+		try 
+		{
+			wait = new WebDriverWait(driver, waitingTimeinseconds);
+        	wait.until(ExpectedConditions.presenceOfElementLocated(this.getObject(p,objectType)));
+        	wait.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(p,objectType)));
+		}
+		catch(Exception e)
+ 		{
+			wait = new WebDriverWait(driver, waitingTimeinseconds);
+        	wait.until(ExpectedConditions.presenceOfElementLocated(this.getObject(p,objectType)));
+        	wait.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(p,objectType)));
+ 		}
+//--------------------------------------------------------CLEAR-----------------------------------------------------------------------------------------------------
+case "ClEAR":
+		try
+		{
+			driver.findElement(this.getObject(p,objectType)).clear();
+		}
+		catch(Exception e)
+		{
+			driver.findElement(this.getObject(p,objectType)).clear();
+		}
+//--------------------------------------------------------ENTER-----------------------------------------------------------------------------------------------------		
+case "ENTER":
+		try
+		{
+			driver.findElement(this.getObject(p,objectType)).sendKeys(Keys.ENTER);  	
+		}
+		catch(Exception e)
+		{
+			driver.findElement(this.getObject(p,objectType)).sendKeys(Keys.ENTER);
+		}
 //-------------------------------click operation-------------------------------------------------------------------------------
 case "CLICK":
         try
         {
-        	wait = new WebDriverWait(driver, waitingTimeinseconds);
-        	wait.until(ExpectedConditions.elementToBeClickable(this.getObject(p,objectType)));
-    		wait.until(ExpectedConditions.presenceOfElementLocated(this.getObject(p,objectType)));
-            wait.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(p,objectType)));
         	driver.findElement(this.getObject(p,objectType)).click(); 	
         }
         catch(StaleElementReferenceException e)
@@ -59,15 +119,7 @@ case "CLICK":
         		inputValue = value;
         		break;
           }
-        		 wait = new WebDriverWait(driver, 30);
-        		 wait = new WebDriverWait(driver, waitingTimeinseconds);
-     		     wait.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(p,objectType)));
-     		     wait.until(ExpectedConditions.presenceOfElementLocated(this.getObject(p,objectType)));
-         	     wait.until(ExpectedConditions.elementToBeClickable(this.getObject(p,objectType)));
-        		driver.findElement(this.getObject(p,objectType)).clear();
-        		driver.findElement(this.getObject(p,objectType)).sendKeys(Keys.ENTER);
         		driver.findElement(this.getObject(p,objectType)).sendKeys(inputValue);
-        		driver.findElement(this.getObject(p,objectType)).sendKeys(Keys.ENTER);
         		break;  		 
      }       
    catch(StaleElementReferenceException e)
@@ -81,9 +133,6 @@ case "CLICK":
 	 try
 	 {
 		 inputValue = value;
-		 wait = new WebDriverWait(driver, waitingTimeinseconds);
-         wait.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(p,objectType)));
-         wait.until(ExpectedConditions.elementToBeClickable(this.getObject(p,objectType)));
          driver.get(inputValue);     
 	 }
 	 catch(StaleElementReferenceException e)
@@ -95,9 +144,6 @@ case "CLICK":
  case "GETATTRIBUTE":
         try
         {
-            wait = new WebDriverWait(driver, waitingTimeinseconds);
-        	wait.until(ExpectedConditions.presenceOfElementLocated(this.getObject(p,objectType)));
-        	wait.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(p,objectType)));
             String text=browserLaunching.driver.findElement(this.getObject(p,objectType)).getAttribute("value");   
             output.write_data(dbcolumn_name,text);
             output.update_row();      
@@ -111,9 +157,6 @@ case "CLICK":
  case "GETTEXT":
 	 try
 	 {
-		    wait = new WebDriverWait(driver, waitingTimeinseconds);
-		    wait.until(ExpectedConditions.presenceOfElementLocated(this.getObject(p,objectType)));
-            wait.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(p,objectType)));
             String text1=driver.findElement(this.getObject(p,objectType)).getText();
             output.write_data(dbcolumn_name,text1);
             output.update_row();      
@@ -139,13 +182,8 @@ case "CLICK":
      		inputValue = value;
      		break;
            }      
-                wait = new WebDriverWait(driver, waitingTimeinseconds);
-        	    wait.until(ExpectedConditions.presenceOfElementLocated(this.getObject(p,objectType)));
-        	    wait.until(ExpectedConditions.elementToBeClickable(this.getObject(p,objectType)));
-        	    wait.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(p,objectType)));
-        		Select dropdown = new Select(driver.findElement(this.getObject(p,objectType)));
-        		dropdown.selectByVisibleText(inputValue);
-        		driver.findElement(this.getObject(p,objectType)).sendKeys(Keys.ENTER);  		
+          		Select dropdown = new Select(driver.findElement(this.getObject(p,objectType)));
+        		dropdown.selectByVisibleText(inputValue);  		
        }
 	 catch(StaleElementReferenceException|TimeoutException e)
 	 {
@@ -156,10 +194,6 @@ case "CLICK":
  case "MOUSEHOVER": 
 	 try
 	 {
-		    wait = new WebDriverWait(driver, waitingTimeinseconds);
-		    wait.until(ExpectedConditions.presenceOfElementLocated(this.getObject(p,objectType)));
-     	    wait.until(ExpectedConditions.elementToBeClickable(this.getObject(p,objectType)));
-        	wait.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(p,objectType)));
         	Actions mouse_hover = new Actions(driver);
 			mouse_hover.moveToElement(driver.findElement(this.getObject(p,objectType))).build().perform();
 				
@@ -184,12 +218,7 @@ case "AUTOCOMPLETE":
     		inputValue = value;
     		break;
        }
-        	wait = new WebDriverWait(driver, waitingTimeinseconds);	
-        	wait.until(ExpectedConditions.presenceOfElementLocated(this.getObject(p,objectType)));
-            wait.until(ExpectedConditions.elementToBeClickable(this.getObject(p,objectType)));
-            wait.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(p,objectType)));
         	driver.findElement(this.getObject(p,objectType)).sendKeys(inputValue);
-        	driver.findElement(this.getObject(p,objectType)).sendKeys(Keys.ENTER);
 	}
 	catch(StaleElementReferenceException e)
 	{
@@ -197,28 +226,6 @@ case "AUTOCOMPLETE":
 	       
 	}
 	 break;
-	
-//-----------------------------------------------------CLICK RADIO BUTTON BY CONCATINATING ITS VALUE ATTRIBUTE---------------------------------------------------------------------------        	
-case "RADIOBUTTONVAL":
-	
-	try
-	{
-       wait = new WebDriverWait(driver, waitingTimeinseconds);	
-       String dbvalue=input.read_data(dbcolumn_name);
-       System.out.println(p+dbvalue+"']");
-	   wait.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(p,objectType)));
-	   wait.until(ExpectedConditions.presenceOfElementLocated(this.getObject(p,objectType)));
-	   wait.until(ExpectedConditions.elementToBeClickable(this.getObject(p,objectType))); 
-       driver.findElement(this.getObject(p,objectType)).sendKeys(Keys.ENTER);
-       driver.findElement(this.getObject(p,objectType)).click();
-       System.out.println("Click Completed");
-      
-	}
-	catch(StaleElementReferenceException e)
-	{
-		this.perform(p, operation, objectType, value, dbcolumn_name, dataFlag, input, output, driver, waitingTime);
-	}
-   break;
 //------------------------------------------------------ASSERTION-------------------------------------------------------------------	       	
 case "ASSERTTEXT":
 	 try
@@ -296,14 +303,8 @@ case "DATEPICKER":
       		inputValue = value;
       		break;
      } 		
-     	wait = new WebDriverWait(driver, 30);
-     	wait = new WebDriverWait(driver, waitingTimeinseconds);
-  		wait.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(p,objectType)));
-  	    wait.until(ExpectedConditions.presenceOfElementLocated(this.getObject(p,objectType)));
-      	wait.until(ExpectedConditions.elementToBeClickable(this.getObject(p,objectType)));
      	driver.findElement(this.getObject(p,objectType)).clear();
      	driver.findElement(this.getObject(p,objectType)).sendKeys(inputValue);
-        driver.findElement(this.getObject(p,objectType)).sendKeys(Keys.ENTER);
    }
 catch(StaleElementReferenceException e)
  {
@@ -315,8 +316,6 @@ catch(StaleElementReferenceException e)
 case "WAITLOAD":
 	try
 	{
-	wait = new WebDriverWait(driver, waitingTimeinseconds); 
-	wait.until(ExpectedConditions.elementToBeClickable(this.getObject(p,objectType)));
 	WebElement element = driver.findElement(this.getObject(p,objectType));
 	element.isDisplayed();
 	break;
@@ -339,8 +338,6 @@ case "CONTOPERATION":
   		inputValue = value;
   		break;
  	}
-	 wait = new WebDriverWait(driver, waitingTimeinseconds); 
-	 wait.until(ExpectedConditions.elementToBeClickable(this.getObject(p,objectType)));
 	 WebElement element1= driver.findElement(this.getObject(p,objectType));
      Actions builder = new Actions(driver);
      Actions seriesOfActions = builder.moveToElement(element1).click().sendKeys(element1, inputValue);
@@ -352,20 +349,6 @@ case "CONTOPERATION":
 	 }
 	 break;
      
-//--------------------------------------------------------WAITING FOR IMG INVISIBILITY----------------------------------------------------------------------------     
-case "IMGIDVISIBLE":	
-	try
-	{
-	wait = new WebDriverWait(driver, waitingTimeinseconds);
-	wait.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(p,objectType)));
-	wait.until(ExpectedConditions.invisibilityOfElementLocated(this.getObject(p,objectType)));
-	break;
-	}
-	catch(Exception e)
-	{
-		System.out.println("waited for invisibility");
-		break;
-	}
 //----------------------------------------------------------------------------------------------------------------------------------------------------	
 default:
 	    System.out.println("operations not  performed");
