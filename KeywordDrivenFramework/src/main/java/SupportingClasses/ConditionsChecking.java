@@ -7,12 +7,13 @@ public class ConditionsChecking {
 	
 	public boolean condition_reading(String condition,databaseOperartions input,databaseOperartions output) throws SQLException
 	{
-		boolean condition_reading=false;
+		boolean condition_reading=true;
 		
 		
 		if(condition.equals(""))
 		{
 			condition_reading=true;
+			return condition_reading;
 		}
 		else
 		{
@@ -29,7 +30,18 @@ public class ConditionsChecking {
 		
 		for(int i=0;i<length;i++)
 		{
-			String[] cond_value=splits[i].split("=");
+			String[] cond_value = new String[10];
+			String operator = null;
+			if(splits[i].contains("="))
+			{
+				cond_value=splits[i].split("=");
+				operator = "=";
+			}
+			else if(splits[i].contains("<>"))
+			{
+				cond_value=splits[i].split("<>");
+				operator = "<>";
+			}
 			String cond=cond_value[0];
 			//System.out.println("condition="+cond);
 			String value=cond_value[1];
@@ -41,11 +53,22 @@ public class ConditionsChecking {
 			{
 				//System.out.println(input.read_data(cond));
 				//System.out.println(individualValue[j]);
-				if(input.read_data(cond).equals(individualValue[j]))
+				switch(operator)
 				{
+				case "=": if(!(input.read_data(cond).equals(individualValue[j])))
+							{
 					//System.out.println("condition satisfied");
-					 condition_reading=true;
-					 return condition_reading;
+					 			condition_reading=false;
+					 			return condition_reading;
+							}
+							break;
+				case "<>": if(input.read_data(cond).equals(individualValue[j]))
+							{
+		//System.out.println("condition satisfied");
+		 						condition_reading=false;
+		 						return condition_reading;
+							}
+							break;
 				}
 			}
 				
