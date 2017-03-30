@@ -35,7 +35,7 @@ public class StarrassistBenefitsCheck
 		objectUIoperations=new UIoperartions();
 		objectconditions=new ConditionsChecking();
 
-		configFile = new propertiesHandle("A:/1 Projects/13 Starr Assist/PDF Change/Configuration/Config_C1128.properties");
+		configFile = new propertiesHandle("A:/1 Projects/14 CVSTARR/SSE/config/config.properties");
 		databaseOperartions.conn_setup(configFile);
 		System.setProperty("jsse.enableSNIExtension", "false");
 		
@@ -56,8 +56,9 @@ public class StarrassistBenefitsCheck
 		log.debug("browser launched");
 		if(driver!=null)
 		{
-			driver.findElement(By.id("loginForm:login_username")).sendKeys(configFile.getProperty("userName"));
-			driver.findElement(By.id("loginForm:login_password")).sendKeys(configFile.getProperty("password"));
+
+			driver.findElement(By.name("answer(Object::UserDetail::userName)")).sendKeys(configFile.getProperty("userName"));
+			driver.findElement(By.name("answer(Object::UserDetail::passWord)")).sendKeys(configFile.getProperty("password"));
 			driver.findElement(By.xpath("//input[@value='Log In']")).click(); 
 			log.debug("successfully login");
 		}
