@@ -14,7 +14,6 @@ import SupportingClasses.browserLaunching;
 import org.apache.log4j.Logger;
 //import org.apache.log4j.xml.DOMConfigurator;
 
-
 public class StarrassistBenefitsCheck 
 {
 	//***************************global objects and variables****************************************	
@@ -24,49 +23,54 @@ public class StarrassistBenefitsCheck
 	public static String dbColumnNmae=null;
 	public static UIoperartions objectUIoperations=null;
 	public static ExcelOperationsJXL objectTestScript=null;
+	public static ExcelOperationsJXL objectLoginScript=null;
 	public static browserLaunching objectBrowse=null;
 	public static propertiesHandle configFile;
 	public static ConditionsChecking objectconditions=null;	
-	public static void main(String args[]) throws Exception
 	
-	
+	public static void main(String args[]) throws Exception	
 	{
 		objectBrowse=new browserLaunching();
 		objectUIoperations=new UIoperartions();
 		objectconditions=new ConditionsChecking();
-
-		configFile = new propertiesHandle("A:/1 Projects/14 CVSTARR/SSE/config/config.properties");
+		configFile = new propertiesHandle("A:/1 Projects/13 Starr Assist/PDF Change/Configuration/Config_Automation4.properties");
 		databaseOperartions.conn_setup(configFile);
-		System.setProperty("jsse.enableSNIExtension", "false");
-		
-		
+		System.setProperty("jsse.enableSNIExtension", "false");	
 		objectInput = new databaseOperartions();
 		objectOutput = new databaseOperartions();
-		
-		
-		
 		objectInput.get_dataobjects(configFile.getProperty("input_query"));
 		objectOutput.get_dataobjects(configFile.getProperty("output_query"));
 		Logger log = Logger.getLogger("devpinoyLogger");
 		
-//********************Login operation*************************************************************************************************************  
+//********************Login operation************************************************************************************************************* 
+		
 	    String browser=configFile.getProperty("browser");
 		String url=configFile.getProperty("url");
 		driver=objectBrowse.launch_browser(browser,url,configFile);
 		log.debug("browser launched");
-		if(driver!=null)
-		{
-
-			driver.findElement(By.name("answer(Object::UserDetail::userName)")).sendKeys(configFile.getProperty("userName"));
-			driver.findElement(By.name("answer(Object::UserDetail::passWord)")).sendKeys(configFile.getProperty("password"));
-			driver.findElement(By.xpath("//input[@value='Log In']")).click(); 
-			log.debug("successfully login");
-		}
-		else
-		{
-			log.debug("driver object is null");
-			System.out.println("driver object is null");
-		}		
+		
+		objectLoginScript = new ExcelOperationsJXL(configFile.getProperty("Test_script_path")+configFile.getProperty("File_name"));
+		objectLoginScript.getsheets("Login");
+		objectLoginScript.set_rownumber(1);
+		System.out.println(objectLoginScript.get_sheetname());
+			
+			while(objectLoginScript.has_next_row())
+			{
+				if(objectLoginScript.read_data(objectLoginScript.get_rownumber(),8).toString().equals("enabled"))
+						{
+					String actionKeyword = objectLoginScript.read_data(objectLoginScript.get_rownumber(),2);
+					String ObjectType = objectLoginScript.read_data(objectLoginScript.get_rownumber(),3);
+					String PropertyString= objectLoginScript.read_data(objectLoginScript.get_rownumber(),4);
+					String dbcolumnNmae = objectLoginScript.read_data(objectLoginScript.get_rownumber(),5);
+					String value = objectLoginScript.read_data(objectLoginScript.get_rownumber(),6);
+					String dataProvidingFlag=objectLoginScript.read_data(objectLoginScript.get_rownumber(),9);
+					String  waitingTime=objectLoginScript.read_data(objectLoginScript.get_rownumber(),10);
+					objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,dbcolumnNmae,dataProvidingFlag,objectInput,objectOutput,driver,waitingTime);
+					
+						}
+				objectLoginScript.next_row();
+			}	
+	
 //************************************************************************************************************************************************
 		objectTestScript = new ExcelOperationsJXL(configFile.getProperty("Test_script_path")+configFile.getProperty("File_name"));
 		objectTestScript.getsheets("Test_Scripts");
@@ -87,7 +91,7 @@ public class StarrassistBenefitsCheck
 			String conditions=objectTestScript.read_data(objectTestScript.get_rownumber(),7);
 			// boolean blnConditionStatus=objectconditions.condition_reading(conditions, objectInput, objectOutput);
 			 //System.out.println(blnConditionStatus);
-			if(objectTestScript.read_data(objectTestScript.get_rownumber(),8).toString().equals("enabled")&& objectconditions.condition_reading(conditions, objectInput, objectOutput))
+			if(objectTestScript.read_data(objectTestScript.get_rownumber(),8).toString().equals("enabled")&& objectconditions.condition_reading(conditions, objectInput))
 			{	
 				   //System.out.println("condition true for "+objectTestScript.read_data(objectTestScript.get_rownumber(),1));
 					//String pageName = objectTestScript.read_data(objectTestScript.get_rownumber(),0);
