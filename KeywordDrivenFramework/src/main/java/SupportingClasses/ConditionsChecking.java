@@ -88,7 +88,7 @@ public class ConditionsChecking {
 		
 	}
 	
-public static void main(String args[]) throws ClassNotFoundException, SQLException
+/*public static void main(String args[]) throws ClassNotFoundException, SQLException
 {
 	propertiesHandle configFile = new propertiesHandle("A:/1 Projects/13 Starr Assist/PDF Change/Configuration/Config_C1128.properties");
 	databaseOperartions.conn_setup(configFile);
@@ -108,6 +108,6 @@ public static void main(String args[]) throws ClassNotFoundException, SQLExcepti
 	   databaseOperartions.close_conn(); 
 	
 	
-}
+} */
 
 }
