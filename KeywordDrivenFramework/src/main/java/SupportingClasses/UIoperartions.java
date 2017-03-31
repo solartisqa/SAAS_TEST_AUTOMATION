@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.TakesScreenshot;
-import KeywordDrivenFramework.StarrassistBenefitsCheck;
+import KeywordDrivenFramework.DriverScript;
 
 
 public class UIoperartions {
@@ -236,7 +236,7 @@ case "SCREENSHOT":
     	   
     	     System.out.println("Taking Screenshot"); 
     	     File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-    	     String Test_data_name=StarrassistBenefitsCheck.objectInput.read_data("test_data_name");
+    	     String Test_data_name=DriverScript.objectInput.read_data("test_data_name");
     	   	 FileUtils.copyFile(scrFile, new File("D:\\sas\\sas1\\"+Test_data_name+".png"));
     	   	 wait = new WebDriverWait(driver, waitingTimeinseconds);	
     	   	 break;
