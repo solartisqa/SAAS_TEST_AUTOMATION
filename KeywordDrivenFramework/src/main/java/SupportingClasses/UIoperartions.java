@@ -28,10 +28,8 @@ public class UIoperartions extends browserLaunching {
 public void perform(String p,String operation,String objectType,String value,String dbcolumn_name,String dataFlag,databaseOperartions input,databaseOperartions output,String waitingTime) throws SQLException, IOException
 {
 	long waitingTimeinseconds=Long.parseLong(waitingTime);
-	
 	//System.out.println("waitingtime"+waitingTimeinseconds);
 	wait = new WebDriverWait(driver, waitingTimeinseconds);
-	
 try
 {
 switch (operation.toUpperCase())
@@ -79,7 +77,7 @@ case "AUTOCOMPLETE":
 //--------------------------------------------------------------------------------------------------------------------------------       	
 case "ASSERTTEXT":
 	  	 inputValue = value;
-	  	 this.assertText(operation, objectType, inputValue);
+	  	 this.assertText(p, objectType, inputValue);
 	  	 break; 	   
 //------------------------------------------------SCREENSHOT------------------------------------------------------------------   	
 case "SCREENSHOT":
@@ -89,7 +87,7 @@ case "SCREENSHOT":
     	   		
 case "RADIOBUTTON":
 	     inputValue = this.getInputValue(dataFlag, input, value, dbcolumn_name);
-	     this.radioButton(p, objectType, inputValue);
+	     this.radioButton(p, objectType,inputValue);
 		 break;
 //------------------------------------------DATE PICKER-----------------------------------------------------------------------------------------
 case "DATEPICKER":
@@ -347,12 +345,5 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 	 	}
 	 	return inputValue;
  }
-
-
-
-
-
-
-
     
 }
