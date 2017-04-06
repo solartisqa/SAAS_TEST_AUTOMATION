@@ -1,11 +1,16 @@
 package KeywordDrivenFramework;
 
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
+
+import SupportingClasses.TheEventListener;
 import SupportingClasses.propertiesHandle;
 import SupportingClasses.ConditionsChecking;
 import SupportingClasses.UIoperartions;
 import SupportingClasses.databaseOperartions;
 import SupportingClasses.ExcelOperationsJXL;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -18,12 +23,15 @@ public class DriverScript
 	protected ExcelOperationsJXL objectLoginScript=null;
 	protected propertiesHandle configFile;
 	protected ConditionsChecking objectconditions=null;
+	protected static TheEventListener event;
+	
 	
 	public static void main(String args[]) throws ClassNotFoundException, SQLException, IOException
 	{
 		databaseOperartions objectInput = new databaseOperartions();
 		databaseOperartions objectOutput = new databaseOperartions();
-		propertiesHandle configFile = new propertiesHandle("A:/1 Projects/13 Starr Assist/Release3/QARelease/Configuration/Config_C1128.properties");
+		event=new TheEventListener();
+		propertiesHandle configFile = new propertiesHandle("A:/1 Projects/14 CVSTARR/SSE/config/config.properties");
 		databaseOperartions.conn_setup(configFile);
 		System.setProperty("jsse.enableSNIExtension", "false");	
 		DriverScript objDriver=new DriverScript(configFile);
@@ -40,6 +48,9 @@ public class DriverScript
 				 loginStatus=false;
 			   
 			   }
+			 String testdata=objectInput.read_data("test_case_id");
+			 System.out.println(testdata);
+			  event.testData(testdata);
 			  if(objectInput.read_data("flag_for_execution").equals(configFile.getProperty("flagForExecution")))
 				{  
 				   objDriver.executeTestScript(objectInput, objectOutput);
@@ -62,7 +73,14 @@ public class DriverScript
 		databaseOperartions.close_conn();
 		objDriver.closeBrowser();
 }
+	
+	//================================================================================================
+	
+	public DriverScript()
+	{
 		
+	}
+	
 //===========constructor to initialize objects======================================================================================================================
 public DriverScript(propertiesHandle configFile) throws SQLException, ClassNotFoundException
 {
@@ -84,7 +102,10 @@ public void launchBrowser()
 {
 	    String browser = configFile.getProperty("browser");
 		String url = configFile.getProperty("url");
+		//System.out.println(url);
+		
 		objectUIoperations.launch_browser(browser,url,configFile);
+			
 }
 
 //==============================================Function to login===================================================================================================
