@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
@@ -73,7 +74,7 @@ case "CLICK":
 //-----------------------------------------------AUTO COMPLETE--------------------------------------------------------------------------------------	  
 case "AUTOCOMPLETE":
 		 inputValue = this.getInputValue(dataFlag, input, value, dbcolumn_name);
-		 this.autoComplete(p, objectType, value);
+		 this.autoComplete(p, objectType, inputValue);
 		 break;
 //--------------------------------------------------------------------------------------------------------------------------------       	
 case "ASSERTTEXT":
@@ -93,7 +94,7 @@ case "RADIOBUTTON":
 //------------------------------------------DATE PICKER-----------------------------------------------------------------------------------------
 case "DATEPICKER":
 		 inputValue = this.getInputValue(dataFlag, input, value, dbcolumn_name);
-		 this.datePicker(p, objectType, value);
+		 this.datePicker(p, objectType, inputValue);
          break;
 
 //-------------------------------------------------------------WAIT FOR LOAD-----------------------------------------------------------------
@@ -103,7 +104,7 @@ case "WAITLOAD":
 //-------------------------------------------------------CONTINUES OPERATION------------------------------------------------------------------------------	
 case "CONTOPERATION":
 		inputValue = this.getInputValue(dataFlag, input, value, dbcolumn_name);
-		this.contSendkeysOperation(p, objectType, value);
+		this.contSendkeysOperation(p, objectType, inputValue);
 		break;
      
 //--------------------------------------------------------WAITING FOR IMG INVISIBILITY----------------------------------------------------------------------------     
@@ -114,7 +115,7 @@ case "IMGIDVISIBLE":
 //---------------------------------------------------------Set text without enter-------------------------------------------------------------------------------------------	
 case "SETTEXT_WITHOUT_ENTER":
 		inputValue = this.getInputValue(dataFlag, input, value, dbcolumn_name);
-		this.setTextWithoutEnter(p, objectType, value);
+		this.setTextWithoutEnter(p, objectType, inputValue);
 		break;
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 default:
@@ -346,5 +347,12 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 	 	}
 	 	return inputValue;
  }
+
+
+
+
+
+
+
     
 }
