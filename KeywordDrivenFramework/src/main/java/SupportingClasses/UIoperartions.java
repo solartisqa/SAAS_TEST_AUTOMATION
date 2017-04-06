@@ -87,7 +87,7 @@ case "SCREENSHOT":
     	   		
 case "RADIOBUTTON":
 	     inputValue = this.getInputValue(dataFlag, input, value, dbcolumn_name);
-	     this.radioButton(p, objectType, inputValue);
+	     this.radioButton(p, objectType,inputValue);
 		 break;
 //------------------------------------------DATE PICKER-----------------------------------------------------------------------------------------
 case "DATEPICKER":
@@ -345,12 +345,5 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 	 	}
 	 	return inputValue;
  }
-
-
-
-
-
-
-
     
 }
