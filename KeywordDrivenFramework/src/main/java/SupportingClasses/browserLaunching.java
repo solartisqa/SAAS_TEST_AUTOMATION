@@ -1,25 +1,31 @@
 package SupportingClasses;
 
 import java.util.concurrent.TimeUnit;
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.remote.CapabilityType;
 
 public class browserLaunching {
 	
-	public static WebDriver driver=null;
-	public static WebDriverWait wait=null; 
+	protected WebDriver wdriver=null;
+	protected EventFiringWebDriver driver=null;
+	protected TheEventListener eventListerner=null;
+			
+	protected WebDriverWait wait=null; 
+	
 	 public WebDriver launch_browser(String browser,String url,propertiesHandle config)
 	 {
 		 DesiredCapabilities capabilities = new DesiredCapabilities();
 		 String driver_path = config.getProperty("driver_path");
-			switch(browser.toUpperCase()) 
-			{
+	   switch(browser.toUpperCase()) 
+		{
+					
 			case "IE":
 				    System.setProperty("webdriver.ie.driver",driver_path + "IEDriverServer.exe");
 				 	capabilities.setCapability("browser", "IE");
@@ -42,10 +48,13 @@ public class browserLaunching {
 					capabilities.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS,false);
 					capabilities.setCapability("browserstack.debug", true);
 					System.out.println(browser);			
-				    driver = new InternetExplorerDriver(capabilities);
+				    wdriver = new InternetExplorerDriver(capabilities);
+				    driver=new EventFiringWebDriver(wdriver);
+				    eventListerner=new TheEventListener();
+				    driver.register(eventListerner);
 				    driver.manage().deleteAllCookies();
+				    driver.manage().window().maximize();
 				    driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
-				    driver.get(url);
 				    break;
 				 
 			case "CHROME":
@@ -58,10 +67,12 @@ public class browserLaunching {
 					capabilities.setCapability("os_version", "7");
 					capabilities.setCapability("resolution", "800x600");
 					capabilities.setCapability("browserstack.debug", true);
-					driver = new ChromeDriver(capabilities);
+					wdriver = new ChromeDriver(capabilities);
+					driver=new EventFiringWebDriver(wdriver);
+				    eventListerner=new TheEventListener();
+				    driver.register(eventListerner);
+					driver.manage().deleteAllCookies();
 					driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-					wait = new WebDriverWait(driver, 30);
-					driver.get(url);
 					break;
 				
 				
@@ -79,10 +90,13 @@ public class browserLaunching {
 					capabilities.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
 					capabilities.setCapability(InternetExplorerDriver.ENABLE_ELEMENT_CACHE_CLEANUP,true);
 					capabilities.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS,false);		
-					driver=new FirefoxDriver(capabilities);  
+					wdriver=new FirefoxDriver(capabilities);
+					driver=new EventFiringWebDriver(wdriver);
+				    eventListerner=new TheEventListener();
+				    driver.register(eventListerner);
+					driver.manage().deleteAllCookies();
 					driver.manage().window().maximize();
 					driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
-					driver.get(url);
 					break;
 					
 		   default	:	 
@@ -92,17 +106,9 @@ public class browserLaunching {
 		return driver;
 	 }
 	 
-	 public void login(String url,String username,String password)
-		{
-			 //driver.get(url);
-			 driver.findElement(By.name("answer(Object::UserDetail::userName)")).sendKeys(username);
-			 driver.findElement(By.name("answer(Object::UserDetail::passWord)")).sendKeys(password);
-			 driver.findElement(By.xpath("//input[@value='Log In']")).click(); 
-		}
 
-		
 	 public void stop_browser()
 		{
-			driver.quit();
+			wdriver.quit();
 		}
 }

@@ -1,4 +1,4 @@
-package KeywordDrivenFramework;
+package CvstarrSmoke;
 
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -31,7 +31,7 @@ public class DriverScript
 		databaseOperartions objectInput = new databaseOperartions();
 		databaseOperartions objectOutput = new databaseOperartions();
 		event=new TheEventListener();
-		propertiesHandle configFile = new propertiesHandle("A:/1 Projects/14 CVSTARR/SSE/config/config.properties");
+		propertiesHandle configFile = new propertiesHandle("A:/1 Projects/14 CVSTARR/BTA/Config/ConfigBTA.properties");
 		databaseOperartions.conn_setup(configFile);
 		System.setProperty("jsse.enableSNIExtension", "false");	
 		DriverScript objDriver=new DriverScript(configFile);
@@ -138,6 +138,7 @@ protected void executeTestScript(databaseOperartions objectInput,databaseOperart
 	while(objectTestScript.has_next_row())
 	{
 		String conditions=objectTestScript.read_data(objectTestScript.get_rownumber(),7);
+		System.out.println(objectTestScript.read_data(objectTestScript.get_rownumber(),1)+"-->"+objectconditions.condition_reading(conditions, objectInput));
 		if(objectTestScript.read_data(objectTestScript.get_rownumber(),8).toString().equals("enabled")&& objectconditions.condition_reading(conditions, objectInput))
 		{	
 			   //System.out.println("condition true for "+objectTestScript.read_data(objectTestScript.get_rownumber(),1));
