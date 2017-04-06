@@ -118,7 +118,7 @@ case "CLICK":
             output.write_data(dbcolumn_name,text1);
             output.update_row();      
 	 }
-	 catch(StaleElementReferenceException|TimeoutException e)
+	 catch(StaleElementReferenceException e)
 	 {
 		 this.perform(p, operation, objectType, value, dbcolumn_name, dataFlag, input, output, driver, waitingTime);
 		 
@@ -146,7 +146,7 @@ case "CLICK":
         		dropdown.selectByVisibleText(inputValue);
         		//driver.findElement(this.getObject(p,objectType)).sendKeys(Keys.ENTER);  		
        }
-	 catch(StaleElementReferenceException|TimeoutException e)
+	 catch(StaleElementReferenceException e)
 	 {
 		 this.perform(p, operation, objectType, value, dbcolumn_name, dataFlag, input, output, driver, waitingTime);    
 	 }
