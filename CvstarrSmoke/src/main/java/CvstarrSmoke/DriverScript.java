@@ -25,33 +25,28 @@ public class DriverScript
 	protected static TheEventListener event;
 	
 	
-	public static void main(String args[]) throws ClassNotFoundException, SQLException, IOException
-	{
-		
+public static void main(String args[]) throws ClassNotFoundException, SQLException, IOException
+{
 		event=new TheEventListener();
 		propertiesHandle configFile = new propertiesHandle("A:/1 Projects/14 CVSTARR/BTA/Config/ConfigBTA.properties");
 		System.setProperty("jsse.enableSNIExtension", "false");	
 		DriverScript objDriver=new DriverScript(configFile);
 		objDriver.launchBrowser();
-		boolean loginStatus=true;
-	
-		  try{
-			  if(loginStatus)
-			   {
-				 objDriver.login();
-				 loginStatus=false;
-			   }
-				objDriver.executeTestScript();
+		try{
+			
+			objDriver.executeTestScript();
 			   
-		    }
+		   }
 		  catch(TimeoutException e)
 			{
 			 	e.printStackTrace();
 			}
-		objDriver.closeBrowser();
+		//objDriver.closeBrowser();
 }
 	
-	//================================================================================================
+	
+	
+	//================default constructor for driver script================================================================================
 	
 	public DriverScript()
 	{
@@ -79,7 +74,7 @@ public void launchBrowser()
 {
 	    String browser = configFile.getProperty("browser");
 		String url = configFile.getProperty("url");
-		//System.out.println(url);
+		System.out.println(url);
 		
 		objectUIoperations.launch_browser(browser,url,configFile);
 			

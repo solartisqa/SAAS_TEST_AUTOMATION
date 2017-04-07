@@ -103,6 +103,7 @@ public class browserLaunching {
 			    System.out.println("not a valid browser");
 			    break;
 		}
+	    driver.get(url);
 		return driver;
 	 }
 	 
