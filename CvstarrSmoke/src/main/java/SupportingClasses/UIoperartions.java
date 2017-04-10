@@ -25,7 +25,7 @@ public class UIoperartions extends browserLaunching {
 	 public WebElement element;
 	
 //**************************************UI operations***************************************************************************
-public void perform(String p,String operation,String objectType,String value,String dbcolumn_name,String dataFlag,databaseOperartions input,databaseOperartions output,String waitingTime) throws SQLException, IOException
+public void perform(String p,String operation,String objectType,String value,String waitingTime) throws SQLException, IOException
 {
 	long waitingTimeinseconds=Long.parseLong(waitingTime);
 	//System.out.println("waitingtime"+waitingTimeinseconds);
@@ -40,7 +40,7 @@ case "CLICK":
         break;
  //---------------------------------------SET TEXT-----------------------------------------------------------------------       
  case "SETTEXT":
-         inputValue=this.getInputValue(dataFlag, input, value, dbcolumn_name);
+         inputValue=value;
      	 this.setTextWithEnter(p, objectType,inputValue);
          break;  		 
  //------------------------------------------------GO TO URL--------------------------------------------------------------------------    
@@ -50,19 +50,17 @@ case "CLICK":
          break;
  //-------------------------------------------------------GET ATTRIBUTE-------------------------------------------------------------	 
  case "GETATTRIBUTE":
-	     outputValue=this.getValueByAttribute(p, objectType);
-	     output.write_data(dbcolumn_name, outputValue);
-	     output.update_row();
+	     outputValue=value;
+	     System.out.println(outputValue);
          break;
  //------------------------------------------------------GET TEXT----------------------------------------------------------------------                 
  case "GETTEXT":
 	     outputValue=this.getValueByText(p, objectType);
-	     output.write_data(dbcolumn_name, outputValue);
-	     output.update_row();
+	     System.out.println(outputValue);
 	     break;
   //----------------------------------------------------SELECT OPERATION------------------------------------------------------------------------- 
  case "SELECT":
-	     inputValue = this.getInputValue(dataFlag, input, value, dbcolumn_name);
+	     inputValue = value;
 	     this.select(p, objectType, inputValue);
 	     break;
 //--------------------------------------------------MOUSE HOVER---------------------------------------------------------------------------------- 
@@ -71,7 +69,7 @@ case "CLICK":
 	 	 break;
 //-----------------------------------------------AUTO COMPLETE--------------------------------------------------------------------------------------	  
 case "AUTOCOMPLETE":
-		 inputValue = this.getInputValue(dataFlag, input, value, dbcolumn_name);
+		 inputValue = value;
 		 this.autoComplete(p, objectType, inputValue);
 		 break;
 //--------------------------------------------------------------------------------------------------------------------------------       	
@@ -86,12 +84,12 @@ case "SCREENSHOT":
  //-----------------------------------------CLICK RADIO BUTTON BY ITS VALUE-------------------------------------------------------------------------------
     	   		
 case "RADIOBUTTON":
-	     inputValue = this.getInputValue(dataFlag, input, value, dbcolumn_name);
+	     inputValue = value;
 	     this.radioButton(p, objectType,inputValue);
 		 break;
 //------------------------------------------DATE PICKER-----------------------------------------------------------------------------------------
 case "DATEPICKER":
-		 inputValue = this.getInputValue(dataFlag, input, value, dbcolumn_name);
+		 inputValue = value;
 		 this.datePicker(p, objectType, inputValue);
          break;
 
@@ -101,7 +99,7 @@ case "WAITLOAD":
 		    break;
 //-------------------------------------------------------CONTINUES OPERATION------------------------------------------------------------------------------	
 case "CONTOPERATION":
-		inputValue = this.getInputValue(dataFlag, input, value, dbcolumn_name);
+		inputValue = value;
 		this.contSendkeysOperation(p, objectType, inputValue);
 		break;
      
@@ -112,7 +110,7 @@ case "IMGIDVISIBLE":
 		    break;
 //---------------------------------------------------------Set text without enter-------------------------------------------------------------------------------------------	
 case "SETTEXT_WITHOUT_ENTER":
-		inputValue = this.getInputValue(dataFlag, input, value, dbcolumn_name);
+		inputValue = value;
 		this.setTextWithoutEnter(p, objectType, inputValue);
 		break;
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -123,7 +121,7 @@ default:
 }
 catch(StaleElementReferenceException e)
 {
-  this.perform(p, operation, objectType, value, dbcolumn_name, dataFlag, input, output, waitingTime);
+  this.perform(p, operation, objectType, value, waitingTime);
 }
 
 }
@@ -331,7 +329,7 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
    	 
  }
  
- protected String getInputValue(String dataFlag,databaseOperartions input,String value,String dbcolumn_name) throws SQLException
+ /*protected String getInputValue(String dataFlag,databaseOperartions input,String value,String dbcolumn_name) throws SQLException
  {
 	 switch(dataFlag)
 	 	{
@@ -344,6 +342,6 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 	 			break;
 	 	}
 	 	return inputValue;
- }
+ } */
     
 }

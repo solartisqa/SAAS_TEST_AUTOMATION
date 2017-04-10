@@ -8,7 +8,6 @@ import SupportingClasses.TheEventListener;
 import SupportingClasses.propertiesHandle;
 import SupportingClasses.ConditionsChecking;
 import SupportingClasses.UIoperartions;
-import SupportingClasses.databaseOperartions;
 import SupportingClasses.ExcelOperationsJXL;
 
 import java.io.IOException;
@@ -26,55 +25,28 @@ public class DriverScript
 	protected static TheEventListener event;
 	
 	
-	public static void main(String args[]) throws ClassNotFoundException, SQLException, IOException
-	{
-		databaseOperartions objectInput = new databaseOperartions();
-		databaseOperartions objectOutput = new databaseOperartions();
+public static void main(String args[]) throws ClassNotFoundException, SQLException, IOException
+{
 		event=new TheEventListener();
 		propertiesHandle configFile = new propertiesHandle("A:/1 Projects/14 CVSTARR/BTA/Config/ConfigBTA.properties");
-		databaseOperartions.conn_setup(configFile);
 		System.setProperty("jsse.enableSNIExtension", "false");	
 		DriverScript objDriver=new DriverScript(configFile);
 		objDriver.launchBrowser();
-		boolean loginStatus=true;
-		objectInput.get_dataobjects(configFile.getProperty("input_query"));
-		objectOutput.get_dataobjects(configFile.getProperty("output_query"));
-		do
-		{
-		  try{
-			  if(loginStatus)
-			   {
-				 objDriver.login(objectInput, objectOutput);
-				 loginStatus=false;
+		try{
+			
+			objDriver.executeTestScript();
 			   
-			   }
-			 String testdata=objectInput.read_data("test_case_id");
-			 System.out.println(testdata);
-			  event.testData(testdata);
-			  if(objectInput.read_data("flag_for_execution").equals(configFile.getProperty("flagForExecution")))
-				{  
-				   objDriver.executeTestScript(objectInput, objectOutput);
-				   objectInput.write_data("Flag_for_execution", objectInput.read_data("Flag_for_execution")+"Completed");
-				   objectOutput.write_data("Flag_for_execution", "Completed");
-			    }
-			   
-		    }
+		   }
 		  catch(TimeoutException e)
 			{
 			 	e.printStackTrace();
-				objectInput.write_data("Flag_for_execution",  objectInput.read_data("Flag_for_execution")+"Error");
-				objectOutput.write_data("Flag_for_execution", "Error");	
-				loginStatus=true;
 			}
-		  objectInput.update_row();
-		  objectOutput.update_row();
-		  
-		}while(objectInput.move_forward() && objectOutput.move_forward());
-		databaseOperartions.close_conn();
-		objDriver.closeBrowser();
+		//objDriver.closeBrowser();
 }
 	
-	//================================================================================================
+	
+	
+	//================default constructor for driver script================================================================================
 	
 	public DriverScript()
 	{
@@ -102,14 +74,14 @@ public void launchBrowser()
 {
 	    String browser = configFile.getProperty("browser");
 		String url = configFile.getProperty("url");
-		//System.out.println(url);
+		System.out.println(url);
 		
 		objectUIoperations.launch_browser(browser,url,configFile);
 			
 }
 
 //==============================================Function to login===================================================================================================
-  protected void login(databaseOperartions objectInput,databaseOperartions objectOutput) throws SQLException, IOException
+  protected void login() throws SQLException, IOException
   {
 	  objectLoginScript.set_rownumber(1);
 	  while(objectLoginScript.has_next_row())
@@ -120,40 +92,29 @@ public void launchBrowser()
 				String actionKeyword = objectLoginScript.read_data(objectLoginScript.get_rownumber(),2);
 				String ObjectType = objectLoginScript.read_data(objectLoginScript.get_rownumber(),3);
 				String PropertyString= objectLoginScript.read_data(objectLoginScript.get_rownumber(),4);
-				String dbcolumnNmae = objectLoginScript.read_data(objectLoginScript.get_rownumber(),5);
 				String value = objectLoginScript.read_data(objectLoginScript.get_rownumber(),6);
-				String dataProvidingFlag=objectLoginScript.read_data(objectLoginScript.get_rownumber(),9);
 				String  waitingTime=objectLoginScript.read_data(objectLoginScript.get_rownumber(),10);
-				//System.out.println(fieldName);
-				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,dbcolumnNmae,dataProvidingFlag,objectInput,objectOutput,waitingTime);
+				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,waitingTime);
 				
 			}
 			objectLoginScript.next_row();
 		}	  
   }
  //=============================================Function to run the test script========================================================================================  
-protected void executeTestScript(databaseOperartions objectInput,databaseOperartions objectOutput) throws SQLException, IOException
+protected void executeTestScript() throws SQLException, IOException
 {
 	objectTestScript.set_rownumber(1);
 	while(objectTestScript.has_next_row())
 	{
-		String conditions=objectTestScript.read_data(objectTestScript.get_rownumber(),7);
-		System.out.println(objectTestScript.read_data(objectTestScript.get_rownumber(),1)+"-->"+objectconditions.condition_reading(conditions, objectInput));
-		if(objectTestScript.read_data(objectTestScript.get_rownumber(),8).toString().equals("enabled")&& objectconditions.condition_reading(conditions, objectInput))
+		if(objectTestScript.read_data(objectTestScript.get_rownumber(),8).toString().equals("enabled"))
 		{	
-			   //System.out.println("condition true for "+objectTestScript.read_data(objectTestScript.get_rownumber(),1));
-				//String pageName = objectTestScript.read_data(objectTestScript.get_rownumber(),0);
 				//String fieldName = objectTestScript.read_data(objectTestScript.get_rownumber(),1);
 				String actionKeyword = objectTestScript.read_data(objectTestScript.get_rownumber(),2);
 				String ObjectType = objectTestScript.read_data(objectTestScript.get_rownumber(),3);
 				String PropertyString= objectTestScript.read_data(objectTestScript.get_rownumber(),4);
-				String dbcolumnNmae = objectTestScript.read_data(objectTestScript.get_rownumber(),5);
 				String value = objectTestScript.read_data(objectTestScript.get_rownumber(),6);
-			    //String condtions1=objectTestScript.read_data(objectTestScript.get_rownumber(),7);
-				String dataProvidingFlag=objectTestScript.read_data(objectTestScript.get_rownumber(),9);
 				String  waitingTime=objectTestScript.read_data(objectTestScript.get_rownumber(),10);
-				//System.out.println(fieldName);
-				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,dbcolumnNmae,dataProvidingFlag,objectInput,objectOutput,waitingTime);
+				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,waitingTime);
 		}
 		objectTestScript.next_row();
 	} //end of while 
