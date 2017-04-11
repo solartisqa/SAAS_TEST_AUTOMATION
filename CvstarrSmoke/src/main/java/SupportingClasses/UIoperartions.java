@@ -114,6 +114,10 @@ case "SETTEXT_WITHOUT_ENTER":
 		this.setTextWithoutEnter(p, objectType, inputValue);
 		break;
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+case "ALERTACCEPT":
+	    driver.switchTo().alert().accept();
+	    break;
+		
 default:
 	    System.out.println("operations not  performed");
 	    break;

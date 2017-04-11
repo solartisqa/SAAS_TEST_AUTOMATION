@@ -28,7 +28,7 @@ public class DriverScript
 public static void main(String args[]) throws ClassNotFoundException, SQLException, IOException
 {
 		event=new TheEventListener();
-		propertiesHandle configFile = new propertiesHandle("A:/1 Projects/14 CVSTARR/BTA/Config/ConfigBTA.properties");
+		propertiesHandle configFile = new propertiesHandle("A:/1 Projects/14 CVSTARR/BAD/Config/Config_C1131.properties");
 		System.setProperty("jsse.enableSNIExtension", "false");	
 		DriverScript objDriver=new DriverScript(configFile);
 		objDriver.launchBrowser();
