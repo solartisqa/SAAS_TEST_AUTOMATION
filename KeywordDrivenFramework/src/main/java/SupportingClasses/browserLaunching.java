@@ -19,7 +19,7 @@ public class browserLaunching {
 			
 	protected WebDriverWait wait=null; 
 	
-	 public WebDriver launch_browser(String browser,String url,propertiesHandle config)
+	 public WebDriver launch_browser(String browser,propertiesHandle config)
 	 {
 		 DesiredCapabilities capabilities = new DesiredCapabilities();
 		 String driver_path = config.getProperty("driver_path");
