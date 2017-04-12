@@ -25,7 +25,7 @@ public class UIoperartions extends browserLaunching {
 	 public WebElement element;
 	
 //**************************************UI operations***************************************************************************
-public void perform(String p,String operation,String objectType,String value,String waitingTime) throws SQLException, IOException
+public void perform(String p,String operation,String objectType,String value,String waitingTime) throws SQLException, IOException, InterruptedException
 {
 	long waitingTimeinseconds=Long.parseLong(waitingTime);
 	//System.out.println("waitingtime"+waitingTimeinseconds);
@@ -113,10 +113,20 @@ case "SETTEXT_WITHOUT_ENTER":
 		inputValue = value;
 		this.setTextWithoutEnter(p, objectType, inputValue);
 		break;
-//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------click ok for Alert--------------------------------------------------------------------------------------------------------
 case "ALERTACCEPT":
 	    driver.switchTo().alert().accept();
 	    break;
+//----------------------------------------------------------Thread sleep------------------------------------------------------------------------------------------------------------------------	    
+case "WAIT":
+	   Thread.sleep(waitingTimeinseconds);
+	    break;
+//-----------------------------------------------------------------Dynamic date picker----------------------------------------------------------------------------------------------------------------------	    
+case "DYNAMICDATEPICKER":
+	
+	inputValue = value;
+	this.dynamicDatePicker(p, objectType, inputValue);
+	break;
 		
 default:
 	    System.out.println("operations not  performed");
@@ -132,7 +142,7 @@ catch(StaleElementReferenceException e)
 
 
  //============================================Locator Action====================================================================  
- private By getObject(String p,String objectType)
+ protected By getObject(String p,String objectType)
   {
     switch(objectType.toUpperCase())
     {
@@ -166,15 +176,19 @@ catch(StaleElementReferenceException e)
     case "ID":
     	
     	return By.id(p);
+    	
+    case "DYNAMICXPATH":
+    	return By.xpath(p);
     	 	
    default:
 	   
 	   System.out.println("wrong object type");
 	   return null;
 	   
+    }	   
     }
-	   
-    }
+ 
+
   //========================================================Methods of UI oprations=============================================================
     
   protected void click(String p,String objectType) throws StaleElementReferenceException
@@ -331,6 +345,29 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 	 	File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 	 	FileUtils.copyFile(scrFile, new File("D:\\Exception\\screenshots\\"+".png"));	
    	 
+ }
+ 
+ 
+ protected void dynamicDatePicker(String p,String objectType,String value) throws InterruptedException
+ {
+	 String[] objtype=objectType.split(";");
+		String[] property=p.split(";");
+		String[] value1=value.split("-");
+		int totElements=objtype.length;
+		int j=0;
+		for(int i=0;i<totElements;i++)
+		{
+			p=property[i];
+			if(objtype[i].equalsIgnoreCase("DYNAMICXPATH"))
+			{
+				 p=property[i].replace("!",value1[j]);
+				 System.out.println(p);
+				 j++;
+			}
+			
+			driver.findElement(this.getObject(p,objtype[i])).click();
+			Thread.sleep(1000);
+		}
  }
  
  /*protected String getInputValue(String dataFlag,databaseOperartions input,String value,String dbcolumn_name) throws SQLException

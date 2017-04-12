@@ -31,7 +31,7 @@ public class DriverScript
 		databaseOperartions objectInput = new databaseOperartions();
 		databaseOperartions objectOutput = new databaseOperartions();
 		event=new TheEventListener();
-		propertiesHandle configFile = new propertiesHandle("A:/1 Projects/14 CVSTARR/SSE/config/config.properties");
+		propertiesHandle configFile = new propertiesHandle("A:/1 Projects/13 Starr Assist/Release3/QARelease/Configuration/Config_C1128.properties");
 		databaseOperartions.conn_setup(configFile);
 		System.setProperty("jsse.enableSNIExtension", "false");	
 		DriverScript objDriver=new DriverScript(configFile);
@@ -101,10 +101,10 @@ public DriverScript(propertiesHandle configFile) throws SQLException, ClassNotFo
 public void launchBrowser()
 {
 	    String browser = configFile.getProperty("browser");
-		String url = configFile.getProperty("url");
+		//String url = configFile.getProperty("url");
 		//System.out.println(url);
 		
-		objectUIoperations.launch_browser(browser,url,configFile);
+		objectUIoperations.launch_browser(browser,configFile);
 			
 }
 
