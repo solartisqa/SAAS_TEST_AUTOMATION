@@ -25,7 +25,7 @@ public class DriverScript
 	protected static TheEventListener event;
 	
 	
-public static void main(String args[]) throws ClassNotFoundException, SQLException, IOException
+public static void main(String args[]) throws ClassNotFoundException, SQLException, IOException, InterruptedException
 {
 		event=new TheEventListener();
 		propertiesHandle configFile = new propertiesHandle("A:/1 Projects/14 CVSTARR/BAD/Config/Config_C1131.properties");
@@ -81,7 +81,7 @@ public void launchBrowser()
 }
 
 //==============================================Function to login===================================================================================================
-  protected void login() throws SQLException, IOException
+  protected void login() throws SQLException, IOException, InterruptedException
   {
 	  objectLoginScript.set_rownumber(1);
 	  while(objectLoginScript.has_next_row())
@@ -101,7 +101,7 @@ public void launchBrowser()
 		}	  
   }
  //=============================================Function to run the test script========================================================================================  
-protected void executeTestScript() throws SQLException, IOException
+protected void executeTestScript() throws SQLException, IOException, InterruptedException
 {
 	objectTestScript.set_rownumber(1);
 	while(objectTestScript.has_next_row())
