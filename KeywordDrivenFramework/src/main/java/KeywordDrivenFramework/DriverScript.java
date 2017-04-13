@@ -26,7 +26,7 @@ public class DriverScript
 	protected static TheEventListener event;
 	
 	
-	public static void main(String args[]) throws ClassNotFoundException, SQLException, IOException
+	public static void main(String args[]) throws ClassNotFoundException, SQLException, IOException, InterruptedException
 	{
 		databaseOperartions objectInput = new databaseOperartions();
 		databaseOperartions objectOutput = new databaseOperartions();
@@ -109,7 +109,7 @@ public void launchBrowser()
 }
 
 //==============================================Function to login===================================================================================================
-  protected void login(databaseOperartions objectInput,databaseOperartions objectOutput) throws SQLException, IOException
+  protected void login(databaseOperartions objectInput,databaseOperartions objectOutput) throws SQLException, IOException, InterruptedException
   {
 	  objectLoginScript.set_rownumber(1);
 	  while(objectLoginScript.has_next_row())
@@ -132,7 +132,7 @@ public void launchBrowser()
 		}	  
   }
  //=============================================Function to run the test script========================================================================================  
-protected void executeTestScript(databaseOperartions objectInput,databaseOperartions objectOutput) throws SQLException, IOException
+protected void executeTestScript(databaseOperartions objectInput,databaseOperartions objectOutput) throws SQLException, IOException, InterruptedException
 {
 	objectTestScript.set_rownumber(1);
 	while(objectTestScript.has_next_row())
