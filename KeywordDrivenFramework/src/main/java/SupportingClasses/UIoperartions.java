@@ -346,4 +346,9 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 	 	return inputValue;
  }
 
+
+/*public void launch_browser(String browser, propertiesHandle configFile) {
+	// TODO Auto-generated method stub
+	
+}*/
 }
