@@ -29,10 +29,13 @@ public class DriverScript
 public static void main(String args[]) throws ClassNotFoundException, SQLException, IOException, InterruptedException
 {
 	    event=new TheEventListener();
-	    File filepath = new File(DriverScript.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-		propertiesHandle configFile = new propertiesHandle(new File(filepath.getParent()).getAbsolutePath() + "/BAD_Config.properties");
-		configFile.setProperty("driver_path", filepath +"/Drivers/");
-		configFile.setProperty("Test_script_path",filepath +"/");
+	    File jarFile = new File(DriverScript.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+	    System.out.println(jarFile);
+	    File FolderFile = jarFile.getParentFile().getParentFile();
+	    System.out.println(FolderFile);
+		propertiesHandle configFile = new propertiesHandle(FolderFile.getAbsolutePath() + "/BAD_Config.properties");
+		configFile.setProperty("driver_path", FolderFile.getAbsolutePath() +"/Drivers/");
+		configFile.setProperty("Test_script_path",FolderFile.getAbsolutePath() +"/");
 		System.setProperty("jsse.enableSNIExtension", "false");	
 		DriverScript objDriver=new DriverScript(configFile);
 		objDriver.launchBrowser();
