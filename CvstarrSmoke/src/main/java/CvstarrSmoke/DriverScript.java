@@ -30,9 +30,7 @@ public static void main(String args[]) throws ClassNotFoundException, SQLExcepti
 {
 	    event=new TheEventListener();
 	    File jarFile = new File(DriverScript.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-	    System.out.println(jarFile);
 	    File FolderFile = jarFile.getParentFile();
-	    System.out.println(FolderFile + "/BAD_Config.properties");
 		propertiesHandle configFile = new propertiesHandle(FolderFile + "\\BAD_Config.properties");
 		configFile.setProperty("driver_path", FolderFile +"\\Drivers\\");
 		configFile.setProperty("Test_script_path",FolderFile +"\\");
