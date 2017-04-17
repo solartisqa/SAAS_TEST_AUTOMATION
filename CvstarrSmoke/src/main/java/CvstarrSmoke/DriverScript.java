@@ -30,8 +30,8 @@ public static void main(String args[]) throws ClassNotFoundException, SQLExcepti
 {
 	    event=new TheEventListener();
 	    File filepath = new File(DriverScript.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-		propertiesHandle configFile = new propertiesHandle(filepath + "/Smoke_BAD_Config_C1131.properties");
-		configFile.setProperty("driver_path", filepath +"/");
+		propertiesHandle configFile = new propertiesHandle(filepath + "/BAD_Config.properties");
+		configFile.setProperty("driver_path", filepath +"/Drivers/");
 		configFile.setProperty("Test_script_path",filepath +"/");
 		System.setProperty("jsse.enableSNIExtension", "false");	
 		DriverScript objDriver=new DriverScript(configFile);
