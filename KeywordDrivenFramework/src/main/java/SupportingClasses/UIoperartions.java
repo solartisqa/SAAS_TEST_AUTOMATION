@@ -25,7 +25,7 @@ public class UIoperartions extends browserLaunching {
 	 public WebElement element;
 	
 //**************************************UI operations***************************************************************************
-public void perform(String p,String operation,String objectType,String value,String dbcolumn_name,String dataFlag,databaseOperartions input,databaseOperartions output,String waitingTime) throws SQLException, IOException
+public void perform(String p,String operation,String objectType,String value,String dbcolumn_name,String dataFlag,databaseOperartions input,databaseOperartions output,String waitingTime) throws SQLException, IOException, InterruptedException
 {
 	long waitingTimeinseconds=Long.parseLong(waitingTime);
 	//System.out.println("waitingtime"+waitingTimeinseconds);
@@ -115,6 +115,10 @@ case "SETTEXT_WITHOUT_ENTER":
 		inputValue = this.getInputValue(dataFlag, input, value, dbcolumn_name);
 		this.setTextWithoutEnter(p, objectType, inputValue);
 		break;
+//----------------------------------------------------------Thread sleep------------------------------------------------------------------------------------------------------------------------	    
+case "WAIT":
+	   Thread.sleep(waitingTimeinseconds);
+       break;
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 default:
 	    System.out.println("operations not  performed");
@@ -346,4 +350,9 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 	 	return inputValue;
  }
 
+
+/*public void launch_browser(String browser, propertiesHandle configFile) {
+	// TODO Auto-generated method stub
+	
+}*/
 }
