@@ -100,7 +100,7 @@ public void launchBrowser()
 				String value = objectLoginScript.read_data(objectLoginScript.get_rownumber(),6);
 				String  waitingTime=objectLoginScript.read_data(objectLoginScript.get_rownumber(),10);
 				String Outputname = objectLoginScript.read_data(objectLoginScript.get_rownumber(),5);
-				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,waitingTime,Outputname,this.configFile.getProperty("FileName"));
+				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,waitingTime,this.configFile.getProperty("FileName"));
 				
 			}
 			objectLoginScript.next_row();
@@ -122,7 +122,7 @@ protected void executeTestScript() throws SQLException, IOException, Interrupted
 				String value = objectTestScript.read_data(objectTestScript.get_rownumber(),6);
 				String  waitingTime=objectTestScript.read_data(objectTestScript.get_rownumber(),10);
 				String Outputname = objectLoginScript.read_data(objectLoginScript.get_rownumber(),5);
-				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,waitingTime,Outputname,this.configFile.getProperty("FileName"));
+				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,waitingTime,this.configFile.getProperty("FileName"));
 		}
 		objectTestScript.next_row();
 	} //end of while 

@@ -25,7 +25,7 @@ public class UIoperartions extends browserLaunching {
 	 public WebElement element;
 	
 //**************************************UI operations***************************************************************************
-public void perform(String p,String operation,String objectType,String value,String waitingTime,String filename,String Outputname) throws SQLException, IOException, InterruptedException
+public void perform(String p,String operation,String objectType,String value,String waitingTime,String filename) throws SQLException, IOException, InterruptedException
 {
 	long waitingTimeinseconds=Long.parseLong(waitingTime);
 	System.out.println("success2");
@@ -52,13 +52,13 @@ case "CLICK":
  //-------------------------------------------------------GET ATTRIBUTE-------------------------------------------------------------	 
  case "GETATTRIBUTE":
 	     outputValue=this.getValueByAttribute(p, objectType);
-	     file.AppendFileHandle(Outputname,outputValue);
+	     file.AppendFileHandle(outputValue);
 	     System.out.println(outputValue);
          break;
  //------------------------------------------------------GET TEXT----------------------------------------------------------------------                 
  case "GETTEXT":
 	     outputValue=this.getValueByText(p, objectType);
-	     file.AppendFileHandle(Outputname,outputValue);
+	     file.AppendFileHandle(outputValue);
 	     System.out.println(outputValue);
 	     break;
   //----------------------------------------------------SELECT OPERATION------------------------------------------------------------------------- 
@@ -138,7 +138,7 @@ default:
 }
 catch(StaleElementReferenceException e)
 {
-  this.perform(p, operation, objectType, value, waitingTime, filename, Outputname);
+  this.perform(p, operation, objectType, value, waitingTime, filename);
 }
 
 }
