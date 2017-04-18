@@ -37,12 +37,12 @@ public class FileHandle extends File
 		
 	}
     
-	public void AppendFileHandle(String Value) throws IOException
+	public void AppendFileHandle(String Outputname,String Value) throws IOException
 	{
 		FileWriter fw = new FileWriter(this.getAbsolutePath(),true);
 		BufferedWriter br = new BufferedWriter(fw);
 		PrintWriter pw = new PrintWriter(br);
-		pw.println(Value);
+		pw.println(Outputname + "=" + Value);
 		pw.flush();
 		pw.close();
 		br.close();
