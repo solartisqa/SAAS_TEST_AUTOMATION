@@ -10,7 +10,9 @@ import SupportingClasses.ConditionsChecking;
 import SupportingClasses.UIoperartions;
 import SupportingClasses.ExcelOperationsJXL;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -34,11 +36,13 @@ public static void main(String args[]) throws ClassNotFoundException, SQLExcepti
 		propertiesHandle configFile = new propertiesHandle(FolderFile + "\\BAD_Config.properties");
 		configFile.setProperty("driver_path", FolderFile +"\\Drivers\\");
 		configFile.setProperty("Test_script_path",FolderFile +"\\");
+		configFile.setProperty("FileName",FolderFile +"\\Output.txt");
 		System.setProperty("jsse.enableSNIExtension", "false");	
 		DriverScript objDriver=new DriverScript(configFile);
 		objDriver.launchBrowser();
 		try{
 			
+			objDriver.Filecreate();
 			objDriver.executeTestScript();
 			   
 		   }
@@ -99,7 +103,7 @@ public void launchBrowser()
 				String PropertyString= objectLoginScript.read_data(objectLoginScript.get_rownumber(),4);
 				String value = objectLoginScript.read_data(objectLoginScript.get_rownumber(),6);
 				String  waitingTime=objectLoginScript.read_data(objectLoginScript.get_rownumber(),10);
-				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,waitingTime);
+				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,waitingTime,this.configFile.getProperty("FileName"));
 				
 			}
 			objectLoginScript.next_row();
@@ -119,7 +123,7 @@ protected void executeTestScript() throws SQLException, IOException, Interrupted
 				String PropertyString= objectTestScript.read_data(objectTestScript.get_rownumber(),4);
 				String value = objectTestScript.read_data(objectTestScript.get_rownumber(),6);
 				String  waitingTime=objectTestScript.read_data(objectTestScript.get_rownumber(),10);
-				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,waitingTime);
+				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,waitingTime,this.configFile.getProperty("FileName"));
 		}
 		objectTestScript.next_row();
 	} //end of while 
@@ -128,5 +132,19 @@ protected void executeTestScript() throws SQLException, IOException, Interrupted
 public void closeBrowser()
 {
 	objectUIoperations.stop_browser();
+}
+//============================================file function=========================================================================================================
+public void Filecreate() throws IOException
+{
+	File file = new File(this.configFile.getProperty("FileName"));
+	if (!file.exists()) 
+	{
+		file.createNewFile();
+	}
+	else
+	{
+		file.delete();
+		file.createNewFile();
+	}
 }
 }
