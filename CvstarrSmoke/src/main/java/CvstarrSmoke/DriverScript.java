@@ -101,7 +101,8 @@ protected void executeTestScript() throws SQLException, IOException, Interrupted
 				String PropertyString= objectTestScript.read_data(objectTestScript.get_rownumber(),4);
 				String value = objectTestScript.read_data(objectTestScript.get_rownumber(),6);
 				String  waitingTime=objectTestScript.read_data(objectTestScript.get_rownumber(),10);
-				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,waitingTime,this.configFile.getProperty("OutputFileName"));
+				String  Outputname=objectTestScript.read_data(objectTestScript.get_rownumber(),5);
+				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,waitingTime,this.configFile.getProperty("OutputFileName"),Outputname);
 		}
 		objectTestScript.next_row();
 	} //end of while 
