@@ -51,7 +51,7 @@ case "CLICK":
          break;
  //-------------------------------------------------------GET ATTRIBUTE-------------------------------------------------------------	 
  case "GETATTRIBUTE":
-	     outputValue=value;
+	     outputValue=this.getValueByAttribute(p, objectType);
 	     file.AppendFileHandle(outputValue);
 	     System.out.println(outputValue);
          break;
