@@ -85,27 +85,6 @@ public void launchBrowser()
 			
 }
 
-//==============================================Function to login===================================================================================================
-  protected void login() throws SQLException, IOException, InterruptedException
-  {
-	  objectLoginScript.set_rownumber(1);
-	  while(objectLoginScript.has_next_row())
-		{
-			if(objectLoginScript.read_data(objectLoginScript.get_rownumber(),8).toString().equals("enabled"))
-			{
-				//String fieldName = objectTestScript.read_data(objectTestScript.get_rownumber(),1);
-				String actionKeyword = objectLoginScript.read_data(objectLoginScript.get_rownumber(),2);
-				String ObjectType = objectLoginScript.read_data(objectLoginScript.get_rownumber(),3);
-				String PropertyString= objectLoginScript.read_data(objectLoginScript.get_rownumber(),4);
-				String value = objectLoginScript.read_data(objectLoginScript.get_rownumber(),6);
-				String  waitingTime=objectLoginScript.read_data(objectLoginScript.get_rownumber(),10);
-				String Outputname = objectLoginScript.read_data(objectLoginScript.get_rownumber(),5);
-				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,waitingTime,this.configFile.getProperty("FileName"));
-				
-			}
-			objectLoginScript.next_row();
-		}	  
-  }
  //=============================================Function to run the test script========================================================================================  
 protected void executeTestScript() throws SQLException, IOException, InterruptedException
 {
@@ -122,7 +101,7 @@ protected void executeTestScript() throws SQLException, IOException, Interrupted
 				String value = objectTestScript.read_data(objectTestScript.get_rownumber(),6);
 				String  waitingTime=objectTestScript.read_data(objectTestScript.get_rownumber(),10);
 				String Outputname = objectLoginScript.read_data(objectLoginScript.get_rownumber(),5);
-				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,waitingTime,this.configFile.getProperty("FileName"));
+				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,waitingTime,this.configFile.getProperty("OutputFileName"));
 		}
 		objectTestScript.next_row();
 	} //end of while 
