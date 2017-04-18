@@ -41,6 +41,7 @@ public class FileHandle extends File
 		FileWriter fw = new FileWriter(this.getAbsolutePath());
 		BufferedWriter br = new BufferedWriter(fw);
 		br.write(Value + "\n");
+		br.newLine();
 		br.flush();
 		br.close();
 		fw.close();
