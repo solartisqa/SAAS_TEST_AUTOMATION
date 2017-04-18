@@ -28,7 +28,7 @@ public class UIoperartions extends browserLaunching {
 public void perform(String p,String operation,String objectType,String value,String waitingTime,String filename,String Outputname) throws SQLException, IOException, InterruptedException
 {
 	long waitingTimeinseconds=Long.parseLong(waitingTime);
-	//System.out.println("waitingtime"+waitingTimeinseconds);
+	System.out.println("success2");
 	wait = new WebDriverWait(driver, waitingTimeinseconds);
 	FileHandle file = new FileHandle(filename);
 try

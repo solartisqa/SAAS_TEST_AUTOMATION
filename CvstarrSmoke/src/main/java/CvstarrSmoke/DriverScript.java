@@ -68,10 +68,6 @@ public DriverScript(propertiesHandle configFile) throws SQLException, ClassNotFo
 	this.configFile = configFile;
 	objectUIoperations=new UIoperartions();
 	objectconditions=new ConditionsChecking();
-	
-	objectLoginScript = new ExcelOperationsJXL(this.configFile.getProperty("Test_script_path")+this.configFile.getProperty("File_name"));
-	objectLoginScript.getsheets(this.configFile.getProperty("Login"));
-	
 
 	objectTestScript = new ExcelOperationsJXL(this.configFile.getProperty("Test_script_path")+this.configFile.getProperty("File_name"));
 	objectTestScript.getsheets(this.configFile.getProperty("ScriptSheetName"));
@@ -118,6 +114,7 @@ protected void executeTestScript() throws SQLException, IOException, Interrupted
 	{
 		if(objectTestScript.read_data(objectTestScript.get_rownumber(),8).toString().equals("enabled"))
 		{	
+			     System.out.println("success1");
 				//String fieldName = objectTestScript.read_data(objectTestScript.get_rownumber(),1);
 				String actionKeyword = objectTestScript.read_data(objectTestScript.get_rownumber(),2);
 				String ObjectType = objectTestScript.read_data(objectTestScript.get_rownumber(),3);
