@@ -40,7 +40,7 @@ public class FileHandle extends File
 	{
 		FileWriter fw = new FileWriter(this.getAbsolutePath());
 		BufferedWriter br = new BufferedWriter(fw);
-		br.append(Value+"\n");
+		br.append("\n" + Value);
 		br.flush();
 		br.close();
 		fw.close();
