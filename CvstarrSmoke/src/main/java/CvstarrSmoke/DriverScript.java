@@ -10,9 +10,7 @@ import SupportingClasses.ConditionsChecking;
 import SupportingClasses.UIoperartions;
 import SupportingClasses.ExcelOperationsJXL;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -68,6 +66,10 @@ public DriverScript(propertiesHandle configFile) throws SQLException, ClassNotFo
 	this.configFile = configFile;
 	objectUIoperations=new UIoperartions();
 	objectconditions=new ConditionsChecking();
+	
+	objectLoginScript = new ExcelOperationsJXL(this.configFile.getProperty("Test_script_path")+this.configFile.getProperty("File_name"));
+	objectLoginScript.getsheets(this.configFile.getProperty("Login"));
+	
 
 	objectTestScript = new ExcelOperationsJXL(this.configFile.getProperty("Test_script_path")+this.configFile.getProperty("File_name"));
 	objectTestScript.getsheets(this.configFile.getProperty("ScriptSheetName"));
@@ -93,24 +95,24 @@ protected void executeTestScript() throws SQLException, IOException, Interrupted
 	{
 		if(objectTestScript.read_data(objectTestScript.get_rownumber(),8).toString().equals("enabled"))
 		{	
-			     System.out.println("success1");
 				//String fieldName = objectTestScript.read_data(objectTestScript.get_rownumber(),1);
 				String actionKeyword = objectTestScript.read_data(objectTestScript.get_rownumber(),2);
 				String ObjectType = objectTestScript.read_data(objectTestScript.get_rownumber(),3);
 				String PropertyString= objectTestScript.read_data(objectTestScript.get_rownumber(),4);
 				String value = objectTestScript.read_data(objectTestScript.get_rownumber(),6);
 				String  waitingTime=objectTestScript.read_data(objectTestScript.get_rownumber(),10);
-				String Outputname = objectLoginScript.read_data(objectLoginScript.get_rownumber(),5);
 				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,waitingTime,this.configFile.getProperty("OutputFileName"));
 		}
 		objectTestScript.next_row();
 	} //end of while 
 }
+
 //==================================Function to close the browser========================================================================================================
 public void closeBrowser()
 {
 	objectUIoperations.stop_browser();
 }
+
 //============================================file function=========================================================================================================
 public void Filecreate() throws IOException
 {
