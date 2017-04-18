@@ -67,10 +67,6 @@ public DriverScript(propertiesHandle configFile) throws SQLException, ClassNotFo
 	objectUIoperations=new UIoperartions();
 	objectconditions=new ConditionsChecking();
 	
-	objectLoginScript = new ExcelOperationsJXL(this.configFile.getProperty("Test_script_path")+this.configFile.getProperty("File_name"));
-	objectLoginScript.getsheets(this.configFile.getProperty("Login"));
-	
-
 	objectTestScript = new ExcelOperationsJXL(this.configFile.getProperty("Test_script_path")+this.configFile.getProperty("File_name"));
 	objectTestScript.getsheets(this.configFile.getProperty("ScriptSheetName"));
 	
