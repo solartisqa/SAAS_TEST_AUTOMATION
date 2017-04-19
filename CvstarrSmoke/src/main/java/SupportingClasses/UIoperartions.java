@@ -52,13 +52,13 @@ case "CLICK":
  //-------------------------------------------------------GET ATTRIBUTE-------------------------------------------------------------	 
  case "GETATTRIBUTE":
 	     outputValue=this.getValueByAttribute(p, objectType);
-	     file.AppendFileHandle(Outputname,outputValue);
+	     file.AppendFileHandle(Outputname+" = "+ outputValue);
 	     System.out.println(outputValue);
          break;
  //------------------------------------------------------GET TEXT----------------------------------------------------------------------                 
  case "GETTEXT":
 	     outputValue=this.getValueByText(p, objectType);
-	     file.AppendFileHandle(Outputname,outputValue);
+	     file.AppendFileHandle(Outputname+" = "+ outputValue);
 	     System.out.println(outputValue);
 	     break;
   //----------------------------------------------------SELECT OPERATION------------------------------------------------------------------------- 

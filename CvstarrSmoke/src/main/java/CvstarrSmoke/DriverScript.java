@@ -32,9 +32,9 @@ public static void main(String args[]) throws ClassNotFoundException, SQLExcepti
 	    File jarFile = new File(DriverScript.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 	    File FolderFile = jarFile.getParentFile();
 		propertiesHandle configFile = new propertiesHandle(FolderFile + "\\BAD_Config.properties");
-		configFile.setProperty("driver_path", FolderFile +"\\Drivers\\");
-		configFile.setProperty("Test_script_path",FolderFile +"\\Script\\");
-		configFile.setProperty("OutputFileName",FolderFile +"\\Output.txt");
+		configFile.setProperty("driver_path", FolderFile +"\\" + configFile.getProperty("driver_folder") + "\\");
+		configFile.setProperty("Test_script_path",FolderFile +"\\" + configFile.getProperty("Test_script_folder") + "\\");
+		configFile.setProperty("OutputFilePath",FolderFile +"\\" + configFile.getProperty("OutputfolderName"));
 		System.setProperty("jsse.enableSNIExtension", "false");	
 		DriverScript objDriver=new DriverScript(configFile);
 		objDriver.launchBrowser();
@@ -98,7 +98,7 @@ protected void executeTestScript() throws SQLException, IOException, Interrupted
 				String value = objectTestScript.read_data(objectTestScript.get_rownumber(),6);
 				String  waitingTime=objectTestScript.read_data(objectTestScript.get_rownumber(),10);
 				String  Outputname=objectTestScript.read_data(objectTestScript.get_rownumber(),5);
-				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,waitingTime,this.configFile.getProperty("OutputFileName"),Outputname);
+				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,waitingTime,this.configFile.getProperty("OutputFilePath"),Outputname);
 		}
 		objectTestScript.next_row();
 	} //end of while 
@@ -113,7 +113,7 @@ public void closeBrowser()
 //============================================file function=========================================================================================================
 public void Filecreate() throws IOException
 {
-	File file = new File(this.configFile.getProperty("OutputFileName"));
+	File file = new File(this.configFile.getProperty("OutputFilePath"));
 	if (!file.exists()) 
 	{
 		file.createNewFile();
