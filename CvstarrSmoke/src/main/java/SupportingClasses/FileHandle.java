@@ -5,6 +5,7 @@ import java.io.File;
 import java.net.URI;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class FileHandle extends File
 {
@@ -38,10 +39,12 @@ public class FileHandle extends File
     
 	public void AppendFileHandle(String Value) throws IOException
 	{
-		FileWriter fw = new FileWriter(this.getAbsolutePath());
+		FileWriter fw = new FileWriter(this.getAbsolutePath(),true);
 		BufferedWriter br = new BufferedWriter(fw);
-		br.append(Value);
-		br.flush();
+		PrintWriter pw = new PrintWriter(br);
+		pw.println(Value);
+		pw.flush();
+		pw.close();
 		br.close();
 		fw.close();
 	}

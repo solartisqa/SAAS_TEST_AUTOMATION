@@ -32,13 +32,15 @@ public static void main(String args[]) throws ClassNotFoundException, SQLExcepti
 	    File jarFile = new File(DriverScript.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 	    File FolderFile = jarFile.getParentFile();
 		propertiesHandle configFile = new propertiesHandle(FolderFile + "\\BAD_Config.properties");
-		configFile.setProperty("driver_path", FolderFile +"\\Drivers\\");
-		configFile.setProperty("Test_script_path",FolderFile +"\\");
+		configFile.setProperty("driver_path", FolderFile +"\\" + configFile.getProperty("driver_folder") + "\\");
+		configFile.setProperty("Test_script_path",FolderFile +"\\" + configFile.getProperty("Test_script_folder") + "\\");
+		configFile.setProperty("OutputFilePath",FolderFile +"\\" + configFile.getProperty("OutputfolderName"));
 		System.setProperty("jsse.enableSNIExtension", "false");	
 		DriverScript objDriver=new DriverScript(configFile);
 		objDriver.launchBrowser();
 		try{
 			
+			objDriver.Filecreate();
 			objDriver.executeTestScript();
 			   
 		   }
@@ -65,10 +67,6 @@ public DriverScript(propertiesHandle configFile) throws SQLException, ClassNotFo
 	objectUIoperations=new UIoperartions();
 	objectconditions=new ConditionsChecking();
 	
-	objectLoginScript = new ExcelOperationsJXL(this.configFile.getProperty("Test_script_path")+this.configFile.getProperty("File_name"));
-	objectLoginScript.getsheets(this.configFile.getProperty("Login"));
-	
-
 	objectTestScript = new ExcelOperationsJXL(this.configFile.getProperty("Test_script_path")+this.configFile.getProperty("File_name"));
 	objectTestScript.getsheets(this.configFile.getProperty("ScriptSheetName"));
 	
@@ -85,26 +83,6 @@ public void launchBrowser()
 			
 }
 
-//==============================================Function to login===================================================================================================
-  protected void login() throws SQLException, IOException, InterruptedException
-  {
-	  objectLoginScript.set_rownumber(1);
-	  while(objectLoginScript.has_next_row())
-		{
-			if(objectLoginScript.read_data(objectLoginScript.get_rownumber(),8).toString().equals("enabled"))
-			{
-				//String fieldName = objectTestScript.read_data(objectTestScript.get_rownumber(),1);
-				String actionKeyword = objectLoginScript.read_data(objectLoginScript.get_rownumber(),2);
-				String ObjectType = objectLoginScript.read_data(objectLoginScript.get_rownumber(),3);
-				String PropertyString= objectLoginScript.read_data(objectLoginScript.get_rownumber(),4);
-				String value = objectLoginScript.read_data(objectLoginScript.get_rownumber(),6);
-				String  waitingTime=objectLoginScript.read_data(objectLoginScript.get_rownumber(),10);
-				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,waitingTime);
-				
-			}
-			objectLoginScript.next_row();
-		}	  
-  }
  //=============================================Function to run the test script========================================================================================  
 protected void executeTestScript() throws SQLException, IOException, InterruptedException
 {
@@ -119,14 +97,31 @@ protected void executeTestScript() throws SQLException, IOException, Interrupted
 				String PropertyString= objectTestScript.read_data(objectTestScript.get_rownumber(),4);
 				String value = objectTestScript.read_data(objectTestScript.get_rownumber(),6);
 				String  waitingTime=objectTestScript.read_data(objectTestScript.get_rownumber(),10);
-				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,waitingTime);
+				String  Outputname=objectTestScript.read_data(objectTestScript.get_rownumber(),5);
+				objectUIoperations.perform(PropertyString,actionKeyword,ObjectType,value,waitingTime,this.configFile.getProperty("OutputFilePath"),Outputname);
 		}
 		objectTestScript.next_row();
 	} //end of while 
 }
+
 //==================================Function to close the browser========================================================================================================
 public void closeBrowser()
 {
 	objectUIoperations.stop_browser();
+}
+
+//============================================file function=========================================================================================================
+public void Filecreate() throws IOException
+{
+	File file = new File(this.configFile.getProperty("OutputFilePath"));
+	if (!file.exists()) 
+	{
+		file.createNewFile();
+	}
+	else
+	{
+		file.delete();
+		file.createNewFile();
+	}
 }
 }
