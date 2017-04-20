@@ -26,12 +26,12 @@ public class DriverScript
 	protected static TheEventListener event;
 	
 	
-	public static void main(String args[]) throws ClassNotFoundException, SQLException, IOException
+	public static void main(String args[]) throws ClassNotFoundException, SQLException, IOException, InterruptedException
 	{
 		databaseOperartions objectInput = new databaseOperartions();
 		databaseOperartions objectOutput = new databaseOperartions();
 		event=new TheEventListener();
-		propertiesHandle configFile = new propertiesHandle("A:/1 Projects/13 Starr Assist/Release3/QARelease/Configuration/Config_C1128.properties");
+		propertiesHandle configFile = new propertiesHandle("A:/1 Projects/14 CVSTARR/BAD/config/BAD_Config_C1131.properties");
 		databaseOperartions.conn_setup(configFile);
 		System.setProperty("jsse.enableSNIExtension", "false");	
 		DriverScript objDriver=new DriverScript(configFile);
@@ -109,7 +109,7 @@ public void launchBrowser()
 }
 
 //==============================================Function to login===================================================================================================
-  protected void login(databaseOperartions objectInput,databaseOperartions objectOutput) throws SQLException, IOException
+  protected void login(databaseOperartions objectInput,databaseOperartions objectOutput) throws SQLException, IOException, InterruptedException
   {
 	  objectLoginScript.set_rownumber(1);
 	  while(objectLoginScript.has_next_row())
@@ -132,7 +132,7 @@ public void launchBrowser()
 		}	  
   }
  //=============================================Function to run the test script========================================================================================  
-protected void executeTestScript(databaseOperartions objectInput,databaseOperartions objectOutput) throws SQLException, IOException
+protected void executeTestScript(databaseOperartions objectInput,databaseOperartions objectOutput) throws SQLException, IOException, InterruptedException
 {
 	objectTestScript.set_rownumber(1);
 	while(objectTestScript.has_next_row())
