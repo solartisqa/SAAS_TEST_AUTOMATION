@@ -19,7 +19,7 @@ public class browserLaunching {
 			
 	protected WebDriverWait wait=null; 
 	
-	 public WebDriver launch_browser(String browser,propertiesHandle config)
+	 public void launch_browser(String browser,propertiesHandle config)
 	 {
 		 DesiredCapabilities capabilities = new DesiredCapabilities();
 		 String driver_path = config.getProperty("driver_path");
@@ -103,7 +103,7 @@ public class browserLaunching {
 			    System.out.println("not a valid browser");
 			    break;
 		}
-		return driver;
+		//return driver;
 	 }
 	 
 
