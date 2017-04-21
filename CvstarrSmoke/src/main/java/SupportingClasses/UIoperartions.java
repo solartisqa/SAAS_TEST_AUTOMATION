@@ -28,7 +28,7 @@ public class UIoperartions extends browserLaunching {
 public void perform(String p,String operation,String objectType,String value,String waitingTime,String filename,String Outputname) throws SQLException, IOException, InterruptedException
 {
 	long waitingTimeinseconds=Long.parseLong(waitingTime);
-	System.out.println("success2");
+	//System.out.println("success2");
 	wait = new WebDriverWait(driver, waitingTimeinseconds);
 	FileHandle file = new FileHandle(filename);
 try
@@ -52,13 +52,13 @@ case "CLICK":
  //-------------------------------------------------------GET ATTRIBUTE-------------------------------------------------------------	 
  case "GETATTRIBUTE":
 	     outputValue=this.getValueByAttribute(p, objectType);
-	     file.AppendFileHandle(Outputname+" = "+ outputValue);
+	     file.AppendFileHandle(Outputname+" = "+ outputValue+"\n\n");
 	     System.out.println(outputValue);
          break;
  //------------------------------------------------------GET TEXT----------------------------------------------------------------------                 
  case "GETTEXT":
 	     outputValue=this.getValueByText(p, objectType);
-	     file.AppendFileHandle(Outputname+" = "+ outputValue);
+	     file.AppendFileHandle(Outputname+" = "+ outputValue+"\n\n");
 	     System.out.println(outputValue);
 	     break;
   //----------------------------------------------------SELECT OPERATION------------------------------------------------------------------------- 
