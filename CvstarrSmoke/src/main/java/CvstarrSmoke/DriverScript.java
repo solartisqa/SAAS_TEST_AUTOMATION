@@ -32,10 +32,11 @@ public static void main(String args[]) throws ClassNotFoundException, SQLExcepti
 	    event=new TheEventListener();
 	    File jarFile = new File(DriverScript.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 	    File FolderFile = jarFile.getParentFile();
-	    propertiesHandle configFile = new propertiesHandle(FolderFile.getPath() + "\\" + args[0] + ".properties");
-		configFile.setProperty("driver_path", FolderFile.getPath() +"\\" + configFile.getProperty("driver_folder") + "\\");
-		configFile.setProperty("Test_script_path",FolderFile.getPath() +"\\" + configFile.getProperty("Test_script_folder") + "\\");
-		configFile.setProperty("OutputFilePath",FolderFile.getPath() +"\\" + configFile.getProperty("OutputfolderName"));
+	    String folderfile = FolderFile.getAbsolutePath().replaceAll(" " ,"%20");
+	    propertiesHandle configFile = new propertiesHandle(folderfile + "\\" + args[0] + ".properties");
+		configFile.setProperty("driver_path", folderfile +"\\" + configFile.getProperty("driver_folder") + "\\");
+		configFile.setProperty("Test_script_path",folderfile +"\\" + configFile.getProperty("Test_script_folder") + "\\");
+		configFile.setProperty("OutputFilePath",folderfile +"\\" + configFile.getProperty("OutputfolderName"));
 		System.setProperty("jsse.enableSNIExtension", "false");	
 		DriverScript objDriver=new DriverScript(configFile);
 		objDriver.launchBrowser();
