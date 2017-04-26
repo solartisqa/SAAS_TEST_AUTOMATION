@@ -149,7 +149,7 @@ case "WAITFORTEXT":
  //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "DYNAMICDATEPICKER":
 	
-	inputValue = value;
+	inputValue = this.getInputValue(dataFlag, input, value, dbcolumn_name);
 	this.dynamicDatePicker(p, objectType, inputValue);
 	break;
        
@@ -441,6 +441,7 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 			}
 			
 			driver.findElement(this.getObject(p,objtype[i])).click();
+			Thread.sleep(1000);
 		}
  }
  
