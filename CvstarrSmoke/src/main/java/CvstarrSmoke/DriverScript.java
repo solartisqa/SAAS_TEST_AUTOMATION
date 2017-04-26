@@ -36,8 +36,6 @@ public static void main(String args[]) throws ClassNotFoundException, SQLExcepti
 		configFile.setProperty("driver_path", FolderFile +"\\" + configFile.getProperty("driver_folder") + "\\");
 		configFile.setProperty("Test_script_path",FolderFile +"\\" + configFile.getProperty("Test_script_folder") + "\\");
 		configFile.setProperty("OutputFilePath",FolderFile +"\\" + configFile.getProperty("OutputfolderName"));
-		System.setProperty("logfile.name",FolderFile +"\\");
-		event.log(FolderFile +"\\Logs");
 		System.setProperty("jsse.enableSNIExtension", "false");	
 		DriverScript objDriver=new DriverScript(configFile);
 		objDriver.launchBrowser();
