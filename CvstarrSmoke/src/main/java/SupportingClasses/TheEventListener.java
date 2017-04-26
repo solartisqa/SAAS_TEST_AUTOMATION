@@ -1,5 +1,7 @@
 package SupportingClasses;
 
+import java.io.File;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +12,40 @@ import CvstarrSmoke.DriverScript;
 
 public class TheEventListener implements WebDriverEventListener 
 {
+	static  					//Static Block that executed before main program runs.
+	{
 
+
+		File theDir = new File("D:/Logs");
+		 System.out.println("Checking the Presence of Logs Folder in D:\\Logs");
+		
+		// if the directory does not exist, create it
+		if (!theDir.exists()) 
+		{
+		    System.out.println("creating directory: " + theDir.getName());
+		    boolean result = false;
+		
+		    try
+		    {
+		        theDir.mkdir();
+		        result = true;
+		    } 
+		    catch(SecurityException se)
+		    {
+		        //handle it
+		    	 System.out.println("Exception Occured while Creating the Folder");
+		    }        
+		    if(result) 
+		    {    
+		        System.out.println("DIR created");  
+		    }
+		}
+		System.out.println("Logs Folder is Detected");
+
+	}
+	
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
 	static Logger logError = Logger.getLogger("ERRORlog");
 	static Logger logInfo = Logger.getLogger("INFOlog");
 	
