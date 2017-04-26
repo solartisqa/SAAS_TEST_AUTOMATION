@@ -32,7 +32,7 @@ public static void main(String args[]) throws ClassNotFoundException, SQLExcepti
 	    event=new TheEventListener();
 	    File jarFile = new File(DriverScript.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 	    File FolderFile = jarFile.getParentFile();
-	    String folderfile = FolderFile.getAbsolutePath().replaceAll(" " ,"%20");
+	    String folderfile = FolderFile.getAbsolutePath().replaceAll("%20" ," ");
 	    propertiesHandle configFile = new propertiesHandle(folderfile + "\\" + args[0] + ".properties");
 		configFile.setProperty("driver_path", folderfile +"\\" + configFile.getProperty("driver_folder") + "\\");
 		configFile.setProperty("Test_script_path",folderfile +"\\" + configFile.getProperty("Test_script_folder") + "\\");
