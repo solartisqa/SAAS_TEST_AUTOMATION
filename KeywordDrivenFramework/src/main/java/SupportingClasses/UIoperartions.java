@@ -95,7 +95,15 @@ case "DATEPICKER":
 		 this.datePicker(p, objectType, inputValue);
          break;
 
-//-------------------------------------------------------------WAIT FOR LOAD-----------------------------------------------------------------
+//-------------------------------------------------------------WAIT FOR LOAD--------------------------------------------------------------------
+case "DATEPICKER_WITHOUT_ENTER":
+	
+	  inputValue = this.getInputValue(dataFlag, input, value, dbcolumn_name);
+	  this.datePickerWithoutEnter(p, objectType, inputValue);
+      break;
+         
+ //---------------------------------------------------------------------------------------------------------------------------------------        
+         
 case "WAITLOAD":
 		    this.waitLoad(p, objectType);
 		    break;
@@ -115,11 +123,37 @@ case "SETTEXT_WITHOUT_ENTER":
 		inputValue = this.getInputValue(dataFlag, input, value, dbcolumn_name);
 		this.setTextWithoutEnter(p, objectType, inputValue);
 		break;
-//----------------------------------------------------------Thread sleep------------------------------------------------------------------------------------------------------------------------	    
+//----------------------------------------------------------Thread sleep------------------------------------------------------------------------------------------------	
+case "SETTEXT_THEN_ENTER":
+	
+	inputValue = this.getInputValue(dataFlag, input, value, dbcolumn_name);
+	this.setTexThenEnter(p, objectType, inputValue);
+	break;
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+	
 case "WAIT":
 	   Thread.sleep(waitingTimeinseconds);
        break;
+       
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+case "WAITFORTEXT":
+	
+	element = driver.findElement(this.getObject(p,objectType));
+	if(element.isEnabled() && element.isDisplayed())
+	{
+	String expectedText=element.getText();
+	System.out.println(expectedText);
+	wait.until(ExpectedConditions.textToBePresentInElement(element, expectedText));
+	}
+    break;   
+ //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+case "DYNAMICDATEPICKER":
+	
+	inputValue = value;
+	this.dynamicDatePicker(p, objectType, inputValue);
+	break;
+       
+       
 default:
 	    System.out.println("operations not  performed");
 	    break;
@@ -133,7 +167,12 @@ catch(StaleElementReferenceException e)
 }
 
 
- //============================================Locator Action====================================================================  
+ 
+
+
+
+
+//============================================Locator Action====================================================================  
  private By getObject(String p,String objectType)
   {
     switch(objectType.toUpperCase())
@@ -168,6 +207,9 @@ catch(StaleElementReferenceException e)
     case "ID":
     	
     	return By.id(p);
+    	
+    case "DYNAMICXPATH":
+    	return By.xpath(p);	
     	 	
    default:
 	   
@@ -204,7 +246,16 @@ catch(StaleElementReferenceException e)
 	   	element.sendKeys(inputValue);
    }
     
-    
+   
+   private void setTexThenEnter(String p, String objectType, String inputValue2) 
+   {
+	   this.waitWithClickable(p, objectType);
+	   	element = driver.findElement(this.getObject(p,objectType));
+	   	element.clear();
+	   	element.sendKeys(inputValue);
+	   	element.sendKeys(Keys.ENTER);	
+		
+   }   
  protected void goToURL(String inputURL )
  {
 	 	driver.get(inputValue); 	
@@ -256,6 +307,7 @@ catch(StaleElementReferenceException e)
 	 	wait.until(ExpectedConditions.presenceOfElementLocated(this.getObject(p,objectType)));
 	 	wait.until(ExpectedConditions.elementToBeClickable(this.getObject(p,objectType)));
 	 	wait.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(p,objectType)));
+
  }
  
  protected void waitWithoutClickable(String p,String objectType)
@@ -287,6 +339,14 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 	 	element.sendKeys(inputValue);
 	 	element.sendKeys(Keys.ENTER);
  }
+ 
+ 
+ private void datePickerWithoutEnter(String p, String objectType, String inputValue2)
+ {
+	    this.waitWithClickable(p, objectType);
+	 	element = driver.findElement(this.getObject(p,objectType));
+	 	element.sendKeys(inputValue);
+}
  
  protected void contSendkeysOperation(String p,String objectType,String inputValue) 
  {
@@ -328,12 +388,63 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 	   	return status;
  }
   
+ 
  protected void takeScreenShot() throws SQLException, IOException
  {
 	 	File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 	 	FileUtils.copyFile(scrFile, new File("D:\\Exception\\screenshots\\"+".png"));	
    	 
  }
+ 
+ 
+ protected void dynamicDatePicker(String p,String objectType,String value) throws InterruptedException
+ {
+	 String[] objtype=objectType.split(";");
+		String[] property=p.split(";");
+		String[] value1=value.split("/");
+		int totElements=objtype.length;
+		for(int i=0;i<totElements;i++)
+		{
+			p=property[i];
+			if(objtype[i].equalsIgnoreCase("DYNAMICXPATH"))
+			{ 
+				if(i==1)
+				{
+					p=property[i].replace("!",value1[2]);
+				}
+				if(i==2)
+				{
+			        switch (value1[0]) 
+			        {
+			            case "01":  value1[0] = "Jan";        break;
+			            case "02":  value1[0] = "Feb";        break;
+			            case "03":  value1[0] = "Mar";        break;
+			            case "04":  value1[0] = "Apr";        break;
+			            case "05":  value1[0] = "May";        break;
+			            case "06":  value1[0] = "Jun";        break;
+			            case "07":  value1[0] = "Jul";        break;
+			            case "08":  value1[0] = "Aug";        break;
+			            case "09":  value1[0] = "Sep";        break;
+			            case "10": value1[0] = "Oct";         break;
+			            case "11": value1[0] = "Nov";         break;
+			            case "12": value1[0] = "Dec";         break;
+			            default: value1[0] = "Invalid month"; break;
+			        }
+			        p=property[i].replace("!",value1[0]);
+				}
+				if(i==3)
+				{
+					p=property[i].replace("!",value1[1]);
+				}
+				 
+				 System.out.println(p);
+			}
+			
+			driver.findElement(this.getObject(p,objtype[i])).click();
+		}
+ }
+ 
+ 
  
  protected String getInputValue(String dataFlag,databaseOperartions input,String value,String dbcolumn_name) throws SQLException
  {
