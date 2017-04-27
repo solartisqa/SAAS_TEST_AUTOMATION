@@ -1,6 +1,5 @@
 package CvstarrSmoke;
 
-import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.TimeoutException;
 import SupportingClasses.TheEventListener;
 import SupportingClasses.propertiesHandle;
@@ -29,7 +28,6 @@ public static void main(String args[]) throws ClassNotFoundException, SQLExcepti
 	    File jarFile = new File(DriverScript.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 	    File FolderFile = jarFile.getParentFile();
 	    String folderfile = FolderFile.getAbsolutePath().replaceAll("%20" ," ");
-	    PropertyConfigurator.configure("log4j.properties");
 	    propertiesHandle configFile = new propertiesHandle(folderfile + "\\" + args[0] + ".properties");
 		configFile.setProperty("driver_path", folderfile +"\\" + configFile.getProperty("driver_folder") + "\\");
 		configFile.setProperty("Test_script_path",folderfile +"\\" + configFile.getProperty("Test_script_folder") + "\\");
