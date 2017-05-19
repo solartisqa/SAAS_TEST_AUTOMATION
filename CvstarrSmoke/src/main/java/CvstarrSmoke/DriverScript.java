@@ -28,13 +28,17 @@ public class DriverScript
 	
 public static void main(String args[]) throws ClassNotFoundException, SQLException, IOException, InterruptedException
 {
-	    event=new TheEventListener();
+	    
+	
+	event=new TheEventListener();
+
 	    File jarFile = new File(DriverScript.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 	    File FolderFile = jarFile.getParentFile();
-		propertiesHandle configFile = new propertiesHandle(FolderFile + "\\BAD_Config.properties");
-		configFile.setProperty("driver_path", FolderFile +"\\" + configFile.getProperty("driver_folder") + "\\");
-		configFile.setProperty("Test_script_path",FolderFile +"\\" + configFile.getProperty("Test_script_folder") + "\\");
-		configFile.setProperty("OutputFilePath",FolderFile +"\\" + configFile.getProperty("OutputfolderName"));
+		propertiesHandle configFile = new propertiesHandle("A:/1 Projects/14 CVSTARR/SSE/config/config_smoke.properties");
+		//configFile.setProperty("driver_path", FolderFile +"\\" + configFile.getProperty("driver_folder") + "\\");
+		//configFile.setProperty("Test_script_path",FolderFile +"\\" + configFile.getProperty("Test_script_folder") + "\\");
+		configFile.setProperty("OutputFilePath",configFile.getProperty("OutputfolderName"));
+		System.setProperty("logfile.name","D:\\Logs");
 		System.setProperty("jsse.enableSNIExtension", "false");	
 		DriverScript objDriver=new DriverScript(configFile);
 		objDriver.launchBrowser();

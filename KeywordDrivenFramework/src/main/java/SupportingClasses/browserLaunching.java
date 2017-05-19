@@ -11,7 +11,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.remote.CapabilityType;
 
-public class browserLaunching {
+public class browserLaunching extends ConditionsChecking{
 	
 	protected WebDriver wdriver=null;
 	protected EventFiringWebDriver driver=null;
