@@ -1,19 +1,14 @@
 package CvstarrSmoke;
 
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
-
 import SupportingClasses.TheEventListener;
 import SupportingClasses.propertiesHandle;
 import SupportingClasses.ConditionsChecking;
 import SupportingClasses.UIoperartions;
 import SupportingClasses.ExcelOperationsJXL;
-
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class DriverScript 
 {
