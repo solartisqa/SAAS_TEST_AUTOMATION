@@ -157,7 +157,8 @@ public class ExcelOperationsJXL
 		} catch (RowsExceededException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (WriteException e) {
+		} catch (WriteException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

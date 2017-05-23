@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -46,6 +47,7 @@ public class browserLaunching {
 					capabilities.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
 					capabilities.setCapability(InternetExplorerDriver.ENABLE_ELEMENT_CACHE_CLEANUP,true);
 					capabilities.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS,false);
+				
 					capabilities.setCapability("browserstack.debug", true);
 					System.out.println(browser);			
 				    wdriver = new InternetExplorerDriver(capabilities);
@@ -67,6 +69,7 @@ public class browserLaunching {
 					capabilities.setCapability("os_version", "7");
 					capabilities.setCapability("resolution", "800x600");
 					capabilities.setCapability("browserstack.debug", true);
+					capabilities.setCapability("webdriver_chrome_port", 7046);
 					wdriver = new ChromeDriver(capabilities);
 					driver=new EventFiringWebDriver(wdriver);
 				    eventListerner=new TheEventListener();
