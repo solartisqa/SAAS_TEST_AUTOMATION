@@ -1,5 +1,6 @@
 package KeywordDrivenFramework;
 
+import java.awt.AWTException;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -9,17 +10,15 @@ import DriverPackages.*;
 import SupportingClasses.databaseOperartions;
 import SupportingClasses.propertiesHandle;
 
-/**
- * Hello world!
- *
- */
+
 public class UIMainscript
 {
-    public static void main( String[] args ) throws ClassNotFoundException, SQLException, IOException, InterruptedException
+    public static void main( String[] args ) throws ClassNotFoundException, SQLException, IOException, InterruptedException, AWTException
     {
     	databaseOperartions objectInput = new databaseOperartions();
 		databaseOperartions objectOutput = new databaseOperartions();
-		propertiesHandle configFile = new propertiesHandle("A:/1 Projects/14 CVSTARR/BAD/config/BAD_Config_C1131.properties");
+		
+		propertiesHandle configFile = new propertiesHandle("A:/1 Projects/20 CHIC_UI/Release1/Configuration/Config_C1128.properties");
 		databaseOperartions.conn_setup(configFile);
 		System.setProperty("jsse.enableSNIExtension", "false");	
 		BaseDriverScript objDriver=new BaseDriverScript(configFile);
@@ -27,32 +26,32 @@ public class UIMainscript
 		boolean loginStatus=true;
 		objectInput.get_dataobjects(configFile.getProperty("input_query"));
 		objectOutput.get_dataobjects(configFile.getProperty("output_query"));
-		do
-		{
-		  //try{
+	do
+	   {
+		  try{
 			  if(loginStatus)
 			   {
 				 objDriver.login(objectInput, objectOutput);
 				 loginStatus=false;
-			   
 			   }
-			 String testdata=objectInput.read_data("test_case_id");
+			 String testdata=objectInput.read_data("Test_data_id");
 			 System.out.println(testdata);
-			  if(objectInput.read_data("flag_for_execution").equals(configFile.getProperty("flagForExecution")))
+			 if(objectInput.read_data("flag_for_execution").equals(configFile.getProperty("flagForExecution")))
 				{  
-				   objDriver.executeTestScript(objectInput, objectOutput);
+				  objDriver.executeTestScript(objectInput, objectOutput);
+				  
+				   //objDriver.comparisonScript(objectInput, objectOutput);
 				   objectInput.write_data("Flag_for_execution", objectInput.read_data("Flag_for_execution")+"Completed");
 				   objectOutput.write_data("Flag_for_execution", "Completed");
-			    }
-			   
-		   // }
-		  //catch(TimeoutException e)
-			//{
-			 	//e.printStackTrace();
-				//objectInput.write_data("Flag_for_execution",  objectInput.read_data("Flag_for_execution")+"Error");
-				//objectOutput.write_data("Flag_for_execution", "Error");	
-				//loginStatus=true;
-			//}
+			   }		   
+	      }
+		 catch(Exception e)
+			{
+			 	e.printStackTrace();
+				objectInput.write_data("Flag_for_execution",  objectInput.read_data("Flag_for_execution")+"Error");
+			   objectOutput.write_data("Flag_for_execution", "Error");	
+				loginStatus=true;
+			} 
 		  objectInput.update_row();
 		  objectOutput.update_row();
 		  
