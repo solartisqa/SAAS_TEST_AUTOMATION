@@ -1,10 +1,16 @@
 package SupportingClasses;
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -18,14 +24,15 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
 
 
-public class UIoperartions extends browserLaunching {
+public class UIoperartions extends browserLaunching
+{
 	
 	 protected String inputValue;
 	 protected String outputValue;
 	 public WebElement element;
 	
 //**************************************UI operations***************************************************************************
-public void perform(String p,String operation,String objectType,String value,String dbcolumn_name,String dataFlag,databaseOperartions input,databaseOperartions output,String waitingTime) throws SQLException, IOException, InterruptedException
+public void perform(String p,String operation,String objectType,String value,String dbcolumn_name,String dataFlag,databaseOperartions input,databaseOperartions output,String waitingTime) throws SQLException, IOException, InterruptedException, AWTException
 {
 	long waitingTimeinseconds=Long.parseLong(waitingTime);
 	//System.out.println("waitingtime"+waitingTimeinseconds);
@@ -33,6 +40,8 @@ public void perform(String p,String operation,String objectType,String value,Str
 try
 {
 switch (operation.toUpperCase())
+
+
 {
 //-------------------------------click operation-------------------------------------------------------------------------------
 case "CLICK": 
@@ -57,6 +66,7 @@ case "CLICK":
  //------------------------------------------------------GET TEXT----------------------------------------------------------------------                 
  case "GETTEXT":
 	     outputValue=this.getValueByText(p, objectType);
+	     System.out.println(outputValue);
 	     output.write_data(dbcolumn_name, outputValue);
 	     output.update_row();
 	     break;
@@ -152,8 +162,37 @@ case "DYNAMICDATEPICKER":
 	inputValue = this.getInputValue(dataFlag, input, value, dbcolumn_name);
 	this.dynamicDatePicker(p, objectType, inputValue);
 	break;
+	
+	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+case "DYNAMICCLICK":
+	inputValue = this.getInputValue(dataFlag, input, value, dbcolumn_name);
+	this.dynamicClick(p, objectType, inputValue);
+	break;
+	
+	//-------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+case "UPLOAD":
+	   this.upload(value);
+	   break;
+	//--------------------------------------------------------------------------------------------------------------------------------------------------   
+	   
+case "CLICKVISIBLEELEMENT":
+	this.clickVisibleElement(p, objectType);
+	break;
+	
+	//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+case "JSCLICK":
+	this.jsClick(p, objectType);
+	break;
+	//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
        
-       
+case "SETEXTRACTEDVALUE":
+	
+	inputValue=this.getValueByAttribute(value, objectType);
+	System.out.println("xpath..."+value+"-----extracted------"+inputValue);
+	this.setTextWithoutEnter(p, objectType, inputValue);
+	break;
+	
 default:
 	    System.out.println("operations not  performed");
 	    break;
@@ -165,10 +204,6 @@ catch(StaleElementReferenceException e)
 }
 
 }
-
-
- 
-
 
 
 
@@ -223,11 +258,36 @@ catch(StaleElementReferenceException e)
     
   protected void click(String p,String objectType) throws StaleElementReferenceException
   {  
+	 
 	  	this.waitWithClickable(p, objectType);
+
 	  	element = driver.findElement(this.getObject(p,objectType));
 	  	element.click(); 	
   }
+  
+  //===========================================================================================================================================
+  
+  protected void clickVisibleElement(String p,String objectType)throws StaleElementReferenceException, InterruptedException
+  {  
+	  int var_ele_size= driver.findElements(this.getObject(p,objectType)).size();
+	  driver.findElements(this.getObject(p,objectType)).get(var_ele_size-1).click();
+	  
+  }
     
+  
+ //=================================================================================================================================================== 
+  
+  protected void jsClick(String p,String objectType)
+  {
+	  element = driver.findElement(this.getObject(p,objectType));
+	  
+	  //JavascriptExecutor executor = (JavascriptExecutor)driver;
+	  ((JavascriptExecutor)driver).executeScript("window.scrollTo(0,"+element.getLocation().y+")");
+	  element.click();
+	  //executor.executeScript("arguments[0].click()", element);
+  }
+  
+  //===================================================================================================================================================
    protected void setTextWithEnter(String p,String objectType,String inputValue) throws StaleElementReferenceException
    {
 	   	this.waitWithClickable(p, objectType);
@@ -237,7 +297,9 @@ catch(StaleElementReferenceException e)
 	   	element.sendKeys(inputValue);
 	   	element.sendKeys(Keys.ENTER);	
    }
+  
    
+  //===================================================================================================================================================== 
    protected void setTextWithoutEnter(String p,String objectType,String inputValue) throws StaleElementReferenceException
    {
 	   	this.waitWithClickable(p, objectType);
@@ -246,21 +308,25 @@ catch(StaleElementReferenceException e)
 	   	element.sendKeys(inputValue);
    }
     
-   
-   private void setTexThenEnter(String p, String objectType, String inputValue2) 
+  //=================================================================================================================================================== 
+   private void setTexThenEnter(String p, String objectType, String inputValue) 
    {
 	   this.waitWithClickable(p, objectType);
 	   	element = driver.findElement(this.getObject(p,objectType));
 	   	element.clear();
 	   	element.sendKeys(inputValue);
-	   	element.sendKeys(Keys.ENTER);	
-		
+	   	element.sendKeys(Keys.ENTER);		
    }   
+   
+   
+  //==================================================================================================================================================== 
  protected void goToURL(String inputURL )
  {
 	 	driver.get(inputValue); 	
  }
     
+ 
+ //======================================================================================================================================================
  protected String getValueByText(String p,String objectType) throws StaleElementReferenceException
  {
 	   	this.waitWithoutClickable(p, objectType);
@@ -359,7 +425,8 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
  
  protected void waitTillInvisible(String p,String objectType)
  {
-	 try{
+	 try
+	 {
 	    wait.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(p,objectType)));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(this.getObject(p,objectType)));
 	 }
@@ -446,7 +513,6 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
  }
  
  
- 
  protected String getInputValue(String dataFlag,databaseOperartions input,String value,String dbcolumn_name) throws SQLException
  {
 	 switch(dataFlag)
@@ -459,9 +525,34 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 	 			inputValue = value;
 	 			break;
 	 	}
+	 System.out.println(inputValue);
 	 	return inputValue;
+	 	
  }
 
+ private void dynamicClick(String p, String objectType, String inputValue) 
+ {
+	    p=p.replace("#", inputValue);
+	    this.waitWithClickable(p, objectType);
+	  	element = driver.findElement(this.getObject(p,objectType));
+	  	element.click(); 
+		
+ }
+ 
+ private void upload(String inputValue) throws AWTException
+ {
+	    StringSelection ss = new StringSelection(inputValue);
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+		 Robot r = new Robot();
+		 r.keyPress(KeyEvent.VK_ENTER);
+		 r.keyRelease(KeyEvent.VK_ENTER);
+		 r.keyPress(KeyEvent.VK_CONTROL);
+		 r.keyPress(KeyEvent.VK_V);
+		 r.keyRelease(KeyEvent.VK_V);    
+		 r.keyRelease(KeyEvent.VK_CONTROL);
+		 r.keyPress(KeyEvent.VK_ENTER);
+		 r.keyRelease(KeyEvent.VK_ENTER);
+ }
 
 /*public void launch_browser(String browser, propertiesHandle configFile) {
 	// TODO Auto-generated method stub
