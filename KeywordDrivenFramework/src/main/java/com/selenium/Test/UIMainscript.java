@@ -10,15 +10,15 @@ import java.util.Map.Entry;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.selenium.Configuration.PropertiesHandle;
+import com.selenium.DriverPackage.*;
 import com.selenium.SupportingClasses.DatabaseOperation;
 import com.selenium.exception.DatabaseException;
 import com.selenium.exception.PropertiesHandleException;
-
-import DriverPackage.*;
 
 
 
@@ -39,11 +39,14 @@ public class UIMainscript
 	public static PropertiesHandle configFile;
 	public static boolean loginStatus;
 	
-	
+	//@Parameters({ "Project","Flow","Env","FlagForExecution","JDBC_DRIVER","DB_URL","USER","password","browser","ResultChoice" })
+	//String Project,String Flow,String Env,String FlagForExecution,String JDBC_DRIVER,String DB_URL,String USER,String password,String browser,String ResultChoice
 	@BeforeTest
 	public void loadconfig() throws DatabaseException, ClassNotFoundException, SQLException, PropertiesHandleException
 	{
 		System.setProperty("jsse.enableSNIExtension", "false");
+		//configFile = new PropertiesHandle(Project, Flow, Env, FlagForExecution, JDBC_DRIVER, DB_URL, USER, password, browser, ResultChoice);
+
 		configFile = new PropertiesHandle(System.getProperty("Project"),System.getProperty("Flow"),System.getProperty("Env"),System.getProperty("FlagForExecution"),System.getProperty("JDBC_DRIVER"),System.getProperty("DB_URL"),System.getProperty("USER"),System.getProperty("password"),System.getProperty("browser"),System.getProperty("ResultChoice"));
 		System.out.println(configFile.getProperty("inputQuery"));
 		DatabaseOperation.ConnectionSetup(configFile);    

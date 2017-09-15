@@ -1,4 +1,4 @@
-package DriverPackage;
+package com.selenium.DriverPackage;
 
 import com.selenium.Configuration.PropertiesHandle;
 import com.selenium.SupportingClasses.ExcelOperationsJXL;

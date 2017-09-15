@@ -22,7 +22,7 @@ public class browserLaunching extends ConditionsChecking{
 			
 	protected WebDriverWait wait=null; 
 	
-	 public void launch_browser(String browser,PropertiesHandle config)
+	 public WebDriver launch_browser(String browser,PropertiesHandle config)
 	 {
 		 DesiredCapabilities capabilities = new DesiredCapabilities();
 		 String driver_path = config.getProperty("driverPath");
@@ -108,7 +108,7 @@ public class browserLaunching extends ConditionsChecking{
 			    break;
 		}
 	   //driver.get(Url);
-		//return driver;
+		return driver;
 	 }
 	 
 

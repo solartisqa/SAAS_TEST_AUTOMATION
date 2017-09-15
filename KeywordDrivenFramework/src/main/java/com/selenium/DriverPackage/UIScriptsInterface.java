@@ -1,9 +1,11 @@
-package DriverPackage;
+package com.selenium.DriverPackage;
 
 import java.awt.AWTException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
+
+import org.openqa.selenium.WebDriver;
 
 import com.selenium.exception.DatabaseException;
 

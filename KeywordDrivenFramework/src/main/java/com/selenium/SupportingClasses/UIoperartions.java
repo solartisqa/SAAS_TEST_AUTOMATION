@@ -31,6 +31,7 @@ public class UIoperartions extends browserLaunching
 	 protected String inputValue;
 	 protected String outputValue;
 	 public WebElement element;
+	// WebDriverWait wait;
 	
 //**************************************UI operations***************************************************************************
 public void perform(String p,String operation,String objectType,String value,String dbcolumn_name,String dataFlag,LinkedHashMap<String, String> InputData,LinkedHashMap<String, String> outputData,String waitingTime) throws SQLException, IOException, InterruptedException, AWTException
