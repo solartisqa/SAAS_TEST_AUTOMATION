@@ -48,7 +48,7 @@ public class UIMainscript
 		//configFile = new PropertiesHandle(Project, Flow, Env, FlagForExecution, JDBC_DRIVER, DB_URL, USER, password, browser, ResultChoice);
 
 		configFile = new PropertiesHandle(System.getProperty("Project"),System.getProperty("Flow"),System.getProperty("Env"),System.getProperty("FlagForExecution"),System.getProperty("JDBC_DRIVER"),System.getProperty("DB_URL"),System.getProperty("USER"),System.getProperty("password"),System.getProperty("browser"),System.getProperty("ResultChoice"));
-		System.out.println(configFile.getProperty("inputQuery"));
+		//System.out.println(configFile.getProperty("inputQuery"));
 		DatabaseOperation.ConnectionSetup(configFile);    
 		objDriver=new BaseDriverScript(configFile);
 		objDriver.launchBrowser();

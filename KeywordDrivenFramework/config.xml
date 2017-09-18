@@ -2,16 +2,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite" parallel="none">
   <test name="Test">
-   <parameter name="Project" value="CHIC"/>
-	<parameter name="Flow" value="Quote"/>
-	<parameter name="Env" value="QA"/>
-	<parameter name="FlagForExecution" value="Y"/>
-	<parameter name="JDBC_DRIVER" value="com.mysql.jdbc.Driver"/>
-	<parameter name="DB_URL" value="jdbc:mysql://192.168.35.2:3391/SeleniumConfig"/>
-	<parameter name="USER" value="root"/>
-	<parameter name="password" value="password"/>
-	<parameter name="browser" value="Chrome"/>
-	<parameter name="ResultChoice" value="ActualOnly"/>
     <classes>
       <class name="com.selenium.Test.UIMainscript"/>
     </classes>
