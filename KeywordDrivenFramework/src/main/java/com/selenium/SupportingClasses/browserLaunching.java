@@ -83,17 +83,11 @@ public class browserLaunching extends ConditionsChecking{
 		    case "FIREFOX":
 				
 				  	System.out.println(browser);	  						
-					System.setProperty("webdriver.gecko.driver",driver_path + "geckodriver.exe");		  		
-					capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
+					System.setProperty("webdriver.gecko.driver",driver_path + "geckodriver.exe");
 					capabilities.setCapability("ignoreZoomSetting", true);
 					capabilities.setCapability("javascriptEnabled", true);
 					capabilities.setCapability("platform", "WINDOWS");
-					capabilities.setCapability("ignoreProtectedModeSettings", true);	
-					capabilities.setCapability(InternetExplorerDriver.UNEXPECTED_ALERT_BEHAVIOR,"dismiss");
-					capabilities.setCapability(InternetExplorerDriver.ELEMENT_SCROLL_BEHAVIOR,0);
-					capabilities.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
-					capabilities.setCapability(InternetExplorerDriver.ENABLE_ELEMENT_CACHE_CLEANUP,true);
-					capabilities.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS,false);		
+					capabilities.setCapability("ignoreProtectedModeSettings", true);		
 					wdriver=new FirefoxDriver(capabilities);
 					driver=new EventFiringWebDriver(wdriver);
 				    eventListerner=new TheEventListener();

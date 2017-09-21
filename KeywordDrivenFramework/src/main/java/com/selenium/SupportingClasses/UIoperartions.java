@@ -20,6 +20,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
@@ -31,6 +33,7 @@ public class UIoperartions extends browserLaunching
 	 protected String inputValue;
 	 protected String outputValue;
 	 public WebElement element;
+	 public Document document;
 	// WebDriverWait wait;
 	
 //**************************************UI operations***************************************************************************
@@ -69,7 +72,7 @@ case "CLICK":
  //------------------------------------------------------GET TEXT----------------------------------------------------------------------                 
  case "GETTEXT":
 	     outputValue=this.getValueByText(p, objectType);
-	     System.out.println(outputValue);
+	    // System.out.println(outputValue);
 	     outputData.put(dbcolumn_name, outputValue);
 	     //outputData.update_row();
 	     break;
@@ -155,7 +158,7 @@ case "WAITFORTEXT":
 	if(element.isEnabled() && element.isDisplayed())
 	{
 	String expectedText=element.getText();
-	System.out.println(expectedText);
+	//System.out.println(expectedText);
 	wait.until(ExpectedConditions.textToBePresentInElement(element, expectedText));
 	}
     break;   
@@ -185,6 +188,7 @@ case "CLICKVISIBLEELEMENT":
 	
 	//-------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "JSCLICK":
+	
 	this.jsClick(p, objectType);
 	break;
 	//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -192,10 +196,10 @@ case "JSCLICK":
 case "SETEXTRACTEDVALUE":
 	
 	inputValue=this.getValueByAttribute(value, objectType);
-	System.out.println("xpath..."+value+"-----extracted------"+inputValue);
+	//System.out.println("xpath..."+value+"-----extracted------"+inputValue);
 	this.setTextWithoutEnter(p, objectType, inputValue);
 	break;
-	
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 default:
 	    System.out.println("operations not  performed");
 	    break;
@@ -282,12 +286,11 @@ catch(StaleElementReferenceException e)
   
   protected void jsClick(String p,String objectType)
   {
-	  element = driver.findElement(this.getObject(p,objectType));
-	  
+	  //element = driver.findElement(this.getObject(p,objectType));
 	  //JavascriptExecutor executor = (JavascriptExecutor)driver;
-	  ((JavascriptExecutor)driver).executeScript("window.scrollTo(0,"+element.getLocation().y+")");
-	  element.click();
 	  //executor.executeScript("arguments[0].click()", element);
+	  Element var=document.getElementById(p);
+	  ((JavascriptExecutor)driver).executeScript(var+".click();");
   }
   
   //===================================================================================================================================================
@@ -301,7 +304,6 @@ catch(StaleElementReferenceException e)
 	   	element.sendKeys(Keys.ENTER);	
    }
   
-   
   //===================================================================================================================================================== 
    protected void setTextWithoutEnter(String p,String objectType,String inputValue) throws StaleElementReferenceException
    {
@@ -394,7 +396,7 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 				//System.out.println(((WebElement) RadButtonList.get(i)).getAttribute("value"));
 			if(((WebElement) RadButtonList.get(i)).getAttribute("value").equals(inputValue))
 			{
-				System.out.println("radio button clicked");
+				//System.out.println("radio button clicked");
 			   ((WebElement) RadButtonList.get(i)).click();	
 			}
 			}	
@@ -507,7 +509,7 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 					p=property[i].replace("!",value1[1]);
 				}
 				 
-				 System.out.println(p);
+				 //System.out.println(p);
 			}
 			
 			driver.findElement(this.getObject(p,objtype[i])).click();
@@ -528,7 +530,7 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 	 			inputValue = value;
 	 			break;
 	 	}
-	 System.out.println(inputValue);
+	 //System.out.println(inputValue);
 	 	return inputValue;
 	 	
  }

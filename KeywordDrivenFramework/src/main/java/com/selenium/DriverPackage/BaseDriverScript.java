@@ -123,7 +123,6 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 		        {
 		        	objectOutput.write_data(StatusColumn, "Fail");
 		        }
-				
 			}
 			objectComparisonScript.next_row();
 		}	

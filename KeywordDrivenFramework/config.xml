@@ -6,4 +6,9 @@
       <class name="com.selenium.Test.UIMainscript"/>
     </classes>
   </test> <!-- Test -->
+  <listeners>
+        <listener class-name="com.selenium.TestNGListeners.RetryListener"/>
+        <listener class-name="com.selenium.TestNGListeners.TestngListener"/>
+        <listener class-name="com.selenium.TestNGReport.TestNGCustomReportListener" />     
+  </listeners>
 </suite> <!-- Suite -->

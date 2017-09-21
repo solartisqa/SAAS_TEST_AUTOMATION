@@ -62,7 +62,7 @@ public class UIMainscript
 		LinkedHashMap<String, String> inputrow = inputtableobjectMapper.convertValue(inputtablerowobj, LinkedHashMap.class);
 		LinkedHashMap<String, String> outputrow = outputtableobjectMapper.convertValue(outputtablerowobj, LinkedHashMap.class);
     	
-	  try{
+	  //try{
 			  if(loginStatus)
 			   {
 				 objDriver.login(inputrow, outputrow);
@@ -72,20 +72,20 @@ public class UIMainscript
 			 if(inputrow.get("Flag_for_execution").equals(configFile.getProperty("flagForExecution")))
 				{  
 				 
-				  System.out.println("Executing main script");
+				  //System.out.println("Executing main script");
 				  objDriver.executeTestScript(inputrow, outputrow);
 				   //objDriver.comparisonScript(inputrow, outputrow);
 				  inputrow.put("Flag_for_execution", inputrow.get("Flag_for_execution")+"Completed");
 				  outputrow.put("Flag_for_execution", "Completed");
 			   }		   
-	      }
-		catch(Exception e)
-		{
+	     // }
+		/*//catch(Exception e)
+		//{
 			 	e.printStackTrace();
 			 	inputrow.put("Flag_for_execution",  inputrow.get("Flag_for_execution")+"Error");
 				outputrow.put("Flag_for_execution", "Error");	
 				loginStatus=true;
-		} 
+		} */
 		  input.UpdateRow(RowIterator, inputrow);
 		  output.UpdateRow(RowIterator, outputrow);	
     }
@@ -104,10 +104,11 @@ public class UIMainscript
 	 {
 		 input = new DatabaseOperation();
 			
-		 System.out.println(configFile.getProperty("inputQuery"));
+		// System.out.println(configFile.getProperty("inputQuery"));
 		 inputtable = input.GetDataObjects(configFile.getProperty("inputQuery"));
 		 Iterator<Entry<Integer, LinkedHashMap<String,String>>> inputtableiterator = inputtable.entrySet().iterator();
 
+		 //System.out.println(configFile.getProperty("outputQuery"));
 		 output = new DatabaseOperation();
 		 outputtable = output.GetDataObjects(configFile.getProperty("outputQuery"));
 		 Iterator<Entry<Integer, LinkedHashMap<String,String>>> outputtableiterator = outputtable.entrySet().iterator();
