@@ -45,10 +45,8 @@ public class UIMainscript
 	public void loadconfig() throws DatabaseException, ClassNotFoundException, SQLException, PropertiesHandleException
 	{
 		System.setProperty("jsse.enableSNIExtension", "false");
-		//configFile = new PropertiesHandle(Project, Flow, Env, FlagForExecution, JDBC_DRIVER, DB_URL, USER, password, browser, ResultChoice);
-
 		configFile = new PropertiesHandle(System.getProperty("Project"),System.getProperty("Flow"),System.getProperty("Env"),System.getProperty("FlagForExecution"),System.getProperty("JDBC_DRIVER"),System.getProperty("DB_URL"),System.getProperty("USER"),System.getProperty("password"),System.getProperty("browser"),System.getProperty("ResultChoice"));
-		//System.out.println(configFile.getProperty("inputQuery"));
+		
 		DatabaseOperation.ConnectionSetup(configFile);    
 		objDriver=new BaseDriverScript(configFile);
 		objDriver.launchBrowser();
@@ -69,18 +67,19 @@ public class UIMainscript
 				 loginStatus=false;
 			   }
 			 System.out.println(RowIterator);
-			 if(inputrow.get("Flag_for_execution").equals(configFile.getProperty("flagForExecution")))
+			
+			 if(inputrow.get("flag_for_execution").equals(configFile.getProperty("flagForExecution")))
 				{  
 				 
-				  //System.out.println("Executing main script");
+				  System.out.println("Executing main script");
 				  objDriver.executeTestScript(inputrow, outputrow);
 				   //objDriver.comparisonScript(inputrow, outputrow);
-				  inputrow.put("Flag_for_execution", inputrow.get("Flag_for_execution")+"Completed");
+				  inputrow.put("flag_for_execution", inputrow.get("Flag_for_execution")+"Completed");
 				  outputrow.put("Flag_for_execution", "Completed");
 			   }		   
 	     // }
-		/*//catch(Exception e)
-		//{
+		/*catch(Exception e)
+		{
 			 	e.printStackTrace();
 			 	inputrow.put("Flag_for_execution",  inputrow.get("Flag_for_execution")+"Error");
 				outputrow.put("Flag_for_execution", "Error");	
@@ -104,11 +103,11 @@ public class UIMainscript
 	 {
 		 input = new DatabaseOperation();
 			
-		// System.out.println(configFile.getProperty("inputQuery"));
+		
 		 inputtable = input.GetDataObjects(configFile.getProperty("inputQuery"));
 		 Iterator<Entry<Integer, LinkedHashMap<String,String>>> inputtableiterator = inputtable.entrySet().iterator();
 
-		 //System.out.println(configFile.getProperty("outputQuery"));
+		
 		 output = new DatabaseOperation();
 		 outputtable = output.GetDataObjects(configFile.getProperty("outputQuery"));
 		 Iterator<Entry<Integer, LinkedHashMap<String,String>>> outputtableiterator = outputtable.entrySet().iterator();
@@ -120,7 +119,6 @@ public class UIMainscript
 				Entry<Integer, LinkedHashMap<String, String>> inputentry = inputtableiterator.next();
 				Entry<Integer, LinkedHashMap<String, String>> outputentry = outputtableiterator.next();
 				
-				//Integer inputtablekey = inputentry.getKey();
 		        LinkedHashMap<String, String> inputrow = inputentry.getValue();
 		        LinkedHashMap<String, String> outputrow = outputentry.getValue();
 		         
