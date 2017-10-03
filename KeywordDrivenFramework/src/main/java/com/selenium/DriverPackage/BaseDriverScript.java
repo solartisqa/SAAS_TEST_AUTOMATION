@@ -8,8 +8,11 @@ import com.selenium.exception.DatabaseException;
 
 import java.awt.AWTException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
+
+import org.openqa.selenium.WebDriver;
 
 public class BaseDriverScript extends UIoperartions implements UIScriptsInterface
 {
@@ -42,13 +45,13 @@ public BaseDriverScript(PropertiesHandle configFile) throws SQLException, ClassN
 	
 }
 //====================================Function to launch browser====================================================================================================
-public void launchBrowser()
+public WebDriver launchBrowser() throws MalformedURLException
 {
 	    String browser = configFile.getProperty("browser");
 		//String url = configFile.getProperty("url");
 		//System.out.println(url);
 		
-		this.launch_browser(browser,configFile);
+		return this.launch_browser(browser,configFile);
 			
 }
 //==============================================Function to login===================================================================================================

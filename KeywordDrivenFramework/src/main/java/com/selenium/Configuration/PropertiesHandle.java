@@ -77,7 +77,7 @@ public class PropertiesHandle extends Properties
 		   this.OutputQuery();
  		    
 		    this.DBdetails();
-		    
+		    this.ScreenshotPath();
 		    DatabaseOperation.CloseConn();
 		 
 		}
@@ -185,6 +185,11 @@ public class PropertiesHandle extends Properties
 			this.put("db_password", this.RdmsValue("DB_Password"));
 		}	
 		
+	    
+	    protected void ScreenshotPath() throws PropertiesHandleException
+	    {
+	    	this.put("ScreenShotPath", this.RdmsValue("RootFolder") + "/" + Project + "/" + Flow + "/ScreenShots/");
+	    }
 		public PropertiesHandle(String path) throws PropertiesHandleException
 		{
 			this.path = path;
