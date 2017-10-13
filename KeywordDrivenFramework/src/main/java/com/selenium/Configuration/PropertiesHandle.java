@@ -167,7 +167,7 @@ public class PropertiesHandle extends Properties
 	
 		protected void InputQuery() throws PropertiesHandleException// FUNCTION FOR INPUTQUERY
 		{
-			this.put("inputQuery",  this.RdmsQuery("InputTable") );
+			this.put("inputQuery",  this.RdmsQuery("InputTable"));//+" where "+ this.RdmsValue("InputTable")+".Flag_for_execution='"+FlagForExecution+"'");
 			
 		}
 		

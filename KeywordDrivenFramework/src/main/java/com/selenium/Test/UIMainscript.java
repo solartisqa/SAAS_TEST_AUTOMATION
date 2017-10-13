@@ -9,9 +9,12 @@ import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -67,12 +70,13 @@ public class UIMainscript
 		this.ResultsChoice=ResultsChoice;
 		
 	}
-
-	@BeforeTest
+   // @Parameters({"Project","Flow","Environment","Flag","jdbcDriver","url","dbUsername","dbPassword","browser","ResultsChoice"}) 
+	// String Project,String Flow,String Environment,String Flag,String jdbcDriver,String url,String dbUsername,String dbPassword,String browser,String ResultsChoice
+	@BeforeTest//(alwaysRun=true)
 	public void loadconfig() throws DatabaseException, ClassNotFoundException, SQLException, PropertiesHandleException, MalformedURLException
 	{
 		System.setProperty("jsse.enableSNIExtension", "false");
-		//configFile = new PropertiesHandle(System.getProperty("Project"),System.getProperty("Flow"),System.getProperty("Env"),System.getProperty("FlagForExecution"),System.getProperty("JDBC_DRIVER"),System.getProperty("DB_URL"),System.getProperty("USER"),System.getProperty("password"),System.getProperty("browser"),System.getProperty("ResultChoice"));		
+		//configFile = new PropertiesHandle(System.getProperty("Project"),System.getProperty("Flow"),System.getProperty("Env"),Flag,System.getProperty("JDBC_DRIVER"),System.getProperty("DB_URL"),System.getProperty("USER"),System.getProperty("password"),myBrowser,System.getProperty("ResultChoice"));		
 		configFile = new PropertiesHandle(Project,Flow,Environment,Flag,jdbcDriver,url,dbUsername,dbPassword,browser,ResultsChoice);		
 
 		DatabaseOperation.ConnectionSetup(configFile);  
@@ -81,7 +85,7 @@ public class UIMainscript
 		exceptionScreenshotPath=configFile.getProperty("ScreenShotPath");
 	}
 		
-	@Test
+	@Test//(alwaysRun=true)
 	public void Login() throws SQLException, IOException, InterruptedException, AWTException
 	{
 		 driver.get(configFile.getProperty("EnvURL"));
@@ -89,14 +93,16 @@ public class UIMainscript
 	}
 	
 	@SuppressWarnings("unchecked")
+	 
 	@Test(dataProvider="UITestData",dependsOnMethods = { "Login" })
+	
     public void UITest(Integer RowIterator, Object inputtablerowobj, Object outputtablerowobj) throws ClassNotFoundException, SQLException, IOException, InterruptedException, AWTException, DatabaseException
     {
 		LinkedHashMap<String, String> inputrow = inputtableobjectMapper.convertValue(inputtablerowobj, LinkedHashMap.class);
 		LinkedHashMap<String, String> outputrow = outputtableobjectMapper.convertValue(outputtablerowobj, LinkedHashMap.class);
     	
 			 System.out.println(RowIterator);
-			 if(inputrow.get("Flag_for_execution").equals(configFile.getProperty("flagForExecution")))
+			 if(inputrow.get("Flag_for_execution").equals(configFile.getProperty("flagForExecution")))//
 				{  
 				  System.out.println("Executing main script");
 				  objDriver.executeTestScript(inputrow, outputrow);

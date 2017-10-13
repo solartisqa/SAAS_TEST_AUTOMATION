@@ -29,6 +29,8 @@
 	</dependency>
     
    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+  
+   
 	<dependency>
     	<groupId>mysql</groupId>
     	<artifactId>mysql-connector-java</artifactId>
@@ -142,7 +144,7 @@
       					
     				</execution>
   				</executions>
-  				<configuration>
+  				<!-- <configuration>
         					<archive>
           						<manifest>
             						<mainClass>com.selenium.Test.UIMainscript</mainClass>
@@ -151,7 +153,7 @@
         					<descriptorRefs>
           						<descriptorRef>jar-with-dependencies</descriptorRef>
         					</descriptorRefs>
-      					</configuration>
+      					</configuration> -->
 			</plugin> 
             
             <plugin>
@@ -161,7 +163,7 @@
 		        <configuration>
 		          <suiteXmlFiles>
 		          
-		            <suiteXmlFile>config.xml</suiteXmlFile>
+		            <suiteXmlFile>configFactoryClass.xml</suiteXmlFile>
 		          </suiteXmlFiles>
 		          
 		          <systemPropertyVariables>

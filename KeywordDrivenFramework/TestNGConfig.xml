@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Parallel test suite" parallel="tests">
+  <test name="ChromeTest1">
+    <classes>
+      <class name="com.selenium.Test.UIMainscript"/>
+    </classes>
+  </test> 
+ 
+  <listeners>
+      <!--   <listener class-name="com.selenium.TestNGListeners.RetryListener"/> -->
+        <listener class-name="com.selenium.TestNGListeners.TestngListener"/>
+        <listener class-name="com.selenium.TestNGReport.TestNGCustomReportListener" />     
+  </listeners>
+</suite> <!-- Suite -->

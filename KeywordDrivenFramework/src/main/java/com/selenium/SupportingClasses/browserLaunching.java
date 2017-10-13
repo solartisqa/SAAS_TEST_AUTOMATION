@@ -1,12 +1,16 @@
 package com.selenium.SupportingClasses;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -16,17 +20,41 @@ import org.openqa.selenium.remote.CapabilityType;
 
 public class browserLaunching extends ConditionsChecking{
 	
+	public static ThreadLocal<RemoteWebDriver> dr = new ThreadLocal<RemoteWebDriver>();
+
+	
 	protected WebDriver wdriver=null;
 	protected EventFiringWebDriver driver=null;
 	protected TheEventListener eventListerner=null;
-			
+	//protected RemoteWebDriver driver=null;
 	protected WebDriverWait wait=null; 
 	
-	 public WebDriver launch_browser(String browser,PropertiesHandle config)
+	 public WebDriver launch_browser(String browser,PropertiesHandle config) throws MalformedURLException
 	 {
-		 DesiredCapabilities capabilities = new DesiredCapabilities();
-		 String driver_path = config.getProperty("driverPath");
-		 String Url= config.getProperty("EnvURL");
+		
+		DesiredCapabilities capabilities = new DesiredCapabilities();
+		String driver_path = config.getProperty("driverPath");
+		/* //String Url= config.getProperty("EnvURL");
+		 if(browser.equalsIgnoreCase("chrome")){
+				DesiredCapabilities capability = new DesiredCapabilities().chrome();
+				capability.setBrowserName("chrome");
+				capability.setPlatform(Platform.WINDOWS);
+				driver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), capability);
+			}
+			else if(browser.equalsIgnoreCase("firefox"))
+			{
+				DesiredCapabilities capability = new DesiredCapabilities().firefox();
+				capability.setBrowserName("firefox");
+				capability.setPlatform(Platform.WINDOWS);
+				driver = new RemoteWebDriver(new URL("http://192.168.4.77:4444/wd/hub"), capability);
+			}
+		 setWebDriver(driver);
+		 //driver=getDriver();
+		 getDriver().manage().window().maximize();
+		 getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		 return getDriver();
+	 }*/
+	 
 	   switch(browser.toUpperCase()) 
 		{
 					
@@ -109,6 +137,16 @@ public class browserLaunching extends ConditionsChecking{
 
 	 public void stop_browser()
 		{
-			wdriver.quit();
+			driver.quit();
 		}
+	 public WebDriver getDriver() {
+			return dr.get();
+		}
+
+		public void setWebDriver(RemoteWebDriver driver) {
+			dr.set(driver);
+		}
+
+	 
+	 
 }

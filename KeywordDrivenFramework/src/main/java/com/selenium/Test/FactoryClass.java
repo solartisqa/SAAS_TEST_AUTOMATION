@@ -2,6 +2,8 @@ package com.selenium.Test;
 
 import org.testng.annotations.Factory;
 
+import com.beust.jcommander.Parameters;
+
 public class FactoryClass 
 {
 	@Factory

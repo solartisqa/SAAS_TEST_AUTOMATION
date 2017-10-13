@@ -120,7 +120,7 @@ public class TestngListener implements ITestListener
 	
 	 public void takeScreenShot(String methodName,String testNo,String className) 
 	 {
-	    	
+		 //UIMainscript ob=new UIMainscript();
 		 System.out.println("Taking ScreenShot");
 	    	driver=UIMainscript.driver;
 	    	filePath= UIMainscript.exceptionScreenshotPath;

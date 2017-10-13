@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite" parallel="none">
-  <test name="Test">
+  <test name="UIMainscript1">
     <classes>
       <class name="com.selenium.Test.FactoryClass"/>
     </classes>
-  </test> <!-- Test -->
+  </test>
   <listeners>
       <!--   <listener class-name="com.selenium.TestNGListeners.RetryListener"/> -->
         <listener class-name="com.selenium.TestNGListeners.TestngListener"/>

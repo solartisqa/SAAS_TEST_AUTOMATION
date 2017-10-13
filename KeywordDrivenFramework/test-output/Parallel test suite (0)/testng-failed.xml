@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="6" guice-stage="DEVELOPMENT" name="Failed suite [Parallel test suite (0)]" parallel="classes">
+  <test name="ChromeTest1(failed)" parallel="classes">
+    <parameter name="Project" value="STARR-ASSIST"/>
+    <parameter name="jdbcDriver" value="com.mysql.jdbc.Driver"/>
+    <parameter name="dbUsername" value="root"/>
+    <parameter name="ResultsChoice" value="ActualOnly"/>
+    <parameter name="browser" value="chrome"/>
+    <parameter name="Environment" value="QA"/>
+    <parameter name="Flag" value="Y"/>
+    <parameter name="url" value="jdbc:mysql://192.168.35.2:3391/SeleniumConfig"/>
+    <parameter name="Flow" value="Quote"/>
+    <parameter name="dbPassword" value="password"/>
+    <classes>
+      <class name="com.selenium.Test.UIMainscript">
+        <methods>
+          <include name="Login"/>
+          <include name="close"/>
+          <include name="close"/>
+          <include name="loadconfig"/>
+          <include name="loadconfig"/>
+          <include name="UITest" invocation-numbers="10 13 0 18 29 27 28 40 39 46 44 49 45 42 53 48 55 56 51 62 57 66 63 73 70 74 76 83 71 86 95 96 104 99 102 105 122 124 123 119 121 128 134 143 142 153 164 159 160 165 180 173 182 184 192 177 199 202 195 196 203 207 205"/>
+        </methods>
+      </class> <!-- com.selenium.Test.UIMainscript -->
+    </classes>
+  </test> <!-- ChromeTest1(failed) -->
+  <test name="ChromeTest2(failed)" parallel="classes">
+    <parameter name="Project" value="STARR-ASSIST"/>
+    <parameter name="jdbcDriver" value="com.mysql.jdbc.Driver"/>
+    <parameter name="dbUsername" value="root"/>
+    <parameter name="ResultsChoice" value="ActualOnly"/>
+    <parameter name="browser" value="Chrome"/>
+    <parameter name="Environment" value="QA"/>
+    <parameter name="Flag" value="C28"/>
+    <parameter name="url" value="jdbc:mysql://192.168.35.2:3391/SeleniumConfig"/>
+    <parameter name="Flow" value="Quote"/>
+    <parameter name="dbPassword" value="password"/>
+    <classes>
+      <class name="com.selenium.Test.UIMainscript">
+        <methods>
+          <include name="Login"/>
+          <include name="close"/>
+          <include name="close"/>
+          <include name="loadconfig"/>
+          <include name="loadconfig"/>
+          <include name="UITest" invocation-numbers="9 5 12 18 20 11 21 27 28 31 32 36 33 41 40 42 46 48 43 50 44 60 61 59 56 58 57 64 70 63 73 74 69 82 79 78 75 76 98 101 86 99 123 121 128 129 118 124 126 137 133 135 134 150 140 155 154 153 156 161 162 164 169 172 191 183 189 188 198"/>
+        </methods>
+      </class> <!-- com.selenium.Test.UIMainscript -->
+    </classes>
+  </test> <!-- ChromeTest2(failed) -->
+</suite> <!-- Failed suite [Parallel test suite (0)] -->

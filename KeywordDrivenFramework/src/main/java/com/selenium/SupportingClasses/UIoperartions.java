@@ -17,6 +17,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -25,6 +26,7 @@ import org.w3c.dom.Element;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 
 
 public class UIoperartions extends browserLaunching
@@ -34,6 +36,7 @@ public class UIoperartions extends browserLaunching
 	 protected String outputValue;
 	 public WebElement element;
 	 public Document document;
+	// public WebDriver driver=null;
 	// WebDriverWait wait;
 	
 //**************************************UI operations***************************************************************************
@@ -41,6 +44,7 @@ public void perform(String p,String operation,String objectType,String value,Str
 {
 	long waitingTimeinseconds=Long.parseLong(waitingTime);
 	//System.out.println("waitingtime"+waitingTimeinseconds);
+   // driver=this.getDriver();
 	wait = new WebDriverWait(driver, waitingTimeinseconds);
 try
 {
@@ -546,6 +550,7 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
  
  private void upload(String inputValue) throws AWTException
  {
+	    
 	    StringSelection ss = new StringSelection(inputValue);
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
 		 Robot r = new Robot();
@@ -558,6 +563,8 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 		 r.keyPress(KeyEvent.VK_ENTER);
 		 r.keyRelease(KeyEvent.VK_ENTER);
  }
+
+ 
 
 /*public void launch_browser(String browser, propertiesHandle configFile) {
 	// TODO Auto-generated method stub
