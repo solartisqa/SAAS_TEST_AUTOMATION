@@ -122,7 +122,7 @@ public class TestngListener implements ITestListener
 	 {
 		 //UIMainscript ob=new UIMainscript();
 		 System.out.println("Taking ScreenShot");
-	    	driver=UIMainscript.driver;
+	    	//driver=UIMainscript.driver;
 	    	filePath= UIMainscript.exceptionScreenshotPath;
 	    	System.out.println("file path: "+filePath);
 	            try

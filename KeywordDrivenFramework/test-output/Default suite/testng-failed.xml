@@ -5,6 +5,7 @@
     <classes>
       <class name="com.selenium.Test.UIMainscript">
         <methods>
+          <include name="Login" invocation-numbers="0 1"/>
           <include name="UITest"/>
         </methods>
       </class> <!-- com.selenium.Test.UIMainscript -->

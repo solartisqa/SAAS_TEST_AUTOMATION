@@ -54,7 +54,7 @@
                 </li>
                 <li>
                   <a href="#" class="navigator-link " panel-name="testlist-Parallel_test_suite">
-                    <span class="test-stats">2 tests</span>
+                    <span class="test-stats">1 test</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -91,7 +91,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">2 methods,  1 skipped,  1 passed</span>
+                    <span class="method-stats">1 method,  1 skipped,  </span>
                   </li>
                   <li>
                     <span class="method-list-title skipped">Skipped methods</span>
@@ -106,20 +106,6 @@
                       </span>
                       <br/>
                     </div> <!-- method-list-content skipped suite-Parallel_test_suite -->
-                  </li>
-                  <li>
-                    <span class="method-list-title passed">Passed methods</span>
-                    <span class="show-or-hide-methods passed">
-                      <a href="#" panel-name="suite-Parallel_test_suite" class="hide-methods passed suite-Parallel_test_suite"> (hide)</a> <!-- hide-methods passed suite-Parallel_test_suite -->
-                      <a href="#" panel-name="suite-Parallel_test_suite" class="show-methods passed suite-Parallel_test_suite"> (show)</a> <!-- show-methods passed suite-Parallel_test_suite -->
-                    </span>
-                    <div class="method-list-content passed suite-Parallel_test_suite">
-                      <span>
-                        <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Parallel_test_suite" title="com.selenium.Test.UIMainscript" hash-for-method="Login">Login</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                    </div> <!-- method-list-content passed suite-Parallel_test_suite -->
                   </li>
                 </ul>
               </div> <!-- suite-section-content -->
@@ -142,67 +128,29 @@
                   <a name="Login">
                   </a> <!-- Login -->
                   <span class="method-name">Login</span>
-                  <div class="stack-trace">com.selenium.exception.PropertiesHandleException: ERROR IN RETRIVING DATA FROM -- RootFolder
-	at com.selenium.Configuration.PropertiesHandle.RdmsValue(PropertiesHandle.java:117)
-	at com.selenium.Configuration.PropertiesHandle.ScreenshotPath(PropertiesHandle.java:191)
-	at com.selenium.Configuration.PropertiesHandle.WriteProperty(PropertiesHandle.java:80)
-	at com.selenium.Configuration.PropertiesHandle.&lt;init&gt;(PropertiesHandle.java:50)
-	at com.selenium.Test.UIMainscript.loadconfig(UIMainscript.java:80)
+                  <div class="stack-trace">org.openqa.selenium.SessionNotCreatedException: Unable to create new remote session. desired capabilities = Capabilities [{browserName=chrome, version=, platform=WINDOWS}], required capabilities = Capabilities [{}]
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;C1128&apos;, ip: &apos;192.168.4.131&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_73&apos;
+Driver info: driver.version: RemoteWebDriver
+	at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:91)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:141)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
+	at org.openqa.selenium.remote.RemoteWebDriver.startSession(RemoteWebDriver.java:241)
+	at org.openqa.selenium.remote.RemoteWebDriver.&lt;init&gt;(RemoteWebDriver.java:128)
+	at org.openqa.selenium.remote.RemoteWebDriver.&lt;init&gt;(RemoteWebDriver.java:155)
+	at com.selenium.SupportingClasses.browserLaunching.launch_browser(browserLaunching.java:41)
+	at com.selenium.DriverPackage.BaseDriverScript.launchBrowser(BaseDriverScript.java:52)
+	at com.selenium.Test.UIMainscript.launchBrowser(UIMainscript.java:74)
 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
 	at java.lang.Thread.run(Thread.java:745)
-Caused by: com.selenium.exception.DatabaseException: PROBLEM WITH RESULT-SET OBTAINED FROM DB
-	at com.selenium.SupportingClasses.DatabaseOperation.GetDataObjects(DatabaseOperation.java:118)
-	at com.selenium.Configuration.PropertiesHandle.RdmsValue(PropertiesHandle.java:107)
-	... 22 more
-Caused by: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
-
-Last packet sent to the server was 5 ms ago.
-	at com.mysql.jdbc.Util.handleNewInstance(Util.java:406)
-	at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:1074)
-	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:2985)
-	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:2871)
-	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3414)
-	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:1936)
-	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2060)
-	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2536)
-	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2465)
-	at com.mysql.jdbc.StatementImpl.executeQuery(StatementImpl.java:1383)
-	at com.selenium.SupportingClasses.DatabaseOperation.GetDataObjects(DatabaseOperation.java:99)
-	... 23 more
-Caused by: java.net.SocketException: Socket closed
-	at java.net.SocketInputStream.socketRead0(Native Method)
-	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
-	at java.net.SocketInputStream.read(SocketInputStream.java:170)
-	at java.net.SocketInputStream.read(SocketInputStream.java:141)
-	at com.mysql.jdbc.util.ReadAheadInputStream.fill(ReadAheadInputStream.java:113)
-	at com.mysql.jdbc.util.ReadAheadInputStream.readFromUnderlyingStreamIfNecessary(ReadAheadInputStream.java:160)
-	at com.mysql.jdbc.util.ReadAheadInputStream.read(ReadAheadInputStream.java:188)
-	at com.mysql.jdbc.MysqlIO.readFully(MysqlIO.java:2428)
-	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:2882)
-	... 31 more
-... Removed 18 stack frames
+... Removed 14 stack frames
 </div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
           </div> <!-- suite-Parallel_test_suite-class-skipped -->
-          <div class="suite-Parallel_test_suite-class-passed">
-            <div class="main-panel-header rounded-window-top">
-              <img src="passed.png"/>
-              <span class="class-name">com.selenium.Test.UIMainscript</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-              <div class="method">
-                <div class="method-content">
-                  <a name="Login">
-                  </a> <!-- Login -->
-                  <span class="method-name">Login</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-            </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-Parallel_test_suite-class-passed -->
         </div> <!-- panel Parallel_test_suite -->
         <div panel-name="test-xml-Parallel_test_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
@@ -212,45 +160,23 @@ Caused by: java.net.SocketException: Socket closed
             <pre>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE suite SYSTEM &quot;http://testng.org/testng-1.0.dtd&quot;&gt;
-&lt;suite thread-count=&quot;3&quot; guice-stage=&quot;DEVELOPMENT&quot; name=&quot;Parallel test suite&quot; parallel=&quot;tests&quot;&gt;
+&lt;suite thread-count=&quot;2&quot; name=&quot;Parallel test suite&quot; parallel=&quot;tests&quot;&gt;
+  &lt;parameter name=&quot;Project&quot; value=&quot;STARR-ASSIST&quot;/&gt;
+  &lt;parameter name=&quot;jdbcDriver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;
+  &lt;parameter name=&quot;dbUsername&quot; value=&quot;root&quot;/&gt;
+  &lt;parameter name=&quot;ResultsChoice&quot; value=&quot;ActualOnly&quot;/&gt;
+  &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;parameter name=&quot;Environment&quot; value=&quot;QA&quot;/&gt;
+  &lt;parameter name=&quot;Flag&quot; value=&quot;C28&quot;/&gt;
+  &lt;parameter name=&quot;url&quot; value=&quot;jdbc:mysql://192.168.35.2:3391/SeleniumConfig&quot;/&gt;
+  &lt;parameter name=&quot;Flow&quot; value=&quot;Quote&quot;/&gt;
+  &lt;parameter name=&quot;dbPassword&quot; value=&quot;password&quot;/&gt;
   &lt;test name=&quot;ChromeTest1&quot;&gt;
-    &lt;parameter name=&quot;Project&quot; value=&quot;CHIC&quot;/&gt;
-    &lt;parameter name=&quot;jdbcDriver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;
-    &lt;parameter name=&quot;dbUsername&quot; value=&quot;root&quot;/&gt;
-    &lt;parameter name=&quot;ResultsChoice&quot; value=&quot;ActualOnly&quot;/&gt;
     &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
-    &lt;parameter name=&quot;Environment&quot; value=&quot;UAT&quot;/&gt;
-    &lt;parameter name=&quot;Flag&quot; value=&quot;Y&quot;/&gt;
-    &lt;parameter name=&quot;url&quot; value=&quot;jdbc:mysql://192.168.35.2:3391/SeleniumConfig&quot;/&gt;
-    &lt;parameter name=&quot;Flow&quot; value=&quot;Quote&quot;/&gt;
-    &lt;parameter name=&quot;dbPassword&quot; value=&quot;password&quot;/&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;com.selenium.Test.UIMainscript&quot;&gt;
-        &lt;methods&gt;
-          &lt;include name=&quot;Login&quot;/&gt;
-        &lt;/methods&gt;
-      &lt;/class&gt; &lt;!-- com.selenium.Test.UIMainscript --&gt;
+      &lt;class name=&quot;com.selenium.Test.UIMainscript&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- ChromeTest1 --&gt;
-  &lt;test name=&quot;ChromeTest2&quot;&gt;
-    &lt;parameter name=&quot;Project&quot; value=&quot;STARR-ASSIST&quot;/&gt;
-    &lt;parameter name=&quot;jdbcDriver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;
-    &lt;parameter name=&quot;dbUsername&quot; value=&quot;root&quot;/&gt;
-    &lt;parameter name=&quot;ResultsChoice&quot; value=&quot;ActualOnly&quot;/&gt;
-    &lt;parameter name=&quot;browser&quot; value=&quot;Chrome&quot;/&gt;
-    &lt;parameter name=&quot;Environment&quot; value=&quot;UAT&quot;/&gt;
-    &lt;parameter name=&quot;Flag&quot; value=&quot;Y&quot;/&gt;
-    &lt;parameter name=&quot;url&quot; value=&quot;jdbc:mysql://192.168.35.2:3391/SeleniumConfig&quot;/&gt;
-    &lt;parameter name=&quot;Flow&quot; value=&quot;Quote&quot;/&gt;
-    &lt;parameter name=&quot;dbPassword&quot; value=&quot;password&quot;/&gt;
-    &lt;classes&gt;
-      &lt;class name=&quot;com.selenium.Test.UIMainscript&quot;&gt;
-        &lt;methods&gt;
-          &lt;include name=&quot;Login&quot;/&gt;
-        &lt;/methods&gt;
-      &lt;/class&gt; &lt;!-- com.selenium.Test.UIMainscript --&gt;
-    &lt;/classes&gt;
-  &lt;/test&gt; &lt;!-- ChromeTest2 --&gt;
 &lt;/suite&gt; &lt;!-- Parallel test suite --&gt;
             </pre>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -263,9 +189,6 @@ Caused by: java.net.SocketException: Socket closed
             <ul>
               <li>
                 <span class="test-name">ChromeTest1 (1 class)</span>
-              </li>
-              <li>
-                <span class="test-name">ChromeTest2 (1 class)</span>
               </li>
             </ul>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -291,20 +214,16 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(2);
+data.addRows(1);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'Login')
 data.setCell(0, 2, 'com.selenium.Test.UIMainscript')
-data.setCell(0, 3, 7547);
-data.setCell(1, 0, 1)
-data.setCell(1, 1, 'Login')
-data.setCell(1, 2, 'com.selenium.Test.UIMainscript')
-data.setCell(1, 3, 2);
+data.setCell(0, 3, 1);
 window.suiteTableData['Parallel_test_suite']= { tableData: data, tableDiv: 'times-div-Parallel_test_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 7 seconds</span>
+              <span class="suite-total-time">Total running time: 1 ms</span>
               <div id="times-div-Parallel_test_suite">
               </div> <!-- times-div-Parallel_test_suite -->
             </div> <!-- times-div -->
@@ -319,18 +238,9 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Parallel_test_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">2 ignored methods</span>
+            <span class="header-content">0 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
-            <div class="ignored-class-div">
-              <span class="ignored-class-name">com.selenium.Test.UIMainscript</span>
-              <div class="ignored-methods-div">
-                <span class="ignored-method-name">UITest</span>
-                <br/>
-                <span class="ignored-method-name">UITest</span>
-                <br/>
-              </div> <!-- ignored-methods-div -->
-            </div> <!-- ignored-class-div -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
         <div panel-name="chronological-Parallel_test_suite" class="panel">
@@ -340,28 +250,20 @@ return data;
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
               <div class="chronological-class-name">com.selenium.Test.UIMainscript</div> <!-- chronological-class-name -->
-              <div class="configuration-test before">
-                <span class="method-name">loadconfig(STARR-ASSIST, Quote, UAT, Y, com.mysql.jdbc.Driver, jdbc:mysql://192.168.35.2:3391/SeleniumConfig, r...)</span>
+              <div class="configuration-suite before">
+                <span class="method-name">loadconfig(STARR-ASSIST, Quote, QA, C28, com.mysql.jdbc.Driver, jdbc:mysql://192.168.35.2:3391/SeleniumConfig, ...)</span>
                 <span class="method-start">0 ms</span>
-              </div> <!-- configuration-test before -->
+              </div> <!-- configuration-suite before -->
               <div class="configuration-test before">
                 <img src="failed.png">
                 </img>
-                <span class="method-name">loadconfig(CHIC, Quote, UAT, Y, com.mysql.jdbc.Driver, jdbc:mysql://192.168.35.2:3391/SeleniumConfig, root, pas...)</span>
-                <span class="method-start">0 ms</span>
+                <span class="method-name">launchBrowser(chrome)</span>
+                <span class="method-start">221 ms</span>
               </div> <!-- configuration-test before -->
               <div class="test-method">
                 <span class="method-name">Login</span>
-                <span class="method-start">270 ms</span>
+                <span class="method-start">881 ms</span>
               </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">Login</span>
-                <span class="method-start">5818 ms</span>
-              </div> <!-- test-method -->
-              <div class="configuration-test after">
-                <span class="method-name">close</span>
-                <span class="method-start">13365 ms</span>
-              </div> <!-- configuration-test after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
       </div> <!-- main-panel-root -->

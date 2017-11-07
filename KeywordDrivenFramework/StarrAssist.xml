@@ -1,0 +1,36 @@
+
+<suite name="Suite" parallel="tests" verbose="2" thread-count="5">
+ <parameter name="Project" value="STARR-ASSIST"/>
+  		<parameter name="Flow" value="Quote"/>
+  		<parameter name="Environment" value="QA"/>
+  		<parameter name="Flag" value="C28"/>
+  		<parameter name="jdbcDriver" value="com.mysql.jdbc.Driver"/>
+  		<parameter name="url" value="jdbc:mysql://192.168.35.2:3391/SeleniumConfig"/>
+   		<parameter name="dbUsername" value="root"/>
+  		<parameter name="dbPassword" value="password"/>
+   		<parameter name="browser" value="chrome"/>
+   		<parameter name="ResultsChoice" value="ActualOnly"/>
+<tests>      
+  <test name="Test1">     
+    <classes>
+   		<parameter name="browser" value="chrome"/>
+      <class name="com.selenium.Test.StarrAssistSuite">
+      <methods>
+       <include name="Login"/>
+      </methods>
+      </class>
+    </classes>
+  </test> 
+<test name="Test2">
+    <classes>
+   		<parameter name="browser" value="chrome"/>
+      <class name="com.selenium.Test.StarrAssistSuite">
+      <methods>
+       <include name="Login"/>
+      </methods>
+      </class>
+      
+    </classes>
+  </test> 
+</tests>
+</suite> <!-- Suite -->

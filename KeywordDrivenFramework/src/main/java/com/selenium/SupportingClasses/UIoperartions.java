@@ -18,11 +18,15 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.LocalFileDetector;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import com.selenium.Test.UIMainscript;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
@@ -36,16 +40,15 @@ public class UIoperartions extends browserLaunching
 	 protected String outputValue;
 	 public WebElement element;
 	 public Document document;
-	// public WebDriver driver=null;
-	// WebDriverWait wait;
+	//public RemoteWebDriver driver=null;
+	public WebDriverWait wait;
 	
 //**************************************UI operations***************************************************************************
-public void perform(String p,String operation,String objectType,String value,String dbcolumn_name,String dataFlag,LinkedHashMap<String, String> InputData,LinkedHashMap<String, String> outputData,String waitingTime) throws SQLException, IOException, InterruptedException, AWTException
+public  void perform(String p,String operation,String objectType,String value,String dbcolumn_name,String dataFlag,LinkedHashMap<String, String> InputData,LinkedHashMap<String, String> outputData,String waitingTime) throws SQLException, IOException, InterruptedException, AWTException
 {
 	long waitingTimeinseconds=Long.parseLong(waitingTime);
-	//System.out.println("waitingtime"+waitingTimeinseconds);
-   // driver=this.getDriver();
-	wait = new WebDriverWait(driver, waitingTimeinseconds);
+	//driver=(RemoteWebDriver) this.getDriver();
+	wait = new WebDriverWait(this.driver, waitingTimeinseconds);
 try
 {
 switch (operation.toUpperCase())

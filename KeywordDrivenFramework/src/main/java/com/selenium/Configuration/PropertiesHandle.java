@@ -16,7 +16,7 @@ import com.selenium.exception.PropertiesHandleException;
 public class PropertiesHandle extends Properties
 
 {
-	private static final long serialVersionUID = 1L;
+	private  long serialVersionUID = 1L;
 	protected String path = null;
 	protected String Project;
 	protected String Flow;
@@ -32,7 +32,7 @@ public class PropertiesHandle extends Properties
 	protected String ResultChoice;
 	
 
-	static DatabaseOperation ConfigQuery = new DatabaseOperation();
+	 DatabaseOperation ConfigQuery = new DatabaseOperation();
 			
 	    public PropertiesHandle(String Project,String Flow, String Env ,String FlagForExecution, String JDBC_DRIVER, String DB_URL, String USER, String password, String browser,String ResultChoice) throws DatabaseException, PropertiesHandleException
 		{

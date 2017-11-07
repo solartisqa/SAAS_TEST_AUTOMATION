@@ -3,15 +3,22 @@ package com.selenium.Test;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
+import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
@@ -24,77 +31,82 @@ import com.selenium.SupportingClasses.DatabaseOperation;
 import com.selenium.exception.DatabaseException;
 import com.selenium.exception.PropertiesHandleException;
 
-
-
 public class UIMainscript
 {
-	public static DatabaseOperation input;
-	public static DatabaseOperation output;
+	public   DatabaseOperation input;
+	public  DatabaseOperation output;
 
-	public static LinkedHashMap<Integer, LinkedHashMap<String, String>> inputtable;
-	public static LinkedHashMap<Integer, LinkedHashMap<String, String>> outputtable;
-	public static Iterator<Entry<Integer, LinkedHashMap<String, String>>> inputtableiterator;
-	public static Iterator<Entry<Integer, LinkedHashMap<String, String>>> outputtableiterator;
-	public static ObjectMapper inputtableobjectMapper;
-	public static ObjectMapper outputtableobjectMapper;
-	public static LinkedHashMap<String, String> inputrow;
-	public static LinkedHashMap<String, String> outputrow;
-	public static BaseDriverScript objDriver;
-	public static PropertiesHandle configFile;
-	public static boolean loginStatus;
-	public  static WebDriver driver=null;
-	public static String exceptionScreenshotPath=null;
+	public  LinkedHashMap<Integer, LinkedHashMap<String, String>> inputtable;
+	public  LinkedHashMap<Integer, LinkedHashMap<String, String>> outputtable;
+	public  Iterator<Entry<Integer, LinkedHashMap<String, String>>> inputtableiterator;
+	public  Iterator<Entry<Integer, LinkedHashMap<String, String>>> outputtableiterator;
+	public  ObjectMapper inputtableobjectMapper;
+	public  ObjectMapper outputtableobjectMapper;
+	public  LinkedHashMap<String, String> inputrow;
+	public  LinkedHashMap<String, String> outputrow;
+	public  static BaseDriverScript objDriver;
+	public  static PropertiesHandle configFile;
+	public   static RemoteWebDriver driver=null; //changed
+	public static  String exceptionScreenshotPath=null;
+
 	
-	String Project=null;
-	String Flow=null;
-	String Environment=null;
-	String Flag=null;
-	String jdbcDriver=null;
-	String url=null;
-	String dbUsername=null;
-	String dbPassword=null;
-	String ResultsChoice=null;
-	String browser=null;
 
-	public UIMainscript(String Project,String Flow,String Environment,String Flag,String jdbcDriver,String url,String dbUsername,String dbPassword,String browser, String ResultsChoice)
+    @Parameters({"Project","Flow","Environment","Flag","jdbcDriver","url","dbUsername","dbPassword","browser","ResultsChoice"})
+	@BeforeSuite
+	public void loadconfig(String Project,String Flow,String Environment,String Flag,String jdbcDriver,String url,String dbUsername,String dbPassword,String browser,String ResultsChoice) throws DatabaseException, ClassNotFoundException, SQLException, PropertiesHandleException, MalformedURLException
 	{
-		this.Project=Project;
-		this.Flow=Flow;
-		this.Environment=Environment;
-		this.Flag=Flag;
-		this.jdbcDriver=jdbcDriver;
-		this.url=url;
-		this.dbUsername=dbUsername;
-		this.dbPassword=dbPassword;
-		this.browser=browser;
-		this.ResultsChoice=ResultsChoice;
-		
-	}
-   // @Parameters({"Project","Flow","Environment","Flag","jdbcDriver","url","dbUsername","dbPassword","browser","ResultsChoice"}) 
-	// String Project,String Flow,String Environment,String Flag,String jdbcDriver,String url,String dbUsername,String dbPassword,String browser,String ResultsChoice
-	@BeforeTest//(alwaysRun=true)
-	public void loadconfig() throws DatabaseException, ClassNotFoundException, SQLException, PropertiesHandleException, MalformedURLException
-	{
+    	
+    	System.out.println("before test");
 		System.setProperty("jsse.enableSNIExtension", "false");
-		//configFile = new PropertiesHandle(System.getProperty("Project"),System.getProperty("Flow"),System.getProperty("Env"),Flag,System.getProperty("JDBC_DRIVER"),System.getProperty("DB_URL"),System.getProperty("USER"),System.getProperty("password"),myBrowser,System.getProperty("ResultChoice"));		
 		configFile = new PropertiesHandle(Project,Flow,Environment,Flag,jdbcDriver,url,dbUsername,dbPassword,browser,ResultsChoice);		
-
 		DatabaseOperation.ConnectionSetup(configFile);  
-		objDriver=new BaseDriverScript(configFile);
-		driver=objDriver.launchBrowser();
-		exceptionScreenshotPath=configFile.getProperty("ScreenShotPath");
-	}
 		
-	@Test//(alwaysRun=true)
+		//driver=objDriver.launchBrowser();
+		exceptionScreenshotPath=configFile.getProperty("ScreenShotPath"); 
+		
+	}
+    
+      @Parameters({"browser"})
+	  @BeforeTest(alwaysRun=true)
+	 public void launchBrowser(String browser) throws MalformedURLException, InterruptedException, DatabaseException, PropertiesHandleException, ClassNotFoundException, SQLException
+	 {
+        objDriver=new BaseDriverScript(configFile);
+		driver=objDriver.launchBrowser(browser);
+    	//RemoteWebDriver driver = null;
+	
+		/*if (browser.equals("firefox"))
+		{
+			DesiredCapabilities cap = new DesiredCapabilities().firefox();
+			cap.setBrowserName("firefox");
+			cap.setPlatform(Platform.WINDOWS);
+			driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), cap);
+		} else if (browser.equals("chrome"))
+		{
+			DesiredCapabilities cap = new DesiredCapabilities().chrome();
+			cap.setBrowserName("chrome");
+			cap.setPlatform(Platform.WINDOWS);
+			driver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
+		} 
+		
+	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);*/
+	}
+    
+    
+		
+	@Test//(dataProvider="sampleData")
 	public void Login() throws SQLException, IOException, InterruptedException, AWTException
 	{
-		 driver.get(configFile.getProperty("EnvURL"));
-		 objDriver.login(inputrow, outputrow);
+		Thread.sleep(2000);
+		driver.navigate().to(configFile.getProperty("EnvURL"));
+		//objDriver.login(inputrow, outputrow);
+		/*driver.findElement(By.xpath("//input[@id='loginForm:login_username']")).sendKeys("csruser");
+		driver.findElement(By.xpath("//input[@id='loginForm:login_password']")).sendKeys("Welcome*1");
+		driver.findElement(By.xpath("//input[@value='Log In']")).click();
+		Thread.sleep(2000);*/
 	}
 	
-	@SuppressWarnings("unchecked")
-	 
-	@Test(dataProvider="UITestData",dependsOnMethods = { "Login" })
+/*@Test(dataProvider="UITestData",dependsOnMethods = { "Login" })
 	
     public void UITest(Integer RowIterator, Object inputtablerowobj, Object outputtablerowobj) throws ClassNotFoundException, SQLException, IOException, InterruptedException, AWTException, DatabaseException
     {
@@ -112,16 +124,18 @@ public class UIMainscript
 			   }		   
 		  input.UpdateRow(RowIterator, inputrow);
 		  output.UpdateRow(RowIterator, outputrow);
-    }
+    }*/
+
 	@AfterTest
 	public void close() throws DatabaseException
 	{
+		driver.quit();
 		//objDriver.closeBrowser();
-		DatabaseOperation.CloseConn();
+		//DatabaseOperation.CloseConn();
 		
 	}
 //========================================================================data provider=========================================================================================
-    @DataProvider(name="UITestData")
+	 @DataProvider(name="UITestData")
 	 public Object[][] getDataFromDataprovider() throws DatabaseException, PropertiesHandleException
 	 {
 		 input = new DatabaseOperation();
@@ -148,5 +162,22 @@ public class UIMainscript
 				 rowIterator++;
 			}  
 		 return combined;
-	 }
+	 }  //Still working fine************************************
+    
+    
+    @DataProvider(name="sampleData",parallel=true)
+    public Object[][] getSampleData()
+    {
+    	Object data[][]=new Object[2][2];
+    	data[0][0]="csruser1";
+    	data[0][1]="welcome1";
+    
+    	data[1][0]="csruser2";
+    	data[1][1]="welcome2";
+    	
+		return data;
+    	
+    }
+  
+
 }

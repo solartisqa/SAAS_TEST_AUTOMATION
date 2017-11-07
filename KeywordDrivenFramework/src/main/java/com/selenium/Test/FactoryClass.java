@@ -11,7 +11,7 @@ public class FactoryClass
 	{
         return new Object[]
         		{ 
-        		new UIMainscript(System.getProperty("Project"),System.getProperty("Flow"),System.getProperty("Env"),System.getProperty("FlagForExecution"),System.getProperty("JDBC_DRIVER"),System.getProperty("DB_URL"),System.getProperty("USER"),System.getProperty("password"),System.getProperty("browser"),System.getProperty("ResultChoice"))
+        		//new UIMainscript("STARR-ASSIST","Quote","QA","C28","com.mysql.jdbc.Driver","jdbc:mysql://192.168.35.2:3391/SeleniumConfig","root","password","chrome","ActualOnly")
         		};
     }
 }

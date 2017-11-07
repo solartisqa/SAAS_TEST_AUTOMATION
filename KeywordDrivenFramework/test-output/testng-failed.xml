@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite thread-count="3" guice-stage="DEVELOPMENT" name="Failed suite [Parallel test suite]" parallel="tests">
+<suite thread-count="2" name="Failed suite [Parallel test suite]" parallel="tests">
+  <parameter name="Project" value="STARR-ASSIST"/>
+  <parameter name="jdbcDriver" value="com.mysql.jdbc.Driver"/>
+  <parameter name="dbUsername" value="root"/>
+  <parameter name="ResultsChoice" value="ActualOnly"/>
+  <parameter name="browser" value="chrome"/>
+  <parameter name="Environment" value="QA"/>
+  <parameter name="Flag" value="C28"/>
+  <parameter name="url" value="jdbc:mysql://192.168.35.2:3391/SeleniumConfig"/>
+  <parameter name="Flow" value="Quote"/>
+  <parameter name="dbPassword" value="password"/>
   <test name="ChromeTest1(failed)" parallel="tests">
-    <parameter name="Project" value="CHIC"/>
-    <parameter name="jdbcDriver" value="com.mysql.jdbc.Driver"/>
-    <parameter name="dbUsername" value="root"/>
-    <parameter name="ResultsChoice" value="ActualOnly"/>
     <parameter name="browser" value="chrome"/>
-    <parameter name="Environment" value="UAT"/>
-    <parameter name="Flag" value="Y"/>
-    <parameter name="url" value="jdbc:mysql://192.168.35.2:3391/SeleniumConfig"/>
-    <parameter name="Flow" value="Quote"/>
-    <parameter name="dbPassword" value="password"/>
     <classes>
       <class name="com.selenium.Test.UIMainscript">
         <methods>
           <include name="Login"/>
-          <include name="close"/>
           <include name="loadconfig"/>
-          <include name="loadconfig"/>
+          <include name="launchBrowser"/>
         </methods>
       </class> <!-- com.selenium.Test.UIMainscript -->
     </classes>

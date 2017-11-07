@@ -4,6 +4,7 @@ import com.selenium.Configuration.PropertiesHandle;
 import com.selenium.SupportingClasses.ExcelOperationsJXL;
 import com.selenium.SupportingClasses.TheEventListener;
 import com.selenium.SupportingClasses.UIoperartions;
+import com.selenium.SupportingClasses.browserLaunching;
 import com.selenium.exception.DatabaseException;
 
 import java.awt.AWTException;
@@ -13,8 +14,9 @@ import java.sql.SQLException;
 import java.util.LinkedHashMap;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class BaseDriverScript extends UIoperartions implements UIScriptsInterface
+public class BaseDriverScript extends browserLaunching implements UIScriptsInterface
 {
 //***************************global objects and variables****************************************	
 	protected String dbColumnNmae=null;
@@ -23,7 +25,7 @@ public class BaseDriverScript extends UIoperartions implements UIScriptsInterfac
 	protected ExcelOperationsJXL objectComparisonScript=null;
 	protected PropertiesHandle configFile;
 	protected static TheEventListener event;
-		
+	UIoperartions ui=new UIoperartions();
 //==========================================================================================================================================================
 	
 	public BaseDriverScript()
@@ -45,12 +47,8 @@ public BaseDriverScript(PropertiesHandle configFile) throws SQLException, ClassN
 	
 }
 //====================================Function to launch browser====================================================================================================
-public WebDriver launchBrowser() throws MalformedURLException
+public RemoteWebDriver launchBrowser(String browser) throws MalformedURLException
 {
-	    String browser = configFile.getProperty("browser");
-		//String url = configFile.getProperty("url");
-		//System.out.println(url);
-		
 		return this.launch_browser(browser,configFile);
 			
 }
@@ -71,7 +69,7 @@ public WebDriver launchBrowser() throws MalformedURLException
 				String dataProvidingFlag=objectLoginScript.read_data(objectLoginScript.get_rownumber(),9);
 				String  waitingTime=objectLoginScript.read_data(objectLoginScript.get_rownumber(),10);
 				//System.out.println(fieldName);
-				this.perform(PropertyString,actionKeyword,ObjectType,value,dbcolumnNmae,dataProvidingFlag,InputData,outputData,waitingTime);
+				ui.perform(PropertyString,actionKeyword,ObjectType,value,dbcolumnNmae,dataProvidingFlag,InputData,outputData,waitingTime);
 				
 			}
 			objectLoginScript.next_row();
@@ -98,7 +96,7 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 				String dataProvidingFlag=objectTestScript.read_data(objectTestScript.get_rownumber(),9);
 				String  waitingTime=objectTestScript.read_data(objectTestScript.get_rownumber(),10);
 				//System.out.println(fieldName);
-				this.perform(PropertyString,actionKeyword,ObjectType,value,dbcolumnNmae,dataProvidingFlag,InputData,outputData,waitingTime);
+				ui.perform(PropertyString,actionKeyword,ObjectType,value,dbcolumnNmae,dataProvidingFlag,InputData,outputData,waitingTime);
 		}
 		objectTestScript.next_row();
 	} //end of while 
@@ -131,11 +129,8 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 		}	
  }*/
 
+
 //============================================Function to close the browser===============================================================================
 
-public void closeBrowser()
-{
-	this.stop_browser();
-}
 
 }
