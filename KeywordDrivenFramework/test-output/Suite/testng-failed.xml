@@ -13,12 +13,14 @@
   <parameter name="dbPassword" value="password"/>
   <test name="Test2(failed)" parallel="tests">
     <parameter name="browser" value="chrome"/>
+    <parameter name="Flag" value="N"/>
     <classes>
       <class name="com.selenium.Test.StarrAssistSuite">
         <methods>
           <include name="loadconfig"/>
           <include name="launchBrowser"/>
           <include name="launchBrowser"/>
+          <include name="TestCase1" invocation-numbers="1"/>
           <include name="Login"/>
           <include name="close"/>
           <include name="close"/>
@@ -28,12 +30,14 @@
   </test> <!-- Test2(failed) -->
   <test name="Test1(failed)" parallel="tests">
     <parameter name="browser" value="chrome"/>
+    <parameter name="Flag" value="Y"/>
     <classes>
       <class name="com.selenium.Test.StarrAssistSuite">
         <methods>
           <include name="loadconfig"/>
           <include name="launchBrowser"/>
           <include name="launchBrowser"/>
+          <include name="TestCase1" invocation-numbers="1"/>
           <include name="Login"/>
           <include name="close"/>
           <include name="close"/>

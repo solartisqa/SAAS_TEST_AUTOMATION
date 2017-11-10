@@ -1,4 +1,3 @@
-
 <suite name="Suite" parallel="tests" verbose="2" thread-count="5">
  <parameter name="Project" value="STARR-ASSIST"/>
   		<parameter name="Flow" value="Quote"/>
@@ -14,20 +13,22 @@
   <test name="Test1">     
     <classes>
    		<parameter name="browser" value="chrome"/>
+   		<parameter name="Flag" value="Y"/>
       <class name="com.selenium.Test.StarrAssistSuite">
-      <methods>
-       <include name="Login"/>
-      </methods>
+     <!--  <methods>
+       <include name="TestCase1"/>
+      </methods> -->
       </class>
     </classes>
   </test> 
 <test name="Test2">
     <classes>
    		<parameter name="browser" value="chrome"/>
+   		<parameter name="Flag" value="N"/>
       <class name="com.selenium.Test.StarrAssistSuite">
-      <methods>
-       <include name="Login"/>
-      </methods>
+     <!--  <methods>
+       <include name="TestCase1"/>
+      </methods> -->
       </class>
       
     </classes>

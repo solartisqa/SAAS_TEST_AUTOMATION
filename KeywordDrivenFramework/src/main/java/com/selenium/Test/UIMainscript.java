@@ -46,7 +46,7 @@ public class UIMainscript
 	public  LinkedHashMap<String, String> outputrow;
 	public  static BaseDriverScript objDriver;
 	public  static PropertiesHandle configFile;
-	public   static RemoteWebDriver driver=null; //changed
+	public    RemoteWebDriver driver=null; //changed
 	public static  String exceptionScreenshotPath=null;
 
 	
@@ -126,7 +126,7 @@ public class UIMainscript
 		  output.UpdateRow(RowIterator, outputrow);
     }*/
 
-	@AfterTest
+	@AfterTest(alwaysRun=true)
 	public void close() throws DatabaseException
 	{
 		driver.quit();

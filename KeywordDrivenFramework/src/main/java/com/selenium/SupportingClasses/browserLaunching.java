@@ -41,7 +41,8 @@ public class browserLaunching extends ConditionsChecking{
 				driver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
 			} 
 			
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+			//driver.manage().window().maximize();
 			return driver;
 	 }
 	

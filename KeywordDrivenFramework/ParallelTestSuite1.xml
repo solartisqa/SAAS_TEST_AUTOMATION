@@ -21,7 +21,7 @@
    </classes>
 </test>
 
-<!-- <test name="firefoxTest2" preserve-order="true">
+<test name="firefoxTest2" preserve-order="true">
  
    <parameter name="browser" value="chrome"/>
    
@@ -30,6 +30,6 @@
      
      </class>
    </classes>
-</test> -->
+</test>
 </tests>
 </suite> 

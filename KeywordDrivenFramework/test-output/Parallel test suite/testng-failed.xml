@@ -11,16 +11,19 @@
   <parameter name="url" value="jdbc:mysql://192.168.35.2:3391/SeleniumConfig"/>
   <parameter name="Flow" value="Quote"/>
   <parameter name="dbPassword" value="password"/>
-  <test name="ChromeTest1(failed)" parallel="tests">
+  <test name="firefoxTest2(failed)" parallel="tests">
     <parameter name="browser" value="chrome"/>
     <classes>
       <class name="com.selenium.Test.UIMainscript">
         <methods>
           <include name="Login"/>
+          <include name="close"/>
+          <include name="close"/>
           <include name="loadconfig"/>
+          <include name="launchBrowser"/>
           <include name="launchBrowser"/>
         </methods>
       </class> <!-- com.selenium.Test.UIMainscript -->
     </classes>
-  </test> <!-- ChromeTest1(failed) -->
+  </test> <!-- firefoxTest2(failed) -->
 </suite> <!-- Failed suite [Parallel test suite] -->

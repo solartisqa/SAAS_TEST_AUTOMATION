@@ -1,12 +1,15 @@
 package StarrAssistPOM;
 
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-public class GetAQuotePage 
+import BasePage.BasePage;
+
+public class GetAQuotePage extends BasePage
 {
 	private WebDriver driver;
 	 @FindBy(id="Get_Quote:travelform:Object__Insured__State__Resident__Code")WebElement StateOfResidence;
@@ -41,89 +44,129 @@ public class GetAQuotePage
 	 
 	 public void selectStateOfResidence(String State)
 	 {
+		 this.WaitWithVisibility(StateOfResidence,driver);
+		 try
+		 {
 		 Select dropdown = new Select(StateOfResidence);
 		 dropdown.selectByVisibleText(State);
+		 }
+		 catch(StaleElementReferenceException e)
+		 {
+			 Select dropdown = new Select(StateOfResidence);
+			 dropdown.selectByVisibleText(State);
+		 }
 		
 	 }
 	 public void selectPlanName(String planName)
 	 {
+		 this.WaitWithVisibility(PlanName,driver);
+		 try
+		 {
 		 Select dropdown = new Select(PlanName);
 		 dropdown.selectByVisibleText(planName);
+		 }
+		 catch(StaleElementReferenceException e)
+		 {
+		 }
+		 
 		
 	 }
 	 public void selectDestinationCountry(String DestCountry)
 	 {
+		 this.WaitWithVisibility(DestinationCountry,driver);
+		 try
+		 {
 		 Select dropdown = new Select(DestinationCountry);
 		 dropdown.selectByVisibleText(DestCountry);
+		 }
+		 catch(StaleElementReferenceException e)
+		 {
+		 }
+		 
 		
 	 }
 	 public void setDepaturedate(String depaturedate)
 	 {
+		 this.WaitWithVisibility(Depaturedate,driver);
 		 Depaturedate.sendKeys(depaturedate);
 		
 	 }
 	 public void setReturndate(String returndate)
 	 {
+		 this.WaitWithVisibility(Returndate,driver);
 		 Returndate.sendKeys(returndate);
 	 }
 	 public void setDepositdate(String depositdate)
 	 {
+		 this.WaitWithVisibility(Depositdate,driver);
 		 Depositdate.sendKeys(depositdate);
 		
 	 }
 	 public void setTravelcost(String travelcost)
 	 {
+		 this.WaitWithVisibility(Travelcost,driver);
 		 Travelcost.sendKeys(travelcost);
 		
 	 }
 	 public void setTravelerDOB(String travelerDOB)
 	 {
+		 this.WaitWithVisibility(TravelerDOB,driver);
 		 TravelerDOB.sendKeys(travelerDOB);
 		
 	 }
 	 public void ClickTripCancellation(String TripCancellation)
 	 {
+		 
 		 if(TripCancellation.equals("With Trip Cancellation for Any Reason"))
 		 {
+			 this.WaitWithVisibility(TripCancellationInclude,driver);
 			 TripCancellationInclude.click();
 		 }
 		 else if(TripCancellation.equals("With Trip Cancellation"))
 		 {
+			 this.WaitWithVisibility(TripCancellationExclude,driver);
 			 TripCancellationExclude.click();
 		 }
 		
 	 }
 	 public void setNumberofTravelers(String numberofTravelers)
 	 {
+		 this.WaitWithVisibility(NumberofTravelers,driver);
 		 NumberofTravelers.sendKeys(numberofTravelers);
 		
 	 }
 	 public void setRentalStartDate(String rentalStartDate)
 	 {
+		 this.WaitWithVisibility(RentalStartDate,driver);
 		 RentalStartDate.sendKeys(rentalStartDate);
 		
 	 }
 	 public void setRentalEndDate(String rentalEndDate)
 	 {
+		 this.WaitWithVisibility(RentalEndDate,driver);
 		 RentalEndDate.sendKeys(rentalEndDate);
 		
 	 }
 	 public void setPolicyEffectiveDate(String policyEffectiveDate)
 	 {
+		 this.WaitWithVisibility(PolicyEffectiveDate,driver);
 		 PolicyEffectiveDate.sendKeys(policyEffectiveDate);
 		
 	 }
 	 
 	 public void Clickcalculate()
 	 {
+		 this.WaitWithVisibility(calculate,driver);
 		 calculate.click();
 	 }
 	 public void ClickAddtraveler()
 	 {
+		 this.WaitWithVisibility(Addtraveler,driver);
 		 Addtraveler.click();
 	 }
 	 public TravellerInformationPage ClickSaveandcontinue()
 	 {
+		 this.WaitWithVisibility(Saveandcontinue,driver);
 		 Saveandcontinue.click();
 		 return new TravellerInformationPage(this.driver);
 	 }
