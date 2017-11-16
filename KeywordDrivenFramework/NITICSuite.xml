@@ -1,5 +1,6 @@
-<suite name="Parallel test suite"  thread-count="4" parallel="tests"> 
-        <parameter name="Project" value="STARR-ASSIST"/>
+
+<suite name="Suite">
+<parameter name="Project" value="STARR-ASSIST"/>
   		<parameter name="Flow" value="Quote"/>
   		<parameter name="Environment" value="QA"/>
   		<parameter name="Flag" value="C28"/>
@@ -10,26 +11,12 @@
    		<parameter name="browser" value="chrome"/>
    		<parameter name="ResultsChoice" value="ActualOnly"/>
 <tests>
-<test name="ChromeTest1" >
-  
-   <classes>
-    <parameter name="browser" value="chrome"/>
-   		<parameter name="Flag" value="Y1"/>
-     <class name="com.selenium.Test.UIMainscript"> 
-    
-     </class>
-   </classes>
-</test>
-
-<test name="ChromeTest2">
-
-   <classes>
+  <test name="Test">
+    <classes>
         <parameter name="browser" value="chrome"/>
-   		<parameter name="Flag" value="Y2"/>
-     <class name="com.selenium.Test.UIMainscript"> 
-     
-     </class>
-   </classes>
-</test>
+   		<parameter name="Flag" value="Y1"/>
+      <class name="com.selenium.Test.NITICSuite"/>
+    </classes>
+  </test> <!-- Test -->
 </tests>
-</suite> 
+</suite> <!-- Suite -->

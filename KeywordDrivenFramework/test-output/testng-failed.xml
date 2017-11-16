@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite verbose="2" name="Failed suite [Suite]" parallel="tests">
+<suite name="Failed suite [Suite]">
   <parameter name="Project" value="STARR-ASSIST"/>
   <parameter name="jdbcDriver" value="com.mysql.jdbc.Driver"/>
   <parameter name="dbUsername" value="root"/>
@@ -11,38 +11,18 @@
   <parameter name="url" value="jdbc:mysql://192.168.35.2:3391/SeleniumConfig"/>
   <parameter name="Flow" value="Quote"/>
   <parameter name="dbPassword" value="password"/>
-  <test name="Test2(failed)" parallel="tests">
+  <test name="Test(failed)">
     <parameter name="browser" value="chrome"/>
-    <parameter name="Flag" value="N"/>
+    <parameter name="Flag" value="Y1"/>
     <classes>
-      <class name="com.selenium.Test.StarrAssistSuite">
+      <class name="com.selenium.Test.NITICSuite">
         <methods>
+          <include name="Login"/>
           <include name="loadconfig"/>
           <include name="launchBrowser"/>
-          <include name="launchBrowser"/>
-          <include name="TestCase1" invocation-numbers="1"/>
-          <include name="Login"/>
-          <include name="close"/>
-          <include name="close"/>
+          <include name="TestCase1"/>
         </methods>
-      </class> <!-- com.selenium.Test.StarrAssistSuite -->
+      </class> <!-- com.selenium.Test.NITICSuite -->
     </classes>
-  </test> <!-- Test2(failed) -->
-  <test name="Test1(failed)" parallel="tests">
-    <parameter name="browser" value="chrome"/>
-    <parameter name="Flag" value="Y"/>
-    <classes>
-      <class name="com.selenium.Test.StarrAssistSuite">
-        <methods>
-          <include name="loadconfig"/>
-          <include name="launchBrowser"/>
-          <include name="launchBrowser"/>
-          <include name="TestCase1" invocation-numbers="1"/>
-          <include name="Login"/>
-          <include name="close"/>
-          <include name="close"/>
-        </methods>
-      </class> <!-- com.selenium.Test.StarrAssistSuite -->
-    </classes>
-  </test> <!-- Test1(failed) -->
+  </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

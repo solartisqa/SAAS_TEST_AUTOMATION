@@ -1,4 +1,4 @@
-package StarrAssistPOM;
+package NITICPOM;
 
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import BasePage.BasePage;
-import StarrAssistPOM.HomePage;
+import NITICPOM.HomePage;
 
 
 
@@ -16,9 +16,9 @@ public class LoginPage extends BasePage
 {
 	 private WebDriver driver;
 	 WebDriverWait wait;
-	 @FindBy(id="loginForm:login_username")WebElement UserName;
-	 @FindBy(id="loginForm:login_password")WebElement PassWord;
-	 @FindBy(xpath="//input[@value='Log In']")WebElement login;
+	 @FindBy(id="login_username")WebElement UserName;
+	 @FindBy(id="login_password")WebElement PassWord;
+	 @FindBy(xpath="//input[@value='Login']")WebElement login;
 	 
 	 public LoginPage(WebDriver driver)
 	 {
@@ -38,7 +38,7 @@ public class LoginPage extends BasePage
 		 }
 		 catch(StaleElementReferenceException e)
 		 {
-			 
+			 UserName.sendKeys(username);
 		 }
 	 }
 	 
@@ -51,7 +51,7 @@ public class LoginPage extends BasePage
 		 }
 		 catch(StaleElementReferenceException e)
 		 {
-			 
+			 PassWord.sendKeys(password);
 		 }
 	 }
 	 
@@ -64,11 +64,8 @@ public class LoginPage extends BasePage
 		 }
 		 catch(StaleElementReferenceException e)
 		 {
-			 
+			 login.click();
 		 }
 		 return new HomePage(this.driver);
 	 }
-	 
-	 
-	 
 }

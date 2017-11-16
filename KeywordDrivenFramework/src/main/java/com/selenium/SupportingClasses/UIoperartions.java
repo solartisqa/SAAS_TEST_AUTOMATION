@@ -19,6 +19,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -40,15 +41,23 @@ public class UIoperartions extends browserLaunching
 	 protected String outputValue;
 	 public WebElement element;
 	 public Document document;
-	//public RemoteWebDriver driver=null;
+	 private WebDriver driver;
+	
 	public WebDriverWait wait;
+	public UIoperartions()
+	 {
+		 
+		 this.driver=this.Rdriver;
+		
+	 }
 	
 //**************************************UI operations***************************************************************************
 public  void perform(String p,String operation,String objectType,String value,String dbcolumn_name,String dataFlag,LinkedHashMap<String, String> InputData,LinkedHashMap<String, String> outputData,String waitingTime) throws SQLException, IOException, InterruptedException, AWTException
 {
 	long waitingTimeinseconds=Long.parseLong(waitingTime);
+	
 	//driver=(RemoteWebDriver) this.getDriver();
-	wait = new WebDriverWait(this.driver, waitingTimeinseconds);
+	//wait = new WebDriverWait(this.driver, waitingTimeinseconds);
 try
 {
 switch (operation.toUpperCase())
@@ -273,8 +282,11 @@ catch(StaleElementReferenceException e)
   protected void click(String p,String objectType) throws StaleElementReferenceException
   {  
 	 
-	  	this.waitWithClickable(p, objectType);
-
+	  	//this.waitWithClickable(p, objectType);
+if(driver==null)
+{
+	System.out.println("driver is null");
+}
 	  	element = driver.findElement(this.getObject(p,objectType));
 	  	element.click(); 	
   }
@@ -356,7 +368,7 @@ catch(StaleElementReferenceException e)
  
  protected void select(String p,String objectType,String inputValue) throws StaleElementReferenceException
  {
-	    this.waitWithClickable(p, objectType);
+	   // this.waitWithClickable(p, objectType);
 	    element = driver.findElement(this.getObject(p,objectType));
 		Select dropdown = new Select(element);
 		dropdown.selectByVisibleText(inputValue);

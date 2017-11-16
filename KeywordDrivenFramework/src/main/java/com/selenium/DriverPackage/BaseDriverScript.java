@@ -25,7 +25,7 @@ public class BaseDriverScript extends browserLaunching implements UIScriptsInter
 	protected ExcelOperationsJXL objectComparisonScript=null;
 	protected PropertiesHandle configFile;
 	protected static TheEventListener event;
-	UIoperartions ui=new UIoperartions();
+	UIoperartions ui;
 //==========================================================================================================================================================
 	
 	public BaseDriverScript()
@@ -36,6 +36,7 @@ public class BaseDriverScript extends browserLaunching implements UIScriptsInter
 //===========constructor to initialize objects======================================================================================================================
 public BaseDriverScript(PropertiesHandle configFile) throws SQLException, ClassNotFoundException
 {
+	
 	this.configFile = configFile;
 	event=new TheEventListener();
 	objectLoginScript = new ExcelOperationsJXL(this.configFile.getProperty("TestScriptPath")+this.configFile.getProperty("ScriptFileName"));
@@ -50,7 +51,7 @@ public BaseDriverScript(PropertiesHandle configFile) throws SQLException, ClassN
 public RemoteWebDriver launchBrowser(String browser) throws MalformedURLException
 {
 		return this.launch_browser(browser,configFile);
-			
+		
 }
 //==============================================Function to login===================================================================================================
   public void login(LinkedHashMap<String, String> InputData,LinkedHashMap<String, String> outputData) throws SQLException, IOException, InterruptedException, AWTException

@@ -3,13 +3,12 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.selenium.Test.StarrAssistSuite">
+      <class name="com.selenium.Test.NITICSuite">
         <methods>
-          <include name="TestCase1"/>
           <include name="Login"/>
-          <include name="close"/>
+          <include name="UITest"/>
         </methods>
-      </class> <!-- com.selenium.Test.StarrAssistSuite -->
+      </class> <!-- com.selenium.Test.NITICSuite -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

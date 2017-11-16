@@ -22,7 +22,7 @@ public class browserLaunching extends ConditionsChecking{
 	
 	public static ThreadLocal<RemoteWebDriver> dr = new ThreadLocal<RemoteWebDriver>();
 	protected TheEventListener eventListerner=null;
-	protected RemoteWebDriver driver=null;
+	protected RemoteWebDriver Rdriver=null;
 	
 	 public RemoteWebDriver launch_browser(String browser,PropertiesHandle config) throws MalformedURLException
 	 {
@@ -32,18 +32,18 @@ public class browserLaunching extends ConditionsChecking{
 				DesiredCapabilities cap = new DesiredCapabilities().firefox();
 				cap.setBrowserName("firefox");
 				cap.setPlatform(Platform.WINDOWS);
-				driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), cap);
+				Rdriver = new RemoteWebDriver(new URL("http://192.168.4.48:4444/wd/hub"), cap);
 			} else if (browser.equals("chrome"))
 			{
 				DesiredCapabilities cap = new DesiredCapabilities().chrome();
 				cap.setBrowserName("chrome");
 				cap.setPlatform(Platform.WINDOWS);
-				driver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
+				Rdriver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
 			} 
 			
-			driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+			Rdriver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 			//driver.manage().window().maximize();
-			return driver;
+			return Rdriver;
 	 }
 	
 }

@@ -42,14 +42,14 @@ public class UIMainscript
 	public  Iterator<Entry<Integer, LinkedHashMap<String, String>>> outputtableiterator;
 	public  ObjectMapper inputtableobjectMapper;
 	public  ObjectMapper outputtableobjectMapper;
-	public  LinkedHashMap<String, String> inputrow;
-	public  LinkedHashMap<String, String> outputrow;
-	public  static BaseDriverScript objDriver;
+	public  static LinkedHashMap<String, String> inputrow;
+	public  static LinkedHashMap<String, String> outputrow;
+	public   BaseDriverScript objDriver;
 	public  static PropertiesHandle configFile;
 	public    RemoteWebDriver driver=null; //changed
 	public static  String exceptionScreenshotPath=null;
 
-	
+	public String FlagforExecution;
 
     @Parameters({"Project","Flow","Environment","Flag","jdbcDriver","url","dbUsername","dbPassword","browser","ResultsChoice"})
 	@BeforeSuite
@@ -66,30 +66,13 @@ public class UIMainscript
 		
 	}
     
-      @Parameters({"browser"})
+      @Parameters({"browser","Flag"})
 	  @BeforeTest(alwaysRun=true)
-	 public void launchBrowser(String browser) throws MalformedURLException, InterruptedException, DatabaseException, PropertiesHandleException, ClassNotFoundException, SQLException
+	 public void launchBrowser(String browser,String Flag) throws MalformedURLException, InterruptedException, DatabaseException, PropertiesHandleException, ClassNotFoundException, SQLException
 	 {
         objDriver=new BaseDriverScript(configFile);
 		driver=objDriver.launchBrowser(browser);
-    	//RemoteWebDriver driver = null;
-	
-		/*if (browser.equals("firefox"))
-		{
-			DesiredCapabilities cap = new DesiredCapabilities().firefox();
-			cap.setBrowserName("firefox");
-			cap.setPlatform(Platform.WINDOWS);
-			driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), cap);
-		} else if (browser.equals("chrome"))
-		{
-			DesiredCapabilities cap = new DesiredCapabilities().chrome();
-			cap.setBrowserName("chrome");
-			cap.setPlatform(Platform.WINDOWS);
-			driver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
-		} 
-		
-	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);*/
+		FlagforExecution=Flag;
 	}
     
     
@@ -100,13 +83,14 @@ public class UIMainscript
 		Thread.sleep(2000);
 		driver.navigate().to(configFile.getProperty("EnvURL"));
 		//objDriver.login(inputrow, outputrow);
-		/*driver.findElement(By.xpath("//input[@id='loginForm:login_username']")).sendKeys("csruser");
+		driver.findElement(By.xpath("//input[@id='loginForm:login_username']")).sendKeys("csruser");
 		driver.findElement(By.xpath("//input[@id='loginForm:login_password']")).sendKeys("Welcome*1");
 		driver.findElement(By.xpath("//input[@value='Log In']")).click();
-		Thread.sleep(2000);*/
+		Thread.sleep(2000);
 	}
 	
-/*@Test(dataProvider="UITestData",dependsOnMethods = { "Login" })
+@SuppressWarnings("unchecked")
+@Test(dataProvider="UITestData",dependsOnMethods = { "Login" })
 	
     public void UITest(Integer RowIterator, Object inputtablerowobj, Object outputtablerowobj) throws ClassNotFoundException, SQLException, IOException, InterruptedException, AWTException, DatabaseException
     {
@@ -114,8 +98,8 @@ public class UIMainscript
 		LinkedHashMap<String, String> outputrow = outputtableobjectMapper.convertValue(outputtablerowobj, LinkedHashMap.class);
     	
 			 System.out.println(RowIterator);
-			 if(inputrow.get("Flag_for_execution").equals(configFile.getProperty("flagForExecution")))//
-				{  
+			 if(inputrow.get("Flag_for_execution").equals(FlagforExecution))//
+			   { 
 				  System.out.println("Executing main script");
 				  objDriver.executeTestScript(inputrow, outputrow);
 				   //objDriver.comparisonScript(inputrow, outputrow);
@@ -124,16 +108,16 @@ public class UIMainscript
 			   }		   
 		  input.UpdateRow(RowIterator, inputrow);
 		  output.UpdateRow(RowIterator, outputrow);
-    }*/
+    }
 
-	@AfterTest(alwaysRun=true)
+/*	@AfterTest(alwaysRun=true)
 	public void close() throws DatabaseException
 	{
 		driver.quit();
 		//objDriver.closeBrowser();
 		//DatabaseOperation.CloseConn();
 		
-	}
+	}*/
 //========================================================================data provider=========================================================================================
 	 @DataProvider(name="UITestData")
 	 public Object[][] getDataFromDataprovider() throws DatabaseException, PropertiesHandleException

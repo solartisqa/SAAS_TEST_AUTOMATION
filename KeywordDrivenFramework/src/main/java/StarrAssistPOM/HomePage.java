@@ -1,10 +1,13 @@
 package StarrAssistPOM;
 
+import java.util.List;
+
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import BasePage.BasePage;
 
@@ -17,6 +20,7 @@ public class HomePage extends BasePage
 	 @FindBy(id="MenuBar:MyQuotes")WebElement FindQuote;
 	 @FindBy(id="MyPolicyLink")WebElement FindPolicy;
 	 @FindBy(id="MenuBar:FindCustomer")WebElement FindCustomer;
+	 @FindBy(xpath="//div/div/img[@class='loading_icon']")List<WebElement> LoadingIcon;
 	
 	
 	 public HomePage(WebDriver driver)
@@ -40,6 +44,7 @@ public class HomePage extends BasePage
 		 {
 			 GetAQuote.click();
 		 }
+		 this.waitForLoading();
 		 return new GetAQuotePage(this.driver);
 	 }
 	 
@@ -95,5 +100,12 @@ public class HomePage extends BasePage
 		  FindCustomer.click();
 		 }
 		 return new FindCustomerPage(this.driver);
+	 }
+	 
+	 
+	 public void waitForLoading()
+	 {
+		 wait.until(ExpectedConditions.visibilityOfAllElements(LoadingIcon));
+		 wait.until(ExpectedConditions.invisibilityOfAllElements(LoadingIcon));
 	 }
 }
