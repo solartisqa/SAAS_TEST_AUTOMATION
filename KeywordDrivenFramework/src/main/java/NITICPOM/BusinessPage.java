@@ -1,5 +1,6 @@
 package NITICPOM;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.openqa.selenium.Keys;
@@ -59,8 +60,8 @@ public class BusinessPage extends BasePage
 		 this.WaitWithVisibility(FirstName1,driver);
 		 FirstName1.clear();
 		 FirstName1.sendKeys(firstname);
-		 FirstName1.sendKeys(Keys.ENTER);
-		 this.waitForLoading();
+		// FirstName1.sendKeys(Keys.ENTER);
+		// this.waitForLoading();
 		
 	 }
 	 
@@ -69,8 +70,8 @@ public class BusinessPage extends BasePage
 		 this.WaitWithVisibility(LastName2,driver);
 		 LastName2.clear();
 		 LastName2.sendKeys(lastname);
-		 LastName2.sendKeys(Keys.ENTER);
-		 this.waitForLoading();
+		 //LastName2.sendKeys(Keys.ENTER);
+		// this.waitForLoading();
 		
 	 }
 	 
@@ -90,8 +91,8 @@ public class BusinessPage extends BasePage
 		 this.WaitWithVisibility(PrimaryNumber,driver);
 		 PrimaryNumber.clear();
 		 PrimaryNumber.sendKeys(primarynumber);
-		 PrimaryNumber.sendKeys(Keys.ENTER);
-		 this.waitForLoading();
+		// PrimaryNumber.sendKeys(Keys.ENTER);
+		// this.waitForLoading();
 		
 	 }
 	 public void ClickAlternateNumberType(String Type)
@@ -110,8 +111,8 @@ public class BusinessPage extends BasePage
 		 this.WaitWithVisibility(AlternativeNumber,driver);
 		 AlternativeNumber.clear();
 		 AlternativeNumber.sendKeys(alternativeNumber);
-		 AlternativeNumber.sendKeys(Keys.ENTER);
-		 this.waitForLoading();
+		 //AlternativeNumber.sendKeys(Keys.ENTER);
+		 //this.waitForLoading();
 		
 	 }
 	 public void setAlternativeExtension(String alternativeExtension)
@@ -119,8 +120,8 @@ public class BusinessPage extends BasePage
 		 this.WaitWithVisibility(AlternativeExtension,driver);
 		 AlternativeExtension.clear();
 		 AlternativeExtension.sendKeys(alternativeExtension);
-		 AlternativeExtension.sendKeys(Keys.ENTER);
-		 this.waitForLoading();
+		 //AlternativeExtension.sendKeys(Keys.ENTER);
+		 //this.waitForLoading();
 		
 	 }
 	 public void setEmailAddress(String emailAddress)
@@ -128,8 +129,8 @@ public class BusinessPage extends BasePage
 		 this.WaitWithVisibility(EmailAddress,driver);
 		 EmailAddress.clear();
 		 EmailAddress.sendKeys(emailAddress);
-		 EmailAddress.sendKeys(Keys.ENTER);
-		 this.waitForLoading();
+		// EmailAddress.sendKeys(Keys.ENTER);
+		// this.waitForLoading();
 		
 	 }
 	
@@ -153,8 +154,8 @@ public class BusinessPage extends BasePage
 		 this.WaitWithVisibility(BusinessOtherDescription,driver);
 		 BusinessOtherDescription.clear();
 		 BusinessOtherDescription.sendKeys(descriptionforOther);
-		 BusinessOtherDescription.sendKeys(Keys.ENTER);
-		 this.waitForLoading();
+		// BusinessOtherDescription.sendKeys(Keys.ENTER);
+		// this.waitForLoading();
 		
 	 }
 	 public void setBusinessName1(String businessName1)
@@ -162,8 +163,8 @@ public class BusinessPage extends BasePage
 		 this.WaitWithVisibility(BusinessName1,driver);
 		 BusinessName1.clear();
 		 BusinessName1.sendKeys(businessName1);
-		 BusinessName1.sendKeys(Keys.ENTER);
-		 this.waitForLoading();
+		// BusinessName1.sendKeys(Keys.ENTER);
+		// this.waitForLoading();
 		
 	 }
 	 public void setYearInBusiness(String yearInBusiness)
@@ -171,8 +172,8 @@ public class BusinessPage extends BasePage
 		 this.WaitWithVisibility(YearInBusiness,driver);
 		 YearInBusiness.clear();
 		 YearInBusiness.sendKeys(yearInBusiness);
-		 YearInBusiness.sendKeys(Keys.ENTER);
-		 this.waitForLoading();
+		// YearInBusiness.sendKeys(Keys.ENTER);
+		 //this.waitForLoading();
 	 }
 	 
 	 public void ClickSSNorFEIN(String Type)
@@ -192,8 +193,8 @@ public class BusinessPage extends BasePage
 		 this.WaitWithVisibility(SSN_FEIN,driver);
 		 SSN_FEIN.clear();
 		 SSN_FEIN.sendKeys(ssnfein);
-		 SSN_FEIN.sendKeys(Keys.ENTER);
-		 this.waitForLoading();
+		 //SSN_FEIN.sendKeys(Keys.ENTER);
+		 //this.waitForLoading();
 	 }
 	 
 	 public void setInsuredDescription(String insuredDescription)
@@ -348,6 +349,28 @@ public class BusinessPage extends BasePage
 		 {
 			 
 		 }
+	 }
+	 
+	 
+	 public void FillBusinessDetails(LinkedHashMap<String, String> inputrow)
+	 {
+		 this.setFirstName1(inputrow.get("FirstName"));
+		 this.setLastName2(inputrow.get("LastName"));
+		 this.setPrimaryNumber(inputrow.get("PrimaryNumber"));
+		 this.setAlternativeNumber("1234569870");
+		 this.setEmailAddress(inputrow.get("EmailAddress"));
+		 this.selectTypeOfBusiness(inputrow.get("TypeOfBusiness"));
+		 this.setBusinessName1(inputrow.get("BusinessName"));
+		 this.setYearInBusiness(inputrow.get("NumberOfYearsInBusiness"));
+		 this.ClickSSNorFEIN(inputrow.get("SSN_FEINChoice"));
+		 this.setSSN_FEIN(inputrow.get("SSN_FEIN_no"));
+		 this.setInsuredDescription(inputrow.get("DescriptionOfOperation"));
+		 this.setAddress1(inputrow.get("AddressLine1"));
+		 this.setAddress2(inputrow.get("AddressLine2"));
+		 this.setCity(inputrow.get("City"));
+		 this.selectState(inputrow.get("State"));
+		 this.setZipcode(inputrow.get("ZipCode"));
+		 this.ClickIsMailingAddressSame(inputrow.get("MailingAddressChoice"));
 	 }
 	 
 	

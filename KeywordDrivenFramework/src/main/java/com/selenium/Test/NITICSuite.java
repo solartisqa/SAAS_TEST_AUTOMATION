@@ -80,7 +80,7 @@ public class NITICSuite
 	public void Login() throws InterruptedException
 	{
 		
-		driver.get("https://qanitic.solartis.net/NITIC/NITIC/Login.xhtml");
+		driver.get(configFile.getProperty("EnvURL"));
 		log=new LoginPage(driver);
 		log.setUserName("nitic_uw");
 		log.setPassword("welcome1");
@@ -89,50 +89,43 @@ public class NITICSuite
 
 
 
-	  // @SuppressWarnings("unchecked")
-		@Test(dependsOnMethods = { "Login" })
+	  @SuppressWarnings("unchecked")
 		
-	    public void TestCase1() throws ClassNotFoundException, SQLException, IOException, InterruptedException, AWTException, DatabaseException
+		@Test(dataProvider="UITestData",dependsOnMethods = { "Login" })
+	    public void TestCase1(Integer RowIterator, Object inputtablerowobj, Object outputtablerowobj) throws ClassNotFoundException, SQLException, IOException, InterruptedException, AWTException, DatabaseException
 	    {
+			LinkedHashMap<String, String> inputrow = inputtableobjectMapper.convertValue(inputtablerowobj, LinkedHashMap.class);
+			LinkedHashMap<String, String> outputrow = outputtableobjectMapper.convertValue(outputtablerowobj, LinkedHashMap.class);
 			
 				//String dataFlag="Y1";
-				// if(dataFlag.equals(FlagforExecution))//
-				  // {  
+			   System.out.println("flag in xml"+FlagforExecution);
+			   System.out.println("flag in data"+inputrow.get("Flag_for_execution"));
+				if(inputrow.get("Flag_for_execution").equals(FlagforExecution))//
+				  {  
 					
 					 hmpage.ClickTruckersInsurance();
-					 hmpage.selectSubBusinessType("Business - Not for Hire");
+					 hmpage.selectSubBusinessType(inputrow.get("BusinessType"));
 					 BusPage=hmpage.ClickContinue();
-					 BusPage.setFirstName1("Test");
-					 BusPage.setLastName2("QA");
-					 BusPage.ClickPrimaryCommunicationType("Home");
-					 BusPage.setPrimaryNumber("1234567890");
-					 BusPage.ClickAlternateNumberType("Home");
-					 BusPage.setAlternativeNumber("5632147890");
-					 BusPage.setEmailAddress("test@gmail.com");
-					 BusPage.selectTypeOfBusiness("Corporation");
-					 BusPage.setBusinessName1("busname");
-					 BusPage.setYearInBusiness("2");
-					 BusPage.setSSN_FEIN("456123789");
-					 BusPage.setInsuredDescription("description");
-					 BusPage.setAddress1("1000 North Florida Avenue");
-					 Thread.sleep(1000);
-					 BusPage.setAddress2("1645 Parkway");
-					 Thread.sleep(1000);
-					 BusPage.setCity("Tampa");
-					 Thread.sleep(1000);
-					 BusPage.selectState("Florida");
-					 BusPage.setZipcode("37862");
-					 BusPage.ClickIsMailingAddressSame("Yes");
+					 BusPage.FillBusinessDetails(inputrow);
+					 
 					 CovPage=BusPage.ClickCoverage();
-					 CovPage.selectLiabilityLimitType("Split Limit"); //condition
-					 CovPage.selectSplitLimitofLiability("$15,000 / $30,000 / $5,000");
+					 CovPage.selectLiabilityLimitType(inputrow.get("LiabilityLimitType"));//condition
+					 if(inputrow.get("LiabilityLimitType").equals("Combined Single Limit"))
+					 {
+					 CovPage.selectCombinedLimitofLiability(inputrow.get("PrimaryLiabilityLimit"));
+					 }
+					 else
+					 {
+					  CovPage.selectSplitLimitofLiability(inputrow.get("PrimaryLiabilityLimit"));
+					 }
 					 CovPage.setPremiumPerVehicle("1000");
-					 CovPage.setQuoteStartDate("11/16/2017");
-					 // inputrow.put("Flag_for_execution", inputrow.get("Flag_for_execution")+"Completed");
-					 // outputrow.put("Flag_for_execution", "Completed");
-				  // }		   
-			 // input.UpdateRow(RowIterator, inputrow);
-			 // output.UpdateRow(RowIterator, outputrow);
+					 CovPage.setQuoteStartDate("11/18/2017");
+					 inputrow.put("Flag_for_execution", inputrow.get("Flag_for_execution")+"Completed");
+					 outputrow.put("Flag_for_execution", "Completed");
+					 
+				  }		   
+			  input.UpdateRow(RowIterator, inputrow);
+			  output.UpdateRow(RowIterator, outputrow);
 	    }
 	   
 	   

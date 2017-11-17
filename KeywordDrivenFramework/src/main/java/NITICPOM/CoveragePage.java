@@ -53,7 +53,7 @@ public class CoveragePage extends BasePage
 			 Select dropdown = new Select(LiabilityLimitType);
 			 dropdown.selectByVisibleText(Lltype);
 		 }
-		 this.waitForLoading();
+		 
 	 }
 	
 	 public void selectSplitLimitofLiability(String Value)
@@ -69,10 +69,10 @@ public class CoveragePage extends BasePage
 			 Select dropdown = new Select(SplitLimitofLiability);
 			 dropdown.selectByVisibleText(Value);
 		 }
-		 this.waitForLoading();
+		
 	 }
 	
-	 public void selectCombinedLimitofLiabilityType(String Value)
+	 public void selectCombinedLimitofLiability(String Value)
 	 {
 		 this.WaitWithVisibility(CombinedLimitofLiabilityType,driver);
 		 try
@@ -85,7 +85,7 @@ public class CoveragePage extends BasePage
 			 Select dropdown = new Select(CombinedLimitofLiabilityType);
 			 dropdown.selectByVisibleText(Value);
 		 }
-		 this.waitForLoading();
+		 
 	 }
 	
 	 public void setPremiumPerVehicle(String VehiclePremium)
@@ -93,9 +93,7 @@ public class CoveragePage extends BasePage
 		 this.WaitWithVisibility(PremiumPerVehicle,driver);
 		 PremiumPerVehicle.clear();
 		 PremiumPerVehicle.sendKeys(VehiclePremium);
-		 PremiumPerVehicle.sendKeys(Keys.ENTER);
-		 this.waitForLoading();
-		
+		 
 	 }
 	
 	 public void setQuoteStartDate(String EffectiveDate)
@@ -104,7 +102,7 @@ public class CoveragePage extends BasePage
 		 QuoteStartDate.clear();
 		 QuoteStartDate.sendKeys(EffectiveDate);
 		 QuoteStartDate.sendKeys(Keys.ENTER);
-		 this.waitForLoading();
+		this.waitForLoading();
 		
 	 }
 	

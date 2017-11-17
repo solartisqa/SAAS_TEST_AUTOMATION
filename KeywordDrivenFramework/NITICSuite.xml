@@ -1,9 +1,9 @@
 
 <suite name="Suite">
-<parameter name="Project" value="STARR-ASSIST"/>
+<parameter name="Project" value="NITIC"/>
   		<parameter name="Flow" value="Quote"/>
   		<parameter name="Environment" value="QA"/>
-  		<parameter name="Flag" value="C28"/>
+  		<parameter name="Flag" value="Y"/>
   		<parameter name="jdbcDriver" value="com.mysql.jdbc.Driver"/>
   		<parameter name="url" value="jdbc:mysql://192.168.35.2:3391/SeleniumConfig"/>
    		<parameter name="dbUsername" value="root"/>
@@ -14,7 +14,7 @@
   <test name="Test">
     <classes>
         <parameter name="browser" value="chrome"/>
-   		<parameter name="Flag" value="Y1"/>
+   		<parameter name="Flag" value="Y"/>
       <class name="com.selenium.Test.NITICSuite"/>
     </classes>
   </test> <!-- Test -->
