@@ -24,7 +24,7 @@
     <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
       <br/>
-      <span class="top-banner-font-1">1 suite, 1 failed test</span>
+      <span class="top-banner-font-1">1 suite</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -38,7 +38,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" class="navigator-link" panel-name="suite-Suite">
-              <span class="suite-name border-failed">Suite</span>
+              <span class="suite-name border-passed">Suite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -91,21 +91,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">2 methods, 1 failed,   1 passed</span>
-                  </li>
-                  <li>
-                    <span class="method-list-title failed">Failed methods</span>
-                    <span class="show-or-hide-methods failed">
-                      <a href="#" panel-name="suite-Suite" class="hide-methods failed suite-Suite"> (hide)</a> <!-- hide-methods failed suite-Suite -->
-                      <a href="#" panel-name="suite-Suite" class="show-methods failed suite-Suite"> (show)</a> <!-- show-methods failed suite-Suite -->
-                    </span>
-                    <div class="method-list-content failed suite-Suite">
-                      <span>
-                        <img width="3%" src="failed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.selenium.Test.NITICSuite" hash-for-method="TestCase1">TestCase1</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                    </div> <!-- method-list-content failed suite-Suite -->
+                    <span class="method-stats">3 methods,   3 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -117,6 +103,16 @@
                       <span>
                         <img width="3%" src="passed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.selenium.Test.NITICSuite" hash-for-method="Login">Login</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.selenium.Test.NITICSuite" hash-for-method="TestCase1(1, {Si_no=1, Test_data_id=NITIC_01, Flag_for_execution=YCompleted, BusinessType=Business - Not for H...)">TestCase1(1, {Si_no=1, Test_data_id=NITIC_01, Flag_for_execution=YCompleted, BusinessType=Business - Not for H...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.selenium.Test.NITICSuite" hash-for-method="TestCase1(2, {Si_no=2, Test_data_id=NITIC_02, Flag_for_execution=YCompleted, BusinessType=Business - Not for H...)">TestCase1(2, {Si_no=2, Test_data_id=NITIC_02, Flag_for_execution=YCompleted, BusinessType=Business - Not for H...)</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Suite -->
@@ -131,107 +127,6 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Suite" class="panel Suite">
-          <div class="suite-Suite-class-failed">
-            <div class="main-panel-header rounded-window-top">
-              <img src="failed.png"/>
-              <span class="class-name">com.selenium.Test.NITICSuite</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-              <div class="method">
-                <div class="method-content">
-                  <a name="TestCase1">
-                  </a> <!-- TestCase1 -->
-                  <span class="method-name">TestCase1</span>
-                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Timed out after 1000 seconds waiting for visibility of Proxy element for: DefaultElementLocator &apos;By.id: CoveragesTile:CoverageInformation:Object__Quote__QuoteStartDate&apos;
-Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
-System info: host: &apos;C1128&apos;, ip: &apos;192.168.4.131&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_73&apos;
-Driver info: org.openqa.selenium.remote.RemoteWebDriver
-Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.32.498550 (9dec58e66c31bcc53a9ce3c7226f0c1c5810906a), userDataDir=C:\Users\SASIRE~1.SOL\AppData\Local\Temp\scoped_dir16444_21219}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=61.0.3163.100, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, webdriver.remote.sessionid=da812201-059b-4671-b3a0-c7c1c9f07e52, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
-Session ID: da812201-059b-4671-b3a0-c7c1c9f07e52
-	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:80)
-	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:261)
-	at BasePage.BasePage.WaitWithVisibility(BasePage.java:17)
-	at NITICPOM.CoveragePage.setQuoteStartDate(CoveragePage.java:103)
-	at com.selenium.Test.NITICSuite.TestCase1(NITICSuite.java:130)
-Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;id&quot;,&quot;selector&quot;:&quot;CoveragesTile:CoverageInformation:Object__Quote__QuoteStartDate&quot;}
-  (Session info: chrome=61.0.3163.100)
-  (Driver info: chromedriver=2.32.498550 (9dec58e66c31bcc53a9ce3c7226f0c1c5810906a),platform=Windows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 50.07 seconds
-For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
-Build info: version: &apos;2.53.0&apos;, revision: &apos;35ae25b&apos;, time: &apos;2016-03-15 17:00:58&apos;
-System info: host: &apos;C1128&apos;, ip: &apos;192.168.4.131&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_73&apos;
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.32.498550 (9dec58e66c31bcc53a9ce3c7226f0c1c5810906a), userDataDir=C:\Users\SASIRE~1.SOL\AppData\Local\Temp\scoped_dir16444_21219}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=61.0.3163.100, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
-Session ID: f7c410fc9ff93cdf570441ebed4559b6
-*** Element info: {Using=id, value=CoveragesTile:CoverageInformation:Object__Quote__QuoteStartDate}
-Command duration or timeout: 50.42 seconds
-For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
-Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
-System info: host: &apos;C1128&apos;, ip: &apos;192.168.4.131&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_73&apos;
-Driver info: org.openqa.selenium.remote.RemoteWebDriver
-Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.32.498550 (9dec58e66c31bcc53a9ce3c7226f0c1c5810906a), userDataDir=C:\Users\SASIRE~1.SOL\AppData\Local\Temp\scoped_dir16444_21219}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=61.0.3163.100, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, webdriver.remote.sessionid=da812201-059b-4671-b3a0-c7c1c9f07e52, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
-Session ID: da812201-059b-4671-b3a0-c7c1c9f07e52
-*** Element info: {Using=id, value=CoveragesTile:CoverageInformation:Object__Quote__QuoteStartDate}
-	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:216)
-	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:168)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:635)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:368)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:417)
-	at org.openqa.selenium.By$ById.findElement(By.java:218)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:360)
-	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
-	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
-	at com.sun.proxy.$Proxy9.isDisplayed(Unknown Source)
-	at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:302)
-	at org.openqa.selenium.support.ui.ExpectedConditions.access$100(ExpectedConditions.java:41)
-	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:288)
-	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:285)
-	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:238)
-	... 28 more
-Caused by: org.openqa.selenium.remote.ScreenshotException: Screen shot has been taken
-Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
-System info: host: &apos;C1128&apos;, ip: &apos;192.168.4.131&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_73&apos;
-Driver info: driver.version: RemoteWebDriver
-	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:142)
-	... 41 more
-Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;id&quot;,&quot;selector&quot;:&quot;CoveragesTile:CoverageInformation:Object__Quote__QuoteStartDate&quot;}
-  (Session info: chrome=61.0.3163.100)
-  (Driver info: chromedriver=2.32.498550 (9dec58e66c31bcc53a9ce3c7226f0c1c5810906a),platform=Windows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 50.07 seconds
-For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
-Build info: version: &apos;2.53.0&apos;, revision: &apos;35ae25b&apos;, time: &apos;2016-03-15 17:00:58&apos;
-System info: host: &apos;C1128&apos;, ip: &apos;192.168.4.131&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_73&apos;
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.32.498550 (9dec58e66c31bcc53a9ce3c7226f0c1c5810906a), userDataDir=C:\Users\SASIRE~1.SOL\AppData\Local\Temp\scoped_dir16444_21219}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=61.0.3163.100, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
-Session ID: f7c410fc9ff93cdf570441ebed4559b6
-*** Element info: {Using=id, value=CoveragesTile:CoverageInformation:Object__Quote__QuoteStartDate}
-For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
-Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
-System info: host: &apos;C1128&apos;, ip: &apos;192.168.4.131&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_73&apos;
-Driver info: driver.version: EventFiringWebDriver
-	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)
-	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:413)
-	at org.openqa.selenium.By$ById.findElement(By.java:218)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)
-	at org.openqa.selenium.support.events.EventFiringWebDriver$2.invoke(EventFiringWebDriver.java:103)
-	at com.sun.proxy.$Proxy1.findElement(Unknown Source)
-	at org.openqa.selenium.support.events.EventFiringWebDriver.findElement(EventFiringWebDriver.java:188)
-	at org.openqa.selenium.remote.server.handler.FindElement.call(FindElement.java:48)
-	at org.openqa.selenium.remote.server.handler.FindElement.call(FindElement.java:1)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at org.openqa.selenium.remote.server.DefaultSession$1.run(DefaultSession.java:176)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-... Removed 34 stack frames
-</div> <!-- stack-trace -->
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-            </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-Suite-class-failed -->
           <div class="suite-Suite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
@@ -243,6 +138,22 @@ Driver info: driver.version: EventFiringWebDriver
                   <a name="Login">
                   </a> <!-- Login -->
                   <span class="method-name">Login</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="TestCase1(1, {Si_no=1, Test_data_id=NITIC_01, Flag_for_execution=YCompleted, BusinessType=Business - Not for H...)">
+                  </a> <!-- TestCase1(1, {Si_no=1, Test_data_id=NITIC_01, Flag_for_execution=YCompleted, BusinessType=Business - Not for H...) -->
+                  <span class="method-name">TestCase1</span>
+                  <span class="parameters">(1, {Si_no=1, Test_data_id=NITIC_01, Flag_for_execution=YCompleted, BusinessType=Business - Not for Hire, FirstName=Test, LastName=QA, PrimaryNumber=1234567890, EmailAddress=test@gmail.com, TypeOfBusiness=Corporation, BusinessName=NITIC, NumberOfYearsInBusiness=1, SSN_FEINChoice=SSN, SSN_FEIN_no=345235645, DescriptionOfOperation=Description of Operation , AddressLine1=1645 Parkway, AddressLine2=Address2, City=Tampa, State=Florida, ZipCode=17050, MailingAddressChoice=, LiabilityLimitType=Combined Single Limit, PrimaryLiabilityLimit=$50,000, PremiumPerVehicle=1000, EffectiveDate=09/07/2017, NumberOfVehicles=1, VIN=12345678901233400, Make=Make, Model=Model , Year=2000, SeatingCapacity=3, BodyType=Tractor, VehicleValue=100001, RadiusOfOperation=50, BusinessUse=Commercial, LossPayee1=Yes, LossPayee__Type=Leased, LossPayeeName=loss payee, VehicleNumber=Vehicle #1, DriverName=Driver1, DriverDOB=05/11/1989, Gender=Female, MaritalStatus=Married, LicenseNumber=12345, YearFirstLicensed=2016, YearsofExperience=23, Accident=Yes, NumberOfAccident=1, NumberOfTicket=0, AccidentType=Accident, AccDate=09/05/2016, AccPlace=Test City, ViolationDate=09/05/2016, AIName=AdditionalInsured, CarrierName=PC-Test, PolicyNo=CHIC-6528-02, PriorEffectiveDate=01/06/1996, PriorExpirationDate=01/06/1997, CoverageType=Physical Damage, SHFirstName=Test, SHLastName=SH, Salutation=Sr, Title=Title , QuoteType=New Business, EditLiabilityPremium=No, TotalLiabilityPremium=, AttachementName=CHIC_02, RenewalPrefix=9945, RenewalSuffix=03}, {Si_no=1, Test_data_id=NITIC_01, Flag_for_execution=Completed, QuoteNumber=QNITIC-632, PolicyNumber=A20175-01, LiabilityTotalPremium=$1,200.00, LiabilityTotalPremium_exp=null, LiabilityTotalPremium_status=null, TotalPremium=$1,200.00, TotalPremium_exp=null, TotalPremium_status=null, TotalDownPayment=$366.67, TotalDownPayment_exp=null, TotalDownPayment_status=null, TotalMonthlyPayment=$83.33, TotalMonthlyPayment_exp=null, TotalMonthlyPayment_status=null, AnalyserResult=null})</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="TestCase1(2, {Si_no=2, Test_data_id=NITIC_02, Flag_for_execution=YCompleted, BusinessType=Business - Not for H...)">
+                  </a> <!-- TestCase1(2, {Si_no=2, Test_data_id=NITIC_02, Flag_for_execution=YCompleted, BusinessType=Business - Not for H...) -->
+                  <span class="method-name">TestCase1</span>
+                  <span class="parameters">(2, {Si_no=2, Test_data_id=NITIC_02, Flag_for_execution=YCompleted, BusinessType=Business - Not for Hire, FirstName=Test, LastName=QA, PrimaryNumber=1234567890, EmailAddress=test@gmail.com, TypeOfBusiness=Corporation, BusinessName=NITIC, NumberOfYearsInBusiness=1, SSN_FEINChoice=SSN, SSN_FEIN_no=345235645, DescriptionOfOperation=Description of Operation , AddressLine1=1645 Parkway, AddressLine2=Address2, City=Tampa, State=Florida, ZipCode=17050, MailingAddressChoice=, LiabilityLimitType=Combined Single Limit, PrimaryLiabilityLimit=$50,000, PremiumPerVehicle=2000, EffectiveDate=09/07/2017, NumberOfVehicles=1, VIN=12345678901233400, Make=Make, Model=Model , Year=2000, SeatingCapacity=3, BodyType=Tractor, VehicleValue=100001, RadiusOfOperation=50, BusinessUse=Commercial, LossPayee1=Yes, LossPayee__Type=Leased, LossPayeeName=loss payee, VehicleNumber=Vehicle #1, DriverName=Driver1, DriverDOB=05/11/1989, Gender=Female, MaritalStatus=Married, LicenseNumber=12345, YearFirstLicensed=2016, YearsofExperience=23, Accident=Yes, NumberOfAccident=1, NumberOfTicket=0, AccidentType=Accident, AccDate=09/05/2016, AccPlace=Test City, ViolationDate=09/05/2016, AIName=AdditionalInsured, CarrierName=PC-Test, PolicyNo=CHIC-6528-02, PriorEffectiveDate=01/06/1996, PriorExpirationDate=01/06/1997, CoverageType=Physical Damage, SHFirstName=Test, SHLastName=SH, Salutation=Sr, Title=Title , QuoteType=New Business, EditLiabilityPremium=No, TotalLiabilityPremium=, AttachementName=CHIC_02, RenewalPrefix=9945, RenewalSuffix=03}, {Si_no=2, Test_data_id=NITIC_02, Flag_for_execution=, QuoteNumber=, PolicyNumber=A20167-01, LiabilityTotalPremium=$2,200.00, LiabilityTotalPremium_exp=null, LiabilityTotalPremium_status=null, TotalPremium=$2,200.00, TotalPremium_exp=null, TotalPremium_status=null, TotalDownPayment=$533.33, TotalDownPayment_exp=null, TotalDownPayment_status=null, TotalMonthlyPayment=$166.67, TotalMonthlyPayment_exp=null, TotalMonthlyPayment_status=null, AnalyserResult=null})</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -257,19 +168,19 @@ Driver info: driver.version: EventFiringWebDriver
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE suite SYSTEM &quot;http://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite name=&quot;Suite&quot;&gt;
-  &lt;parameter name=&quot;Project&quot; value=&quot;STARR-ASSIST&quot;/&gt;
+  &lt;parameter name=&quot;Project&quot; value=&quot;NITIC&quot;/&gt;
   &lt;parameter name=&quot;jdbcDriver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;
   &lt;parameter name=&quot;dbUsername&quot; value=&quot;root&quot;/&gt;
   &lt;parameter name=&quot;ResultsChoice&quot; value=&quot;ActualOnly&quot;/&gt;
   &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
   &lt;parameter name=&quot;Environment&quot; value=&quot;QA&quot;/&gt;
-  &lt;parameter name=&quot;Flag&quot; value=&quot;C28&quot;/&gt;
+  &lt;parameter name=&quot;Flag&quot; value=&quot;Y&quot;/&gt;
   &lt;parameter name=&quot;url&quot; value=&quot;jdbc:mysql://192.168.35.2:3391/SeleniumConfig&quot;/&gt;
   &lt;parameter name=&quot;Flow&quot; value=&quot;Quote&quot;/&gt;
   &lt;parameter name=&quot;dbPassword&quot; value=&quot;password&quot;/&gt;
   &lt;test name=&quot;Test&quot;&gt;
     &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
-    &lt;parameter name=&quot;Flag&quot; value=&quot;Y1&quot;/&gt;
+    &lt;parameter name=&quot;Flag&quot; value=&quot;Y&quot;/&gt;
     &lt;classes&gt;
       &lt;class name=&quot;com.selenium.Test.NITICSuite&quot;/&gt;
     &lt;/classes&gt;
@@ -311,20 +222,24 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(2);
+data.addRows(3);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'TestCase1')
+data.setCell(0, 1, 'Login')
 data.setCell(0, 2, 'com.selenium.Test.NITICSuite')
-data.setCell(0, 3, 3099332);
+data.setCell(0, 3, 13490);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'Login')
+data.setCell(1, 1, 'TestCase1')
 data.setCell(1, 2, 'com.selenium.Test.NITICSuite')
-data.setCell(1, 3, 23135);
+data.setCell(1, 3, 17);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'TestCase1')
+data.setCell(2, 2, 'com.selenium.Test.NITICSuite')
+data.setCell(2, 3, 5);
 window.suiteTableData['Suite']= { tableData: data, tableDiv: 'times-div-Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 52 minutes</span>
+              <span class="suite-total-time">Total running time: 13 seconds</span>
               <div id="times-div-Suite">
               </div> <!-- times-div-Suite -->
             </div> <!-- times-div -->
@@ -352,22 +267,24 @@ return data;
             <div class="chronological-class">
               <div class="chronological-class-name">com.selenium.Test.NITICSuite</div> <!-- chronological-class-name -->
               <div class="configuration-suite before">
-                <span class="method-name">loadconfig(STARR-ASSIST, Quote, QA, C28, com.mysql.jdbc.Driver, jdbc:mysql://192.168.35.2:3391/SeleniumConfig, ...)</span>
+                <span class="method-name">loadconfig(NITIC, Quote, QA, Y, com.mysql.jdbc.Driver, jdbc:mysql://192.168.35.2:3391/SeleniumConfig, root, pas...)</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-suite before -->
               <div class="configuration-test before">
-                <span class="method-name">launchBrowser(chrome, Y1)</span>
-                <span class="method-start">224 ms</span>
+                <span class="method-name">launchBrowser(chrome, Y)</span>
+                <span class="method-start">235 ms</span>
               </div> <!-- configuration-test before -->
               <div class="test-method">
                 <span class="method-name">Login</span>
-                <span class="method-start">4322 ms</span>
+                <span class="method-start">4406 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <img src="failed.png">
-                </img>
-                <span class="method-name">TestCase1</span>
-                <span class="method-start">27462 ms</span>
+                <span class="method-name">TestCase1(1, {Si_no=1, Test_data_id=NITIC_01, Flag_for_execution=YCompleted, BusinessType=Business - Not for H...)</span>
+                <span class="method-start">18052 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">TestCase1(2, {Si_no=2, Test_data_id=NITIC_02, Flag_for_execution=YCompleted, BusinessType=Business - Not for H...)</span>
+                <span class="method-start">18070 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

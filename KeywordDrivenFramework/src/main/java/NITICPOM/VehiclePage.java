@@ -1,5 +1,6 @@
 package NITICPOM;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.openqa.selenium.StaleElementReferenceException;
@@ -469,7 +470,7 @@ public class VehiclePage extends BasePage
 		}
 		
 		
-		 public DriverPage ClickBusiness()
+		 public DriverPage ClickDriver()
 		 {
 			 this.WaitWithVisibility(Driver,driver);
 			 try
@@ -495,4 +496,36 @@ public class VehiclePage extends BasePage
 			 
 		 }
 	 }
+	 
+	public void FillVehicleDetails(LinkedHashMap<String, String> inputrow)
+	{
+		 this.ClickAddVehicle();
+		 this.setVehicleVIN(inputrow.get("VIN"));
+		 this.setVehicleMake(inputrow.get("Make"));
+		 this.setVehicleModel(inputrow.get("Model"));
+		 this.setVehicleYear(inputrow.get("Year"));
+		 this.setVehicleSeatingCapacity(inputrow.get("SeatingCapacity"));
+		 this.selectVehicleBodyType(inputrow.get("BodyType"));
+		 this.setVehicleValue(inputrow.get("VehicleValue"));
+		 this.setGrossWeight(inputrow.get("RadiusOfOperation"));
+		 this.selectRegistrationState(inputrow.get("State"));
+		 this.selectBusinessUse(inputrow.get("BusinessUse"));
+		 this.ClickIsLossPayee(inputrow.get("LossPayee1"));
+		 this.ClickSave();
+	}
+	 
+	public void FillLossPayeeDetails(LinkedHashMap<String, String> inputrow)
+	{
+		 this.ClickAddLossPayee();
+		 this.selectLossPayeeType(inputrow.get("LossPayee__Type"));
+		 this.setLossPayeeName(inputrow.get("LossPayeeName"));
+		 this.selectVehicleNumber(inputrow.get("VehicleNumber"));
+		 this.setAddress1(inputrow.get("AddressLine1"));
+		 this.setCity(inputrow.get("City"));
+		 this.selectLossPayeeState(inputrow.get("State"));
+		 this.setLossPayeeZipCode(inputrow.get("ZipCode"));
+		 this.ClickSave();		
+	}
+	 
+	 
 }

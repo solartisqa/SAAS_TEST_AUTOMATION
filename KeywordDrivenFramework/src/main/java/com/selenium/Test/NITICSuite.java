@@ -50,6 +50,8 @@ public class NITICSuite
 	public HomePage hmpage;
 	public BusinessPage BusPage;
 	public CoveragePage CovPage;
+	public VehiclePage VehPage;
+	public DriverPage drPage;
     
     @Parameters({"Project","Flow","Environment","Flag","jdbcDriver","url","dbUsername","dbPassword","browser","ResultsChoice"})
 	@BeforeSuite
@@ -107,19 +109,13 @@ public class NITICSuite
 					 hmpage.selectSubBusinessType(inputrow.get("BusinessType"));
 					 BusPage=hmpage.ClickContinue();
 					 BusPage.FillBusinessDetails(inputrow);
-					 
 					 CovPage=BusPage.ClickCoverage();
-					 CovPage.selectLiabilityLimitType(inputrow.get("LiabilityLimitType"));//condition
-					 if(inputrow.get("LiabilityLimitType").equals("Combined Single Limit"))
-					 {
-					 CovPage.selectCombinedLimitofLiability(inputrow.get("PrimaryLiabilityLimit"));
-					 }
-					 else
-					 {
-					  CovPage.selectSplitLimitofLiability(inputrow.get("PrimaryLiabilityLimit"));
-					 }
-					 CovPage.setPremiumPerVehicle("1000");
-					 CovPage.setQuoteStartDate("11/18/2017");
+					 CovPage.FillCoverageDetails(inputrow);
+					 VehPage=CovPage.ClickVehicle();
+					 VehPage.FillVehicleDetails(inputrow);
+					 VehPage.FillLossPayeeDetails(inputrow);
+					 drPage=VehPage.ClickDriver();
+					 
 					 inputrow.put("Flag_for_execution", inputrow.get("Flag_for_execution")+"Completed");
 					 outputrow.put("Flag_for_execution", "Completed");
 					 

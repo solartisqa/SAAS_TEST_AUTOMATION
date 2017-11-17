@@ -1,5 +1,6 @@
 package NITICPOM;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.openqa.selenium.Keys;
@@ -136,7 +137,20 @@ public class CoveragePage extends BasePage
 		 return new BusinessPage(this.driver);
 	 }
 	
-	
+	public void FillCoverageDetails(LinkedHashMap<String, String> inputrow)
+	{
+		 this.selectLiabilityLimitType(inputrow.get("LiabilityLimitType"));//condition
+		 if(inputrow.get("LiabilityLimitType").equals("Combined Single Limit"))
+		 {
+			 this.selectCombinedLimitofLiability(inputrow.get("PrimaryLiabilityLimit"));
+		 }
+		 else
+		 {
+			 this.selectSplitLimitofLiability(inputrow.get("PrimaryLiabilityLimit"));
+		 }
+		 this.setPremiumPerVehicle("1000");
+		 this.setQuoteStartDate("11/18/2017");
+	}
 	
 	 public void waitForLoading()
 	 {

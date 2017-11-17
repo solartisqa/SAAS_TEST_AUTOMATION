@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Suite]">
-  <parameter name="Project" value="STARR-ASSIST"/>
+  <parameter name="Project" value="NITIC"/>
   <parameter name="jdbcDriver" value="com.mysql.jdbc.Driver"/>
   <parameter name="dbUsername" value="root"/>
   <parameter name="ResultsChoice" value="ActualOnly"/>
   <parameter name="browser" value="chrome"/>
   <parameter name="Environment" value="QA"/>
-  <parameter name="Flag" value="C28"/>
+  <parameter name="Flag" value="Y"/>
   <parameter name="url" value="jdbc:mysql://192.168.35.2:3391/SeleniumConfig"/>
   <parameter name="Flow" value="Quote"/>
   <parameter name="dbPassword" value="password"/>
   <test name="Test(failed)">
     <parameter name="browser" value="chrome"/>
-    <parameter name="Flag" value="Y1"/>
+    <parameter name="Flag" value="Y"/>
     <classes>
       <class name="com.selenium.Test.NITICSuite">
         <methods>
           <include name="Login"/>
           <include name="loadconfig"/>
           <include name="launchBrowser"/>
-          <include name="TestCase1"/>
+          <include name="TestCase1" invocation-numbers="0"/>
         </methods>
       </class> <!-- com.selenium.Test.NITICSuite -->
     </classes>

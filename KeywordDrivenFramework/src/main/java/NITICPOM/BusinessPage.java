@@ -365,11 +365,13 @@ public class BusinessPage extends BasePage
 		 this.ClickSSNorFEIN(inputrow.get("SSN_FEINChoice"));
 		 this.setSSN_FEIN(inputrow.get("SSN_FEIN_no"));
 		 this.setInsuredDescription(inputrow.get("DescriptionOfOperation"));
+
+		 //this.setAddress2(inputrow.get("AddressLine2"));
+		 this.selectState(inputrow.get("State"));
+		 this.setZipcode(inputrow.get("ZipCode"));
 		 this.setAddress1(inputrow.get("AddressLine1"));
 		 this.setAddress2(inputrow.get("AddressLine2"));
 		 this.setCity(inputrow.get("City"));
-		 this.selectState(inputrow.get("State"));
-		 this.setZipcode(inputrow.get("ZipCode"));
 		 this.ClickIsMailingAddressSame(inputrow.get("MailingAddressChoice"));
 	 }
 	 
