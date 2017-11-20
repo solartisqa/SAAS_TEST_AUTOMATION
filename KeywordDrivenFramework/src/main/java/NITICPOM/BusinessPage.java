@@ -43,6 +43,12 @@ public class BusinessPage extends BasePage
 	@FindBy(xpath="//div[@id='BusinessTile:BusinessInformationForm:IsMailingAddressSame']//span")List<WebElement> IsMailingAddressSame;
 	@FindBy(xpath="//span[@class='common_validation_error']")List<WebElement> validationError;
 	@FindBy(xpath="//button[@id='BusinessTile:BusinessInformationForm:BusinessSave']//span[contains(.,'Coverage')]")WebElement Coverage;
+	@FindBy(xpath="//div[@id='BusinessTile:BusinessInformationForm:Object__Insured__ICCFiling']//span")List<WebElement> ICCFiling;
+	@FindBy(id="BusinessTile:BusinessInformationForm:Object__MCNumber")WebElement MCNumber;
+	
+	
+	
+	
 	
 	
 	public BusinessPage(WebDriver driver) 
@@ -242,9 +248,8 @@ public class BusinessPage extends BasePage
 			 Address2.clear();
 			 Address2.sendKeys(address2);
 		 }
-		
-		 
 	 }
+	 
 	 public void setCity(String city)
 	 {
 		 try
@@ -339,6 +344,36 @@ public class BusinessPage extends BasePage
 		 return new CoveragePage(this.driver);
 	 }
 	 
+	 public void ClickICCFiling(String iCCFiling)
+	 {
+		 for(int i=0; i<ICCFiling.size(); i++)
+			{
+			if(ICCFiling.get(i).getText().equals(iCCFiling))
+			{
+				ICCFiling.get(i).click();
+				break;
+			}
+			}	
+	 }
+	 
+	 
+	 public void setMCNumber(String mCNumber)
+	 {
+		 try
+		 {
+		 this.WaitWithVisibility(MCNumber,driver);
+		 MCNumber.clear();
+		 MCNumber.sendKeys(mCNumber);
+		 }
+		 catch(StaleElementReferenceException e)
+		 {
+			 this.WaitWithVisibility(MCNumber,driver);
+			 MCNumber.clear();
+			 MCNumber.sendKeys(mCNumber);
+		 }
+	 }
+	 //======================================================================================================================
+	 
 	 public void waitForLoading()
 	 {
 		 try{
@@ -365,13 +400,18 @@ public class BusinessPage extends BasePage
 		 this.ClickSSNorFEIN(inputrow.get("SSN_FEINChoice"));
 		 this.setSSN_FEIN(inputrow.get("SSN_FEIN_no"));
 		 this.setInsuredDescription(inputrow.get("DescriptionOfOperation"));
-
-		 //this.setAddress2(inputrow.get("AddressLine2"));
+         this.ClickICCFiling(inputrow.get("ICCFilling"));
+         if(inputrow.get("ICCFilling").equals("Yes"))
+         {
+        	 this.setMCNumber(inputrow.get("MCNumber"));
+         }
+	
 		 this.selectState(inputrow.get("State"));
 		 this.setZipcode(inputrow.get("ZipCode"));
+		 this.setCity(inputrow.get("City"));
 		 this.setAddress1(inputrow.get("AddressLine1"));
 		 this.setAddress2(inputrow.get("AddressLine2"));
-		 this.setCity(inputrow.get("City"));
+		
 		 this.ClickIsMailingAddressSame(inputrow.get("MailingAddressChoice"));
 	 }
 	 

@@ -27,7 +27,9 @@ public class VehiclePage extends BasePage
 	@FindBy(id="VehiclesTile:VehicleDetailsAddForm:Object__Risk__Vehicle__BodyType")WebElement VehicleBodyType;
 	@FindBy(id="VehiclesTile:VehicleDetailsAddForm:Object__Risk__Vehicle__VehicleValue")WebElement VehicleValue;
 	@FindBy(id="VehiclesTile:VehicleDetailsAddForm:Object__Risk__Vehicle__GrossWeight")WebElement GrossWeight;
+	@FindBy(id="VehiclesTile:VehicleDetailsAddForm:Object__Risk__Vehicle__RadiusCategory")WebElement RadiusCategory;
 	@FindBy(id="VehiclesTile:VehicleDetailsAddForm:Object__Risk__Vehicle__Radius")WebElement Radius;
+	
 	@FindBy(id="VehiclesTile:VehicleDetailsAddForm:Object__Risk__Vehicle__RegistrationState")WebElement RegistrationState;
 	@FindBy(id="VehiclesTile:VehicleDetailsAddForm:Object__Risk__Vehicle__BusinessUse")WebElement BusinessUse;
 	@FindBy(xpath="//div[@id='VehiclesTile:VehicleDetailsAddForm:Object__Risk__Vehicle__IsLossPayee']//span")List<WebElement> IsLossPayee;
@@ -214,6 +216,21 @@ public class VehiclePage extends BasePage
 		  GrossWeight.sendKeys(grossWeight);
 		}		
 	}
+	
+	 public void selectRadiusCategory(String radiusCategory)
+	 {
+		 this.WaitWithVisibility(RadiusCategory,driver);
+		 try
+		 {
+		 Select dropdown = new Select(RadiusCategory);
+		 dropdown.selectByVisibleText(radiusCategory);
+		 }
+		 catch(StaleElementReferenceException e)
+		 {
+			 Select dropdown = new Select(RadiusCategory);
+			 dropdown.selectByVisibleText(radiusCategory);
+		 }
+	 }
 
 	public void setRadius(String radius)
 	{
@@ -463,9 +480,9 @@ public class VehiclePage extends BasePage
 		}
 		catch(StaleElementReferenceException e)
 		{
-		 this.WaitWithVisibility(Radius,driver);
-		 Radius.clear();
-		 Radius.sendKeys(zipcode);
+		 this.WaitWithVisibility(Zipcode,driver);
+		 Zipcode.clear();
+		 Zipcode.sendKeys(zipcode);
 		}		
 		}
 		
@@ -507,7 +524,8 @@ public class VehiclePage extends BasePage
 		 this.setVehicleSeatingCapacity(inputrow.get("SeatingCapacity"));
 		 this.selectVehicleBodyType(inputrow.get("BodyType"));
 		 this.setVehicleValue(inputrow.get("VehicleValue"));
-		 this.setGrossWeight(inputrow.get("RadiusOfOperation"));
+		 this.selectRadiusCategory(inputrow.get("RadiusCategory"));
+		 this.setRadius(inputrow.get("RadiusOfOperation"));
 		 this.selectRegistrationState(inputrow.get("State"));
 		 this.selectBusinessUse(inputrow.get("BusinessUse"));
 		 this.ClickIsLossPayee(inputrow.get("LossPayee1"));

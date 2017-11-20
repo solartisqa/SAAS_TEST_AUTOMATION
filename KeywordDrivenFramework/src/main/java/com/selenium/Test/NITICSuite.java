@@ -115,6 +115,8 @@ public class NITICSuite
 					 VehPage.FillVehicleDetails(inputrow);
 					 VehPage.FillLossPayeeDetails(inputrow);
 					 drPage=VehPage.ClickDriver();
+					 drPage.FillDriverDetails(inputrow);
+					 drPage.FillAccidentViolationDetails(inputrow);
 					 
 					 inputrow.put("Flag_for_execution", inputrow.get("Flag_for_execution")+"Completed");
 					 outputrow.put("Flag_for_execution", "Completed");
