@@ -44,10 +44,10 @@ public class DriverPage extends BasePage
 	@FindBy(xpath="//button[contains(.,'Save')]")WebElement Save;
 	@FindBy(xpath="//button[contains(.,'Cancel')]")List<WebElement> Cancel;
 	
-	@FindBy(xpath="//span[contains(.,'Add Accident/Violation History')]")WebElement AddAccident;
-	@FindBy(xpath="//div[contains(.,'DriversTile:DriverInformation:Object__Driver__Accident__IncidentType')]//span")List<WebElement> IncidentType;
+	@FindBy(xpath="//button[contains(.,'Add Accident/Violation History')]")WebElement AddAccident;
+	@FindBy(xpath="//div[@id='DriversTile:DriverInformation:Object__Driver__Accident__IncidentType']//span")List<WebElement> IncidentType;
 	@FindBy(id="DriversTile:DriverInformation:Object__Driver__Accident__Date")WebElement AccidentDate;
-	@FindBy(id="DriversTile:DriverInformation:Object__Driver__Accident__Place'")WebElement AccidentPlace;
+	@FindBy(id="DriversTile:DriverInformation:Object__Driver__Accident__Place")WebElement AccidentPlace;
 	@FindBy(id="DriversTile:DriverInformation:driverNameList:Object__Risk__Driver__VehicleDriverID")WebElement AccNameofDriver;
 	@FindBy(id="DriversTile:DriverInformation:Object__Driver__Accident__Description")WebElement AccDescription;
 	@FindBy(id="DriversTile:DriverInformation:Violation_SubViewDate:Object__Driver__Accident__Date")WebElement ViolationAccidentDate;
@@ -259,6 +259,7 @@ public class DriverPage extends BasePage
 		 this.WaitWithVisibility(AccidentDescription,driver);
 		 AccidentDescription.clear();
 		 AccidentDescription.sendKeys(accidentDescription);
+		
 
 	 }  
 	 
@@ -311,7 +312,6 @@ public class DriverPage extends BasePage
 			 AccidentDate.clear();
 			 AccidentDate.sendKeys(accidentDate);
 			 AccidentDate.sendKeys(Keys.ENTER);
-			this.waitForLoading();
 			
 		 }
 		 
@@ -352,7 +352,6 @@ public class DriverPage extends BasePage
 			 ViolationAccidentDate.clear();
 			 ViolationAccidentDate.sendKeys(violationAccidentDate);
 			 ViolationAccidentDate.sendKeys(Keys.ENTER);
-			this.waitForLoading();
 		  }
 		 
 		 public void setViolationAccDescription(String violationAccDescription)
@@ -379,6 +378,26 @@ public class DriverPage extends BasePage
 			 dropdown.selectByVisibleText(violationNameofDriver);
 		 }
 	 }	 
+	 
+	 public AdditionalInsuredPage ClickAdditionalInsured()
+	 {
+		 this.WaitWithVisibility(AdditionalInsured,driver);
+		 try
+		 {
+			 AdditionalInsured.click();
+		 }
+		 catch(StaleElementReferenceException e)
+		 {
+			 AdditionalInsured.click();
+		 }
+		 this.waitForLoading();
+		 return new AdditionalInsuredPage(this.driver);
+	 }
+	 
+	 
+	 
+	 
+	 
 	 
 	 public void waitForLoading()
 	 {

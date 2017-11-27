@@ -52,7 +52,9 @@ public class NITICSuite
 	public CoveragePage CovPage;
 	public VehiclePage VehPage;
 	public DriverPage drPage;
-    
+	public AdditionalInsuredPage AIPage;
+	public PriorCarrierPage PCPage;
+    public ShareholderPage SHPage;
     @Parameters({"Project","Flow","Environment","Flag","jdbcDriver","url","dbUsername","dbPassword","browser","ResultsChoice"})
 	@BeforeSuite
 	public void loadconfig(String Project,String Flow,String Environment,String Flag,String jdbcDriver,String url,String dbUsername,String dbPassword,String browser,String ResultsChoice) throws DatabaseException, ClassNotFoundException, SQLException, PropertiesHandleException, MalformedURLException
@@ -117,7 +119,14 @@ public class NITICSuite
 					 drPage=VehPage.ClickDriver();
 					 drPage.FillDriverDetails(inputrow);
 					 drPage.FillAccidentViolationDetails(inputrow);
-					 
+					 AIPage=drPage.ClickAdditionalInsured();
+					 AIPage.FillAdditionalInsured(inputrow);
+					 PCPage=AIPage.ClickPriorCarrier();
+					 PCPage.FillPriorCarrier(inputrow);
+					 SHPage=PCPage.ClickShareholder();
+					 SHPage.FillShareHolderDetails(inputrow);
+					 SHPage.ClickQuoteType(inputrow.get("QuoteType"));
+					 SHPage.ClickCreateQuote();
 					 inputrow.put("Flag_for_execution", inputrow.get("Flag_for_execution")+"Completed");
 					 outputrow.put("Flag_for_execution", "Completed");
 					 
