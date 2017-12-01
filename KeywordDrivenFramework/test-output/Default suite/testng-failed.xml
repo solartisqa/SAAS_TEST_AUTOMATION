@@ -6,7 +6,7 @@
       <class name="com.selenium.Test.NITICSuite">
         <methods>
           <include name="Login"/>
-          <include name="UITest"/>
+          <include name="TestCase1"/>
         </methods>
       </class> <!-- com.selenium.Test.NITICSuite -->
     </classes>

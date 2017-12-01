@@ -32,8 +32,7 @@ public class NITICSuite
 
 	public  LinkedHashMap<Integer, LinkedHashMap<String, String>> inputtable;
 	public  LinkedHashMap<Integer, LinkedHashMap<String, String>> outputtable;
-	public  Iterator<Entry<Integer, LinkedHashMap<String, String>>> inputtableiterator;
-	public  Iterator<Entry<Integer, LinkedHashMap<String, String>>> outputtableiterator;
+
 	public  ObjectMapper inputtableobjectMapper;
 	public  ObjectMapper outputtableobjectMapper;
 	public  LinkedHashMap<String, String> inputrow;
@@ -55,6 +54,12 @@ public class NITICSuite
 	public AdditionalInsuredPage AIPage;
 	public PriorCarrierPage PCPage;
     public ShareholderPage SHPage;
+    public QuoteSummaryPage QSPage;
+    public DocumentsPage DocPage;
+    public FindQuotePage FQPage;
+    public FindPolicyPage FPPage;
+    public PolicySummaryPage PSPage;
+    public EndorsementPage EndorsePage;
     @Parameters({"Project","Flow","Environment","Flag","jdbcDriver","url","dbUsername","dbPassword","browser","ResultsChoice"})
 	@BeforeSuite
 	public void loadconfig(String Project,String Flow,String Environment,String Flag,String jdbcDriver,String url,String dbUsername,String dbPassword,String browser,String ResultsChoice) throws DatabaseException, ClassNotFoundException, SQLException, PropertiesHandleException, MalformedURLException
@@ -91,6 +96,45 @@ public class NITICSuite
 		hmpage=log.ClickLogin();
 	}
 
+	 /* @SuppressWarnings("unchecked")
+		
+		@Test(dataProvider="UITestData",dependsOnMethods = { "Login" })
+	    public void TestCase1(Integer RowIterator, Object inputtablerowobj, Object outputtablerowobj) throws ClassNotFoundException, SQLException, IOException, InterruptedException, AWTException, DatabaseException
+	    {
+			LinkedHashMap<String, String> inputrow = inputtableobjectMapper.convertValue(inputtablerowobj, LinkedHashMap.class);
+			LinkedHashMap<String, String> outputrow = outputtableobjectMapper.convertValue(outputtablerowobj, LinkedHashMap.class);
+			
+				//String dataFlag="Y1";
+			   System.out.println("flag in xml"+FlagforExecution);
+			   System.out.println("flag in data"+inputrow.get("Flag_for_execution"));
+				if(inputrow.get("Flag_for_execution").equals(FlagforExecution))//
+				  {  
+					 hmpage.ClickFind();
+					 FQPage=hmpage.ClickFindQuote();
+					 FQPage.setQuoteNumber("QNITIC-849");
+					 FQPage.ClickFindQuoteButton();
+					 QSPage=FQPage.ClickQuoteFromList("QNITIC-849");
+					 QSPage.ClickQuoteSummary();
+					 DocPage=QSPage.ClickDocuments();
+					 DocPage.AttachFile(inputrow);
+					 FPPage=hmpage.ClickFindPolicy();
+					 FPPage.setPolicyNumber("B3015-01");
+					 FPPage.ClickFindPolicyButton();
+					 PSPage=FPPage.ClickPolicyFromList("B3015-01");
+					 outputrow.put("PolicyNumber", PSPage.getPolicyNumber());
+					 EndorsePage=PSPage.ClickEndorsementAccordian();
+					 EndorsePage.EditEndorsementPage(inputrow);
+					 
+					 
+					 
+					inputrow.put("Flag_for_execution", inputrow.get("Flag_for_execution")+"Completed");
+					outputrow.put("Flag_for_execution", "Completed");
+					 
+				  }		   
+			  input.UpdateRow(RowIterator, inputrow);
+			  output.UpdateRow(RowIterator, outputrow);
+	    }
+	   */
 
 
 	  @SuppressWarnings("unchecked")
@@ -106,7 +150,7 @@ public class NITICSuite
 			   System.out.println("flag in data"+inputrow.get("Flag_for_execution"));
 				if(inputrow.get("Flag_for_execution").equals(FlagforExecution))//
 				  {  
-					
+					 hmpage.ClickHome();
 					 hmpage.ClickTruckersInsurance();
 					 hmpage.selectSubBusinessType(inputrow.get("BusinessType"));
 					 BusPage=hmpage.ClickContinue();
@@ -126,15 +170,61 @@ public class NITICSuite
 					 SHPage=PCPage.ClickShareholder();
 					 SHPage.FillShareHolderDetails(inputrow);
 					 SHPage.ClickQuoteType(inputrow.get("QuoteType"));
-					 SHPage.ClickCreateQuote();
+					 QSPage=SHPage.ClickCreateQuote();
+					 QSPage.EditCoverageDetails(inputrow);
+					 QSPage.getDetailsFromQuoteSummary(outputrow);
+					 QSPage.ClickOfferQuote();
+					 DocPage=QSPage.ClickOfferQuoteYes();
+					 DocPage.AttachFile(inputrow);
+					 QSPage.ClickIssuePolicy();
+					 PSPage=QSPage.ClickIssuePolicyYes();
+					 outputrow.put("PolicyNumber", PSPage.getPolicyNumber());
+					 
 					 inputrow.put("Flag_for_execution", inputrow.get("Flag_for_execution")+"Completed");
-					 outputrow.put("Flag_for_execution", "Completed");
+					// outputrow.put("Flag_for_execution", "Completed");
 					 
 				  }		   
 			  input.UpdateRow(RowIterator, inputrow);
 			  output.UpdateRow(RowIterator, outputrow);
 	    }
 	   
+	   @SuppressWarnings("unchecked")
+		
+		@Test(dataProvider="UITestData",dependsOnMethods = { "Login" })
+	    public void TestCase2(Integer RowIterator, Object inputtablerowobj, Object outputtablerowobj) throws ClassNotFoundException, SQLException, IOException, InterruptedException, AWTException, DatabaseException
+	    {
+			LinkedHashMap<String, String> inputrow = inputtableobjectMapper.convertValue(inputtablerowobj, LinkedHashMap.class);
+			LinkedHashMap<String, String> outputrow = outputtableobjectMapper.convertValue(outputtablerowobj, LinkedHashMap.class);
+			
+				//String dataFlag="Y1";
+			   System.out.println("flag in xml"+FlagforExecution);
+			   System.out.println("flag in data"+inputrow.get("Flag_for_execution"));
+				if(outputrow.get("Flag_for_execution").equals(FlagforExecution))//
+				  {  
+					 FPPage=hmpage.ClickFindPolicy();
+					 FPPage.setPolicyNumber(outputrow.get("PolicyNumber"));
+					 FPPage.ClickFindPolicyButton();
+					 PSPage=FPPage.ClickPolicyFromList(outputrow.get("PolicyNumber"));
+					 EndorsePage=PSPage.ClickEndorsementAccordian();
+					 EndorsePage.EditEndorsementPage(inputrow);
+					 
+					 
+					 
+					//inputrow.put("Flag_for_execution", inputrow.get("Flag_for_execution")+"Completed");
+					outputrow.put("Flag_for_execution", "Completed");
+					 
+				  }		   
+			  input.UpdateRow(RowIterator, inputrow);
+			  output.UpdateRow(RowIterator, outputrow);
+	    }
+	   
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 	   
 	   @DataProvider(name="UITestData")//,parallel=true)
 			 public Object[][] getDataFromDataprovider() throws DatabaseException, PropertiesHandleException

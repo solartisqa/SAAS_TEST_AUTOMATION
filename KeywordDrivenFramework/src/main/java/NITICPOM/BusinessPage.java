@@ -46,7 +46,7 @@ public class BusinessPage extends BasePage
 	@FindBy(xpath="//div[@id='BusinessTile:BusinessInformationForm:Object__Insured__ICCFiling']//span")List<WebElement> ICCFiling;
 	@FindBy(id="BusinessTile:BusinessInformationForm:Object__MCNumber")WebElement MCNumber;
 	
-	
+	@FindBy(xpath="//button[contains(.,'Save')]")WebElement Save;
 	
 	
 	

@@ -136,7 +136,7 @@ public class AdditionalInsuredPage extends BasePage
 		 {
 			 Save.click();
 		 }
-		 this.waitForLoading();
+		// this.waitForLoading();
 	 }
 	
 	 public void ClickCancel()

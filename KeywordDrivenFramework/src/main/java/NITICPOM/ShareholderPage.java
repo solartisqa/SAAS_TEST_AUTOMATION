@@ -124,7 +124,7 @@ public class ShareholderPage extends BasePage
 			}	
 	 }
 	 
-	 public void ClickCreateQuote()
+	 public QuoteSummaryPage ClickCreateQuote()
 	 {
 		 this.WaitWithVisibility(CreateQuote,driver);
 		 try
@@ -136,6 +136,7 @@ public class ShareholderPage extends BasePage
 			 CreateQuote.click();
 		 }
 		 this.waitForLoading();
+		 return new QuoteSummaryPage(this.driver);
 	 }
 	
 	 public void waitForLoading()

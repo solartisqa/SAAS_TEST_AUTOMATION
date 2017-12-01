@@ -1,5 +1,5 @@
 
-<suite name="Suite">
+<suite name="Suite" thread-count="4"> <!-- parallel="tests" -->
 <parameter name="Project" value="NITIC"/>
   		<parameter name="Flow" value="Quote"/>
   		<parameter name="Environment" value="QA"/>
@@ -11,12 +11,21 @@
    		<parameter name="browser" value="chrome"/>
    		<parameter name="ResultsChoice" value="ActualOnly"/>
 <tests>
-  <test name="Test">
+  <test name="Test1">
     <classes>
         <parameter name="browser" value="chrome"/>
    		<parameter name="Flag" value="Y"/>
       <class name="com.selenium.Test.NITICSuite"/>
+      <include name="TestCase1"/>
     </classes>
-  </test> <!-- Test -->
+  </test> 
+   <test name="Test2">
+    <classes>
+        <parameter name="browser" value="chrome"/>
+   		<parameter name="Flag" value="Y"/>
+      <class name="com.selenium.Test.NITICSuite"/>
+       <include name="TestCase2"/>
+    </classes>
+  </test> 
 </tests>
-</suite> <!-- Suite -->
+</suite> 

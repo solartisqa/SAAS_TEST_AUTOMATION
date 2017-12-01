@@ -301,7 +301,7 @@ public class VehiclePage extends BasePage
 		 {
 			 Save.click();
 		 }
-		 this.waitForLoading();
+		 //this.waitForLoading();
 		
 	 }
 	

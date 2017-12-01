@@ -395,10 +395,6 @@ public class DriverPage extends BasePage
 	 }
 	 
 	 
-	 
-	 
-	 
-	 
 	 public void waitForLoading()
 	 {
 		 try{

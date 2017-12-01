@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Suite]">
+<suite thread-count="4" name="Failed suite [Suite]">
   <parameter name="Project" value="NITIC"/>
   <parameter name="jdbcDriver" value="com.mysql.jdbc.Driver"/>
   <parameter name="dbUsername" value="root"/>
@@ -11,18 +11,34 @@
   <parameter name="url" value="jdbc:mysql://192.168.35.2:3391/SeleniumConfig"/>
   <parameter name="Flow" value="Quote"/>
   <parameter name="dbPassword" value="password"/>
-  <test name="Test(failed)">
+  <test name="Test1(failed)">
     <parameter name="browser" value="chrome"/>
     <parameter name="Flag" value="Y"/>
     <classes>
       <class name="com.selenium.Test.NITICSuite">
         <methods>
+          <include name="TestCase2" invocation-numbers="0 1"/>
           <include name="Login"/>
+          <include name="launchBrowser"/>
           <include name="loadconfig"/>
           <include name="launchBrowser"/>
-          <include name="TestCase1" invocation-numbers="0"/>
         </methods>
       </class> <!-- com.selenium.Test.NITICSuite -->
     </classes>
-  </test> <!-- Test(failed) -->
+  </test> <!-- Test1(failed) -->
+  <test name="Test2(failed)">
+    <parameter name="browser" value="chrome"/>
+    <parameter name="Flag" value="Y"/>
+    <classes>
+      <class name="com.selenium.Test.NITICSuite">
+        <methods>
+          <include name="TestCase2" invocation-numbers="0 1"/>
+          <include name="Login"/>
+          <include name="launchBrowser"/>
+          <include name="loadconfig"/>
+          <include name="launchBrowser"/>
+        </methods>
+      </class> <!-- com.selenium.Test.NITICSuite -->
+    </classes>
+  </test> <!-- Test2(failed) -->
 </suite> <!-- Failed suite [Suite] -->
