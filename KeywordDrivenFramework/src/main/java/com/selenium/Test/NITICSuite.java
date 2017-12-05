@@ -175,7 +175,7 @@ public class NITICSuite
 					 QSPage.getDetailsFromQuoteSummary(outputrow);
 					 QSPage.ClickOfferQuote();
 					 DocPage=QSPage.ClickOfferQuoteYes();
-					 DocPage.AttachFile(inputrow);
+					 DocPage.AttachFile1(inputrow);
 					 QSPage.ClickIssuePolicy();
 					 PSPage=QSPage.ClickIssuePolicyYes();
 					 

@@ -156,7 +156,7 @@ public class DocumentsPage extends BasePage
 		 this.setAttachmentDescription("attachement");
 		 this.ClickBrowse();
 		 Thread.sleep(1000);
-		 String Path="D:\\Pdf1.pdf";
+		 String Path="D:\\SeleniumConfig\\ResourceFiles\\sample.png";
 		 this.upload(Path);
 		 Thread.sleep(1000);
 		 this.ClickAttachFile();
@@ -170,7 +170,7 @@ public class DocumentsPage extends BasePage
 		 DesktopOptions options = new DesktopOptions();
 		    options.setApplicationPath("C:\\Windows\\System32\\openfiles.exe");
            
-		    String WiniumEXEpath = "E:\\Sasirekha1054\\Softwares\\Winium.Desktop.Driver.exe";
+		    String WiniumEXEpath = "D:\\SeleniumConfig\\ResourceFiles\\Winium.Desktop.Driver.exe";
 		    File file = new File(WiniumEXEpath);
 		    if (! file.exists()) 
 		    {
@@ -185,7 +185,7 @@ public class DocumentsPage extends BasePage
 		    {
 		        e.printStackTrace();
 		    }
-		    String file1 = "D:\\sas\\sample.png";
+		    String file1 = "D:\\SeleniumConfig\\ResourceFiles\\sample.png";
 		    try
 		    {
 		    d.switchTo().activeElement();
