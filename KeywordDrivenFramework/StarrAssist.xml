@@ -1,7 +1,7 @@
 <suite name="Suite" parallel="tests" verbose="2" thread-count="4"  data-provider-thread-count="2">
  <parameter name="Project" value="STARR-ASSIST"/>
   		<parameter name="Flow" value="Quote"/>
-  		<parameter name="Environment" value="QA"/>
+  		<parameter name="Environment" value="UAT"/>
   		<parameter name="Flag" value="C28"/>
   		<parameter name="jdbcDriver" value="com.mysql.jdbc.Driver"/>
   		<parameter name="url" value="jdbc:mysql://192.168.35.2:3391/SeleniumConfig"/>
@@ -19,7 +19,7 @@
       </class>
     </classes>
   </test> 
-<test name="Test2">
+<!-- <test name="Test2">
     <classes>
    		<parameter name="browser" value="chrome"/>
    		<parameter name="Flag" value="Y2"/>
@@ -28,6 +28,6 @@
       </class>
       
     </classes>
-  </test> 
+  </test>  -->
 </tests>
 </suite> <!-- Suite -->

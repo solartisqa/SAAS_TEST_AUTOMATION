@@ -26,9 +26,9 @@ public class HomePage extends BasePage
 	@FindBy(xpath="//span[contains(.,'Cancel')]")WebElement Cancel;
 	@FindBy(xpath="//div/div/img[@class='loading_icon']")List<WebElement> LoadingIcon;
 	@FindBy(id="AccountLink")WebElement Find;
-	@FindBy(xpath="//a[contains(.,'Find Insured')]")WebElement FindInsured;
+	@FindBy(id="MyInsured")WebElement FindInsured;
 	@FindBy(id="MyQuote")WebElement FindQuote;
-	@FindBy(xpath="//a[contains(.,'Find Policy')]")WebElement FindPolicy;
+	@FindBy(id="MyPolicies")WebElement FindPolicy;
 	
 	 public HomePage(WebDriver driver)
 	 {
@@ -115,16 +115,10 @@ public class HomePage extends BasePage
 	 public FindInsuredPage ClickFindInsured()
 	 {
 		 this.WaitWithVisibility(FindInsured,driver);
-		 try
-		 {
-			 FindInsured.click();
-		 }
-		 catch(StaleElementReferenceException e)
-		 {
-			 FindInsured.click();
-		 }
-		
-		 return new FindInsuredPage(this.driver);
+			Actions builder = new Actions(driver);
+			builder.moveToElement(FindInsured).build().perform();
+			FindInsured.click();
+			return new FindInsuredPage(this.driver);
 	 }
 	 
 	 public FindQuotePage ClickFindQuote()

@@ -21,7 +21,7 @@ public class HomePage extends BasePage
 	 @FindBy(id="MyPolicyLink")WebElement FindPolicy;
 	 @FindBy(id="MenuBar:FindCustomer")WebElement FindCustomer;
 	 @FindBy(xpath="//div/div/img[@class='loading_icon']")List<WebElement> LoadingIcon;
-	
+	 @FindBy(id="groupBooking:Object__Attachment__FileUpload_input")WebElement FileUpload;
 	
 	 public HomePage(WebDriver driver)
 	 {
@@ -102,7 +102,12 @@ public class HomePage extends BasePage
 		 return new FindCustomerPage(this.driver);
 	 }
 	 
-	 
+	 public void ClickFileUpload()
+	 {
+		 this.WaitWithVisibility(FileUpload,driver);
+		 FileUpload.click();
+		 this.waitForLoading();
+	 }
 	 public void waitForLoading()
 	 {
 		 wait.until(ExpectedConditions.visibilityOfAllElements(LoadingIcon));

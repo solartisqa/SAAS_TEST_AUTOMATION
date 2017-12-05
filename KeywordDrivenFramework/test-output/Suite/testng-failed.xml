@@ -17,28 +17,12 @@
     <classes>
       <class name="com.selenium.Test.NITICSuite">
         <methods>
-          <include name="TestCase2" invocation-numbers="0 1"/>
           <include name="Login"/>
-          <include name="launchBrowser"/>
           <include name="loadconfig"/>
           <include name="launchBrowser"/>
+          <include name="TestCase1" invocation-numbers="0"/>
         </methods>
       </class> <!-- com.selenium.Test.NITICSuite -->
     </classes>
   </test> <!-- Test1(failed) -->
-  <test name="Test2(failed)">
-    <parameter name="browser" value="chrome"/>
-    <parameter name="Flag" value="Y"/>
-    <classes>
-      <class name="com.selenium.Test.NITICSuite">
-        <methods>
-          <include name="TestCase2" invocation-numbers="0 1"/>
-          <include name="Login"/>
-          <include name="launchBrowser"/>
-          <include name="loadconfig"/>
-          <include name="launchBrowser"/>
-        </methods>
-      </class> <!-- com.selenium.Test.NITICSuite -->
-    </classes>
-  </test> <!-- Test2(failed) -->
 </suite> <!-- Failed suite [Suite] -->

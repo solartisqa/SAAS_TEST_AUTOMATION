@@ -16,16 +16,16 @@
         <parameter name="browser" value="chrome"/>
    		<parameter name="Flag" value="Y"/>
       <class name="com.selenium.Test.NITICSuite"/>
-      <include name="TestCase1"/>
+ 
     </classes>
   </test> 
-   <test name="Test2">
+   <!-- <test name="Test2">
     <classes>
         <parameter name="browser" value="chrome"/>
    		<parameter name="Flag" value="Y"/>
       <class name="com.selenium.Test.NITICSuite"/>
        <include name="TestCase2"/>
     </classes>
-  </test> 
+  </test>  -->
 </tests>
 </suite> 

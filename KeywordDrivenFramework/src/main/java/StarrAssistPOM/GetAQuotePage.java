@@ -35,9 +35,11 @@ public class GetAQuotePage extends BasePage
 	 @FindBy(id="Get_Quote:travelform:Saveandcontinue")WebElement Saveandcontinue;
 	 @FindBy(xpath="//div/div/img[@class='loading_icon']")List<WebElement> LoadingIcon;
 	 @FindBy(xpath="//div[@id='Get_Quote:travelform:PremiumCalculation']//div[3]//div//label")WebElement Premium;
-
+	 @FindBy(id="groupBooking:Object__Attachment__FileUpload_input")WebElement FileUpload;
 	 
-	
+	 
+	 
+	 
 	 public GetAQuotePage(WebDriver driver)
 	 {
 		 this.driver=driver;
@@ -211,7 +213,12 @@ public class GetAQuotePage extends BasePage
 		return Premium.getText();
 	 }
 	 
-	 
+	 public void ClickFileUpload()
+	 {
+		 this.WaitWithVisibility(FileUpload,driver);
+		 FileUpload.click();
+		 this.waitForLoading();
+	 }
 	 public void waitForLoading()
 	 {
 		 wait.until(ExpectedConditions.visibilityOfAllElements(LoadingIcon));

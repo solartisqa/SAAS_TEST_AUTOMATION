@@ -150,6 +150,21 @@ public class PolicySummaryPage extends BasePage
 		 return new EndorsementPage(this.driver);
 	}
 	
+	 public void ClickPolicySummary()
+	 {
+		 this.WaitWithVisibility(PolicySummary,driver);
+		 PolicySummary.click();
+		 this.waitForLoading();
+	}
+	 
+	 public DocumentsPage ClickDocuments()
+	 {
+		 this.WaitWithVisibility(Documents,driver);
+		 Documents.click();
+		 this.waitForLoading();
+		 return new DocumentsPage(this.driver);
+	}
+	 
 	 public void waitForLoading()
 	 {
 		 try{

@@ -5,8 +5,8 @@
     <classes>
       <class name="com.selenium.Test.NITICSuite">
         <methods>
+          <include name="TestCase2"/>
           <include name="Login"/>
-          <include name="TestCase1"/>
         </methods>
       </class> <!-- com.selenium.Test.NITICSuite -->
     </classes>

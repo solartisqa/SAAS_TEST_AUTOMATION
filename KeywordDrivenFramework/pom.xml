@@ -109,6 +109,13 @@
 	    <version>2.7.5</version>
 	</dependency>
 	
+	 <!-- https://mvnrepository.com/artifact/com.github.2gis.winium/winium-webdriver -->
+<dependency>
+    <groupId>com.github.2gis.winium</groupId>
+    <artifactId>winium-webdriver</artifactId>
+    <version>0.1.0-1</version>
+</dependency>
+	
 	<!-- https://mvnrepository.com/artifact/info.cukes/cucumber-jvm -->
 <dependency>
     <groupId>info.cukes</groupId>

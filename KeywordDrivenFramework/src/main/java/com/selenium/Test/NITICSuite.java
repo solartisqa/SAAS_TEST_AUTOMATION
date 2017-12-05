@@ -178,6 +178,7 @@ public class NITICSuite
 					 DocPage.AttachFile(inputrow);
 					 QSPage.ClickIssuePolicy();
 					 PSPage=QSPage.ClickIssuePolicyYes();
+					 
 					 outputrow.put("PolicyNumber", PSPage.getPolicyNumber());
 					 
 					 inputrow.put("Flag_for_execution", inputrow.get("Flag_for_execution")+"Completed");
@@ -188,7 +189,7 @@ public class NITICSuite
 			  output.UpdateRow(RowIterator, outputrow);
 	    }
 	   
-	   @SuppressWarnings("unchecked")
+	/*   @SuppressWarnings("unchecked")
 		
 		@Test(dataProvider="UITestData",dependsOnMethods = { "Login" })
 	    public void TestCase2(Integer RowIterator, Object inputtablerowobj, Object outputtablerowobj) throws ClassNotFoundException, SQLException, IOException, InterruptedException, AWTException, DatabaseException
@@ -201,12 +202,26 @@ public class NITICSuite
 			   System.out.println("flag in data"+inputrow.get("Flag_for_execution"));
 				if(outputrow.get("Flag_for_execution").equals(FlagforExecution))//
 				  {  
+					 hmpage.ClickFind();
 					 FPPage=hmpage.ClickFindPolicy();
 					 FPPage.setPolicyNumber(outputrow.get("PolicyNumber"));
 					 FPPage.ClickFindPolicyButton();
 					 PSPage=FPPage.ClickPolicyFromList(outputrow.get("PolicyNumber"));
-					 EndorsePage=PSPage.ClickEndorsementAccordian();
-					 EndorsePage.EditEndorsementPage(inputrow);
+					 PSPage.ClickPolicySummary();
+					 DocPage=PSPage.ClickDocuments();
+					 DocPage.AttachFile(inputrow);
+					// DocPage.ClickAttach();
+					// DocPage.ClickBrowse();
+				    // DocPage.uploadFile();
+				     String title=driver.getTitle();
+				     System.out.println(title);
+				 
+					 ///DocPage.ClickAttachFile();
+				    //PSPage.ClickPolicySummary();
+				   // DocPage=PSPage.ClickDocuments();
+					 
+					// EndorsePage=PSPage.ClickEndorsementAccordian();
+					 //EndorsePage.EditEndorsementPage(inputrow);
 					 
 					 
 					 
@@ -216,15 +231,7 @@ public class NITICSuite
 				  }		   
 			  input.UpdateRow(RowIterator, inputrow);
 			  output.UpdateRow(RowIterator, outputrow);
-	    }
-	   
-	  
-	  
-	  
-	  
-	  
-	  
-	  
+	    }*/
 	   
 	   @DataProvider(name="UITestData")//,parallel=true)
 			 public Object[][] getDataFromDataprovider() throws DatabaseException, PropertiesHandleException

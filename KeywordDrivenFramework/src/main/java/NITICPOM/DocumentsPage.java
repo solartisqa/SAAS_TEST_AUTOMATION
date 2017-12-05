@@ -5,6 +5,10 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -13,11 +17,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.winium.DesktopOptions;
+import org.openqa.selenium.winium.WiniumDriver;
 
 import BasePage.BasePage;
 
 public class DocumentsPage extends BasePage
-{
+{static WiniumDriver d;
 	private WebDriver driver;
 	@FindBy(xpath="//div/div/img[@class='loading_icon']")List<WebElement> LoadingIcon;
 	@FindBy(xpath="//tr[contains(.,'Application - Liability.pdf')]//td[3]")WebElement DownloadApplicationPDF;
@@ -26,7 +32,9 @@ public class DocumentsPage extends BasePage
 	@FindBy(id="AttachmentsTile:AttachmentForm:Object__Attachment__Name")WebElement AttachmentName;
 	@FindBy(id="AttachmentsTile:AttachmentForm:Object__Attachment__Description")WebElement AttachmentDescription;
 	@FindBy(xpath="//span[@class='ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left ui-fileupload-choose' and @role='button']")WebElement Browse;
-	@FindBy(id="AttachmentsTile:AttachmentForm:Object__Quote__Attach")WebElement AttachFile;
+
+	@FindBy(xpath="//button[contains(.,'Attach File')]")WebElement AttachFile;
+	
 	@FindBy(id="AttachmentsTile:AttachmentForm:Object__Button__Cancel")WebElement Close;
 	@FindBy(xpath="//button[contains(.,'Add Notes')]")WebElement AddNotes;
 	@FindBy(id="NotesTile:NotesForm:Object__Notes__Description")WebElement NotesDescription;
@@ -108,6 +116,15 @@ public class DocumentsPage extends BasePage
 			 r.keyRelease(KeyEvent.VK_ENTER);
 	 }
 	
+	public void ClickDesktopEnter() throws AWTException
+	{
+		 Robot r = new Robot();
+		 r.keyPress(KeyEvent.VK_ENTER);
+		 r.keyRelease(KeyEvent.VK_ENTER);
+	}
+	
+	
+	
 	 public void waitForLoading()
 	 {
 		 try{
@@ -120,7 +137,19 @@ public class DocumentsPage extends BasePage
 		 }
 	 }
 	 
-	 public void AttachFile(LinkedHashMap<String, String> inputrow) throws AWTException, InterruptedException
+	 public void AttachFile(LinkedHashMap<String, String> inputrow) throws AWTException, InterruptedException, IOException
+	 {
+		 this.ClickAttach();
+		 this.setAttachmentName(inputrow.get("AttachementName"));
+		 this.setAttachmentDescription("attachement");
+		 this.ClickBrowse();
+		 Thread.sleep(1000);
+		 this.uploadFileusingWinium();
+		 Thread.sleep(2000);
+		 this.ClickAttachFile();
+	 }
+	 
+	 public void AttachFile1(LinkedHashMap<String, String> inputrow) throws AWTException, InterruptedException, IOException
 	 {
 		 this.ClickAttach();
 		 this.setAttachmentName(inputrow.get("AttachementName"));
@@ -131,6 +160,44 @@ public class DocumentsPage extends BasePage
 		 this.upload(Path);
 		 Thread.sleep(1000);
 		 this.ClickAttachFile();
+	 }
+	 
+	 
+	 
+	 public void uploadFileusingWinium() throws IOException, AWTException
+	 {
+		
+		 DesktopOptions options = new DesktopOptions();
+		    options.setApplicationPath("C:\\Windows\\System32\\openfiles.exe");
+           
+		    String WiniumEXEpath = "E:\\Sasirekha1054\\Softwares\\Winium.Desktop.Driver.exe";
+		    File file = new File(WiniumEXEpath);
+		    if (! file.exists()) 
+		    {
+		        throw new IllegalArgumentException("The file " + WiniumEXEpath + " does not exist");
+		    }
+		    Runtime.getRuntime().exec(file.getAbsolutePath());
+		    try
+		    {
+		        d = new WiniumDriver(new URL("http://localhost:9999"),options);
+		       
+		    } catch (MalformedURLException e) 
+		    {
+		        e.printStackTrace();
+		    }
+		    String file1 = "D:\\sas\\sample.png";
+		    try
+		    {
+		    d.switchTo().activeElement();
+		    d.findElementByName("File name:").click();	
+		    d.findElementByName("File name:").sendKeys(file1);
+		    d.findElementByName("Open").click();
+		    }
+		    catch(VerifyError  e)
+		    {
+		    	System.out.println("Element not found");
+		    }
+		    this.ClickDesktopEnter();		      
 	 }
 	
 }

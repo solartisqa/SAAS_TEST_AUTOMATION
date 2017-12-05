@@ -88,9 +88,10 @@ public class StarrAssistSuite extends browserLaunching
 		
 		log.setUserName("csruser");
 		
-		log.setPassword("Welcome*1");
+		log.setPassword("welcome1");
 		
 		hmpage=log.ClickLogin();
+		hmpage.ClickFileUpload();
 		
 		
 	}
@@ -113,7 +114,7 @@ public class StarrAssistSuite extends browserLaunching
 	*/
 	
 	
-	   @SuppressWarnings("unchecked")
+	  /* @SuppressWarnings("unchecked")
 		@Test(dataProvider="UITestData",dependsOnMethods = { "Login" })
 		
 	    public void UITest(Integer RowIterator, Object inputtablerowobj, Object outputtablerowobj) throws ClassNotFoundException, SQLException, IOException, InterruptedException, AWTException, DatabaseException
@@ -200,7 +201,7 @@ public class StarrAssistSuite extends browserLaunching
 				   }		   
 			  input.UpdateRow(RowIterator, inputrow);
 			  output.UpdateRow(RowIterator, outputrow);
-	    }
+	    }*/
 	
 	
 	
