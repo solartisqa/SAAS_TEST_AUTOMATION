@@ -2,12 +2,12 @@
 <testng-results skipped="0" failed="1" ignored="0" total="3" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite" duration-ms="155200" started-at="2017-12-05T13:10:41Z" finished-at="2017-12-05T13:13:17Z">
+  <suite name="Suite" duration-ms="1229608" started-at="2017-12-06T06:33:23Z" finished-at="2017-12-06T06:53:53Z">
     <groups>
     </groups>
-    <test name="Test1" duration-ms="155200" started-at="2017-12-05T13:10:41Z" finished-at="2017-12-05T13:13:17Z">
+    <test name="Test1" duration-ms="1229608" started-at="2017-12-06T06:33:23Z" finished-at="2017-12-06T06:53:53Z">
       <class name="com.selenium.Test.NITICSuite">
-        <test-method status="PASS" signature="loadconfig(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.selenium.Test.NITICSuite@91161c7]" name="loadconfig" is-config="true" duration-ms="247" started-at="2017-12-05T18:40:41Z" finished-at="2017-12-05T18:40:41Z">
+        <test-method status="PASS" signature="loadconfig(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.selenium.Test.NITICSuite@91161c7]" name="loadconfig" is-config="true" duration-ms="249" started-at="2017-12-06T12:03:23Z" finished-at="2017-12-06T12:03:23Z">
           <params>
             <param index="0">
               <value>
@@ -63,7 +63,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loadconfig -->
-        <test-method status="PASS" signature="launchBrowser(java.lang.String, java.lang.String)[pri:0, instance:com.selenium.Test.NITICSuite@91161c7]" name="launchBrowser" is-config="true" duration-ms="2602" started-at="2017-12-05T18:40:41Z" finished-at="2017-12-05T18:40:44Z">
+        <test-method status="PASS" signature="launchBrowser(java.lang.String, java.lang.String)[pri:0, instance:com.selenium.Test.NITICSuite@91161c7]" name="launchBrowser" is-config="true" duration-ms="3755" started-at="2017-12-06T12:03:23Z" finished-at="2017-12-06T12:03:27Z">
           <params>
             <param index="0">
               <value>
@@ -79,11 +79,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchBrowser -->
-        <test-method status="PASS" signature="Login()[pri:0, instance:com.selenium.Test.NITICSuite@91161c7]" name="Login" duration-ms="12069" started-at="2017-12-05T18:40:44Z" finished-at="2017-12-05T18:40:56Z">
+        <test-method status="PASS" signature="Login()[pri:0, instance:com.selenium.Test.NITICSuite@91161c7]" name="Login" duration-ms="12505" started-at="2017-12-06T12:03:27Z" finished-at="2017-12-06T12:03:39Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Login -->
-        <test-method status="FAIL" signature="TestCase1(java.lang.Integer, java.lang.Object, java.lang.Object)[pri:0, instance:com.selenium.Test.NITICSuite@91161c7]" name="TestCase1" duration-ms="140314" started-at="2017-12-05T18:40:56Z" data-provider="UITestData" depends-on-methods="com.selenium.Test.NITICSuite.Login" finished-at="2017-12-05T18:43:17Z">
+        <test-method status="FAIL" signature="TestCase1(java.lang.Integer, java.lang.Object, java.lang.Object)[pri:0, instance:com.selenium.Test.NITICSuite@91161c7]" name="TestCase1" duration-ms="1213118" started-at="2017-12-06T12:03:40Z" data-provider="UITestData" depends-on-methods="com.selenium.Test.NITICSuite.Login" finished-at="2017-12-06T12:23:53Z">
           <params>
             <param index="0">
               <value>
@@ -97,44 +97,31 @@
             </param>
             <param index="2">
               <value>
-                <![CDATA[{Si_no=1, Test_data_id=NITIC_01, Flag_for_execution=Y, QuoteNumber=QNITIC-928, PolicyNumber=B3034-01, LiabilityTotalPremium=$1,200.00, LiabilityTotalPremium_exp=null, LiabilityTotalPremium_status=null, TotalPremium=$1,200.00, TotalPremium_exp=null, TotalPremium_status=null, TotalDownPayment=$366.67, TotalDownPayment_exp=null, TotalDownPayment_status=null, TotalMonthlyPayment=$83.33, TotalMonthlyPayment_exp=null, TotalMonthlyPayment_status=null, AnalyserResult=null}]]>
+                <![CDATA[{Si_no=1, Test_data_id=NITIC_01, Flag_for_execution=Y, QuoteNumber=QNITIC-932, PolicyNumber=B3034-01, LiabilityTotalPremium=$1,200.00, LiabilityTotalPremium_exp=null, LiabilityTotalPremium_status=null, TotalPremium=$1,200.00, TotalPremium_exp=null, TotalPremium_status=null, TotalDownPayment=$366.67, TotalDownPayment_exp=null, TotalDownPayment_status=null, TotalMonthlyPayment=$83.33, TotalMonthlyPayment_exp=null, TotalMonthlyPayment_status=null, AnalyserResult=null}]]>
               </value>
             </param>
           </params>
-          <exception class="org.openqa.selenium.NoSuchElementException">
+          <exception class="org.openqa.selenium.TimeoutException">
             <message>
-              <![CDATA[Element cannot be found (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 18.18 seconds
-For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+              <![CDATA[Timed out after 1000 seconds waiting for visibility of Proxy element for: DefaultElementLocator 'By.id: PolicyHeaderTile:PolicyHeaderForm:Object__Policy__PolicyNumber'
 Build info: version: '3.0.1', revision: '1969d75', time: '2016-10-18 09:49:13 -0700'
 System info: host: 'C1128', ip: '192.168.4.131', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_73'
-Driver info: org.openqa.selenium.winium.WiniumDriver
-Capabilities [{app=C:\Windows\System32\openfiles.exe, args=, innerPort=9998, debugConnectToRunningApp=false, keyboardSimulator=1, launchDelay=0, platform=ANY}]
-Session ID: AwesomeSession
-*** Element info: {Using=name, value=File name:}]]>
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, networkConnectionEnabled=false, mobileEmulationEnabled=false, chrome={chromedriverVersion=2.32.498550 (9dec58e66c31bcc53a9ce3c7226f0c1c5810906a), userDataDir=C:\Users\AUTOMA~1\AppData\Local\Temp\scoped_dir3192_23617}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=62.0.3202.94, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, webdriver.remote.sessionid=bc0ed392-c95f-4d72-ab8d-550117f31fc5, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, setWindowRect=true, cssSelectorsEnabled=true, unexpectedAlertBehaviour=}]
+Session ID: bc0ed392-c95f-4d72-ab8d-550117f31fc5]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.NoSuchElementException: Element cannot be found (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 18.18 seconds
-For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+              <![CDATA[org.openqa.selenium.TimeoutException: Timed out after 1000 seconds waiting for visibility of Proxy element for: DefaultElementLocator 'By.id: PolicyHeaderTile:PolicyHeaderForm:Object__Policy__PolicyNumber'
 Build info: version: '3.0.1', revision: '1969d75', time: '2016-10-18 09:49:13 -0700'
 System info: host: 'C1128', ip: '192.168.4.131', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_73'
-Driver info: org.openqa.selenium.winium.WiniumDriver
-Capabilities [{app=C:\Windows\System32\openfiles.exe, args=, innerPort=9998, debugConnectToRunningApp=false, keyboardSimulator=1, launchDelay=0, platform=ANY}]
-Session ID: AwesomeSession
-*** Element info: {Using=name, value=File name:}
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
-	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:216)
-	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:168)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:635)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:368)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElementByName(RemoteWebDriver.java:449)
-	at NITICPOM.DocumentsPage.uploadFileusingWinium(DocumentsPage.java:192)
-	at NITICPOM.DocumentsPage.AttachFile(DocumentsPage.java:147)
-	at com.selenium.Test.NITICSuite.TestCase1(NITICSuite.java:178)
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, networkConnectionEnabled=false, mobileEmulationEnabled=false, chrome={chromedriverVersion=2.32.498550 (9dec58e66c31bcc53a9ce3c7226f0c1c5810906a), userDataDir=C:\Users\AUTOMA~1\AppData\Local\Temp\scoped_dir3192_23617}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=62.0.3202.94, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, webdriver.remote.sessionid=bc0ed392-c95f-4d72-ab8d-550117f31fc5, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, setWindowRect=true, cssSelectorsEnabled=true, unexpectedAlertBehaviour=}]
+Session ID: bc0ed392-c95f-4d72-ab8d-550117f31fc5
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:80)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:261)
+	at BasePage.BasePage.WaitWithVisibility(BasePage.java:30)
+	at NITICPOM.PolicySummaryPage.getPolicyNumber(PolicySummaryPage.java:45)
+	at com.selenium.Test.NITICSuite.TestCase1(NITICSuite.java:183)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -160,13 +147,95 @@ Session ID: AwesomeSession
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:236)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:81)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"id","selector":"PolicyHeaderTile:PolicyHeaderForm:Object__Policy__PolicyNumber"}
+  (Session info: chrome=62.0.3202.94)
+  (Driver info: chromedriver=2.32.498550 (9dec58e66c31bcc53a9ce3c7226f0c1c5810906a),platform=Windows NT 6.1.7600 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 50.08 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.53.0', revision: '35ae25b', time: '2016-03-15 17:00:58'
+System info: host: 'Automation3PC', ip: '192.168.4.93', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.7.0_79'
+*** Element info: {Using=id, value=PolicyHeaderTile:PolicyHeaderForm:Object__Policy__PolicyNumber}
+Session ID: 556fd4662dfd92c7a35fb55ff5ec6ae8
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{platform=XP, acceptSslCerts=true, javascriptEnabled=true, browserName=chrome, chrome={userDataDir=C:\Users\AUTOMA~1\AppData\Local\Temp\scoped_dir3192_23617, chromedriverVersion=2.32.498550 (9dec58e66c31bcc53a9ce3c7226f0c1c5810906a)}, networkConnectionEnabled=false, unexpectedAlertBehaviour=, rotatable=false, setWindowRect=true, locationContextEnabled=true, mobileEmulationEnabled=false, pageLoadStrategy=normal, version=62.0.3202.94, takesHeapSnapshot=true, cssSelectorsEnabled=true, databaseEnabled=false, handlesAlerts=true, browserConnectionEnabled=false, webStorageEnabled=true, nativeEvents=true, hasTouchScreen=false, applicationCacheEnabled=false, takesScreenshot=true}]
+Command duration or timeout: 50.56 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.0.1', revision: '1969d75', time: '2016-10-18 09:49:13 -0700'
+System info: host: 'C1128', ip: '192.168.4.131', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_73'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, networkConnectionEnabled=false, mobileEmulationEnabled=false, chrome={chromedriverVersion=2.32.498550 (9dec58e66c31bcc53a9ce3c7226f0c1c5810906a), userDataDir=C:\Users\AUTOMA~1\AppData\Local\Temp\scoped_dir3192_23617}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=62.0.3202.94, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, webdriver.remote.sessionid=bc0ed392-c95f-4d72-ab8d-550117f31fc5, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, setWindowRect=true, cssSelectorsEnabled=true, unexpectedAlertBehaviour=}]
+Session ID: bc0ed392-c95f-4d72-ab8d-550117f31fc5
+*** Element info: {Using=id, value=PolicyHeaderTile:PolicyHeaderForm:Object__Policy__PolicyNumber}
+	at sun.reflect.GeneratedConstructorAccessor15.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:216)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:168)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:635)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:368)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:417)
+	at org.openqa.selenium.By$ById.findElement(By.java:218)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:360)
+	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+	at com.sun.proxy.$Proxy9.isDisplayed(Unknown Source)
+	at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:302)
+	at org.openqa.selenium.support.ui.ExpectedConditions.access$100(ExpectedConditions.java:41)
+	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:288)
+	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:285)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:238)
+	... 28 more
+Caused by: org.openqa.selenium.remote.ScreenshotException: Screen shot has been taken
+Build info: version: '3.0.1', revision: '1969d75', time: '2016-10-18 09:49:13 -0700'
+System info: host: 'C1128', ip: '192.168.4.131', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_73'
+Driver info: driver.version: RemoteWebDriver
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:142)
+	... 41 more
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"id","selector":"PolicyHeaderTile:PolicyHeaderForm:Object__Policy__PolicyNumber"}
+  (Session info: chrome=62.0.3202.94)
+  (Driver info: chromedriver=2.32.498550 (9dec58e66c31bcc53a9ce3c7226f0c1c5810906a),platform=Windows NT 6.1.7600 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 50.08 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.53.0', revision: '35ae25b', time: '2016-03-15 17:00:58'
+System info: host: 'Automation3PC', ip: '192.168.4.93', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.7.0_79'
+*** Element info: {Using=id, value=PolicyHeaderTile:PolicyHeaderForm:Object__Policy__PolicyNumber}
+Session ID: 556fd4662dfd92c7a35fb55ff5ec6ae8
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{platform=XP, acceptSslCerts=true, javascriptEnabled=true, browserName=chrome, chrome={userDataDir=C:\Users\AUTOMA~1\AppData\Local\Temp\scoped_dir3192_23617, chromedriverVersion=2.32.498550 (9dec58e66c31bcc53a9ce3c7226f0c1c5810906a)}, networkConnectionEnabled=false, unexpectedAlertBehaviour=, rotatable=false, setWindowRect=true, locationContextEnabled=true, mobileEmulationEnabled=false, pageLoadStrategy=normal, version=62.0.3202.94, takesHeapSnapshot=true, cssSelectorsEnabled=true, databaseEnabled=false, handlesAlerts=true, browserConnectionEnabled=false, webStorageEnabled=true, nativeEvents=true, hasTouchScreen=false, applicationCacheEnabled=false, takesScreenshot=true}]
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.0.1', revision: '1969d75', time: '2016-10-18 09:49:13 -0700'
+System info: host: 'C1128', ip: '192.168.4.131', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_73'
+Driver info: driver.version: EventFiringWebDriver
+	at sun.reflect.GeneratedConstructorAccessor23.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:413)
+	at org.openqa.selenium.By$ById.findElement(By.java:218)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)
+	at sun.reflect.GeneratedMethodAccessor9.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.openqa.selenium.support.events.EventFiringWebDriver$2.invoke(EventFiringWebDriver.java:103)
+	at com.sun.proxy.$Proxy1.findElement(Unknown Source)
+	at org.openqa.selenium.support.events.EventFiringWebDriver.findElement(EventFiringWebDriver.java:188)
+	at org.openqa.selenium.remote.server.handler.FindElement.call(FindElement.java:48)
+	at org.openqa.selenium.remote.server.handler.FindElement.call(FindElement.java:1)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at org.openqa.selenium.remote.server.DefaultSession$1.run(DefaultSession.java:176)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
 ]]>
             </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.NoSuchElementException -->
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TestCase1 -->
-        <test-method status="PASS" signature="TestCase1(java.lang.Integer, java.lang.Object, java.lang.Object)[pri:0, instance:com.selenium.Test.NITICSuite@91161c7]" name="TestCase1" duration-ms="15" started-at="2017-12-05T18:43:17Z" data-provider="UITestData" depends-on-methods="com.selenium.Test.NITICSuite.Login" finished-at="2017-12-05T18:43:17Z">
+        <test-method status="PASS" signature="TestCase1(java.lang.Integer, java.lang.Object, java.lang.Object)[pri:0, instance:com.selenium.Test.NITICSuite@91161c7]" name="TestCase1" duration-ms="25" started-at="2017-12-06T12:23:53Z" data-provider="UITestData" depends-on-methods="com.selenium.Test.NITICSuite.Login" finished-at="2017-12-06T12:23:53Z">
           <params>
             <param index="0">
               <value>

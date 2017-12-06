@@ -23,7 +23,8 @@ import org.openqa.selenium.winium.WiniumDriver;
 import BasePage.BasePage;
 
 public class DocumentsPage extends BasePage
-{static WiniumDriver d;
+{
+	static WiniumDriver d;
 	private WebDriver driver;
 	@FindBy(xpath="//div/div/img[@class='loading_icon']")List<WebElement> LoadingIcon;
 	@FindBy(xpath="//tr[contains(.,'Application - Liability.pdf')]//td[3]")WebElement DownloadApplicationPDF;
@@ -162,7 +163,15 @@ public class DocumentsPage extends BasePage
 		 this.ClickAttachFile();
 	 }
 	 
-	 
+	 public void AttachFile2(LinkedHashMap<String, String> inputrow) throws AWTException, InterruptedException, IOException
+	 {
+		 this.ClickAttach();
+		 this.setAttachmentName(inputrow.get("AttachementName"));
+		 this.setAttachmentDescription("attachement");
+		 this.ClickBrowse();
+	     this.uploadFileusingAutoIt();
+		 this.ClickAttachFile();
+	 }
 	 
 	 public void uploadFileusingWinium() throws IOException, AWTException
 	 {

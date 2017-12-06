@@ -152,6 +152,7 @@ public class NITICSuite
 				  {  
 					 hmpage.ClickHome();
 					 hmpage.ClickTruckersInsurance();
+					 Thread.sleep(2000);
 					 hmpage.selectSubBusinessType(inputrow.get("BusinessType"));
 					 BusPage=hmpage.ClickContinue();
 					 BusPage.FillBusinessDetails(inputrow);
@@ -175,7 +176,7 @@ public class NITICSuite
 					 QSPage.getDetailsFromQuoteSummary(outputrow);
 					 QSPage.ClickOfferQuote();
 					 DocPage=QSPage.ClickOfferQuoteYes();
-					 DocPage.AttachFile1(inputrow);
+					 DocPage.AttachFile2(inputrow);
 					 QSPage.ClickIssuePolicy();
 					 PSPage=QSPage.ClickIssuePolicyYes();
 					 
