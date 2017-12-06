@@ -170,6 +170,7 @@ public class DocumentsPage extends BasePage
 		 this.setAttachmentDescription("attachement");
 		 this.ClickBrowse();
 	     this.uploadFileusingAutoIt();
+	     Thread.sleep(1000);
 		 this.ClickAttachFile();
 	 }
 	 
