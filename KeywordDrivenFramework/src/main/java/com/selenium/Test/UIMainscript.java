@@ -7,14 +7,10 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
-
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,13 +20,11 @@ import com.selenium.SupportingClasses.DatabaseOperation;
 import com.selenium.exception.DatabaseException;
 import com.selenium.exception.PropertiesHandleException;
 
-
-
 public class UIMainscript
 {
 	public static DatabaseOperation input;
 	public static DatabaseOperation output;
-
+	public static DatabaseOperation LoginScript;
 	public static LinkedHashMap<Integer, LinkedHashMap<String, String>> inputtable;
 	public static LinkedHashMap<Integer, LinkedHashMap<String, String>> outputtable;
 	public static Iterator<Entry<Integer, LinkedHashMap<String, String>>> inputtableiterator;
@@ -70,8 +64,7 @@ public class UIMainscript
 		this.ResultsChoice=ResultsChoice;
 		
 	}
-   // @Parameters({"Project","Flow","Environment","Flag","jdbcDriver","url","dbUsername","dbPassword","browser","ResultsChoice"}) 
-	// String Project,String Flow,String Environment,String Flag,String jdbcDriver,String url,String dbUsername,String dbPassword,String browser,String ResultsChoice
+  
 	@BeforeTest//(alwaysRun=true)
 	public void loadconfig() throws DatabaseException, ClassNotFoundException, SQLException, PropertiesHandleException, MalformedURLException
 	{
@@ -83,13 +76,17 @@ public class UIMainscript
 		objDriver=new BaseDriverScript(configFile);
 		driver=objDriver.launchBrowser();
 		exceptionScreenshotPath=configFile.getProperty("ScreenShotPath");
+		LoginScript=new DatabaseOperation();
+		LoginScript.getDataobjects(configFile.getProperty("loginScript"));
+	
 	}
 		
 	@Test//(alwaysRun=true)
-	public void Login() throws SQLException, IOException, InterruptedException, AWTException
+	public void Login() throws SQLException, IOException, InterruptedException, AWTException, DatabaseException
 	{
 		 driver.get(configFile.getProperty("EnvURL"));
-		 objDriver.login(inputrow, outputrow);
+		 System.out.println(configFile.getProperty("username")+configFile.getProperty("password"));
+		 objDriver.login(LoginScript,configFile.getProperty("username"),configFile.getProperty("password"));
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -102,11 +99,10 @@ public class UIMainscript
 		LinkedHashMap<String, String> outputrow = outputtableobjectMapper.convertValue(outputtablerowobj, LinkedHashMap.class);
     	
 			 System.out.println(RowIterator);
-			 if(inputrow.get("Flag_for_execution").equals(configFile.getProperty("flagForExecution")))//
-				{  
+			 if(inputrow.get("Flag_for_execution").equals(configFile.getProperty("flagForExecution")))
+				{ 
 				  System.out.println("Executing main script");
 				  objDriver.executeTestScript(inputrow, outputrow);
-				   //objDriver.comparisonScript(inputrow, outputrow);
 				  inputrow.put("Flag_for_execution", inputrow.get("Flag_for_execution")+"Completed");
 				  outputrow.put("Flag_for_execution", "Completed");
 			   }		   
@@ -116,7 +112,7 @@ public class UIMainscript
 	@AfterTest
 	public void close() throws DatabaseException
 	{
-		//objDriver.closeBrowser();
+		objDriver.closeBrowser();
 		DatabaseOperation.CloseConn();
 		
 	}

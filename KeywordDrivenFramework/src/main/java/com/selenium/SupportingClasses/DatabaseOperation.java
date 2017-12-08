@@ -177,4 +177,88 @@ public class DatabaseOperation
 		}
 	}
 	
+	
+	//<==============old database operations==========>
+	
+	public void getDataobjects(String query)throws SQLException
+	{
+		this.query = query;
+		//System.out.println(this.query);
+		if(conn!=null)
+		{
+		stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY,ResultSet.CONCUR_UPDATABLE);
+			 rs = stmt.executeQuery(this.query);
+		
+			rs.first();
+		}
+		else 
+		{
+			System.out.println("null connection");
+		}
+		
+		
+	}
+	
+	public boolean moveForward() throws SQLException, DatabaseException
+	{
+		try
+		{
+		
+			return rs.next();
+		}
+		catch (SQLException e) 
+		{
+			throw new DatabaseException("PROBLEM WITH MoveForward IN DB", e);
+		}
+		
+	}
+	
+	public String readData(String column_name) throws SQLException, DatabaseException
+	{
+		try
+		{
+		return rs.getString(column_name);
+		}
+		catch (SQLException e) 
+		{
+			throw new DatabaseException("PROBLEM WITH readData IN DB", e);
+		}
+	}
+	
+	public void writeData(String column_name,String value) throws SQLException, DatabaseException
+	{
+		try
+		{
+		rs.updateString(column_name, value);
+		}
+		catch (SQLException e) 
+		{
+			throw new DatabaseException("PROBLEM WITH writeData IN DB", e);
+		}
+	}
+	
+	public void updateRow() throws SQLException, DatabaseException
+	{
+		try
+		{
+		rs.updateRow();
+		}
+		catch (SQLException e) 
+		{
+			throw new DatabaseException("PROBLEM WITH updateRow IN DB", e);
+		}
+	}
+	
+	public void moveNext() throws SQLException, DatabaseException
+	{
+		try
+		{
+		rs.next();
+		}
+		catch (SQLException e) 
+		{
+			throw new DatabaseException("PROBLEM WITH moveNext IN DB", e);
+		}
+	}
+	
 }

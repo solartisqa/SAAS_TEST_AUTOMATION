@@ -66,18 +66,17 @@ public class PropertiesHandle extends Properties
 			
 		   this.browser();
 		   this.driverPath();
-		   this.TestScriptPath();
-		   this.ScriptFileName();
-		   this.loginSheetName();
-		   this.ScriptSheetName();
+		  
+		   this.loginScript();
+		   this.Testscript();
 		   this.flagForExecution();
 		   this.EnvURL();
-
 		   this.InputQuery();
 		   this.OutputQuery();
- 		    
 		    this.DBdetails();
 		    this.ScreenshotPath();
+		    this.Username();
+		    this.password();
 		    DatabaseOperation.CloseConn();
 		 
 		}
@@ -86,7 +85,7 @@ public class PropertiesHandle extends Properties
 		{
 			try
 			{
-				LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdmsQuery =  ConfigQuery.GetDataObjects("SELECT ProjectName,ProjectDBName, DriverPath,RootFolder,FileName,ScriptSheetName,LoginSheetName,InputTable,OutputTable,UserDBName,JDCDriver,DB_URL,DB_UserName,DB_Password,Env_Name,URL FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN Flow_CONFIG ON Project_CONFIG.ProjectID = Flow_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON Flow_CONFIG.FlowID = Environment_CONFIG.FlowID INNER JOIN Version_CONFIG ON Environment_CONFIG.Env_ID = Version_CONFIG.Env_ID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.FlowID = Flow_CONFIG.FlowID)WHERE Project_CONFIG.ProjectName ='" +Project+ "' AND Flow_CONFIG.FlowName = '" +Flow+ "' AND Environment_CONFIG.Env_Name = '" +Env+ "' ORDER BY Version_CONFIG.Version DESC LIMIT 1");
+				LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdmsQuery =  ConfigQuery.GetDataObjects("SELECT ProjectName,ProjectDBName, DriverPath,RootFolder,TestScriptTable,LoginScriptTable,InputTable,OutputTable,UserDBName,JDCDriver,DB_URL,DB_UserName,DB_Password,Env_Name,URL,UserName,Password FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN Flow_CONFIG ON Project_CONFIG.ProjectID = Flow_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON Flow_CONFIG.FlowID = Environment_CONFIG.FlowID INNER JOIN Version_CONFIG ON Environment_CONFIG.Env_ID = Version_CONFIG.Env_ID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.FlowID = Flow_CONFIG.FlowID)WHERE Project_CONFIG.ProjectName ='" +Project+ "' AND Flow_CONFIG.FlowName = '" +Flow+ "' AND Environment_CONFIG.Env_Name = '" +Env+ "' ORDER BY Version_CONFIG.Version DESC LIMIT 1");
 				for (Entry<Integer, LinkedHashMap<String, String>> entry : tableRdmsQuery.entrySet())	
 				{
 					LinkedHashMap<String, String> rowRdmsQuery = entry.getValue();
@@ -104,7 +103,7 @@ public class PropertiesHandle extends Properties
 		{
 			try
 			{
-				LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdmsValue = ConfigQuery.GetDataObjects("SELECT ProjectName,ProjectDBName, DriverPath,RootFolder,FileName,ScriptSheetName,LoginSheetName,InputTable,OutputTable,UserDBName,JDCDriver,DB_URL,DB_UserName,DB_Password,Env_Name,URL FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN Flow_CONFIG ON Project_CONFIG.ProjectID = Flow_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON Flow_CONFIG.FlowID = Environment_CONFIG.FlowID INNER JOIN Version_CONFIG ON Environment_CONFIG.Env_ID = Version_CONFIG.Env_ID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.FlowID = Flow_CONFIG.FlowID)WHERE Project_CONFIG.ProjectName ='" +Project+ "' AND Flow_CONFIG.FlowName = '" +Flow+ "' AND Environment_CONFIG.Env_Name = '" +Env+ "' ORDER BY Version_CONFIG.Version DESC LIMIT 1");
+				LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdmsValue = ConfigQuery.GetDataObjects("SELECT ProjectName,ProjectDBName, DriverPath,RootFolder,TestScriptTable,LoginScriptTable,InputTable,OutputTable,UserDBName,JDCDriver,DB_URL,DB_UserName,DB_Password,Env_Name,URL,UserName,Password FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN Flow_CONFIG ON Project_CONFIG.ProjectID = Flow_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON Flow_CONFIG.FlowID = Environment_CONFIG.FlowID INNER JOIN Version_CONFIG ON Environment_CONFIG.Env_ID = Version_CONFIG.Env_ID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.FlowID = Flow_CONFIG.FlowID)WHERE Project_CONFIG.ProjectName ='" +Project+ "' AND Flow_CONFIG.FlowName = '" +Flow+ "' AND Environment_CONFIG.Env_Name = '" +Env+ "' ORDER BY Version_CONFIG.Version DESC LIMIT 1");
 				for (Entry<Integer, LinkedHashMap<String, String>> entry : tableRdmsValue.entrySet())	
 				{
 					LinkedHashMap<String, String> rowRdmsValue = entry.getValue();
@@ -135,24 +134,15 @@ public class PropertiesHandle extends Properties
 			this.put("driverPath", this.RdmsValue("DriverPath"));
 		}
 		
-		protected void TestScriptPath() throws PropertiesHandleException// FUNCTION FOR RESPONSE TO SAVE PATH
+		
+		protected void loginScript() throws PropertiesHandleException// FUNCTION FOR EXPECTED RATING MODEL PATH
 		{
-			this.put("TestScriptPath", this.RdmsValue("RootFolder") + "/" + Project + "/" + Flow + "/Script/");
+			this.put("loginScript", this.RdmsQuery("LoginScriptTable"));
 		}
 		
-		protected void ScriptFileName() throws PropertiesHandleException// FUNCTION FOR SAMPLE RATING MODEL PATH
+		protected void Testscript() throws PropertiesHandleException// FUNCTION TO GET RESULT SET FROM MACRO MAPPING TABLE 
 		{
-			this.put("ScriptFileName", this.RdmsValue("FileName"));
-		}
-		
-		protected void loginSheetName() throws PropertiesHandleException// FUNCTION FOR EXPECTED RATING MODEL PATH
-		{
-			this.put("loginSheetName", this.RdmsValue("LoginSheetName"));
-		}
-		
-		protected void ScriptSheetName() throws PropertiesHandleException// FUNCTION TO GET RESULT SET FROM MACRO MAPPING TABLE 
-		{
-			this.put("ScriptSheetName", this.RdmsValue("ScriptSheetName"));
+			this.put("TestScript", this.RdmsQuery("TestScriptTable"));
 		}
 		
 		protected void flagForExecution() throws PropertiesHandleException// FUNCTION TO GET RESULT SET FROM MACRO TRNSLATION TABLE 
@@ -190,6 +180,17 @@ public class PropertiesHandle extends Properties
 	    {
 	    	this.put("ScreenShotPath", this.RdmsValue("RootFolder") + "/" + Project + "/" + Flow + "/ScreenShots/");
 	    }
+	    
+	    protected void Username() throws PropertiesHandleException// FUNCTION TO GET URL
+		{
+			this.put("username", this.RdmsValue("UserName"));	
+		}
+	    
+	    protected void password() throws PropertiesHandleException// FUNCTION TO GET URL
+		{
+			this.put("password", this.RdmsValue("Password"));	
+		}
+	    
 		public PropertiesHandle(String path) throws PropertiesHandleException
 		{
 			this.path = path;

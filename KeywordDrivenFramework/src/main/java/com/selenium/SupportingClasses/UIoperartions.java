@@ -23,6 +23,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import com.selenium.exception.DatabaseException;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
@@ -564,7 +567,33 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 		 r.keyRelease(KeyEvent.VK_ENTER);
  }
 
- 
+ public void login(DatabaseOperation LoginScript,String username,String password) throws SQLException, IOException, InterruptedException, AWTException, DatabaseException
+ {
+	 do{
+			if(LoginScript.readData("Status").equals("enabled"))
+			{
+				String keyword=LoginScript.readData("Keyword");
+				System.out.println(keyword);
+				switch(keyword.toUpperCase())
+				{
+				case "SETUSERNAME":
+					       System.out.println(keyword);
+					       driver.findElement(this.getObject(LoginScript.readData("Property"), LoginScript.readData("Locator"))).sendKeys(username);
+					       break;
+				case "SETPASSWORD":
+					      driver.findElement(this.getObject(LoginScript.readData("Property"), LoginScript.readData("Locator"))).sendKeys(password);
+				          break;
+				case "CLICKLOGIN":
+					      driver.findElement(this.getObject(LoginScript.readData("Property"), LoginScript.readData("Locator"))).click();
+					      break;
+			   default:
+				    System.out.println("invalid login operation given");
+				}
+				
+			}
+	 }while(LoginScript.moveForward());
+		
+ }
 
 /*public void launch_browser(String browser, propertiesHandle configFile) {
 	// TODO Auto-generated method stub

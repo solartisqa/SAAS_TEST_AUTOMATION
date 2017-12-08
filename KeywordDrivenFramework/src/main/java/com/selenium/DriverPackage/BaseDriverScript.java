@@ -1,6 +1,7 @@
 package com.selenium.DriverPackage;
 
 import com.selenium.Configuration.PropertiesHandle;
+import com.selenium.SupportingClasses.DatabaseOperation;
 import com.selenium.SupportingClasses.ExcelOperationsJXL;
 import com.selenium.SupportingClasses.TheEventListener;
 import com.selenium.SupportingClasses.UIoperartions;
@@ -23,7 +24,8 @@ public class BaseDriverScript extends UIoperartions implements UIScriptsInterfac
 	protected ExcelOperationsJXL objectComparisonScript=null;
 	protected PropertiesHandle configFile;
 	protected static TheEventListener event;
-		
+
+	public static DatabaseOperation TestScript;
 //==========================================================================================================================================================
 	
 	public BaseDriverScript()
@@ -36,72 +38,39 @@ public BaseDriverScript(PropertiesHandle configFile) throws SQLException, ClassN
 {
 	this.configFile = configFile;
 	event=new TheEventListener();
-	objectLoginScript = new ExcelOperationsJXL(this.configFile.getProperty("TestScriptPath")+this.configFile.getProperty("ScriptFileName"));
-	objectLoginScript.getsheets(this.configFile.getProperty("loginSheetName"));
-	objectTestScript = new ExcelOperationsJXL(this.configFile.getProperty("TestScriptPath")+this.configFile.getProperty("ScriptFileName"));
-	objectTestScript.getsheets(this.configFile.getProperty("ScriptSheetName"));
-	//objectComparisonScript = new ExcelOperationsJXL(this.configFile.getProperty("Test_script_path")+this.configFile.getProperty("ScriptFileName"));
-	//objectComparisonScript.getsheets(this.configFile.getProperty("ComparisonSheetName"));
 	
 }
 //====================================Function to launch browser====================================================================================================
 public WebDriver launchBrowser() throws MalformedURLException
 {
 	    String browser = configFile.getProperty("browser");
-		//String url = configFile.getProperty("url");
-		//System.out.println(url);
-		
 		return this.launch_browser(browser,configFile);
 			
 }
-//==============================================Function to login===================================================================================================
-  public void login(LinkedHashMap<String, String> InputData,LinkedHashMap<String, String> outputData) throws SQLException, IOException, InterruptedException, AWTException
-  {
-	  objectLoginScript.set_rownumber(1);
-	  while(objectLoginScript.has_next_row())
-		{
-			if(objectLoginScript.read_data(objectLoginScript.get_rownumber(),8).toString().equals("enabled"))
-			{
-				//String fieldName = objectTestScript.read_data(objectTestScript.get_rownumber(),1);
-				String actionKeyword = objectLoginScript.read_data(objectLoginScript.get_rownumber(),2);
-				String ObjectType = objectLoginScript.read_data(objectLoginScript.get_rownumber(),3);
-				String PropertyString= objectLoginScript.read_data(objectLoginScript.get_rownumber(),4);
-				String dbcolumnNmae = objectLoginScript.read_data(objectLoginScript.get_rownumber(),5);
-				String value = objectLoginScript.read_data(objectLoginScript.get_rownumber(),6);
-				String dataProvidingFlag=objectLoginScript.read_data(objectLoginScript.get_rownumber(),9);
-				String  waitingTime=objectLoginScript.read_data(objectLoginScript.get_rownumber(),10);
-				//System.out.println(fieldName);
-				this.perform(PropertyString,actionKeyword,ObjectType,value,dbcolumnNmae,dataProvidingFlag,InputData,outputData,waitingTime);
-				
-			}
-			objectLoginScript.next_row();
-		}	  
-  }
- //=============================================Function to run the test script========================================================================================  
+//================================================================================================================================================================= 
+
 public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHashMap<String, String> outputData) throws SQLException, IOException, InterruptedException, AWTException, DatabaseException
 {
-	objectTestScript.set_rownumber(1);
-	while(objectTestScript.has_next_row())
+	TestScript=new DatabaseOperation();
+	TestScript.getDataobjects(configFile.getProperty("TestScript"));
+	do
 	{
-		String conditions=objectTestScript.read_data(objectTestScript.get_rownumber(),7);
-		if(objectTestScript.read_data(objectTestScript.get_rownumber(),8).toString().equals("enabled")&& this.ConditionReading(conditions, InputData))
+		String conditions=TestScript.readData("Flowcondition");
+		if(TestScript.readData("Status").equals("enabled")&& this.ConditionReading(conditions, InputData))
 		{	
-			   //System.out.println("condition true for "+objectTestScript.read_data(objectTestScript.get_rownumber(),1));
-				//String pageName = objectTestScript.read_data(objectTestScript.get_rownumber(),0);
-				//String fieldName = objectTestScript.read_data(objectTestScript.get_rownumber(),1);
-				String actionKeyword = objectTestScript.read_data(objectTestScript.get_rownumber(),2);
-				String ObjectType = objectTestScript.read_data(objectTestScript.get_rownumber(),3);
-				String PropertyString= objectTestScript.read_data(objectTestScript.get_rownumber(),4);
-				String dbcolumnNmae = objectTestScript.read_data(objectTestScript.get_rownumber(),5);
-				String value = objectTestScript.read_data(objectTestScript.get_rownumber(),6);
-			    //String condtions1=objectTestScript.read_data(objectTestScript.get_rownumber(),7);
-				String dataProvidingFlag=objectTestScript.read_data(objectTestScript.get_rownumber(),9);
-				String  waitingTime=objectTestScript.read_data(objectTestScript.get_rownumber(),10);
-				//System.out.println(fieldName);
+			 
+				String actionKeyword = TestScript.readData("Keyword");
+				String ObjectType = TestScript.readData("Locator");
+				String PropertyString= TestScript.readData("Property");
+				String dbcolumnNmae = TestScript.readData("DbColumnName");
+				String value = TestScript.readData("DefaultInputvalue");
+				String dataProvidingFlag=TestScript.readData("DataFlag");
+				String  waitingTime=TestScript.readData("WaitTime");
+				
 				this.perform(PropertyString,actionKeyword,ObjectType,value,dbcolumnNmae,dataProvidingFlag,InputData,outputData,waitingTime);
 		}
-		objectTestScript.next_row();
-	} //end of while 
+	}
+	while(TestScript.moveForward());
 }
 //==================================Function to compare  the results========================================================================================================
 /*public void comparisonScript(DatabaseOperation objectInput,DatabaseOperation objectOutput) throws SQLException
