@@ -34,15 +34,17 @@ public class AdditionalInsuredPage extends BasePage
 	
 	public AdditionalInsuredPage(WebDriver driver)
 	{
-		 this.driver=driver;
-		 if(driver==null)
-		 {
-			 System.out.println("driver is null in get a Quote page");
-		 }
-		 PageFactory.initElements(driver, this);
+		super(driver);
+		
 	}
 	
-	 public void ClickAddAdditionalInsured()
+	 private boolean isInitialized(boolean displayed)
+	 {
+		
+		return AIFirstName.isDisplayed();
+	}
+
+	public void ClickAddAdditionalInsured()
 	 {
 		 this.WaitWithVisibility(AddAdditionalInsured,driver);
 		 try

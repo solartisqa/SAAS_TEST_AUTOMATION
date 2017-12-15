@@ -30,14 +30,15 @@ public class ShareholderPage extends BasePage
 	
 	public ShareholderPage(WebDriver driver)
 	{
-		 this.driver=driver;
-		 if(driver==null)
-		 {
-			 System.out.println("driver is null in get a Quote page");
-		 }
-		 PageFactory.initElements(driver, this);
+		super(driver);
 	}
 	
+	 private boolean isInitialized(boolean displayed)
+	 {
+		
+		return AddShareHolder.isDisplayed();
+	}
+	 
 	
 	 public void ClickAddShareHolder()
 	 {

@@ -32,12 +32,13 @@ public class PolicySummaryPage extends BasePage
 
 	public PolicySummaryPage(WebDriver driver)
 	{
-		 this.driver=driver;
-		 if(driver==null)
-		 {
-			 System.out.println("driver is null in get a Quote page");
-		 }
-		 PageFactory.initElements(driver, this);
+		super(driver);
+	}
+	
+	 private boolean isInitialized(boolean displayed)
+	 {
+		
+		return PolicyNumber.isDisplayed();
 	}
 	
 	public String getPolicyNumber()

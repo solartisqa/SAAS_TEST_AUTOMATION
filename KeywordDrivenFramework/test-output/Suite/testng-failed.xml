@@ -1,28 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite thread-count="4" name="Failed suite [Suite]">
-  <parameter name="Project" value="NITIC"/>
-  <parameter name="jdbcDriver" value="com.mysql.jdbc.Driver"/>
-  <parameter name="dbUsername" value="root"/>
-  <parameter name="ResultsChoice" value="ActualOnly"/>
-  <parameter name="browser" value="chrome"/>
-  <parameter name="Environment" value="QA"/>
-  <parameter name="Flag" value="Y"/>
-  <parameter name="url" value="jdbc:mysql://192.168.35.2:3391/SeleniumConfig"/>
-  <parameter name="Flow" value="Quote"/>
-  <parameter name="dbPassword" value="password"/>
-  <test name="Test1(failed)">
-    <parameter name="browser" value="chrome"/>
-    <parameter name="Flag" value="Y"/>
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
+  <test name="Test(failed)">
     <classes>
-      <class name="com.selenium.Test.NITICSuite">
+      <class name="KeywordDrivenFramework.KeywordDrivenFramework.testSequential">
         <methods>
-          <include name="Login"/>
-          <include name="loadconfig"/>
-          <include name="launchBrowser"/>
-          <include name="TestCase1" invocation-numbers="0"/>
+          <include name="Testcase1"/>
+          <include name="Testcase1"/>
+          <include name="Testcase1"/>
+          <include name="Testcase3"/>
+          <include name="Testcase3"/>
+          <include name="Testcase3"/>
+          <include name="Testcase2"/>
+          <include name="Testcase2"/>
+          <include name="Testcase2"/>
         </methods>
-      </class> <!-- com.selenium.Test.NITICSuite -->
+      </class> <!-- KeywordDrivenFramework.KeywordDrivenFramework.testSequential -->
     </classes>
-  </test> <!-- Test1(failed) -->
+  </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

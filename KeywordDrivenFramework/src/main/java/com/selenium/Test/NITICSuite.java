@@ -125,8 +125,6 @@ public class NITICSuite
 					 EndorsePage=PSPage.ClickEndorsementAccordian();
 					 EndorsePage.EditEndorsementPage(inputrow);
 					 
-					 
-					 
 					inputrow.put("Flag_for_execution", inputrow.get("Flag_for_execution")+"Completed");
 					outputrow.put("Flag_for_execution", "Completed");
 					 

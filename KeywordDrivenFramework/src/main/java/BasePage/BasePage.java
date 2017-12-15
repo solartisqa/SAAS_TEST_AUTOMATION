@@ -13,6 +13,7 @@ import java.net.URL;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.winium.DesktopOptions;
@@ -22,8 +23,15 @@ import com.selenium.SupportingClasses.browserLaunching;
 
 public class BasePage extends browserLaunching
 {
-	static WiniumDriver d;
+ static WiniumDriver d;
   public WebDriverWait wait;
+  protected WebDriver driver;
+  public BasePage(WebDriver driver)
+  { 
+	  this.driver = driver; 
+	  PageFactory.initElements(driver, this);
+  }
+  
   public void WaitWithVisibility(WebElement element,WebDriver driver)//
  {
 	 wait=new WebDriverWait(driver, 1000);

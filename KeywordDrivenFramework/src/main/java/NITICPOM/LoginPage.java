@@ -14,7 +14,7 @@ import NITICPOM.HomePage;
 
 public class LoginPage extends BasePage
 {
-	 private WebDriver driver;
+	// private WebDriver driver;
 	 WebDriverWait wait;
 	 @FindBy(id="login_username")WebElement UserName;
 	 @FindBy(id="login_password")WebElement PassWord;
@@ -22,11 +22,13 @@ public class LoginPage extends BasePage
 	 
 	 public LoginPage(WebDriver driver)
 	 {
-		 
-		 this.driver=driver;
-	
-		 PageFactory.initElements(driver, this);
+		 super(driver);
 		
+	 }
+	 
+	 private boolean isInitialized(boolean displayed)
+	 {
+		return UserName.isDisplayed();
 	 }
 	 
 	 public void setUserName(String username)
@@ -34,7 +36,7 @@ public class LoginPage extends BasePage
 		 this.WaitWithVisibility(UserName,driver);
 		 try
 		 {
-		 UserName.sendKeys(username);
+		     UserName.sendKeys(username);
 		 }
 		 catch(StaleElementReferenceException e)
 		 {

@@ -61,14 +61,15 @@ public class QuoteSummaryPage extends BasePage
 	
 	public QuoteSummaryPage(WebDriver driver)
 	{
-		 this.driver=driver;
-		 if(driver==null)
-		 {
-			 System.out.println("driver is null in get a Quote page");
-		 }
-		 PageFactory.initElements(driver, this);
+		super(driver);
 	}
 	
+	 private boolean isInitialized(boolean displayed)
+	 {
+		
+		return QuoteNumber.isDisplayed();
+	}
+	 
 	public String getQuoteNumber()
 	 {
 		 this.WaitWithVisibility(QuoteNumber,driver);

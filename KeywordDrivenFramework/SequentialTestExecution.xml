@@ -1,0 +1,34 @@
+
+<suite name="Suite">
+        <parameter name="jdbcDriver" value="com.mysql.jdbc.Driver"/>
+  		<parameter name="dburl" value="jdbc:mysql://192.168.35.2:3391/NITIC"/>
+   		<parameter name="dbUsername" value="root"/>
+  		<parameter name="dbPassword" value="password"/>
+  		<parameter name="EnvURL" value="https://niticqa.solartis.net/NITIC/NITIC/Login.xhtml"/>
+  		<parameter name="inputtableName" value="NITIC_Input_Quote"/>
+  		<parameter name="outputtableName" value="NITIC_Output_Quote"/>
+  		<parameter name="userName" value="nitic_uw"/>
+  		<parameter name="password" value="welcome1"/>
+  		
+  <test name="Test1">
+    <classes>
+    <parameters>
+     <parameter name="browser" value="chrome"/>
+     <parameter name="driverType" value="Remote"/>
+    <parameter name="FlagForTest" value="Y"/>
+    </parameters>
+      <class name="KeywordDrivenFramework.KeywordDrivenFramework.AppTest"/>
+    </classes>
+  </test> 
+  
+  <test name="Test2">
+    <classes>
+    <parameters>
+     <parameter name="browser" value="chrome"/>
+     <parameter name="driverType" value="Remote"/>
+    <parameter name="FlagForTest" value="Y1"/>
+    </parameters>
+      <class name="KeywordDrivenFramework.KeywordDrivenFramework.AppTest"/>
+    </classes>
+  </test> 
+</suite>

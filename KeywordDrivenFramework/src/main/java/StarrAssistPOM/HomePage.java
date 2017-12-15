@@ -25,12 +25,7 @@ public class HomePage extends BasePage
 	
 	 public HomePage(WebDriver driver)
 	 {
-		 this.driver=driver;
-		 if(driver==null)
-		 {
-			 System.out.println("driver is null in get a Quote page");
-		 }
-		 PageFactory.initElements(driver, this);
+		 super(driver);
 	 }
 	 
 	 public GetAQuotePage ClickGetAQuote()

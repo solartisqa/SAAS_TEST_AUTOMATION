@@ -50,14 +50,15 @@ public class VehiclePage extends BasePage
 	
 	public VehiclePage(WebDriver driver)
 	{
-		 this.driver=driver;
-		 if(driver==null)
-		 {
-			 System.out.println("driver is null in get a Quote page");
-		 }
-		 PageFactory.initElements(driver, this);
+		super(driver);
 	}
 	
+	 private boolean isInitialized(boolean displayed)
+	 {
+		
+		return AddVehicle.isDisplayed();
+	}
+	 
 	 public void ClickAddVehicle()
 	 {
 		 this.WaitWithVisibility(AddVehicle,driver);

@@ -23,13 +23,15 @@ public class FindQuotePage extends BasePage
 	
 	 public FindQuotePage(WebDriver driver)
 	 {
-		 this.driver=driver;
-		 if(driver==null)
-		 {
-			 System.out.println("driver is null in Home page");
-		 }
-		 PageFactory.initElements(driver, this);
+		 super(driver);
 	 }
+	 
+	 private boolean isInitialized(boolean displayed)
+	 {
+		
+		return QuoteNumber.isDisplayed();
+	}
+	 
 	 public void setQuoteNumber(String quoteNumber)
 	 {
 		 this.WaitWithVisibility(QuoteNumber,driver);

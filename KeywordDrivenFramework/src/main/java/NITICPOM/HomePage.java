@@ -32,13 +32,15 @@ public class HomePage extends BasePage
 	
 	 public HomePage(WebDriver driver)
 	 {
-		 this.driver=driver;
-		 if(driver==null)
-		 {
-			 System.out.println("driver is null in Home page");
-		 }
-		 PageFactory.initElements(driver, this);
+		 super(driver);
 	 }
+	 
+	 private boolean isInitialized(boolean displayed)
+	 {
+		
+		return TruckersInsurance.isDisplayed();
+	}
+	 
 	 public void ClickHome()
 	 {
 		 this.WaitWithVisibility(Home,driver);

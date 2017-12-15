@@ -3,12 +3,12 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.selenium.Test.NITICSuite">
+      <class name="KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest">
         <methods>
-          <include name="TestCase2"/>
           <include name="Login"/>
+          <include name="createQuote"/>
         </methods>
-      </class> <!-- com.selenium.Test.NITICSuite -->
+      </class> <!-- KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
