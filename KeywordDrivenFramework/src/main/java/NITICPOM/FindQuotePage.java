@@ -13,7 +13,7 @@ import BasePage.BasePage;
 
 public class FindQuotePage extends BasePage
 {
-	private WebDriver driver;
+	
 	@FindBy(xpath="//div/div/img[@class='loading_icon']")List<WebElement> LoadingIcon;
 	@FindBy(id="FindQuote:FindQuoteForm:Object__Quote__QuoteNumber")WebElement QuoteNumber;
 	@FindBy(id="FindQuote:FindQuoteForm:FindQuoteButton")WebElement FindQuoteButton;

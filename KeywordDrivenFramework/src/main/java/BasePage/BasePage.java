@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -103,6 +104,12 @@ public class BasePage extends browserLaunching
 		 Runtime.getRuntime().exec("D:\\SeleniumConfig\\AutoItScripts\\FileUpload.exe");
 	 }
 	
-  
+	   public WebElement highlightElement(WebElement elem) {
+	        // draw a border around the found element
+	        if (driver instanceof JavascriptExecutor) {
+	            ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='3px solid red'", elem);
+	        }
+	        return elem;
+	    }
   
 }

@@ -15,7 +15,6 @@ import BasePage.BasePage;
 public class QuoteSummaryPage extends BasePage
 {
 
-	private WebDriver driver;
 	@FindBy(xpath="//div/div/img[@class='loading_icon']")List<WebElement> LoadingIcon;
 	@FindBy(id="QuoteHeaderTile:QuoteHeaderForm:Object__Quote__QuoteNumber")WebElement QuoteNumber;
 	@FindBy(id="QuoteHeaderTile:QuoteHeaderForm:Object__Quote__QuoteType")WebElement QuoteType;

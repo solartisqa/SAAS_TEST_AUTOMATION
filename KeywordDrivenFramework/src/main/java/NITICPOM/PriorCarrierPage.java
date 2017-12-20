@@ -15,7 +15,7 @@ import BasePage.BasePage;
 
 public class PriorCarrierPage extends BasePage
 {
-	private WebDriver driver;
+	
 	@FindBy(xpath="//div/div/img[@class='loading_icon']")List<WebElement> LoadingIcon;
 	@FindBy(xpath="//button[contains(.,'Shareholder')]")WebElement Shareholder;
     @FindBy(xpath="//button[contains(.,'Additional Insured')]")WebElement AdditionalInsured;

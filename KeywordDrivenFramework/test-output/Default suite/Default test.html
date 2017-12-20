@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>9/0/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>0/1/1</td>
 </tr><tr>
-<td>Started on:</td><td>Fri Dec 15 15:51:43 IST 2017</td>
+<td>Started on:</td><td>Mon Dec 18 16:47:54 IST 2017</td>
 </tr>
-<tr><td>Total time:</td><td>0 seconds (51 ms)</td>
+<tr><td>Total time:</td><td>0 seconds (14 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -67,58 +67,193 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
-<table width='100%' border='1' class='invocation-passed'>
-<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED CONFIGURATIONS</b></td></tr>
 <tr><td><b>Test method</b></td>
 <td width="30%"><b>Exception</b></td>
 <td width="10%"><b>Time (seconds)</b></td>
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='KeywordDrivenFramework.KeywordDrivenFramework.testSequential.Testcase1()'><b>Testcase1</b><br>Test class: KeywordDrivenFramework.KeywordDrivenFramework.testSequential<br>Parameters: Alabama, CAT 70, Y1</td>
-<td></td>
+<td title='KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest.loadConfig()'><b>loadConfig</b><br>Test class: KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest</td>
+<td><div><pre>org.testng.TestNGException: 
+Parameter &apos;jdbcDriver&apos; is required by BeforeSuite on method loadConfig but has not been marked @Optional or defined
+in C:\Users\sasirekha_a.SOLARTISTECH\AppData\Local\Temp\testng-eclipse-811273107\testng-customsuite.xml
+	at org.testng.internal.Parameters.createParameters(Parameters.java:199)
+	at org.testng.internal.Parameters.createParameters(Parameters.java:443)
+	at org.testng.internal.Parameters.createConfigurationParameters(Parameters.java:118)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:203)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:144)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:326)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:236)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:81)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1555690610", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1555690610'><pre>org.testng.TestNGException: 
+Parameter &apos;jdbcDriver&apos; is required by BeforeSuite on method loadConfig but has not been marked @Optional or defined
+in C:\Users\sasirekha_a.SOLARTISTECH\AppData\Local\Temp\testng-eclipse-811273107\testng-customsuite.xml
+	at org.testng.internal.Parameters.createParameters(Parameters.java:199)
+	at org.testng.internal.Parameters.createParameters(Parameters.java:443)
+	at org.testng.internal.Parameters.createConfigurationParameters(Parameters.java:118)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:203)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:144)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:326)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:236)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:81)
+</pre></div></td>
 <td>0</td>
-<td>KeywordDrivenFramework.KeywordDrivenFramework.testSequential@4501b7af</td></tr>
+<td>null</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-skipped'>
+<tr><td colspan='4' align='center'><b>SKIPPED CONFIGURATIONS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
 <tr>
-<td title='KeywordDrivenFramework.KeywordDrivenFramework.testSequential.Testcase1()'><b>Testcase1</b><br>Test class: KeywordDrivenFramework.KeywordDrivenFramework.testSequential<br>Parameters: Alaska, Air Ticket Protector, Y2</td>
+<td title='KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest.setUp()'><b>setUp</b><br>Test class: KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest</td>
 <td></td>
 <td>0</td>
-<td>KeywordDrivenFramework.KeywordDrivenFramework.testSequential@4501b7af</td></tr>
+<td>null</td></tr>
 <tr>
-<td title='KeywordDrivenFramework.KeywordDrivenFramework.testSequential.Testcase1()'><b>Testcase1</b><br>Test class: KeywordDrivenFramework.KeywordDrivenFramework.testSequential<br>Parameters: Arizona, Classic Plus, Y1</td>
+<td title='KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest.tearDown()'><b>tearDown</b><br>Test class: KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest</td>
 <td></td>
 <td>0</td>
-<td>KeywordDrivenFramework.KeywordDrivenFramework.testSequential@4501b7af</td></tr>
+<td>KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest@685cb137</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
 <tr>
-<td title='KeywordDrivenFramework.KeywordDrivenFramework.testSequential.Testcase2()'><b>Testcase2</b><br>Test class: KeywordDrivenFramework.KeywordDrivenFramework.testSequential<br>Parameters: Alabama, CAT 70, Y1</td>
-<td></td>
+<td title='KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest.Login()'><b>Login</b><br>Test class: KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest</td>
+<td><div><pre>org.testng.TestNGException: 
+Parameter &apos;EnvURL&apos; is required by @Test on method Login but has not been marked @Optional or defined
+in C:\Users\sasirekha_a.SOLARTISTECH\AppData\Local\Temp\testng-eclipse-811273107\testng-customsuite.xml
+	at org.testng.internal.Parameters.createParameters(Parameters.java:199)
+	at org.testng.internal.Parameters.createParameters(Parameters.java:443)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:568)
+	at org.testng.internal.Invoker.handleParameters(Invoker.java:1293)
+	at org.testng.internal.Invoker.createParameters(Invoker.java:1020)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1110)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:236)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:81)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1340328248", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1340328248'><pre>org.testng.TestNGException: 
+Parameter &apos;EnvURL&apos; is required by @Test on method Login but has not been marked @Optional or defined
+in C:\Users\sasirekha_a.SOLARTISTECH\AppData\Local\Temp\testng-eclipse-811273107\testng-customsuite.xml
+	at org.testng.internal.Parameters.createParameters(Parameters.java:199)
+	at org.testng.internal.Parameters.createParameters(Parameters.java:443)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:568)
+	at org.testng.internal.Invoker.handleParameters(Invoker.java:1293)
+	at org.testng.internal.Invoker.createParameters(Invoker.java:1020)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1110)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:236)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:81)
+</pre></div></td>
 <td>0</td>
-<td>KeywordDrivenFramework.KeywordDrivenFramework.testSequential@4501b7af</td></tr>
+<td>KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest@685cb137</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-skipped'>
+<tr><td colspan='4' align='center'><b>SKIPPED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
 <tr>
-<td title='KeywordDrivenFramework.KeywordDrivenFramework.testSequential.Testcase2()'><b>Testcase2</b><br>Test class: KeywordDrivenFramework.KeywordDrivenFramework.testSequential<br>Parameters: Alaska, Air Ticket Protector, Y2</td>
-<td></td>
+<td title='KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest.createQuote()'><b>createQuote</b><br>Test class: KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest</td>
+<td><div><pre>java.lang.Throwable: Method NITICCreateQuoteTest.createQuote(java.lang.Integer, java.lang.Object, java.lang.Object)[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest@685cb137] depends on not successfully finished methods
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1068)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:236)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:81)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1445157774", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1445157774'><pre>java.lang.Throwable: Method NITICCreateQuoteTest.createQuote(java.lang.Integer, java.lang.Object, java.lang.Object)[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest@685cb137] depends on not successfully finished methods
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1068)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:236)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:81)
+</pre></div></td>
 <td>0</td>
-<td>KeywordDrivenFramework.KeywordDrivenFramework.testSequential@4501b7af</td></tr>
-<tr>
-<td title='KeywordDrivenFramework.KeywordDrivenFramework.testSequential.Testcase2()'><b>Testcase2</b><br>Test class: KeywordDrivenFramework.KeywordDrivenFramework.testSequential<br>Parameters: Arizona, Classic Plus, Y1</td>
-<td></td>
-<td>0</td>
-<td>KeywordDrivenFramework.KeywordDrivenFramework.testSequential@4501b7af</td></tr>
-<tr>
-<td title='KeywordDrivenFramework.KeywordDrivenFramework.testSequential.Testcase3()'><b>Testcase3</b><br>Test class: KeywordDrivenFramework.KeywordDrivenFramework.testSequential<br>Parameters: Alabama, CAT 70, Y1</td>
-<td></td>
-<td>0</td>
-<td>KeywordDrivenFramework.KeywordDrivenFramework.testSequential@4501b7af</td></tr>
-<tr>
-<td title='KeywordDrivenFramework.KeywordDrivenFramework.testSequential.Testcase3()'><b>Testcase3</b><br>Test class: KeywordDrivenFramework.KeywordDrivenFramework.testSequential<br>Parameters: Alaska, Air Ticket Protector, Y2</td>
-<td></td>
-<td>0</td>
-<td>KeywordDrivenFramework.KeywordDrivenFramework.testSequential@4501b7af</td></tr>
-<tr>
-<td title='KeywordDrivenFramework.KeywordDrivenFramework.testSequential.Testcase3()'><b>Testcase3</b><br>Test class: KeywordDrivenFramework.KeywordDrivenFramework.testSequential<br>Parameters: Arizona, Classic Plus, Y1</td>
-<td></td>
-<td>0</td>
-<td>KeywordDrivenFramework.KeywordDrivenFramework.testSequential@4501b7af</td></tr>
+<td>null</td></tr>
 </table><p>
 </body>
 </html>

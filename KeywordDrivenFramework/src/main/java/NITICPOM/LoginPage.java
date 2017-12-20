@@ -14,8 +14,7 @@ import NITICPOM.HomePage;
 
 public class LoginPage extends BasePage
 {
-	// private WebDriver driver;
-	 WebDriverWait wait;
+	
 	 @FindBy(id="login_username")WebElement UserName;
 	 @FindBy(id="login_password")WebElement PassWord;
 	 @FindBy(xpath="//input[@value='Login']")WebElement login;

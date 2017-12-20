@@ -7,7 +7,7 @@ import BasePage.BasePage;
 
 public class FindInsuredPage extends BasePage
 {
-	private WebDriver driver;
+	
 
 
 	 public FindInsuredPage(WebDriver driver)

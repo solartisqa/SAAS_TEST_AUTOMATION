@@ -15,7 +15,6 @@ import BasePage.BasePage;
 
 public class VehiclePage extends BasePage
 {
-	private WebDriver driver;
 	@FindBy(xpath="//div/div/img[@class='loading_icon']")List<WebElement> LoadingIcon;
 	@FindBy(xpath="//button[contains(.,'Add Vehicle')]")WebElement AddVehicle;
 	@FindBy(xpath="//div[@id='VehiclesTile:VehicleDetailsAddForm:Object__Vehicle__GaragingAddress__SameAsBusinessAddress']//span")List<WebElement> SameAsBusinessAddress;
@@ -522,9 +521,9 @@ public class VehiclePage extends BasePage
 		 this.setVehicleMake(inputrow.get("Make"));
 		 this.setVehicleModel(inputrow.get("Model"));
 		 this.setVehicleYear(inputrow.get("Year"));
-		 this.setVehicleSeatingCapacity(inputrow.get("SeatingCapacity"));
+		 //this.setVehicleSeatingCapacity(inputrow.get("SeatingCapacity"));
 		 this.selectVehicleBodyType(inputrow.get("BodyType"));
-		 this.setVehicleValue(inputrow.get("VehicleValue"));
+		this.setVehicleValue(inputrow.get("VehicleValue"));
 		 this.selectRadiusCategory(inputrow.get("RadiusCategory"));
 		 this.setRadius(inputrow.get("RadiusOfOperation"));
 		 this.selectRegistrationState(inputrow.get("State"));

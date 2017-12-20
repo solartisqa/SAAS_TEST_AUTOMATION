@@ -17,7 +17,7 @@ import BasePage.BasePage;
 
 public class BusinessPage extends BasePage
 {
-	private WebDriver driver;
+	
 	@FindBy(xpath="//div/div/img[@class='loading_icon']")List<WebElement> LoadingIcon;
 	@FindBy(id="BusinessTile:BusinessInformationForm:Object__Insured__Contact__FirstName1")WebElement FirstName1;
 	@FindBy(id="BusinessTile:BusinessInformationForm:Object__Insured__Contact__LastName2")WebElement LastName2;
@@ -64,6 +64,7 @@ public class BusinessPage extends BasePage
 	 public void setFirstName1(String firstname)
 	 {
 		 this.WaitWithVisibility(FirstName1,driver);
+		 this.highlightElement(FirstName1);
 		 FirstName1.clear();
 		 FirstName1.sendKeys(firstname);
 		// FirstName1.sendKeys(Keys.ENTER);

@@ -15,7 +15,7 @@ import BasePage.BasePage;
 
 public class AdditionalInsuredPage extends BasePage
 {
-	private WebDriver driver;
+	
 	@FindBy(xpath="//div/div/img[@class='loading_icon']")List<WebElement> LoadingIcon;
 	@FindBy(xpath="//button[contains(.,'Add Additional Insured')]")WebElement AddAdditionalInsured;
 	@FindBy(xpath="//button[contains(.,'Prior Carrier ')]")WebElement PriorCarrier;

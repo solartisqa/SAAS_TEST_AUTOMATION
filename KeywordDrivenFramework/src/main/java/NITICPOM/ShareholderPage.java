@@ -15,7 +15,7 @@ import BasePage.BasePage;
 
 public class ShareholderPage extends BasePage
 {
-	private WebDriver driver;
+	
 	@FindBy(xpath="//div/div/img[@class='loading_icon']")List<WebElement> LoadingIcon;
 	@FindBy(xpath="//div[@id='ShareHolderInfoTile:ShareHolderInformation:Addbutton']//button/span[contains(.,'Add Shareholder')]")WebElement AddShareHolder;
 	@FindBy(id="ShareHolderInfoTile:ShareHolderInformation:Object__ShareHolder__Name")WebElement ShareHolderName;

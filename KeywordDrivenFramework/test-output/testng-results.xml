@@ -1,49 +1,561 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="9" passed="9">
+<testng-results skipped="0" failed="3" ignored="0" total="10" passed="7">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite" duration-ms="49" started-at="2017-12-15T11:22:48Z" finished-at="2017-12-15T11:22:48Z">
+  <suite name="Suite" duration-ms="114145" started-at="2017-12-18T12:14:36Z" finished-at="2017-12-18T12:16:30Z">
     <groups>
     </groups>
-    <test name="Test" duration-ms="49" started-at="2017-12-15T11:22:48Z" finished-at="2017-12-15T11:22:48Z">
-      <class name="KeywordDrivenFramework.KeywordDrivenFramework.testSequential">
-        <test-method status="PASS" signature="Testcase1()[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.testSequential@1794d431]" name="Testcase1" duration-ms="7" started-at="2017-12-15T16:52:48Z" finished-at="2017-12-15T16:52:48Z">
+    <test name="Test2" duration-ms="113370" started-at="2017-12-18T12:14:36Z" finished-at="2017-12-18T12:16:30Z">
+      <class name="KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest">
+        <test-method status="PASS" signature="loadConfig(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest@3c0ecd4b]" name="loadConfig" is-config="true" duration-ms="234" started-at="2017-12-18T17:44:36Z" finished-at="2017-12-18T17:44:36Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[com.mysql.jdbc.Driver]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[jdbc:mysql://192.168.35.2:3391/NITIC]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[root]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[password]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[NITIC_Input_Quote]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[NITIC_Output_Quote]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Testcase1 -->
-        <test-method status="PASS" signature="Testcase2()[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.testSequential@1794d431]" name="Testcase2" duration-ms="2" started-at="2017-12-15T16:52:48Z" finished-at="2017-12-15T16:52:48Z">
+        </test-method> <!-- loadConfig -->
+        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest@3c0ecd4b]" name="setUp" is-config="true" duration-ms="2976" started-at="2017-12-18T17:44:36Z" finished-at="2017-12-18T17:44:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Remote]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Y1]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Testcase2 -->
-        <test-method status="PASS" signature="Testcase3()[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.testSequential@1794d431]" name="Testcase3" duration-ms="3" started-at="2017-12-15T16:52:48Z" finished-at="2017-12-15T16:52:48Z">
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="Login(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest@3c0ecd4b]" name="Login" duration-ms="16815" started-at="2017-12-18T17:44:39Z" finished-at="2017-12-18T17:44:56Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[https://niticqa.solartis.net/NITIC/NITIC/Login.xhtml]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[nitic_uw]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[welcome1]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Testcase3 -->
-        <test-method status="PASS" signature="Testcase1()[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.testSequential@39c0f4a]" name="Testcase1" duration-ms="2" started-at="2017-12-15T16:52:48Z" finished-at="2017-12-15T16:52:48Z">
+        </test-method> <!-- Login -->
+        <test-method status="PASS" signature="createQuote(java.lang.Integer, java.lang.Object, java.lang.Object)[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest@3c0ecd4b]" name="createQuote" duration-ms="1" started-at="2017-12-18T17:44:56Z" data-provider="UITestData" depends-on-methods="KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest.Login" finished-at="2017-12-18T17:44:56Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[{Si_no=1, Test_data_id=NITIC_01, Flag_for_execution=Y, BusinessType=Business - Not for Hire, FirstName=Test, LastName=QA, PrimaryNumber=1234567890, EmailAddress=test@gmail.com, TypeOfBusiness=Corporation, BusinessName=NITIC, NumberOfYearsInBusiness=1, SSN_FEINChoice=SSN, SSN_FEIN_no=345235645, DescriptionOfOperation=Description of Operation , ICCFilling=Yes, MCNumber=123456789, AddressLine1=1645 Parkway, AddressLine2=Address2, City=Tampa, State=Florida, ZipCode=17050, MailingAddressChoice=, LiabilityLimitType=Combined Single Limit, PrimaryLiabilityLimit=$50,000, PremiumPerVehicle=1000, EffectiveDate=09/07/2017, NumberOfVehicles=1, VIN=12345678901233400, Make=Make, Model=Model , Year=2000, SeatingCapacity=3, BodyType=Tractor, VehicleValue=100001, RadiusCategory=Short, RadiusOfOperation=50, BusinessUse=Commercial, LossPayee1=Yes, LossPayee__Type=Leased, LossPayeeName=loss payee, VehicleNumber=Vehicle #1, DriverName=Driver1, DriverDOB=05/11/1989, Gender=Male, MaritalStatus=Married, LicenseNumber=12345, YearFirstLicensed=2016, YearsofExperience=23, Accident=Yes, NumberOfAccident=1, NumberOfTicket=0, AccidentType=Accident, AccDate=09/05/2016, AccPlace=Test City, ViolationDate=09/05/2016, AIName=AdditionalInsured, CarrierName=PC-Test, PolicyNo=CHIC-6528-02, PriorEffectiveDate=01/06/1996, PriorExpirationDate=01/06/1997, CoverageType=Physical Damage, SHFirstName=Test, SHLastName=SH, Salutation=Sr, Title=Title , QuoteType=New Business, EditLiabilityPremium=No, TotalLiabilityPremium=, AttachementName=CHIC_02, RenewalPrefix=9945, RenewalSuffix=03}]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[{Si_no=1, Test_data_id=NITIC_01, Flag_for_execution=Y, QuoteNumber=null, PolicyNumber=null, LiabilityTotalPremium=null, LiabilityTotalPremium_exp=null, LiabilityTotalPremium_status=null, TotalPremium=null, TotalPremium_exp=null, TotalPremium_status=null, TotalDownPayment=null, TotalDownPayment_exp=null, TotalDownPayment_status=null, TotalMonthlyPayment=null, TotalMonthlyPayment_exp=null, TotalMonthlyPayment_status=null, AnalyserResult=null}]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Testcase1 -->
-        <test-method status="PASS" signature="Testcase2()[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.testSequential@39c0f4a]" name="Testcase2" duration-ms="0" started-at="2017-12-15T16:52:48Z" finished-at="2017-12-15T16:52:48Z">
+        </test-method> <!-- createQuote -->
+        <test-method status="PASS" signature="createQuote(java.lang.Integer, java.lang.Object, java.lang.Object)[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest@3c0ecd4b]" name="createQuote" duration-ms="6" started-at="2017-12-18T17:44:56Z" data-provider="UITestData" depends-on-methods="KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest.Login" finished-at="2017-12-18T17:44:56Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[3]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[{Si_no=3, Test_data_id=NITIC_03, Flag_for_execution=Y, BusinessType=Business - Not for Hire, FirstName=Test, LastName=QA, PrimaryNumber=1234567890, EmailAddress=test@gmail.com, TypeOfBusiness=Corporation, BusinessName=NITIC, NumberOfYearsInBusiness=1, SSN_FEINChoice=SSN, SSN_FEIN_no=345235645, DescriptionOfOperation=Description of Operation , ICCFilling=Yes, MCNumber=123456789, AddressLine1=1645 Parkway, AddressLine2=Address2, City=Tampa, State=Florida, ZipCode=17050, MailingAddressChoice=, LiabilityLimitType=Combined Single Limit, PrimaryLiabilityLimit=$50,000, PremiumPerVehicle=2000, EffectiveDate=09/07/2017, NumberOfVehicles=1, VIN=12345678901233400, Make=Make, Model=Model , Year=2000, SeatingCapacity=3, BodyType=Tractor, VehicleValue=100001, RadiusCategory=Short, RadiusOfOperation=50, BusinessUse=Commercial, LossPayee1=Yes, LossPayee__Type=Leased, LossPayeeName=loss payee, VehicleNumber=Vehicle #1, DriverName=Driver1, DriverDOB=05/11/1989, Gender=Female, MaritalStatus=Married, LicenseNumber=12345, YearFirstLicensed=2016, YearsofExperience=23, Accident=Yes, NumberOfAccident=1, NumberOfTicket=0, AccidentType=Accident, AccDate=09/05/2016, AccPlace=Test City, ViolationDate=09/05/2016, AIName=AdditionalInsured, CarrierName=PC-Test, PolicyNo=CHIC-6528-02, PriorEffectiveDate=01/06/1996, PriorExpirationDate=01/06/1997, CoverageType=Physical Damage, SHFirstName=Test, SHLastName=SH, Salutation=Sr, Title=Title , QuoteType=New Business, EditLiabilityPremium=No, TotalLiabilityPremium=, AttachementName=CHIC_02, RenewalPrefix=9945, RenewalSuffix=03}]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[{Si_no=3, Test_data_id=NITIC_03, Flag_for_execution=Y, QuoteNumber=null, PolicyNumber=null, LiabilityTotalPremium=null, LiabilityTotalPremium_exp=null, LiabilityTotalPremium_status=null, TotalPremium=null, TotalPremium_exp=null, TotalPremium_status=null, TotalDownPayment=null, TotalDownPayment_exp=null, TotalDownPayment_status=null, TotalMonthlyPayment=null, TotalMonthlyPayment_exp=null, TotalMonthlyPayment_status=null, AnalyserResult=null}]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Testcase2 -->
-        <test-method status="PASS" signature="Testcase3()[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.testSequential@39c0f4a]" name="Testcase3" duration-ms="1" started-at="2017-12-15T16:52:48Z" finished-at="2017-12-15T16:52:48Z">
+        </test-method> <!-- createQuote -->
+        <test-method status="FAIL" signature="createQuote(java.lang.Integer, java.lang.Object, java.lang.Object)[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest@3c0ecd4b]" name="createQuote" duration-ms="2696" started-at="2017-12-18T17:44:56Z" data-provider="UITestData" depends-on-methods="KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest.Login" finished-at="2017-12-18T17:44:59Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[2]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[{Si_no=2, Test_data_id=NITIC_02, Flag_for_execution=Y1, BusinessType=Business - Not for Hire, FirstName=Test, LastName=QA, PrimaryNumber=1234567890, EmailAddress=test@gmail.com, TypeOfBusiness=Corporation, BusinessName=NITIC, NumberOfYearsInBusiness=1, SSN_FEINChoice=SSN, SSN_FEIN_no=345235645, DescriptionOfOperation=Description of Operation , ICCFilling=Yes, MCNumber=123456789, AddressLine1=1645 Parkway, AddressLine2=Address2, City=Tampa, State=Florida, ZipCode=17050, MailingAddressChoice=, LiabilityLimitType=Combined Single Limit, PrimaryLiabilityLimit=$50,000, PremiumPerVehicle=2000, EffectiveDate=09/07/2017, NumberOfVehicles=1, VIN=12345678901233400, Make=Make, Model=Model , Year=2000, SeatingCapacity=3, BodyType=Tractor, VehicleValue=100001, RadiusCategory=Short, RadiusOfOperation=50, BusinessUse=Commercial, LossPayee1=Yes, LossPayee__Type=Leased, LossPayeeName=loss payee, VehicleNumber=Vehicle #1, DriverName=Driver1, DriverDOB=05/11/1989, Gender=Female, MaritalStatus=Married, LicenseNumber=12345, YearFirstLicensed=2016, YearsofExperience=23, Accident=Yes, NumberOfAccident=1, NumberOfTicket=0, AccidentType=Accident, AccDate=09/05/2016, AccPlace=Test City, ViolationDate=09/05/2016, AIName=AdditionalInsured, CarrierName=PC-Test, PolicyNo=CHIC-6528-02, PriorEffectiveDate=01/06/1996, PriorExpirationDate=01/06/1997, CoverageType=Physical Damage, SHFirstName=Test, SHLastName=SH, Salutation=Sr, Title=Title , QuoteType=New Business, EditLiabilityPremium=No, TotalLiabilityPremium=, AttachementName=CHIC_02, RenewalPrefix=9945, RenewalSuffix=03}]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[{Si_no=2, Test_data_id=NITIC_02, Flag_for_execution=Y1, QuoteNumber=null, PolicyNumber=null, LiabilityTotalPremium=null, LiabilityTotalPremium_exp=null, LiabilityTotalPremium_status=null, TotalPremium=null, TotalPremium_exp=null, TotalPremium_status=null, TotalDownPayment=null, TotalDownPayment_exp=null, TotalDownPayment_status=null, TotalMonthlyPayment=null, TotalMonthlyPayment_exp=null, TotalMonthlyPayment_status=null, AnalyserResult=null}]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.openqa.selenium.WebDriverException">
+            <message>
+              <![CDATA[unknown error: Element <input id="j_idt105" type="image" src="/NITIC/javax.faces.resource/images/NITIC/nitic_truckers.png.xhtml" name="j_idt105" onclick="jsf.util.chain(this,event,'PF(\'BusinessSubTypePopup\').show()','PrimeFaces.ab({s:this,e:\'action\',p:\'j_idt105\',u:\'businessSubTypeForm\'});');return false"> is not clickable at point (239, 368). Other element would receive the click: <div id="j_idt106_modal" class="ui-widget-overlay" style="width: 1305px; height: 1082px; z-index: 1000;"></div>
+  (Session info: chrome=63.0.3239.84)
+  (Driver info: chromedriver=2.33.506120 (e3e53437346286c0bc2d2dc9aa4915ba81d9023f),platform=Windows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 54 milliseconds
+Build info: version: '2.53.0', revision: '35ae25b', time: '2016-03-15 17:00:58'
+System info: host: 'C1128', ip: '192.168.4.131', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_73'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.33.506120 (e3e53437346286c0bc2d2dc9aa4915ba81d9023f), userDataDir=C:\Users\SASIRE~1.SOL\AppData\Local\Temp\scoped_dir12480_5641}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=63.0.3239.84, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: c52eaa18eeb6504247ba659e18cae06b
+Command duration or timeout: 1.51 seconds
+Build info: version: '3.0.1', revision: '1969d75', time: '2016-10-18 09:49:13 -0700'
+System info: host: 'C1128', ip: '192.168.4.131', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_73'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.33.506120 (e3e53437346286c0bc2d2dc9aa4915ba81d9023f), userDataDir=C:\Users\SASIRE~1.SOL\AppData\Local\Temp\scoped_dir12480_5641}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=63.0.3239.84, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, webdriver.remote.sessionid=e8cc95ec-25bc-4f38-a701-5e1a3ff05365, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: e8cc95ec-25bc-4f38-a701-5e1a3ff05365]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.WebDriverException: unknown error: Element <input id="j_idt105" type="image" src="/NITIC/javax.faces.resource/images/NITIC/nitic_truckers.png.xhtml" name="j_idt105" onclick="jsf.util.chain(this,event,'PF(\'BusinessSubTypePopup\').show()','PrimeFaces.ab({s:this,e:\'action\',p:\'j_idt105\',u:\'businessSubTypeForm\'});');return false"> is not clickable at point (239, 368). Other element would receive the click: <div id="j_idt106_modal" class="ui-widget-overlay" style="width: 1305px; height: 1082px; z-index: 1000;"></div>
+  (Session info: chrome=63.0.3239.84)
+  (Driver info: chromedriver=2.33.506120 (e3e53437346286c0bc2d2dc9aa4915ba81d9023f),platform=Windows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 54 milliseconds
+Build info: version: '2.53.0', revision: '35ae25b', time: '2016-03-15 17:00:58'
+System info: host: 'C1128', ip: '192.168.4.131', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_73'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.33.506120 (e3e53437346286c0bc2d2dc9aa4915ba81d9023f), userDataDir=C:\Users\SASIRE~1.SOL\AppData\Local\Temp\scoped_dir12480_5641}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=63.0.3239.84, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: c52eaa18eeb6504247ba659e18cae06b
+Command duration or timeout: 1.51 seconds
+Build info: version: '3.0.1', revision: '1969d75', time: '2016-10-18 09:49:13 -0700'
+System info: host: 'C1128', ip: '192.168.4.131', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_73'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.33.506120 (e3e53437346286c0bc2d2dc9aa4915ba81d9023f), userDataDir=C:\Users\SASIRE~1.SOL\AppData\Local\Temp\scoped_dir12480_5641}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=63.0.3239.84, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, webdriver.remote.sessionid=e8cc95ec-25bc-4f38-a701-5e1a3ff05365, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: e8cc95ec-25bc-4f38-a701-5e1a3ff05365
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:216)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:168)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:635)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:274)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:84)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
+	at com.sun.proxy.$Proxy10.click(Unknown Source)
+	at NITICPOM.HomePage.ClickTruckersInsurance(HomePage.java:62)
+	at KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest.createQuote(NITICCreateQuoteTest.java:82)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:75)
+	at org.testng.internal.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:14)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.openqa.selenium.remote.ScreenshotException: Screen shot has been taken
+Build info: version: '3.0.1', revision: '1969d75', time: '2016-10-18 09:49:13 -0700'
+System info: host: 'C1128', ip: '192.168.4.131', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_73'
+Driver info: driver.version: RemoteWebDriver
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:142)
+	... 26 more
+Caused by: org.openqa.selenium.WebDriverException: unknown error: Element <input id="j_idt105" type="image" src="/NITIC/javax.faces.resource/images/NITIC/nitic_truckers.png.xhtml" name="j_idt105" onclick="jsf.util.chain(this,event,'PF(\'BusinessSubTypePopup\').show()','PrimeFaces.ab({s:this,e:\'action\',p:\'j_idt105\',u:\'businessSubTypeForm\'});');return false"> is not clickable at point (239, 368). Other element would receive the click: <div id="j_idt106_modal" class="ui-widget-overlay" style="width: 1305px; height: 1082px; z-index: 1000;"></div>
+  (Session info: chrome=63.0.3239.84)
+  (Driver info: chromedriver=2.33.506120 (e3e53437346286c0bc2d2dc9aa4915ba81d9023f),platform=Windows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 54 milliseconds
+Build info: version: '2.53.0', revision: '35ae25b', time: '2016-03-15 17:00:58'
+System info: host: 'C1128', ip: '192.168.4.131', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_73'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.33.506120 (e3e53437346286c0bc2d2dc9aa4915ba81d9023f), userDataDir=C:\Users\SASIRE~1.SOL\AppData\Local\Temp\scoped_dir12480_5641}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=63.0.3239.84, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: c52eaa18eeb6504247ba659e18cae06b
+Build info: version: '3.0.1', revision: '1969d75', time: '2016-10-18 09:49:13 -0700'
+System info: host: 'C1128', ip: '192.168.4.131', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_73'
+Driver info: driver.version: RemoteWebDriver
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:327)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:85)
+	at sun.reflect.GeneratedMethodAccessor15.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.openqa.selenium.support.events.EventFiringWebDriver$EventFiringWebElement$1.invoke(EventFiringWebDriver.java:335)
+	at com.sun.proxy.$Proxy2.click(Unknown Source)
+	at org.openqa.selenium.support.events.EventFiringWebDriver$EventFiringWebElement.click(EventFiringWebDriver.java:348)
+	at sun.reflect.GeneratedMethodAccessor15.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.openqa.selenium.remote.server.KnownElements$1.invoke(KnownElements.java:64)
+	at com.sun.proxy.$Proxy3.click(Unknown Source)
+	at org.openqa.selenium.remote.server.handler.ClickElement.call(ClickElement.java:30)
+	at org.openqa.selenium.remote.server.handler.ClickElement.call(ClickElement.java:1)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.openqa.selenium.remote.server.DefaultSession$1.run(DefaultSession.java:176)
+	... 3 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.WebDriverException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Testcase3 -->
-        <test-method status="PASS" signature="Testcase1()[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.testSequential@42e26948]" name="Testcase1" duration-ms="0" started-at="2017-12-15T16:52:48Z" finished-at="2017-12-15T16:52:48Z">
+        </test-method> <!-- createQuote -->
+        <test-method status="PASS" signature="createQuote(java.lang.Integer, java.lang.Object, java.lang.Object)[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest@3c0ecd4b]" name="createQuote" duration-ms="93330" started-at="2017-12-18T17:44:56Z" data-provider="UITestData" depends-on-methods="KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest.Login" finished-at="2017-12-18T17:46:29Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[4]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[{Si_no=4, Test_data_id=NITIC_04, Flag_for_execution=completed, BusinessType=Business - Not for Hire, FirstName=Test, LastName=QA, PrimaryNumber=1234567890, EmailAddress=test@gmail.com, TypeOfBusiness=Corporation, BusinessName=NITIC, NumberOfYearsInBusiness=1, SSN_FEINChoice=SSN, SSN_FEIN_no=345235645, DescriptionOfOperation=Description of Operation , ICCFilling=Yes, MCNumber=123456789, AddressLine1=1645 Parkway, AddressLine2=Address2, City=Tampa, State=Florida, ZipCode=17050, MailingAddressChoice=, LiabilityLimitType=Combined Single Limit, PrimaryLiabilityLimit=$50,000, PremiumPerVehicle=2000, EffectiveDate=09/07/2017, NumberOfVehicles=1, VIN=12345678901233400, Make=Make, Model=Model , Year=2000, SeatingCapacity=3, BodyType=Tractor, VehicleValue=100001, RadiusCategory=Short, RadiusOfOperation=50, BusinessUse=Commercial, LossPayee1=Yes, LossPayee__Type=Leased, LossPayeeName=loss payee, VehicleNumber=Vehicle #1, DriverName=Driver1, DriverDOB=05/11/1989, Gender=Female, MaritalStatus=Married, LicenseNumber=12345, YearFirstLicensed=2016, YearsofExperience=23, Accident=Yes, NumberOfAccident=1, NumberOfTicket=0, AccidentType=Accident, AccDate=09/05/2016, AccPlace=Test City, ViolationDate=09/05/2016, AIName=AdditionalInsured, CarrierName=PC-Test, PolicyNo=CHIC-6528-02, PriorEffectiveDate=01/06/1996, PriorExpirationDate=01/06/1997, CoverageType=Physical Damage, SHFirstName=Test, SHLastName=SH, Salutation=Sr, Title=Title , QuoteType=New Business, EditLiabilityPremium=No, TotalLiabilityPremium=, AttachementName=CHIC_02, RenewalPrefix=9945, RenewalSuffix=03}]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[{Si_no=4, Test_data_id=NITIC_04, Flag_for_execution=completed, QuoteNumber=QNITIC-1143, PolicyNumber=null, LiabilityTotalPremium=$1,200.00, LiabilityTotalPremium_exp=null, LiabilityTotalPremium_status=null, TotalPremium=$1,200.00, TotalPremium_exp=null, TotalPremium_status=null, TotalDownPayment=$366.67, TotalDownPayment_exp=null, TotalDownPayment_status=null, TotalMonthlyPayment=$83.33, TotalMonthlyPayment_exp=null, TotalMonthlyPayment_status=null, AnalyserResult=null}]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Testcase1 -->
-        <test-method status="PASS" signature="Testcase2()[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.testSequential@42e26948]" name="Testcase2" duration-ms="1" started-at="2017-12-15T16:52:48Z" finished-at="2017-12-15T16:52:48Z">
+        </test-method> <!-- createQuote -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest@3c0ecd4b]" name="tearDown" is-config="true" duration-ms="227" started-at="2017-12-18T17:46:29Z" finished-at="2017-12-18T17:46:30Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Testcase2 -->
-        <test-method status="PASS" signature="Testcase3()[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.testSequential@42e26948]" name="Testcase3" duration-ms="0" started-at="2017-12-15T16:52:48Z" finished-at="2017-12-15T16:52:48Z">
+        </test-method> <!-- tearDown -->
+      </class> <!-- KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest -->
+    </test> <!-- Test2 -->
+    <test name="Test1" duration-ms="114145" started-at="2017-12-18T12:14:36Z" finished-at="2017-12-18T12:16:30Z">
+      <class name="KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest">
+        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest@6093dd95]" name="setUp" is-config="true" duration-ms="2978" started-at="2017-12-18T17:44:36Z" finished-at="2017-12-18T17:44:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Remote]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Y]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Testcase3 -->
-      </class> <!-- KeywordDrivenFramework.KeywordDrivenFramework.testSequential -->
-    </test> <!-- Test -->
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="Login(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest@6093dd95]" name="Login" duration-ms="16581" started-at="2017-12-18T17:44:39Z" finished-at="2017-12-18T17:44:56Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[https://niticqa.solartis.net/NITIC/NITIC/Login.xhtml]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[nitic_uw]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[welcome1]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Login -->
+        <test-method status="PASS" signature="createQuote(java.lang.Integer, java.lang.Object, java.lang.Object)[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest@6093dd95]" name="createQuote" duration-ms="3" started-at="2017-12-18T17:44:56Z" data-provider="UITestData" depends-on-methods="KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest.Login" finished-at="2017-12-18T17:44:56Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[2]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[{Si_no=2, Test_data_id=NITIC_02, Flag_for_execution=Y1, BusinessType=Business - Not for Hire, FirstName=Test, LastName=QA, PrimaryNumber=1234567890, EmailAddress=test@gmail.com, TypeOfBusiness=Corporation, BusinessName=NITIC, NumberOfYearsInBusiness=1, SSN_FEINChoice=SSN, SSN_FEIN_no=345235645, DescriptionOfOperation=Description of Operation , ICCFilling=Yes, MCNumber=123456789, AddressLine1=1645 Parkway, AddressLine2=Address2, City=Tampa, State=Florida, ZipCode=17050, MailingAddressChoice=, LiabilityLimitType=Combined Single Limit, PrimaryLiabilityLimit=$50,000, PremiumPerVehicle=2000, EffectiveDate=09/07/2017, NumberOfVehicles=1, VIN=12345678901233400, Make=Make, Model=Model , Year=2000, SeatingCapacity=3, BodyType=Tractor, VehicleValue=100001, RadiusCategory=Short, RadiusOfOperation=50, BusinessUse=Commercial, LossPayee1=Yes, LossPayee__Type=Leased, LossPayeeName=loss payee, VehicleNumber=Vehicle #1, DriverName=Driver1, DriverDOB=05/11/1989, Gender=Female, MaritalStatus=Married, LicenseNumber=12345, YearFirstLicensed=2016, YearsofExperience=23, Accident=Yes, NumberOfAccident=1, NumberOfTicket=0, AccidentType=Accident, AccDate=09/05/2016, AccPlace=Test City, ViolationDate=09/05/2016, AIName=AdditionalInsured, CarrierName=PC-Test, PolicyNo=CHIC-6528-02, PriorEffectiveDate=01/06/1996, PriorExpirationDate=01/06/1997, CoverageType=Physical Damage, SHFirstName=Test, SHLastName=SH, Salutation=Sr, Title=Title , QuoteType=New Business, EditLiabilityPremium=No, TotalLiabilityPremium=, AttachementName=CHIC_02, RenewalPrefix=9945, RenewalSuffix=03}]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[{Si_no=2, Test_data_id=NITIC_02, Flag_for_execution=Y1, QuoteNumber=null, PolicyNumber=null, LiabilityTotalPremium=null, LiabilityTotalPremium_exp=null, LiabilityTotalPremium_status=null, TotalPremium=null, TotalPremium_exp=null, TotalPremium_status=null, TotalDownPayment=null, TotalDownPayment_exp=null, TotalDownPayment_status=null, TotalMonthlyPayment=null, TotalMonthlyPayment_exp=null, TotalMonthlyPayment_status=null, AnalyserResult=null}]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createQuote -->
+        <test-method status="FAIL" signature="createQuote(java.lang.Integer, java.lang.Object, java.lang.Object)[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest@6093dd95]" name="createQuote" duration-ms="93959" started-at="2017-12-18T17:44:56Z" data-provider="UITestData" depends-on-methods="KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest.Login" finished-at="2017-12-18T17:46:30Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[{Si_no=1, Test_data_id=NITIC_01, Flag_for_execution=completed, BusinessType=Business - Not for Hire, FirstName=Test, LastName=QA, PrimaryNumber=1234567890, EmailAddress=test@gmail.com, TypeOfBusiness=Corporation, BusinessName=NITIC, NumberOfYearsInBusiness=1, SSN_FEINChoice=SSN, SSN_FEIN_no=345235645, DescriptionOfOperation=Description of Operation , ICCFilling=Yes, MCNumber=123456789, AddressLine1=1645 Parkway, AddressLine2=Address2, City=Tampa, State=Florida, ZipCode=17050, MailingAddressChoice=, LiabilityLimitType=Combined Single Limit, PrimaryLiabilityLimit=$50,000, PremiumPerVehicle=1000, EffectiveDate=09/07/2017, NumberOfVehicles=1, VIN=12345678901233400, Make=Make, Model=Model , Year=2000, SeatingCapacity=3, BodyType=Tractor, VehicleValue=100001, RadiusCategory=Short, RadiusOfOperation=50, BusinessUse=Commercial, LossPayee1=Yes, LossPayee__Type=Leased, LossPayeeName=loss payee, VehicleNumber=Vehicle #1, DriverName=Driver1, DriverDOB=05/11/1989, Gender=Male, MaritalStatus=Married, LicenseNumber=12345, YearFirstLicensed=2016, YearsofExperience=23, Accident=Yes, NumberOfAccident=1, NumberOfTicket=0, AccidentType=Accident, AccDate=09/05/2016, AccPlace=Test City, ViolationDate=09/05/2016, AIName=AdditionalInsured, CarrierName=PC-Test, PolicyNo=CHIC-6528-02, PriorEffectiveDate=01/06/1996, PriorExpirationDate=01/06/1997, CoverageType=Physical Damage, SHFirstName=Test, SHLastName=SH, Salutation=Sr, Title=Title , QuoteType=New Business, EditLiabilityPremium=No, TotalLiabilityPremium=, AttachementName=CHIC_02, RenewalPrefix=9945, RenewalSuffix=03}]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[{Si_no=1, Test_data_id=NITIC_01, Flag_for_execution=completed, QuoteNumber=QNITIC-1144, PolicyNumber=null, LiabilityTotalPremium=$1,200.00, LiabilityTotalPremium_exp=null, LiabilityTotalPremium_status=null, TotalPremium=$1,200.00, TotalPremium_exp=null, TotalPremium_status=null, TotalDownPayment=$366.67, TotalDownPayment_exp=null, TotalDownPayment_status=null, TotalMonthlyPayment=$83.33, TotalMonthlyPayment_exp=null, TotalMonthlyPayment_status=null, AnalyserResult=null}]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.NullPointerException">
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException
+	at KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest.createQuote(NITICCreateQuoteTest.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:75)
+	at org.testng.internal.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:14)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createQuote -->
+        <test-method status="PASS" signature="createQuote(java.lang.Integer, java.lang.Object, java.lang.Object)[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest@6093dd95]" name="createQuote" duration-ms="1" started-at="2017-12-18T17:44:56Z" data-provider="UITestData" depends-on-methods="KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest.Login" finished-at="2017-12-18T17:44:56Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[4]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[{Si_no=4, Test_data_id=NITIC_04, Flag_for_execution=Y1, BusinessType=Business - Not for Hire, FirstName=Test, LastName=QA, PrimaryNumber=1234567890, EmailAddress=test@gmail.com, TypeOfBusiness=Corporation, BusinessName=NITIC, NumberOfYearsInBusiness=1, SSN_FEINChoice=SSN, SSN_FEIN_no=345235645, DescriptionOfOperation=Description of Operation , ICCFilling=Yes, MCNumber=123456789, AddressLine1=1645 Parkway, AddressLine2=Address2, City=Tampa, State=Florida, ZipCode=17050, MailingAddressChoice=, LiabilityLimitType=Combined Single Limit, PrimaryLiabilityLimit=$50,000, PremiumPerVehicle=2000, EffectiveDate=09/07/2017, NumberOfVehicles=1, VIN=12345678901233400, Make=Make, Model=Model , Year=2000, SeatingCapacity=3, BodyType=Tractor, VehicleValue=100001, RadiusCategory=Short, RadiusOfOperation=50, BusinessUse=Commercial, LossPayee1=Yes, LossPayee__Type=Leased, LossPayeeName=loss payee, VehicleNumber=Vehicle #1, DriverName=Driver1, DriverDOB=05/11/1989, Gender=Female, MaritalStatus=Married, LicenseNumber=12345, YearFirstLicensed=2016, YearsofExperience=23, Accident=Yes, NumberOfAccident=1, NumberOfTicket=0, AccidentType=Accident, AccDate=09/05/2016, AccPlace=Test City, ViolationDate=09/05/2016, AIName=AdditionalInsured, CarrierName=PC-Test, PolicyNo=CHIC-6528-02, PriorEffectiveDate=01/06/1996, PriorExpirationDate=01/06/1997, CoverageType=Physical Damage, SHFirstName=Test, SHLastName=SH, Salutation=Sr, Title=Title , QuoteType=New Business, EditLiabilityPremium=No, TotalLiabilityPremium=, AttachementName=CHIC_02, RenewalPrefix=9945, RenewalSuffix=03}]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[{Si_no=4, Test_data_id=NITIC_04, Flag_for_execution=Y1, QuoteNumber=null, PolicyNumber=null, LiabilityTotalPremium=null, LiabilityTotalPremium_exp=null, LiabilityTotalPremium_status=null, TotalPremium=null, TotalPremium_exp=null, TotalPremium_status=null, TotalDownPayment=null, TotalDownPayment_exp=null, TotalDownPayment_status=null, TotalMonthlyPayment=null, TotalMonthlyPayment_exp=null, TotalMonthlyPayment_status=null, AnalyserResult=null}]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createQuote -->
+        <test-method status="FAIL" signature="createQuote(java.lang.Integer, java.lang.Object, java.lang.Object)[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest@6093dd95]" name="createQuote" duration-ms="2760" started-at="2017-12-18T17:44:56Z" data-provider="UITestData" depends-on-methods="KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest.Login" finished-at="2017-12-18T17:44:59Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[3]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[{Si_no=3, Test_data_id=NITIC_03, Flag_for_execution=Y, BusinessType=Business - Not for Hire, FirstName=Test, LastName=QA, PrimaryNumber=1234567890, EmailAddress=test@gmail.com, TypeOfBusiness=Corporation, BusinessName=NITIC, NumberOfYearsInBusiness=1, SSN_FEINChoice=SSN, SSN_FEIN_no=345235645, DescriptionOfOperation=Description of Operation , ICCFilling=Yes, MCNumber=123456789, AddressLine1=1645 Parkway, AddressLine2=Address2, City=Tampa, State=Florida, ZipCode=17050, MailingAddressChoice=, LiabilityLimitType=Combined Single Limit, PrimaryLiabilityLimit=$50,000, PremiumPerVehicle=2000, EffectiveDate=09/07/2017, NumberOfVehicles=1, VIN=12345678901233400, Make=Make, Model=Model , Year=2000, SeatingCapacity=3, BodyType=Tractor, VehicleValue=100001, RadiusCategory=Short, RadiusOfOperation=50, BusinessUse=Commercial, LossPayee1=Yes, LossPayee__Type=Leased, LossPayeeName=loss payee, VehicleNumber=Vehicle #1, DriverName=Driver1, DriverDOB=05/11/1989, Gender=Female, MaritalStatus=Married, LicenseNumber=12345, YearFirstLicensed=2016, YearsofExperience=23, Accident=Yes, NumberOfAccident=1, NumberOfTicket=0, AccidentType=Accident, AccDate=09/05/2016, AccPlace=Test City, ViolationDate=09/05/2016, AIName=AdditionalInsured, CarrierName=PC-Test, PolicyNo=CHIC-6528-02, PriorEffectiveDate=01/06/1996, PriorExpirationDate=01/06/1997, CoverageType=Physical Damage, SHFirstName=Test, SHLastName=SH, Salutation=Sr, Title=Title , QuoteType=New Business, EditLiabilityPremium=No, TotalLiabilityPremium=, AttachementName=CHIC_02, RenewalPrefix=9945, RenewalSuffix=03}]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[{Si_no=3, Test_data_id=NITIC_03, Flag_for_execution=Y, QuoteNumber=null, PolicyNumber=null, LiabilityTotalPremium=null, LiabilityTotalPremium_exp=null, LiabilityTotalPremium_status=null, TotalPremium=null, TotalPremium_exp=null, TotalPremium_status=null, TotalDownPayment=null, TotalDownPayment_exp=null, TotalDownPayment_status=null, TotalMonthlyPayment=null, TotalMonthlyPayment_exp=null, TotalMonthlyPayment_status=null, AnalyserResult=null}]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.openqa.selenium.WebDriverException">
+            <message>
+              <![CDATA[unknown error: Element <input id="j_idt105" type="image" src="/NITIC/javax.faces.resource/images/NITIC/nitic_truckers.png.xhtml" name="j_idt105" onclick="jsf.util.chain(this,event,'PF(\'BusinessSubTypePopup\').show()','PrimeFaces.ab({s:this,e:\'action\',p:\'j_idt105\',u:\'businessSubTypeForm\'});');return false"> is not clickable at point (239, 368). Other element would receive the click: <div id="j_idt106_modal" class="ui-widget-overlay" style="width: 1305px; height: 1082px; z-index: 1000;"></div>
+  (Session info: chrome=63.0.3239.84)
+  (Driver info: chromedriver=2.33.506120 (e3e53437346286c0bc2d2dc9aa4915ba81d9023f),platform=Windows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 75 milliseconds
+Build info: version: '2.53.0', revision: '35ae25b', time: '2016-03-15 17:00:58'
+System info: host: 'C1128', ip: '192.168.4.131', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_73'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.33.506120 (e3e53437346286c0bc2d2dc9aa4915ba81d9023f), userDataDir=C:\Users\SASIRE~1.SOL\AppData\Local\Temp\scoped_dir12528_23680}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=63.0.3239.84, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: 802197c49ce7f59d489dfbc7bff855be
+Command duration or timeout: 1.59 seconds
+Build info: version: '3.0.1', revision: '1969d75', time: '2016-10-18 09:49:13 -0700'
+System info: host: 'C1128', ip: '192.168.4.131', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_73'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.33.506120 (e3e53437346286c0bc2d2dc9aa4915ba81d9023f), userDataDir=C:\Users\SASIRE~1.SOL\AppData\Local\Temp\scoped_dir12528_23680}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=63.0.3239.84, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, webdriver.remote.sessionid=1716327d-53a5-4db3-bc02-45bc36a2c008, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: 1716327d-53a5-4db3-bc02-45bc36a2c008]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.WebDriverException: unknown error: Element <input id="j_idt105" type="image" src="/NITIC/javax.faces.resource/images/NITIC/nitic_truckers.png.xhtml" name="j_idt105" onclick="jsf.util.chain(this,event,'PF(\'BusinessSubTypePopup\').show()','PrimeFaces.ab({s:this,e:\'action\',p:\'j_idt105\',u:\'businessSubTypeForm\'});');return false"> is not clickable at point (239, 368). Other element would receive the click: <div id="j_idt106_modal" class="ui-widget-overlay" style="width: 1305px; height: 1082px; z-index: 1000;"></div>
+  (Session info: chrome=63.0.3239.84)
+  (Driver info: chromedriver=2.33.506120 (e3e53437346286c0bc2d2dc9aa4915ba81d9023f),platform=Windows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 75 milliseconds
+Build info: version: '2.53.0', revision: '35ae25b', time: '2016-03-15 17:00:58'
+System info: host: 'C1128', ip: '192.168.4.131', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_73'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.33.506120 (e3e53437346286c0bc2d2dc9aa4915ba81d9023f), userDataDir=C:\Users\SASIRE~1.SOL\AppData\Local\Temp\scoped_dir12528_23680}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=63.0.3239.84, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: 802197c49ce7f59d489dfbc7bff855be
+Command duration or timeout: 1.59 seconds
+Build info: version: '3.0.1', revision: '1969d75', time: '2016-10-18 09:49:13 -0700'
+System info: host: 'C1128', ip: '192.168.4.131', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_73'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.33.506120 (e3e53437346286c0bc2d2dc9aa4915ba81d9023f), userDataDir=C:\Users\SASIRE~1.SOL\AppData\Local\Temp\scoped_dir12528_23680}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=63.0.3239.84, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, webdriver.remote.sessionid=1716327d-53a5-4db3-bc02-45bc36a2c008, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: 1716327d-53a5-4db3-bc02-45bc36a2c008
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:216)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:168)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:635)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:274)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:84)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
+	at com.sun.proxy.$Proxy10.click(Unknown Source)
+	at NITICPOM.HomePage.ClickTruckersInsurance(HomePage.java:62)
+	at KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest.createQuote(NITICCreateQuoteTest.java:82)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:75)
+	at org.testng.internal.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:14)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.openqa.selenium.remote.ScreenshotException: Screen shot has been taken
+Build info: version: '3.0.1', revision: '1969d75', time: '2016-10-18 09:49:13 -0700'
+System info: host: 'C1128', ip: '192.168.4.131', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_73'
+Driver info: driver.version: RemoteWebDriver
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:142)
+	... 26 more
+Caused by: org.openqa.selenium.WebDriverException: unknown error: Element <input id="j_idt105" type="image" src="/NITIC/javax.faces.resource/images/NITIC/nitic_truckers.png.xhtml" name="j_idt105" onclick="jsf.util.chain(this,event,'PF(\'BusinessSubTypePopup\').show()','PrimeFaces.ab({s:this,e:\'action\',p:\'j_idt105\',u:\'businessSubTypeForm\'});');return false"> is not clickable at point (239, 368). Other element would receive the click: <div id="j_idt106_modal" class="ui-widget-overlay" style="width: 1305px; height: 1082px; z-index: 1000;"></div>
+  (Session info: chrome=63.0.3239.84)
+  (Driver info: chromedriver=2.33.506120 (e3e53437346286c0bc2d2dc9aa4915ba81d9023f),platform=Windows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 75 milliseconds
+Build info: version: '2.53.0', revision: '35ae25b', time: '2016-03-15 17:00:58'
+System info: host: 'C1128', ip: '192.168.4.131', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_73'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.33.506120 (e3e53437346286c0bc2d2dc9aa4915ba81d9023f), userDataDir=C:\Users\SASIRE~1.SOL\AppData\Local\Temp\scoped_dir12528_23680}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=63.0.3239.84, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: 802197c49ce7f59d489dfbc7bff855be
+Build info: version: '3.0.1', revision: '1969d75', time: '2016-10-18 09:49:13 -0700'
+System info: host: 'C1128', ip: '192.168.4.131', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_73'
+Driver info: driver.version: RemoteWebDriver
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:327)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:85)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.openqa.selenium.support.events.EventFiringWebDriver$EventFiringWebElement$1.invoke(EventFiringWebDriver.java:335)
+	at com.sun.proxy.$Proxy2.click(Unknown Source)
+	at org.openqa.selenium.support.events.EventFiringWebDriver$EventFiringWebElement.click(EventFiringWebDriver.java:348)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.openqa.selenium.remote.server.KnownElements$1.invoke(KnownElements.java:64)
+	at com.sun.proxy.$Proxy3.click(Unknown Source)
+	at org.openqa.selenium.remote.server.handler.ClickElement.call(ClickElement.java:30)
+	at org.openqa.selenium.remote.server.handler.ClickElement.call(ClickElement.java:1)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.openqa.selenium.remote.server.DefaultSession$1.run(DefaultSession.java:176)
+	... 3 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.WebDriverException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createQuote -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest@6093dd95]" name="tearDown" is-config="true" duration-ms="438" started-at="2017-12-18T17:46:30Z" finished-at="2017-12-18T17:46:30Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest -->
+    </test> <!-- Test1 -->
   </suite> <!-- Suite -->
 </testng-results>

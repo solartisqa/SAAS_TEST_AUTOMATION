@@ -12,7 +12,7 @@ import BasePage.BasePage;
 
 public class PolicySummaryPage extends BasePage
 {
-	private WebDriver driver;
+	
 	@FindBy(xpath="//div/div/img[@class='loading_icon']")List<WebElement> LoadingIcon;
 	@FindBy(id="PolicyHeaderTile:PolicyHeaderForm:Object__Policy__PolicyNumber")WebElement PolicyNumber;
 	@FindBy(id="PolicyHeaderTile:PolicyHeaderForm:Object__Policy__PolicyType")WebElement PolicyType;

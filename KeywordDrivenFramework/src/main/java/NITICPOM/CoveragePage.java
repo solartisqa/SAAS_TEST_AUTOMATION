@@ -16,7 +16,7 @@ import BasePage.BasePage;
 
 public class CoveragePage extends BasePage
 {
-	private WebDriver driver;
+
 	@FindBy(xpath="//div/div/img[@class='loading_icon']")List<WebElement> LoadingIcon;
 	@FindBy(id="CoveragesTile:CoverageInformation:Object__Risk__BusinessTypeName")WebElement BusinessTypeName;
 	@FindBy(id="CoveragesTile:CoverageInformation:Object__Location__StateRegion_Static")WebElement State;

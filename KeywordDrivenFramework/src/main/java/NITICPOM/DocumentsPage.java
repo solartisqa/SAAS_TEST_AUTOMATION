@@ -25,7 +25,7 @@ import BasePage.BasePage;
 public class DocumentsPage extends BasePage
 {
 	static WiniumDriver d;
-	private WebDriver driver;
+	
 	@FindBy(xpath="//div/div/img[@class='loading_icon']")List<WebElement> LoadingIcon;
 	@FindBy(xpath="//tr[contains(.,'Application - Liability.pdf')]//td[3]")WebElement DownloadApplicationPDF;
 	@FindBy(xpath="//tr[contains(.,'Quote Proposal - Liability.pdf')]//td[3]")WebElement DownloadPropasalPDF;

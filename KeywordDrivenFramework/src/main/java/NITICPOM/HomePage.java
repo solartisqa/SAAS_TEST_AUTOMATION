@@ -17,9 +17,8 @@ import BasePage.BasePage;
 
 public class HomePage extends BasePage
 {
-	private WebDriver driver;
-	//WebDriverWait wait;
-	@FindBy(xpath="//a[@class='header_menu_item home-icon']")WebElement Home;
+	
+	@FindBy(id="MenuBar")WebElement Home;
 	@FindBy(xpath="//div[@id='chicHomePage']//input[@type='image']")WebElement TruckersInsurance;
 	@FindBy(xpath="//select[@id='businessSubTypeForm:Object__Risk__SubBusinessType']")WebElement SubBusinessType;
 	@FindBy(xpath="//span[contains(.,'Continue')]")WebElement Continue;

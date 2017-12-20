@@ -16,7 +16,7 @@ import BasePage.BasePage;
 
 public class EndorsementPage extends BasePage
 {
-	private WebDriver driver;
+	
 	@FindBy(xpath="//div/div/img[@class='loading_icon']")List<WebElement> LoadingIcon;
 	@FindBy(xpath="//button[contains(.,'Add Endorsement')]")WebElement AddEndorsement;
 	@FindBy(xpath="//button[contains(.,'Save')]")WebElement Save;

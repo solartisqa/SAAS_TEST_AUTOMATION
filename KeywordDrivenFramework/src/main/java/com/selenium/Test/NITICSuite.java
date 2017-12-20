@@ -60,6 +60,7 @@ public class NITICSuite
     public FindPolicyPage FPPage;
     public PolicySummaryPage PSPage;
     public EndorsementPage EndorsePage;
+    
     @Parameters({"Project","Flow","Environment","Flag","jdbcDriver","url","dbUsername","dbPassword","browser","ResultsChoice"})
 	@BeforeSuite
 	public void loadconfig(String Project,String Flow,String Environment,String Flag,String jdbcDriver,String url,String dbUsername,String dbPassword,String browser,String ResultsChoice) throws DatabaseException, ClassNotFoundException, SQLException, PropertiesHandleException, MalformedURLException
@@ -181,7 +182,7 @@ public class NITICSuite
 					 outputrow.put("PolicyNumber", PSPage.getPolicyNumber());
 					 
 					 inputrow.put("Flag_for_execution", inputrow.get("Flag_for_execution")+"Completed");
-					// outputrow.put("Flag_for_execution", "Completed");
+					//outputrow.put("Flag_for_execution", "Completed");
 					 
 				  }		   
 			  input.UpdateRow(RowIterator, inputrow);

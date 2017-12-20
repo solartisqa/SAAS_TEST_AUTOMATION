@@ -21,12 +21,12 @@ import NITICPOM.*;
 
 public class NITICCreateQuoteTest extends BaseSuite
 {
-	public  ObjectMapper inputtableobjectMapper;
-	public  ObjectMapper outputtableobjectMapper;
-	public static DatabaseOperation input;
-	public static DatabaseOperation output;
-	public static LinkedHashMap<Integer, LinkedHashMap<String, String>> inputtable;
-	public static LinkedHashMap<Integer, LinkedHashMap<String, String>> outputtable;
+	public static   ObjectMapper inputtableobjectMapper;
+	public static   ObjectMapper outputtableobjectMapper;
+	public  DatabaseOperation input;
+	public  DatabaseOperation output;
+	public static  LinkedHashMap<Integer, LinkedHashMap<String, String>> inputtable;
+	public static  LinkedHashMap<Integer, LinkedHashMap<String, String>> outputtable;
 
 	public LoginPage log;
 	public HomePage hmpage;
@@ -55,8 +55,6 @@ public class NITICCreateQuoteTest extends BaseSuite
     	output = new DatabaseOperation();
     	inputtable = input.GetDataObjects("SELECT * FROM "+inputtableName);
     	outputtable = output.GetDataObjects("SELECT * FROM "+outputtableName);
-    	// Iterator<Entry<Integer, LinkedHashMap<String,String>>> inputtableiterator = inputtable.entrySet().iterator();
-		 //Iterator<Entry<Integer, LinkedHashMap<String,String>>> outputtableiterator = outputtable.entrySet().iterator();
     	
     }
     
@@ -72,22 +70,54 @@ public class NITICCreateQuoteTest extends BaseSuite
 	}
 	
     @Test(dataProvider="UITestData",dependsOnMethods = { "Login" })
-    public void createQuote(Integer RowIterator, Object inputtablerowobj, Object outputtablerowobj) throws DatabaseException
+    public void createQuote(Integer RowIterator, Object inputtablerowobj, Object outputtablerowobj) throws DatabaseException, InterruptedException
     {
     	LinkedHashMap<String, String> inputrow = inputtableobjectMapper.convertValue(inputtablerowobj, LinkedHashMap.class);
 		LinkedHashMap<String, String> outputrow = outputtableobjectMapper.convertValue(outputtablerowobj, LinkedHashMap.class);
 		if(inputrow.get("Flag_for_execution").equals(TestFlag))
 		{
-		inputrow.put("Flag_for_execution", "completed");
-		outputrow.put("Flag_for_execution", "completed");
-		input.UpdateRow(RowIterator, inputrow);
-	    System.out.println("hi....");
+			 System.out.println("Started Flow");
+			
+			 hmpage.ClickHome();
+			 hmpage.ClickTruckersInsurance();
+			 Thread.sleep(2000);
+			 hmpage.selectSubBusinessType(inputrow.get("BusinessType"));
+			 BusPage=hmpage.ClickContinue();
+			 BusPage.FillBusinessDetails(inputrow);
+			 CovPage=BusPage.ClickCoverage();
+			 CovPage.FillCoverageDetails(inputrow);
+			 VehPage=CovPage.ClickVehicle();
+			 VehPage.FillVehicleDetails(inputrow);
+			 VehPage.FillLossPayeeDetails(inputrow);
+			 drPage=VehPage.ClickDriver();
+			 drPage.FillDriverDetails(inputrow);
+			 drPage.FillAccidentViolationDetails(inputrow);
+			 AIPage=drPage.ClickAdditionalInsured();
+			 AIPage.FillAdditionalInsured(inputrow);
+			 PCPage=AIPage.ClickPriorCarrier();
+			 PCPage.FillPriorCarrier(inputrow);
+			 SHPage=PCPage.ClickShareholder();
+			 SHPage.FillShareHolderDetails(inputrow);
+			 SHPage.ClickQuoteType(inputrow.get("QuoteType"));
+			 QSPage=SHPage.ClickCreateQuote();
+			 QSPage.EditCoverageDetails(inputrow);
+			 QSPage.getDetailsFromQuoteSummary(outputrow);
+			 QSPage.ClickOfferQuote();
+			 DocPage=QSPage.ClickOfferQuoteYes();
+	
+			 Thread.sleep(1000);
+			 inputrow.put("Flag_for_execution", "completed");
+			 outputrow.put("Flag_for_execution", "completed");
+			 
+				input.UpdateRow(RowIterator, inputrow);
+				output.UpdateRow(RowIterator, inputrow);
 		}
-	  
+		
+	
     }
     
-    @DataProvider(name="UITestData")//,parallel=true)
-	 public Object[][] getDataFromDataprovider() throws DatabaseException, PropertiesHandleException
+    @DataProvider(name="UITestData",parallel=true)
+	 public  static Object[][] getDataFromDataprovider() throws DatabaseException, PropertiesHandleException
 	 {
 		 Iterator<Entry<Integer, LinkedHashMap<String,String>>> inputtableiterator = inputtable.entrySet().iterator();
 		 Iterator<Entry<Integer, LinkedHashMap<String,String>>> outputtableiterator = outputtable.entrySet().iterator();
