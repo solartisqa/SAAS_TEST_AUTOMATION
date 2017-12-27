@@ -33,9 +33,9 @@ public class DocumentsPage extends BasePage
 	@FindBy(id="AttachmentsTile:AttachmentForm:Object__Attachment__Name")WebElement AttachmentName;
 	@FindBy(id="AttachmentsTile:AttachmentForm:Object__Attachment__Description")WebElement AttachmentDescription;
 	@FindBy(xpath="//span[@class='ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left ui-fileupload-choose' and @role='button']")WebElement Browse;
-
-	@FindBy(xpath="//button[contains(.,'Attach File')]")WebElement AttachFile;
+	@FindBy(id="AttachmentsTile:AttachmentForm:Object__Attachment__Location_input")WebElement BrowseButton;
 	
+	@FindBy(xpath="//button[contains(.,'Attach File')]")WebElement AttachFile;
 	@FindBy(id="AttachmentsTile:AttachmentForm:Object__Button__Cancel")WebElement Close;
 	@FindBy(xpath="//button[contains(.,'Add Notes')]")WebElement AddNotes;
 	@FindBy(id="NotesTile:NotesForm:Object__Notes__Description")WebElement NotesDescription;
@@ -173,6 +173,17 @@ public class DocumentsPage extends BasePage
 		 this.ClickAttachFile();
 	 }
 	 
+	 public void AttachFile3(LinkedHashMap<String, String> inputrow) throws AWTException, InterruptedException, IOException
+	 {
+		 this.ClickAttach();
+		 this.setAttachmentName(inputrow.get("AttachementName"));
+		 this.setAttachmentDescription("attachement");
+		 this.uploadUsingSendKeys();
+	     Thread.sleep(1000);
+		 this.ClickAttachFile();
+	 }
+	 
+	 
 	 public void uploadFileusingWinium() throws IOException, AWTException
 	 {
 		
@@ -207,6 +218,12 @@ public class DocumentsPage extends BasePage
 		    	System.out.println("Element not found");
 		    }
 		    this.ClickDesktopEnter();		      
+	 }
+	 
+	 public void uploadUsingSendKeys() throws InterruptedException
+	 {
+		 BrowseButton.sendKeys("D:\\sas\\sample.png");
+		 Thread.sleep(1000);
 	 }
 	
 }

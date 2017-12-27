@@ -1,5 +1,7 @@
 package KeywordDrivenFramework.KeywordDrivenFramework;
 
+import java.awt.AWTException;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
@@ -70,7 +72,7 @@ public class NITICCreateQuoteTest extends BaseSuite
 	}
 	
     @Test(dataProvider="UITestData",dependsOnMethods = { "Login" })
-    public void createQuote(Integer RowIterator, Object inputtablerowobj, Object outputtablerowobj) throws DatabaseException, InterruptedException
+    public void createQuote(Integer RowIterator, Object inputtablerowobj, Object outputtablerowobj) throws DatabaseException, InterruptedException, AWTException, IOException
     {
     	LinkedHashMap<String, String> inputrow = inputtableobjectMapper.convertValue(inputtablerowobj, LinkedHashMap.class);
 		LinkedHashMap<String, String> outputrow = outputtableobjectMapper.convertValue(outputtablerowobj, LinkedHashMap.class);
@@ -104,6 +106,9 @@ public class NITICCreateQuoteTest extends BaseSuite
 			 QSPage.getDetailsFromQuoteSummary(outputrow);
 			 QSPage.ClickOfferQuote();
 			 DocPage=QSPage.ClickOfferQuoteYes();
+			 DocPage.AttachFile3(inputrow);
+			 QSPage.ClickIssuePolicy();
+			 PSPage=QSPage.ClickIssuePolicyYes();
 	
 			 Thread.sleep(1000);
 			 inputrow.put("Flag_for_execution", "completed");
@@ -113,7 +118,6 @@ public class NITICCreateQuoteTest extends BaseSuite
 				output.UpdateRow(RowIterator, inputrow);
 		}
 		
-	
     }
     
     @DataProvider(name="UITestData",parallel=true)

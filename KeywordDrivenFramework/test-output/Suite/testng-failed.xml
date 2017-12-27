@@ -10,37 +10,17 @@
   <parameter name="dburl" value="jdbc:mysql://192.168.35.2:3391/NITIC"/>
   <parameter name="dbPassword" value="password"/>
   <parameter name="inputtableName" value="NITIC_Input_Quote"/>
-  <test name="Test2(failed)" parallel="tests">
-    <parameter name="browser" value="chrome"/>
-    <parameter name="FlagForTest" value="Y1"/>
-    <parameter name="driverType" value="Remote"/>
-    <classes>
-      <class name="KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest">
-        <methods>
-          <include name="Login"/>
-          <include name="loadConfig"/>
-          <include name="createQuote" invocation-numbers="1"/>
-          <include name="setUp"/>
-          <include name="setUp"/>
-          <include name="tearDown"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest -->
-    </classes>
-  </test> <!-- Test2(failed) -->
   <test name="Test1(failed)" parallel="tests">
     <parameter name="browser" value="chrome"/>
     <parameter name="FlagForTest" value="Y"/>
-    <parameter name="driverType" value="Remote"/>
+    <parameter name="driverType" value="Local"/>
     <classes>
       <class name="KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest">
         <methods>
           <include name="Login"/>
           <include name="loadConfig"/>
-          <include name="createQuote" invocation-numbers="2 0"/>
+          <include name="createQuote" invocation-numbers="0"/>
           <include name="setUp"/>
-          <include name="setUp"/>
-          <include name="tearDown"/>
           <include name="tearDown"/>
         </methods>
       </class> <!-- KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest -->

@@ -19,7 +19,7 @@ import org.testng.annotations.Parameters;
 
 public class BaseSuite 
 {
-protected  RemoteWebDriver Rdriver=null;
+//protected  RemoteWebDriver Rdriver=null;
 protected  WebDriver driver;
 protected   String TestFlag;
 
@@ -44,8 +44,8 @@ protected   String TestFlag;
 	@AfterClass
 	public  void tearDown()
 	{
-		driver.manage().deleteAllCookies();
-		driver.close();
+		//driver.manage().deleteAllCookies();
+		//driver.close();
 	}	
 	
 	public  void lauchLocalBrowser(String browser)

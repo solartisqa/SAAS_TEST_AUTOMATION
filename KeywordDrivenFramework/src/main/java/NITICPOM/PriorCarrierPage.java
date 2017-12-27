@@ -170,13 +170,14 @@ public class PriorCarrierPage extends BasePage
 	 }	
 	 
 	 
-	 public void FillPriorCarrier(LinkedHashMap<String, String> inputrow)
+	 public void FillPriorCarrier(LinkedHashMap<String, String> inputrow) throws InterruptedException
 	 {
 		 this.ClickAddPriorCarrier();
 		 this.setCarrierName(inputrow.get("CarrierName"));
 		 this.setPolicyNo(inputrow.get("PolicyNo"));
 		 this.setEffectiveDate(inputrow.get("PriorEffectiveDate"));
 		 this.setExpirationDate(inputrow.get("PriorExpirationDate"));
+		 Thread.sleep(1000);
 		 this.ClickCoverageTypeVal(inputrow.get("CoverageType"));
 		 this.ClickSave();
 		 

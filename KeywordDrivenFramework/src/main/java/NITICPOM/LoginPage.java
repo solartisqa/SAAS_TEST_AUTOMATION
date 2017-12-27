@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import BasePage.BasePage;
 import NITICPOM.HomePage;
+import common.Assert;
 
 
 
@@ -41,6 +42,7 @@ public class LoginPage extends BasePage
 		 {
 			 UserName.sendKeys(username);
 		 }
+		
 	 }
 	 
 	 public void setPassword(String password)
@@ -49,6 +51,7 @@ public class LoginPage extends BasePage
 		 try
 		 {
 		 PassWord.sendKeys(password);
+		 
 		 }
 		 catch(StaleElementReferenceException e)
 		 {

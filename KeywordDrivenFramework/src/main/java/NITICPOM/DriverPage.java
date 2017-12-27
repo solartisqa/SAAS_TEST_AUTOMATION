@@ -415,6 +415,7 @@ public class DriverPage extends BasePage
 		 this.ClickAddDriver();
 		 this.setDriverName(inputrow.get("DriverName"));
 		 this.setDriverDOB(inputrow.get("DriverDOB"));
+		 Thread.sleep(1000);
 		 this.ClickGender(inputrow.get("Gender"));
 		 this.selectMaritalStatus(inputrow.get("MaritalStatus"));
 		 this.setSSNorFEIN(inputrow.get("SSN_FEIN_no"));
@@ -433,11 +434,8 @@ public class DriverPage extends BasePage
 			 this.setNumberOfAccident(inputrow.get("NumberOfAccident"));
 			 this.setNumberOfTicket(inputrow.get("NumberOfTicket"));
 		 }
-		 
 		 this.ClickSave();
 	 }
-	 
-	 
 	 
 	 public void FillAccidentViolationDetails(LinkedHashMap<String, String> inputrow) throws InterruptedException
 	 {

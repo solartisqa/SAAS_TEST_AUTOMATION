@@ -14,19 +14,8 @@
     <classes>
     <parameters>
      <parameter name="browser" value="chrome"/>
-     <parameter name="driverType" value="Remote"/>
+     <parameter name="driverType" value="Local"/>
     <parameter name="FlagForTest" value="Y"/>
-    </parameters>
-      <class name="KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest"/>
-    </classes>
-  </test> 
-  
-  <test name="Test2">
-    <classes>
-    <parameters>
-     <parameter name="browser" value="chrome"/>
-     <parameter name="driverType" value="Remote"/>
-    <parameter name="FlagForTest" value="Y1"/>
     </parameters>
       <class name="KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest"/>
     </classes>

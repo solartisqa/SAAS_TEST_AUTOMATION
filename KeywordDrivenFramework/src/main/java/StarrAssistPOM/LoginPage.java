@@ -14,8 +14,7 @@ import StarrAssistPOM.HomePage;
 
 public class LoginPage extends BasePage
 {
-	 private WebDriver driver;
-	 WebDriverWait wait;
+	
 	 @FindBy(id="loginForm:login_username")WebElement UserName;
 	 @FindBy(id="loginForm:login_password")WebElement PassWord;
 	 @FindBy(xpath="//input[@value='Log In']")WebElement login;

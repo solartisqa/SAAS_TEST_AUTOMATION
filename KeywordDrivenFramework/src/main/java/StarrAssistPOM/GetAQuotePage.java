@@ -36,9 +36,7 @@ public class GetAQuotePage extends BasePage
 	 @FindBy(xpath="//div/div/img[@class='loading_icon']")List<WebElement> LoadingIcon;
 	 @FindBy(xpath="//div[@id='Get_Quote:travelform:PremiumCalculation']//div[3]//div//label")WebElement Premium;
 	 @FindBy(id="groupBooking:Object__Attachment__FileUpload_input")WebElement FileUpload;
-	 
-	 
-	 
+	
 	 
 	 public GetAQuotePage(WebDriver driver)
 	 {
@@ -218,6 +216,11 @@ public class GetAQuotePage extends BasePage
 	 {
 		 wait.until(ExpectedConditions.visibilityOfAllElements(LoadingIcon));
 		 wait.until(ExpectedConditions.invisibilityOfAllElements(LoadingIcon));
+	 }
+	 
+	 public void upload()
+	 {
+		 FileUpload.sendKeys("D:\\sas\\Format_for_Spreadsheet_Upload.xls");
 	 }
 	 
 }

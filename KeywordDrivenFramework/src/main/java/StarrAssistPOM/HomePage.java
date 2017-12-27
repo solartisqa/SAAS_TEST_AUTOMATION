@@ -108,4 +108,9 @@ public class HomePage extends BasePage
 		 wait.until(ExpectedConditions.visibilityOfAllElements(LoadingIcon));
 		 wait.until(ExpectedConditions.invisibilityOfAllElements(LoadingIcon));
 	 }
+	 public void upload() throws InterruptedException
+	 {
+		 FileUpload.sendKeys("D:\\sas\\Format_for_Spreadsheet_Upload.xls");
+		 Thread.sleep(1000);
+	 }
 }

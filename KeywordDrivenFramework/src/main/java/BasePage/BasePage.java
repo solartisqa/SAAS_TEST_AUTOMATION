@@ -22,7 +22,7 @@ import org.openqa.selenium.winium.WiniumDriver;
 
 import com.selenium.SupportingClasses.browserLaunching;
 
-public class BasePage extends browserLaunching
+public class BasePage
 {
  static WiniumDriver d;
   public WebDriverWait wait;
