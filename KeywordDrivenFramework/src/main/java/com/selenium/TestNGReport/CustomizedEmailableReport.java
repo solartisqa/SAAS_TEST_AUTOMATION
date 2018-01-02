@@ -631,7 +631,7 @@ public class CustomizedEmailableReport implements IReporter {
             if (r == 0) {
                 //System.out.println("First method name "+o1.getTestMethod());
                 //System.out.println("second method name "+o2.getTestMethod());
-                r=o1.getTestMethod().compareTo(o2.getTestMethod());
+                //r=o1.getTestMethod().compareTo(o2.getTestMethod());
 
             }
             return r;
