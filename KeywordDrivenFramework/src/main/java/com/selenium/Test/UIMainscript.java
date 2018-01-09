@@ -107,7 +107,7 @@ public class UIMainscript
 		if(inputrow.get("Flag_for_execution").equals(configFile.getProperty("flagForExecution")))
 		{ 			    	
 		   	System.out.println("Executing main script");
-		   	//objDriver.executeTestScript(inputrow, outputrow);
+		   	objDriver.executeTestScript(inputrow, outputrow);
 		   	this.generatExpectedResult(inputrow,outputrow);		
 		   	output.UpdateRow(RowIterator, outputrow);
 		    inputrow.put("Flag_for_execution", inputrow.get("Flag_for_execution")+"Completed");
