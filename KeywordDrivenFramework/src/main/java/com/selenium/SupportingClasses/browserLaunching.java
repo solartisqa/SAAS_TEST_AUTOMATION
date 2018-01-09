@@ -104,7 +104,7 @@ public class browserLaunching extends ConditionsChecking{
 				    eventListerner=new TheEventListener();
 				    driver.register(eventListerner);
 					driver.manage().deleteAllCookies();
-					driver.manage().window().maximize();
+					//driver.manage().window().maximize();
 					driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 					break;
 				

@@ -73,11 +73,14 @@ public class PropertiesHandle extends Properties
 		   this.EnvURL();
 		   this.InputQuery();
 		   this.OutputQuery();
-		    this.DBdetails();
-		    this.ScreenshotPath();
-		    this.Username();
-		    this.password();
-		    DatabaseOperation.CloseConn();
+		   this.DBdetails();
+		   this.ScreenshotPath();
+		   this.Username();
+		   this.password();
+		   this.MacroClassName();
+		   this.MacroMappingQuery();
+		   this.MacroTranslationQuery();
+		   DatabaseOperation.CloseConn();
 		 
 		}
 		
@@ -85,7 +88,7 @@ public class PropertiesHandle extends Properties
 		{
 			try
 			{
-				LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdmsQuery =  ConfigQuery.GetDataObjects("SELECT ProjectName,ProjectDBName, DriverPath,RootFolder,TestScriptTable,LoginScriptTable,InputTable,OutputTable,UserDBName,JDCDriver,DB_URL,DB_UserName,DB_Password,Env_Name,URL,UserName,Password FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN Flow_CONFIG ON Project_CONFIG.ProjectID = Flow_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON Flow_CONFIG.FlowID = Environment_CONFIG.FlowID INNER JOIN Version_CONFIG ON Environment_CONFIG.Env_ID = Version_CONFIG.Env_ID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.FlowID = Flow_CONFIG.FlowID)WHERE Project_CONFIG.ProjectName ='" +Project+ "' AND Flow_CONFIG.FlowName = '" +Flow+ "' AND Environment_CONFIG.Env_Name = '" +Env+ "' ORDER BY Version_CONFIG.Version DESC LIMIT 1");
+				LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdmsQuery =  ConfigQuery.GetDataObjects("SELECT MacroClassName,MacroMappingTable,MacroTranslationTable,ProjectName,ProjectDBName, DriverPath,RootFolder,TestScriptTable,LoginScriptTable,InputTable,OutputTable,UserDBName,JDCDriver,DB_URL,DB_UserName,DB_Password,Env_Name,URL,UserName,Password FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN Flow_CONFIG ON Project_CONFIG.ProjectID = Flow_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON Flow_CONFIG.FlowID = Environment_CONFIG.FlowID INNER JOIN Version_CONFIG ON Environment_CONFIG.Env_ID = Version_CONFIG.Env_ID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.FlowID = Flow_CONFIG.FlowID)WHERE Project_CONFIG.ProjectName ='" +Project+ "' AND Flow_CONFIG.FlowName = '" +Flow+ "' AND Environment_CONFIG.Env_Name = '" +Env+ "' ORDER BY Version_CONFIG.Version DESC LIMIT 1");
 				for (Entry<Integer, LinkedHashMap<String, String>> entry : tableRdmsQuery.entrySet())	
 				{
 					LinkedHashMap<String, String> rowRdmsQuery = entry.getValue();
@@ -103,7 +106,7 @@ public class PropertiesHandle extends Properties
 		{
 			try
 			{
-				LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdmsValue = ConfigQuery.GetDataObjects("SELECT ProjectName,ProjectDBName, DriverPath,RootFolder,TestScriptTable,LoginScriptTable,InputTable,OutputTable,UserDBName,JDCDriver,DB_URL,DB_UserName,DB_Password,Env_Name,URL,UserName,Password FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN Flow_CONFIG ON Project_CONFIG.ProjectID = Flow_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON Flow_CONFIG.FlowID = Environment_CONFIG.FlowID INNER JOIN Version_CONFIG ON Environment_CONFIG.Env_ID = Version_CONFIG.Env_ID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.FlowID = Flow_CONFIG.FlowID)WHERE Project_CONFIG.ProjectName ='" +Project+ "' AND Flow_CONFIG.FlowName = '" +Flow+ "' AND Environment_CONFIG.Env_Name = '" +Env+ "' ORDER BY Version_CONFIG.Version DESC LIMIT 1");
+				LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdmsValue = ConfigQuery.GetDataObjects("SELECT MacroClassName,MacroMappingTable,MacroTranslationTable,ProjectName,ProjectDBName, DriverPath,RootFolder,TestScriptTable,LoginScriptTable,InputTable,OutputTable,UserDBName,JDCDriver,DB_URL,DB_UserName,DB_Password,Env_Name,URL,UserName,Password FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN Flow_CONFIG ON Project_CONFIG.ProjectID = Flow_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON Flow_CONFIG.FlowID = Environment_CONFIG.FlowID INNER JOIN Version_CONFIG ON Environment_CONFIG.Env_ID = Version_CONFIG.Env_ID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.FlowID = Flow_CONFIG.FlowID)WHERE Project_CONFIG.ProjectName ='" +Project+ "' AND Flow_CONFIG.FlowName = '" +Flow+ "' AND Environment_CONFIG.Env_Name = '" +Env+ "' ORDER BY Version_CONFIG.Version DESC LIMIT 1");
 				for (Entry<Integer, LinkedHashMap<String, String>> entry : tableRdmsValue.entrySet())	
 				{
 					LinkedHashMap<String, String> rowRdmsValue = entry.getValue();
@@ -189,6 +192,20 @@ public class PropertiesHandle extends Properties
 	    protected void password() throws PropertiesHandleException// FUNCTION TO GET URL
 		{
 			this.put("password", this.RdmsValue("Password"));	
+		}
+	    protected void MacroClassName() throws PropertiesHandleException// FUNCTION TO GET URL
+		{
+			this.put("MacroClassName", this.RdmsValue("MacroClassName"));	
+		}
+	    
+	    protected void MacroMappingQuery() throws PropertiesHandleException// FUNCTION TO GET RESULT SET FROM MACRO MAPPING TABLE 
+		{
+			this.put("config_query", this.RdmsQuery("MacroMappingTable"));
+		}
+		
+		protected void MacroTranslationQuery() throws PropertiesHandleException// FUNCTION TO GET RESULT SET FROM MACRO TRNSLATION TABLE 
+		{
+			this.put("lookup_query", this.RdmsQuery("MacroTranslationTable"));
 		}
 	    
 		public PropertiesHandle(String path) throws PropertiesHandleException
