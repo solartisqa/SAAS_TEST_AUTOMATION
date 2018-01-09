@@ -1,13 +1,11 @@
 package com.solartis.selenium.macroPackage;
 
-import java.sql.SQLException;
 import java.util.LinkedHashMap;
 
 import com.selenium.Configuration.PropertiesHandle;
 import com.selenium.exception.DatabaseException;
 import com.selenium.exception.MacroException;
 import com.selenium.exception.POIException;
-import com.selenium.SupportingClasses.DatabaseOperation;
 
 public interface MacroInterface 
 {

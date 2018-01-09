@@ -362,7 +362,6 @@ public class NITICMacro implements MacroInterface
 		Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
 		Matcher m = p.matcher(s);
 		boolean b = m.find();
-		String res="";
 		int num=0;
 		if (b)
 		{

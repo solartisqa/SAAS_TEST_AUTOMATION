@@ -17,7 +17,6 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -29,7 +28,6 @@ import com.selenium.exception.DatabaseException;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 
 
 public class UIoperartions extends browserLaunching
