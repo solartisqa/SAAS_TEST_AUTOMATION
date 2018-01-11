@@ -18,11 +18,11 @@ import com.selenium.exception.DatabaseException;
 import com.selenium.exception.MacroException;
 import com.selenium.exception.POIException;
 
-public class CHICMacro 
+public class CHICMacro implements MacroInterface
 {
 	protected ExcelOperationsPOI sampleexcel=null;
 	protected String Targetpath;
-	protected NITICMacro trans;
+	protected CHICMacro trans;
 	protected String Samplepath;
 	protected DatabaseOperation configTable = null;
 	protected PropertiesHandle configFile;
@@ -67,7 +67,7 @@ public class CHICMacro
 	{
 		try
 		{
-			String RateingModelName = "E:\\SeleniumConfig\\NITIC\\Quote\\SampleRatingModel\\NITICRatingModel.xls";
+			String RateingModelName = "E:\\SeleniumConfig\\CHIC\\Policy\\SampleRatingModel\\CHIC Rating Calculator Test_case_2.xls";
 			
 			Samplepath= RateingModelName;
 			sampleexcel= new ExcelOperationsPOI(Samplepath);
@@ -103,7 +103,7 @@ public class CHICMacro
 			//DatabaseOperation configTable = new DatabaseOperation();
 			LinkedHashMap<Integer, LinkedHashMap<String, String>> tablePumpinData = configTable.GetDataObjects(configFile.getProperty("config_query"));
 			ExcelOperationsPOI excel=new ExcelOperationsPOI(Targetpath);
-			trans= new NITICMacro(configFile);
+			trans= new CHICMacro(configFile);
 			for (Entry<Integer, LinkedHashMap<String, String>> entry : tablePumpinData.entrySet())	
 			{								
 				LinkedHashMap<String, String> rowPumpinData = entry.getValue();
@@ -159,7 +159,7 @@ public class CHICMacro
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	public void PumpoutData(LinkedHashMap<String, String> outputData,LinkedHashMap<String, String> inputData,PropertiesHandle configFile) throws MacroException    
 	{
-		trans= new NITICMacro(configFile);
+		trans= new CHICMacro(configFile);
 		try
 		{
 			ExcelOperationsPOI excel=new ExcelOperationsPOI(Targetpath);
@@ -213,7 +213,7 @@ public class CHICMacro
 			switch(configTable.get("Translation_Function"))
 			{
 			case "Date": 
-				Date DateData = Date(Datatowrite,"yyyy-mm-dd",configTable.get("Translation_Format"));
+				Date DateData = Date(Datatowrite,"mm/dd/yyyy",configTable.get("Translation_Format"));
 				outputdata = (T) DateData;
 				break;
 			case "Lookup":
@@ -253,7 +253,6 @@ public class CHICMacro
 			{
 				ExpectedDelimiter=String.valueOf(ExpectedFormat.charAt(m1.start()));
 			}
-			
 			String[] DateInputFormat = InputFormat.split(InputDelimiter);
 			String[] DateOutputFormat = ExpectedFormat.split(ExpectedDelimiter);
 			String[] date = Date.split(InputDelimiter); //yyyy-mm-dd
@@ -262,7 +261,8 @@ public class CHICMacro
 			DateMaping.put(DateInputFormat[0].toLowerCase(), date[0]);
 			DateMaping.put(DateInputFormat[1].toLowerCase(), date[1]);
 			DateMaping.put(DateInputFormat[2].toLowerCase(), date[2]);
-			value =  DateMaping.get(DateOutputFormat[0].toLowerCase())+ExpectedDelimiter+DateMaping.get(DateOutputFormat[1].toLowerCase())+ExpectedDelimiter+DateMaping.get(DateOutputFormat[2].toLowerCase());     
+			value =  DateMaping.get(DateOutputFormat[0].toLowerCase())+ExpectedDelimiter+DateMaping.get(DateOutputFormat[1].toLowerCase())+ExpectedDelimiter+DateMaping.get(DateOutputFormat[2].toLowerCase());  
+			
 			DateFormat format = new SimpleDateFormat(ExpectedFormat, Locale.ENGLISH);
 			try 
 			{
