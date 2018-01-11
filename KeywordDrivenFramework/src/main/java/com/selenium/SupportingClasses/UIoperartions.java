@@ -26,8 +26,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.selenium.Test.UIMainscript;
-
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;

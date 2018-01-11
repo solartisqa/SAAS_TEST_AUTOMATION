@@ -1,4 +1,4 @@
-package com.selenium.Test;
+package KeywordDrivenFramework.KeywordDrivenFramework;
 
 import java.awt.AWTException;
 import java.io.IOException;
@@ -17,7 +17,6 @@ import org.testng.annotations.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.selenium.Configuration.PropertiesHandle;
-import com.selenium.DriverPackage.BaseDriverScript;
 import com.selenium.SupportingClasses.DatabaseOperation;
 import com.selenium.exception.DatabaseException;
 import com.selenium.exception.PropertiesHandleException;
@@ -37,7 +36,6 @@ public class NITICSuite
 	public  ObjectMapper outputtableobjectMapper;
 	public  LinkedHashMap<String, String> inputrow;
 	public  LinkedHashMap<String, String> outputrow;
-	public  static BaseDriverScript objDriver;
 	public  static PropertiesHandle configFile;
 	public    RemoteWebDriver driver=null; //changed
 	public static  String exceptionScreenshotPath=null;
@@ -74,16 +72,6 @@ public class NITICSuite
 		
 	}
     
-      @Parameters({"browser","Flag"})
-	  @BeforeTest(alwaysRun=true)
-	 public void launchBrowser(String browser,String Flag) throws MalformedURLException, InterruptedException, DatabaseException, PropertiesHandleException, ClassNotFoundException, SQLException
-	 {
-		//driver=this.launch_browser(browser,configFile);
-    	objDriver=new BaseDriverScript(configFile);
-  		driver=objDriver.launchBrowser(browser);
-  		FlagforExecution=Flag;
-  		
-	}
     
     
 	@Test

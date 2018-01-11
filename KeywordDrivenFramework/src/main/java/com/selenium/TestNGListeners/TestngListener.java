@@ -12,7 +12,6 @@ import org.testng.ITestListener;
 import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 
-import com.selenium.Test.UIMainscript;
 import org.apache.commons.io.FileUtils;
 import com.selenium.Test.*;
 public class TestngListener implements ITestListener
@@ -123,7 +122,7 @@ public class TestngListener implements ITestListener
 		 //UIMainscript ob=new UIMainscript();
 		 System.out.println("Taking ScreenShot");
 	    	//driver=UIMainscript.driver;
-	    	filePath= UIMainscript.exceptionScreenshotPath;
+	    	
 	    	System.out.println("file path: "+filePath);
 	            try
 	            {

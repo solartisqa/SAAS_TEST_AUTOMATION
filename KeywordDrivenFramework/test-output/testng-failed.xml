@@ -17,11 +17,9 @@
     <classes>
       <class name="KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest">
         <methods>
-          <include name="Login"/>
+          <include name="Login" invocation-numbers="0"/>
           <include name="loadConfig"/>
-          <include name="createQuote" invocation-numbers="0"/>
-          <include name="setUp"/>
-          <include name="tearDown"/>
+          <include name="createQuote"/>
         </methods>
       </class> <!-- KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest -->
     </classes>
