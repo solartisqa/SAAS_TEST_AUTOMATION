@@ -15,7 +15,7 @@
     <classes>
         <parameter name="browser" value="chrome"/>
    		<parameter name="Flag" value="Y"/>
-      <class name="com.selenium.Test.NITICSuite"/>
+      <class name="NITICTestCases.NITICSuite"/>
  
     </classes>
   </test> 

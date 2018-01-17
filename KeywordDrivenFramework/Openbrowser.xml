@@ -6,7 +6,7 @@
      <parameter name="driverType" value="Remote"/>
     <parameter name="FlagForTest" value="Y"/>
     </parameters>
-      <class name="KeywordDrivenFramework.KeywordDrivenFramework.OpenBrowser"/>
+      <class name="PojoCases.OpenBrowser"/>
     </classes>
   </test> <!-- Open -->
 </suite> <!-- Suite -->

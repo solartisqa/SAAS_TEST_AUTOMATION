@@ -1,4 +1,4 @@
-package TestCases;
+package PojoCases;
 
 import org.testng.annotations.*;
 import org.testng.annotations.Factory;

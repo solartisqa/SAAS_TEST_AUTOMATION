@@ -17,7 +17,7 @@
      <parameter name="driverType" value="Local"/>
     <parameter name="FlagForTest" value="Y"/>
     </parameters>
-      <class name="KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest"/>
+      <class name="POMWithTestNG.TestCases.NITICCreateQuoteTest"/>
     </classes>
   </test> 
 </suite>

@@ -1,4 +1,4 @@
-package TestCases;
+package PojoCases;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;

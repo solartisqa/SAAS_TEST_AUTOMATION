@@ -7,7 +7,7 @@
      <parameter name="driverType" value="Local"/>
     <parameter name="FlagForTest" value="Y"/>
     </parameters>
-      <class name="com.selenium.Test.uploadTest"/>
+      <class name="PojoCases.uploadTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

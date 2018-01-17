@@ -1,4 +1,4 @@
-package TestCases;
+package NITICTestCases;
 
 import java.awt.AWTException;
 import java.io.IOException;

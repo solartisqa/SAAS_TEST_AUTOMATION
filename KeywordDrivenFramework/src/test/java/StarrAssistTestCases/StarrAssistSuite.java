@@ -1,4 +1,4 @@
-package TestCases;
+package StarrAssistTestCases;
 
 import java.awt.AWTException;
 import java.io.IOException;

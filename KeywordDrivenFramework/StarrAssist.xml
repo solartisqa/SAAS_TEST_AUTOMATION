@@ -13,21 +13,12 @@
   <test name="Test1">     
     <classes>
    		<parameter name="browser" value="chrome"/>
+   		<parameter name="driverType" value="Local"/>
    		<parameter name="Flag" value="Y1"/>
       <class name="com.selenium.Test.StarrAssistSuite">
     
       </class>
     </classes>
   </test> 
-<!-- <test name="Test2">
-    <classes>
-   		<parameter name="browser" value="chrome"/>
-   		<parameter name="Flag" value="Y2"/>
-      <class name="com.selenium.Test.StarrAssistSuite">
-    
-      </class>
-      
-    </classes>
-  </test>  -->
 </tests>
 </suite> <!-- Suite -->
