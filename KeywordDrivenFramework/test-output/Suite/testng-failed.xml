@@ -1,27 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Suite]" parallel="tests">
-  <parameter name="EnvURL" value="https://niticqa.solartis.net/NITIC/NITIC/Login.xhtml"/>
-  <parameter name="jdbcDriver" value="com.mysql.jdbc.Driver"/>
-  <parameter name="dbUsername" value="root"/>
-  <parameter name="password" value="welcome1"/>
-  <parameter name="outputtableName" value="NITIC_Output_Quote"/>
-  <parameter name="userName" value="nitic_uw"/>
-  <parameter name="dburl" value="jdbc:mysql://192.168.35.2:3391/NITIC"/>
-  <parameter name="dbPassword" value="password"/>
-  <parameter name="inputtableName" value="NITIC_Input_Quote"/>
-  <test name="Test1(failed)" parallel="tests">
+<suite name="Failed suite [Suite]">
+  <test name="Open(failed)">
     <parameter name="browser" value="chrome"/>
     <parameter name="FlagForTest" value="Y"/>
-    <parameter name="driverType" value="Local"/>
+    <parameter name="driverType" value="Remote"/>
     <classes>
-      <class name="KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest">
+      <class name="KeywordDrivenFramework.KeywordDrivenFramework.OpenBrowser">
         <methods>
-          <include name="Login" invocation-numbers="0"/>
-          <include name="loadConfig"/>
-          <include name="createQuote"/>
+          <include name="Hello"/>
+          <include name="setUp"/>
         </methods>
-      </class> <!-- KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest -->
+      </class> <!-- KeywordDrivenFramework.KeywordDrivenFramework.OpenBrowser -->
     </classes>
-  </test> <!-- Test1(failed) -->
+  </test> <!-- Open(failed) -->
 </suite> <!-- Failed suite [Suite] -->

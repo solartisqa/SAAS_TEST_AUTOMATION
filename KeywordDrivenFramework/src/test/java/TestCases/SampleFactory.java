@@ -1,4 +1,4 @@
-package KeywordDrivenFramework.KeywordDrivenFramework;
+package TestCases;
 
 import org.testng.annotations.*;
 import org.testng.annotations.Factory;

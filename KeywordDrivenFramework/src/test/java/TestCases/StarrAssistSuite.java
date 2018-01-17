@@ -1,4 +1,4 @@
-package KeywordDrivenFramework.KeywordDrivenFramework;
+package TestCases;
 
 import java.awt.AWTException;
 import java.io.IOException;

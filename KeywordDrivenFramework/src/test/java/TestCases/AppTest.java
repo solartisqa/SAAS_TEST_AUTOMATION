@@ -1,4 +1,4 @@
-package KeywordDrivenFramework.KeywordDrivenFramework;
+package TestCases;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
