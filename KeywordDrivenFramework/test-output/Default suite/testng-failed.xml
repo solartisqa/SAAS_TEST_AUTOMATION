@@ -3,12 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest">
+      <class name="CucumberRunnerClass.RunCucumber">
         <methods>
-          <include name="Login"/>
-          <include name="createQuote"/>
+          <include name="Test"/>
+          <include name="setUpClass"/>
+          <include name="feature"/>
         </methods>
-      </class> <!-- KeywordDrivenFramework.KeywordDrivenFramework.NITICCreateQuoteTest -->
+      </class> <!-- CucumberRunnerClass.RunCucumber -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

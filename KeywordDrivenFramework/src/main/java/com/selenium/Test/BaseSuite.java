@@ -53,14 +53,11 @@ protected   String TestFlag;
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		 if (browser.equals("firefox"))
 			{
-			 
 			 System.setProperty("webdriver.gecko.driver","src/main/java/Drivers/geckodriver.exe");
-			 
 			 driver = new FirefoxDriver();
 			 driver.manage().deleteAllCookies();
 			 driver.manage().window().maximize();
 			 driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
-			
 			}
 		 else if (browser.equals("chrome"))
 		 {
@@ -87,10 +84,10 @@ protected   String TestFlag;
 				capabilities.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
 				capabilities.setCapability(InternetExplorerDriver.ENABLE_ELEMENT_CACHE_CLEANUP,true);
 				capabilities.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS,false);
-			 driver = new InternetExplorerDriver(capabilities);
-			 driver.manage().deleteAllCookies();
-			driver.manage().window().maximize();
-			driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+			    driver = new InternetExplorerDriver(capabilities);
+			    driver.manage().deleteAllCookies();
+			    driver.manage().window().maximize();
+			    driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 			 
 		 }
 		
@@ -134,4 +131,10 @@ protected   String TestFlag;
 			driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 	}
 
+	
+	public static void main(String args[])
+	{
+		BaseSuite base=new BaseSuite();
+		base.lauchLocalBrowser("firefox");
+	}
 }

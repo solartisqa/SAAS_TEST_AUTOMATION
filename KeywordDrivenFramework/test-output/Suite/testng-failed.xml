@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Suite]">
-  <test name="Open(failed)">
-    <parameter name="browser" value="chrome"/>
-    <parameter name="FlagForTest" value="Y"/>
-    <parameter name="driverType" value="Remote"/>
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
+  <test name="Test(failed)">
     <classes>
-      <class name="KeywordDrivenFramework.KeywordDrivenFramework.OpenBrowser">
+      <class name="selenide.LoginSelenide">
         <methods>
-          <include name="Hello"/>
-          <include name="setUp"/>
+          <include name="login"/>
         </methods>
-      </class> <!-- KeywordDrivenFramework.KeywordDrivenFramework.OpenBrowser -->
+      </class> <!-- selenide.LoginSelenide -->
     </classes>
-  </test> <!-- Open(failed) -->
+  </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->
