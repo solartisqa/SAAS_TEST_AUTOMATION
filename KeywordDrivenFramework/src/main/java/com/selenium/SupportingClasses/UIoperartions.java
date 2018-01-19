@@ -70,15 +70,11 @@ case "CLICK":
  case "GETATTRIBUTE":
 	     outputValue=this.getValueByAttribute(p, objectType);
 	     outputData.put(dbcolumn_name, outputValue);
-	     //write_data(dbcolumn_name, outputValue);
-	    // outputData.update_row();
          break;
  //------------------------------------------------------GET TEXT----------------------------------------------------------------------                 
  case "GETTEXT":
 	     outputValue=this.getValueByText(p, objectType);
-	    // System.out.println(outputValue);
 	     outputData.put(dbcolumn_name, outputValue);
-	     //outputData.update_row();
 	     break;
   //----------------------------------------------------SELECT OPERATION------------------------------------------------------------------------- 
  case "SELECT":
@@ -125,8 +121,8 @@ case "DATEPICKER_WITHOUT_ENTER":
  //---------------------------------------------------------------------------------------------------------------------------------------        
          
 case "WAITLOAD":
-		    this.waitLoad(p, objectType);
-		    break;
+		   this.waitLoad(p, objectType);
+		   break;
 //-------------------------------------------------------CONTINUES OPERATION------------------------------------------------------------------------------	
 case "CONTOPERATION":
 		inputValue = this.getInputValue(dataFlag, InputData, value, dbcolumn_name);
@@ -134,7 +130,7 @@ case "CONTOPERATION":
 		break;
      
 //--------------------------------------------------------WAITING FOR IMG INVISIBILITY----------------------------------------------------------------------------     
-case "IMGIDVISIBLE":	
+case "IMGINVISIBLE":	
 		
 			this.waitTillInvisible(p, objectType);
 		    break;
@@ -162,7 +158,6 @@ case "WAITFORTEXT":
 	if(element.isEnabled() && element.isDisplayed())
 	{
 	String expectedText=element.getText();
-	//System.out.println(expectedText);
 	wait.until(ExpectedConditions.textToBePresentInElement(element, expectedText));
 	}
     break;   

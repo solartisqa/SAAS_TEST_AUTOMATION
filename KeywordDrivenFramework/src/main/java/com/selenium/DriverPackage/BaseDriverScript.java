@@ -36,9 +36,9 @@ public BaseDriverScript(PropertiesHandle configFile) throws SQLException, ClassN
 {
 	this.configFile = configFile;
 	event=new TheEventListener();
-	objectLoginScript = new ExcelOperationsJXL(this.configFile.getProperty("TestScriptPath")+this.configFile.getProperty("ScriptFileName"));
+	objectLoginScript = new ExcelOperationsJXL(this.configFile.getProperty("TestScriptPath"));
 	objectLoginScript.getsheets(this.configFile.getProperty("loginSheetName"));
-	objectTestScript = new ExcelOperationsJXL(this.configFile.getProperty("TestScriptPath")+this.configFile.getProperty("ScriptFileName"));
+	objectTestScript = new ExcelOperationsJXL(this.configFile.getProperty("TestScriptPath"));
 	objectTestScript.getsheets(this.configFile.getProperty("ScriptSheetName"));
 	//objectComparisonScript = new ExcelOperationsJXL(this.configFile.getProperty("Test_script_path")+this.configFile.getProperty("ScriptFileName"));
 	//objectComparisonScript.getsheets(this.configFile.getProperty("ComparisonSheetName"));
@@ -48,10 +48,7 @@ public BaseDriverScript(PropertiesHandle configFile) throws SQLException, ClassN
 public WebDriver launchBrowser() throws MalformedURLException
 {
 	    String browser = configFile.getProperty("browser");
-		//String url = configFile.getProperty("url");
-		//System.out.println(url);
-		
-		return this.launch_browser(browser,configFile);
+		return this.launch_browser(browser);
 			
 }
 //==============================================Function to login===================================================================================================

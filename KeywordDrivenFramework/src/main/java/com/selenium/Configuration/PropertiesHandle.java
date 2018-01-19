@@ -18,177 +18,115 @@ public class PropertiesHandle extends Properties
 {
 	private static final long serialVersionUID = 1L;
 	protected String path = null;
-	protected String Project;
-	protected String Flow;
-	protected String Env;
-	protected String FlagForExecution;
 	protected String browser;
-	protected String JDBC_DRIVER;
-	protected String DB_URL;
-	protected String USER;
-	protected String password;
-	protected String priority;
-	protected String queryresult;
-	protected String ResultChoice;
+	protected String AppURL;
+	protected String TestSctiptFilePath;
+	protected String LoginSheetName;
+	protected String TestScriptSheetName;
+	protected String inpuTableName;
+	protected String outputtableName;
+	protected String jdbcDriver;
+	protected String dbURL;
+	protected String dbusername;
+	protected String dbPassword;
+	protected String FlagForExecution;
+	protected String ScreenshotPath;
 	
 
 	static DatabaseOperation ConfigQuery = new DatabaseOperation();
 			
-	    public PropertiesHandle(String Project,String Flow, String Env ,String FlagForExecution, String JDBC_DRIVER, String DB_URL, String USER, String password, String browser,String ResultChoice) throws DatabaseException, PropertiesHandleException
+	    public PropertiesHandle(String browser,String AppURL,String TestSctiptFilePath,String LoginSheetName,String TestScriptSheetName,String inpuTableName,String outputtableName,String jdbcDriver,String dbURL,String dbusername,String dbPassword,String FlagForExecution,String ScreenshotPath) throws DatabaseException, PropertiesHandleException
 		{
-			this.Project = Project;
-			this.Flow=Flow;
-			this.Env=Env;
+			this.browser = browser;
+			this.AppURL =AppURL;
+			this.TestSctiptFilePath=TestSctiptFilePath;
+			this.LoginSheetName=LoginSheetName;
+			this.TestScriptSheetName=TestScriptSheetName;
+			this.inpuTableName=inpuTableName;
+			this.outputtableName=outputtableName;
+			this.jdbcDriver=jdbcDriver;
+			System.out.println("1---------"+dbURL);
+			this.dbURL=dbURL;
+			this.dbusername=dbusername;
+			this.dbPassword=dbPassword;
 			this.FlagForExecution=FlagForExecution;
-			this.JDBC_DRIVER=JDBC_DRIVER;
-			this.DB_URL=DB_URL;
-			this.USER=USER;
-			this.password=password;
-			this.browser=browser;
-			this.ResultChoice=ResultChoice;
-		
+			this.ScreenshotPath=ScreenshotPath;
 			WriteProperty();
 			
 		}
 		
 		protected void WriteProperty() throws DatabaseException, PropertiesHandleException
 		{
-			DatabaseOperation.ConnectionSetup(JDBC_DRIVER, DB_URL, USER, password);
-						
-            if(ResultChoice.equalsIgnoreCase("ActualOnly"))
-            {
-				 this.ActualAndStatus("Y", "N");    
-            }
-			if(ResultChoice.equalsIgnoreCase("CompareResults"))
-			{
-				this.ActualAndStatus("Y", "Y");    
-			}
+			
 			
 		   this.browser();
-		   this.driverPath();
-		   this.TestScriptPath();
-		   this.ScriptFileName();
-		   this.loginSheetName();
-		   this.ScriptSheetName();
-		   this.flagForExecution();
-		   this.EnvURL();
-
+		   this.AppURL();
+		   this.TestSctiptFilePath();
+		   this.LoginSheetName();
+		   this.TestScriptSheetName();
 		   this.InputQuery();
 		   this.OutputQuery();
- 		    
 		    this.DBdetails();
+		    this.FlagForExecution();
 		    this.ScreenshotPath();
-		    DatabaseOperation.CloseConn();
 		 
 		}
-		
-		protected String RdmsQuery(String OutputColoumn) throws PropertiesHandleException
-		{
-			try
-			{
-				LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdmsQuery =  ConfigQuery.GetDataObjects("SELECT ProjectName,ProjectDBName, DriverPath,RootFolder,FileName,ScriptSheetName,LoginSheetName,InputTable,OutputTable,UserDBName,JDCDriver,DB_URL,DB_UserName,DB_Password,Env_Name,URL FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN Flow_CONFIG ON Project_CONFIG.ProjectID = Flow_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON Flow_CONFIG.FlowID = Environment_CONFIG.FlowID INNER JOIN Version_CONFIG ON Environment_CONFIG.Env_ID = Version_CONFIG.Env_ID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.FlowID = Flow_CONFIG.FlowID)WHERE Project_CONFIG.ProjectName ='" +Project+ "' AND Flow_CONFIG.FlowName = '" +Flow+ "' AND Environment_CONFIG.Env_Name = '" +Env+ "' ORDER BY Version_CONFIG.Version DESC LIMIT 1");
-				for (Entry<Integer, LinkedHashMap<String, String>> entry : tableRdmsQuery.entrySet())	
-				{
-					LinkedHashMap<String, String> rowRdmsQuery = entry.getValue();
-					queryresult =  rowRdmsQuery.get(OutputColoumn);
-				}
-				return "SELECT * FROM " + queryresult;		
-			}
-			catch(DatabaseException e)
-			{
-				throw new PropertiesHandleException("ERROR IN SQL - QUERY -- " + OutputColoumn, e);
-			}
-		}
-		
-		protected String RdmsValue(String OutputColoumn) throws PropertiesHandleException
-		{
-			try
-			{
-				LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdmsValue = ConfigQuery.GetDataObjects("SELECT ProjectName,ProjectDBName, DriverPath,RootFolder,FileName,ScriptSheetName,LoginSheetName,InputTable,OutputTable,UserDBName,JDCDriver,DB_URL,DB_UserName,DB_Password,Env_Name,URL FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN Flow_CONFIG ON Project_CONFIG.ProjectID = Flow_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON Flow_CONFIG.FlowID = Environment_CONFIG.FlowID INNER JOIN Version_CONFIG ON Environment_CONFIG.Env_ID = Version_CONFIG.Env_ID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.FlowID = Flow_CONFIG.FlowID)WHERE Project_CONFIG.ProjectName ='" +Project+ "' AND Flow_CONFIG.FlowName = '" +Flow+ "' AND Environment_CONFIG.Env_Name = '" +Env+ "' ORDER BY Version_CONFIG.Version DESC LIMIT 1");
-				for (Entry<Integer, LinkedHashMap<String, String>> entry : tableRdmsValue.entrySet())	
-				{
-					LinkedHashMap<String, String> rowRdmsValue = entry.getValue();
-					queryresult = rowRdmsValue.get(OutputColoumn);
-				}
-				return queryresult;
-			}
-			catch(DatabaseException e)
-			{
-				throw new PropertiesHandleException("ERROR IN RETRIVING DATA FROM -- " + OutputColoumn, e);
-			}
-		}
-
-	
-		protected void ActualAndStatus(String Actual, String Status)// FUNCTION FOR ACTUAL AND STATUS OCCURANCE
-		{
-			this.put("actual", Actual);
-			this.put("comparison", Status);
-		}	
 		
 		protected void browser() throws PropertiesHandleException// FUNCTION FOR SAMPLEREQUEST PATH
 		{
 			this.put("browser", browser);
 		}
 		
-		protected void driverPath() throws PropertiesHandleException// FUNCTION FOR REQUEST TO SAVE PATH
+		protected void AppURL() throws PropertiesHandleException// FUNCTION FOR SAMPLEREQUEST PATH
 		{
-			this.put("driverPath", this.RdmsValue("DriverPath"));
+			this.put("EnvURL", AppURL);
 		}
 		
-		protected void TestScriptPath() throws PropertiesHandleException// FUNCTION FOR RESPONSE TO SAVE PATH
+		protected void TestSctiptFilePath() throws PropertiesHandleException// FUNCTION FOR RESPONSE TO SAVE PATH
 		{
-			this.put("TestScriptPath", this.RdmsValue("RootFolder") + "/" + Project + "/" + Flow + "/Script/");
+			this.put("TestScriptPath", TestSctiptFilePath);
+		}
+		protected void LoginSheetName() throws PropertiesHandleException// FUNCTION FOR EXPECTED RATING MODEL PATH
+		{
+			this.put("loginSheetName", LoginSheetName);
 		}
 		
-		protected void ScriptFileName() throws PropertiesHandleException// FUNCTION FOR SAMPLE RATING MODEL PATH
+		protected void TestScriptSheetName() throws PropertiesHandleException// FUNCTION TO GET RESULT SET FROM MACRO MAPPING TABLE 
 		{
-			this.put("ScriptFileName", this.RdmsValue("FileName"));
+			this.put("ScriptSheetName", TestScriptSheetName);
 		}
 		
-		protected void loginSheetName() throws PropertiesHandleException// FUNCTION FOR EXPECTED RATING MODEL PATH
-		{
-			this.put("loginSheetName", this.RdmsValue("LoginSheetName"));
-		}
-		
-		protected void ScriptSheetName() throws PropertiesHandleException// FUNCTION TO GET RESULT SET FROM MACRO MAPPING TABLE 
-		{
-			this.put("ScriptSheetName", this.RdmsValue("ScriptSheetName"));
-		}
-		
-		protected void flagForExecution() throws PropertiesHandleException// FUNCTION TO GET RESULT SET FROM MACRO TRNSLATION TABLE 
+		protected void FlagForExecution() throws PropertiesHandleException// FUNCTION TO GET RESULT SET FROM MACRO TRNSLATION TABLE 
 		{
 			this.put("flagForExecution", FlagForExecution);
 		}
 
-		protected void EnvURL() throws PropertiesHandleException// FUNCTION TO GET URL
-		{
-			this.put("EnvURL", this.RdmsValue("URL"));	
-		}
 	
 		protected void InputQuery() throws PropertiesHandleException// FUNCTION FOR INPUTQUERY
 		{
-			this.put("inputQuery",  this.RdmsQuery("InputTable"));//+" where "+ this.RdmsValue("InputTable")+".Flag_for_execution='"+FlagForExecution+"'");
+			this.put("inputQuery",  "SELECT * From "+inpuTableName);//+" where "+ this.RdmsValue("InputTable")+".Flag_for_execution='"+FlagForExecution+"'");
 			
 		}
 		
 		protected void OutputQuery() throws PropertiesHandleException// FUNCTION FOR OUTPUTQUERY
 		{
-			this.put("outputQuery", this.RdmsQuery("OutputTable"));
+			this.put("outputQuery", "SELECT * From "+outputtableName);
 		}
 		
 	
 	    protected void DBdetails() throws PropertiesHandleException// FUNCTION FOR DB-DETAILS
 		{
-			this.put("jdbc_driver", this.RdmsValue("JDCDriver"));
-			this.put("db_url", this.RdmsValue("DB_URL") + "/" + this.RdmsValue("ProjectDBName"));
-			this.put("db_username", this.RdmsValue("DB_UserName"));
-			this.put("db_password", this.RdmsValue("DB_Password"));
+			this.put("jdbc_driver",jdbcDriver);
+			System.out.println("----"+dbURL);
+			this.put("db_url",dbURL);
+			this.put("db_username",dbusername);
+			this.put("db_password",dbPassword);
 		}	
 		
 	    
 	    protected void ScreenshotPath() throws PropertiesHandleException
 	    {
-	    	this.put("ScreenShotPath", this.RdmsValue("RootFolder") + "/" + Project + "/" + Flow + "/ScreenShots/");
+	    	this.put("ScreenShotPath",ScreenshotPath );
 	    }
 		public PropertiesHandle(String path) throws PropertiesHandleException
 		{

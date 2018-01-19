@@ -7,24 +7,17 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
-
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.selenium.Configuration.PropertiesHandle;
 import com.selenium.DriverPackage.*;
 import com.selenium.SupportingClasses.DatabaseOperation;
 import com.selenium.exception.DatabaseException;
 import com.selenium.exception.PropertiesHandleException;
-
-
 
 public class UIMainscript
 {
@@ -45,41 +38,15 @@ public class UIMainscript
 	public  static WebDriver driver=null;
 	public static String exceptionScreenshotPath=null;
 	
-	String Project=null;
-	String Flow=null;
-	String Environment=null;
-	String Flag=null;
-	String jdbcDriver=null;
-	String url=null;
-	String dbUsername=null;
-	String dbPassword=null;
-	String ResultsChoice=null;
-	String browser=null;
 
-	public UIMainscript(String Project,String Flow,String Environment,String Flag,String jdbcDriver,String url,String dbUsername,String dbPassword,String browser, String ResultsChoice)
-	{
-		this.Project=Project;
-		this.Flow=Flow;
-		this.Environment=Environment;
-		this.Flag=Flag;
-		this.jdbcDriver=jdbcDriver;
-		this.url=url;
-		this.dbUsername=dbUsername;
-		this.dbPassword=dbPassword;
-		this.browser=browser;
-		this.ResultsChoice=ResultsChoice;
-		
-	}
-   // @Parameters({"Project","Flow","Environment","Flag","jdbcDriver","url","dbUsername","dbPassword","browser","ResultsChoice"}) 
-	// String Project,String Flow,String Environment,String Flag,String jdbcDriver,String url,String dbUsername,String dbPassword,String browser,String ResultsChoice
+	
 	@BeforeTest//(alwaysRun=true)
 	public void loadconfig() throws DatabaseException, ClassNotFoundException, SQLException, PropertiesHandleException, MalformedURLException
 	{
 		System.setProperty("jsse.enableSNIExtension", "false");
-		//configFile = new PropertiesHandle(System.getProperty("Project"),System.getProperty("Flow"),System.getProperty("Env"),Flag,System.getProperty("JDBC_DRIVER"),System.getProperty("DB_URL"),System.getProperty("USER"),System.getProperty("password"),myBrowser,System.getProperty("ResultChoice"));		
-		configFile = new PropertiesHandle(Project,Flow,Environment,Flag,jdbcDriver,url,dbUsername,dbPassword,browser,ResultsChoice);		
+		configFile = new PropertiesHandle(System.getProperty("browser"),System.getProperty("AppURL"),System.getProperty("TestSctiptFilePath"),System.getProperty("LoginSheetName"),System.getProperty("TestScriptSheetName"),System.getProperty("inpuTableName"),System.getProperty("outputtableName"),System.getProperty("jdbcDriver"), System.getProperty("dbURL"), System.getProperty("dbusername"), System.getProperty("dbPassword"),System.getProperty("FlagForExecution"),System.getProperty("ScreenshotPath"));		
 
-		DatabaseOperation.ConnectionSetup(configFile);  
+		DatabaseOperation.ConnectionSetup(configFile);
 		objDriver=new BaseDriverScript(configFile);
 		driver=objDriver.launchBrowser();
 		exceptionScreenshotPath=configFile.getProperty("ScreenShotPath");
@@ -93,9 +60,7 @@ public class UIMainscript
 	}
 	
 	@SuppressWarnings("unchecked")
-	 
 	@Test(dataProvider="UITestData",dependsOnMethods = { "Login" })
-	
     public void UITest(Integer RowIterator, Object inputtablerowobj, Object outputtablerowobj) throws ClassNotFoundException, SQLException, IOException, InterruptedException, AWTException, DatabaseException
     {
 		LinkedHashMap<String, String> inputrow = inputtableobjectMapper.convertValue(inputtablerowobj, LinkedHashMap.class);
@@ -118,7 +83,6 @@ public class UIMainscript
 	{
 		//objDriver.closeBrowser();
 		DatabaseOperation.CloseConn();
-		
 	}
 //========================================================================data provider=========================================================================================
     @DataProvider(name="UITestData")

@@ -26,14 +26,13 @@ public class browserLaunching extends ConditionsChecking{
 	protected WebDriver wdriver=null;
 	protected EventFiringWebDriver driver=null;
 	protected TheEventListener eventListerner=null;
-	//protected RemoteWebDriver driver=null;
 	protected WebDriverWait wait=null; 
 	
-	 public WebDriver launch_browser(String browser,PropertiesHandle config) throws MalformedURLException
+	 public WebDriver launch_browser(String browser) throws MalformedURLException
 	 {
 		
 		DesiredCapabilities capabilities = new DesiredCapabilities();
-		String driver_path = config.getProperty("driverPath");
+		String driver_path = "src//main//java//Drivers//";
 		/* //String Url= config.getProperty("EnvURL");
 		 if(browser.equalsIgnoreCase("chrome")){
 				DesiredCapabilities capability = new DesiredCapabilities().chrome();
@@ -148,5 +147,11 @@ public class browserLaunching extends ConditionsChecking{
 		}
 
 	 
+		public static void main(String args[]) throws MalformedURLException
+		{
+			browserLaunching br=new browserLaunching();
+			br.launch_browser("chrome");
+			
+		}
 	 
 }
