@@ -35,14 +35,14 @@ public class browserLaunching extends ConditionsChecking{
 			{
 				DesiredCapabilities cap = new DesiredCapabilities().firefox();
 				cap.setBrowserName("firefox");
-				cap.setPlatform(Platform.WINDOWS);
+				//cap.setPlatform(Platform.WINDOWS);
 				driver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
 			} 
 		 else if (browser.equals("chrome"))
 			{
 				DesiredCapabilities cap = new DesiredCapabilities().chrome();
 				cap.setBrowserName("chrome");
-				cap.setPlatform(Platform.WINDOWS);
+				//cap.setPlatform(Platform.WINDOWS);
 				driver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
 			} 
 		 else if(browser.equals("IE"))

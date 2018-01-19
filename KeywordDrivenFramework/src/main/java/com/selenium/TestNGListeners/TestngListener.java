@@ -67,7 +67,7 @@ public class TestngListener implements ITestListener
 		{
 			System.out.println(sttributeName);
 		}
-		System.out.println("Calling Listener Class");
+		System.out.println("Test Started");
 	}
 
 	public void onTestFailedButWithinSuccessPercentage(ITestResult arg0) 
@@ -107,7 +107,7 @@ public class TestngListener implements ITestListener
 	public void onTestSuccess(ITestResult arg0) 
 	{
 		// TODO Auto-generated method stub
-		System.out.println("On Test Success");
+		System.out.println("Test Success");
 		long millisec = arg0.getEndMillis();
 		System.out.println(millisec);
 		
