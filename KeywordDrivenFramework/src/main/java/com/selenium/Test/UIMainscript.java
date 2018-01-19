@@ -55,8 +55,10 @@ public class UIMainscript
 	@Test//(alwaysRun=true)
 	public void Login() throws SQLException, IOException, InterruptedException, AWTException
 	{
-		 driver.get(configFile.getProperty("EnvURL"));
+	
+		driver.get(configFile.getProperty("EnvURL"));
 		 objDriver.login(inputrow, outputrow);
+		
 	}
 	
 	@SuppressWarnings("unchecked")

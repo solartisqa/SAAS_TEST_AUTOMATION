@@ -20,41 +20,55 @@ import org.openqa.selenium.remote.CapabilityType;
 
 public class browserLaunching extends ConditionsChecking{
 	
-	public static ThreadLocal<RemoteWebDriver> dr = new ThreadLocal<RemoteWebDriver>();
-
 	
-	protected WebDriver wdriver=null;
-	protected EventFiringWebDriver driver=null;
-	protected TheEventListener eventListerner=null;
+	protected WebDriver driver = null;
+	//protected RemoteWebDriver wdriver=null;
+	//protected WebDriver wdriver=null;
+	//protected EventFiringWebDriver driver=null;
+	//protected TheEventListener eventListerner=null;
 	protected WebDriverWait wait=null; 
 	
 	 public WebDriver launch_browser(String browser) throws MalformedURLException
 	 {
 		
-		DesiredCapabilities capabilities = new DesiredCapabilities();
-		String driver_path = "src//main//java//Drivers//";
-		/* //String Url= config.getProperty("EnvURL");
-		 if(browser.equalsIgnoreCase("chrome")){
-				DesiredCapabilities capability = new DesiredCapabilities().chrome();
-				capability.setBrowserName("chrome");
-				capability.setPlatform(Platform.WINDOWS);
-				driver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), capability);
-			}
-			else if(browser.equalsIgnoreCase("firefox"))
+		 if (browser.equals("firefox"))
 			{
-				DesiredCapabilities capability = new DesiredCapabilities().firefox();
-				capability.setBrowserName("firefox");
-				capability.setPlatform(Platform.WINDOWS);
-				driver = new RemoteWebDriver(new URL("http://192.168.4.77:4444/wd/hub"), capability);
-			}
-		 setWebDriver(driver);
-		 //driver=getDriver();
-		 getDriver().manage().window().maximize();
-		 getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		 return getDriver();
-	 }*/
+				DesiredCapabilities cap = new DesiredCapabilities().firefox();
+				cap.setBrowserName("firefox");
+				cap.setPlatform(Platform.WINDOWS);
+				driver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
+			} 
+		 else if (browser.equals("chrome"))
+			{
+				DesiredCapabilities cap = new DesiredCapabilities().chrome();
+				cap.setBrowserName("chrome");
+				cap.setPlatform(Platform.WINDOWS);
+				driver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
+			} 
+		 else if(browser.equals("IE"))
+		 {
+			   DesiredCapabilities cap = new DesiredCapabilities().internetExplorer();
+				cap.setBrowserName("IE");
+				cap.setPlatform(Platform.WINDOWS);
+				cap.setCapability("ignoreZoomSetting", true);
+				cap.setCapability("javascriptEnabled", true);
+				cap.setCapability("platform", "WINDOWS");
+				cap.setCapability("ignoreProtectedModeSettings", true);
+				cap.setCapability("ie.ensureCleanSession", true);
+				cap.setCapability("browserName", "internet explorer");
+				cap.setCapability(InternetExplorerDriver.UNEXPECTED_ALERT_BEHAVIOR,"dismiss");
+				cap.setCapability(InternetExplorerDriver.ELEMENT_SCROLL_BEHAVIOR,0);
+				cap.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
+				cap.setCapability(InternetExplorerDriver.ENABLE_ELEMENT_CACHE_CLEANUP,true);
+				cap.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS,false);
+				driver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
+		 }
+		 
+			driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+			return driver;
+	 }
 	 
-	   switch(browser.toUpperCase()) 
+	   /*switch(browser.toUpperCase()) 
 		{
 					
 			case "IE":
@@ -131,20 +145,13 @@ public class browserLaunching extends ConditionsChecking{
 		}
 	   //driver.get(Url);
 		return driver;
-	 }
-	 
+	 }*/
 
 	 public void stop_browser()
 		{
 			driver.quit();
 		}
-	 public WebDriver getDriver() {
-			return dr.get();
-		}
-
-		public void setWebDriver(RemoteWebDriver driver) {
-			dr.set(driver);
-		}
+	
 
 	 
 		public static void main(String args[]) throws MalformedURLException
