@@ -67,7 +67,7 @@ public class UIMainscript
 		LinkedHashMap<String, String> outputrow = outputtableobjectMapper.convertValue(outputtablerowobj, LinkedHashMap.class);
     	
 			 System.out.println(RowIterator);
-			 if(inputrow.get("Flag_for_execution").equals(configFile.getProperty("flagForExecution")))//
+			 if(inputrow.get("Flag_for_execution").equals(configFile.getProperty("flagForExecution")))
 				{  
 				  System.out.println("Executing main script");
 				  objDriver.executeTestScript(inputrow, outputrow);

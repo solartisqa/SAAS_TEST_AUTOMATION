@@ -36,20 +36,15 @@ public class UIoperartions extends browserLaunching
 	 protected String outputValue;
 	 public WebElement element;
 	 public Document document;
-	// public WebDriver driver=null;
-	// WebDriverWait wait;
 	
 //**************************************UI operations***************************************************************************
 public void perform(String p,String operation,String objectType,String value,String dbcolumn_name,String dataFlag,LinkedHashMap<String, String> InputData,LinkedHashMap<String, String> outputData,String waitingTime) throws SQLException, IOException, InterruptedException, AWTException
 {
 	long waitingTimeinseconds=Long.parseLong(waitingTime);
-	//System.out.println("waitingtime"+waitingTimeinseconds);
-   // driver=this.getDriver();
 	wait = new WebDriverWait(driver, waitingTimeinseconds);
 try
 {
 switch (operation.toUpperCase())
-
 
 {
 //-------------------------------click operation-------------------------------------------------------------------------------
@@ -195,13 +190,12 @@ case "JSCLICK":
 case "SETEXTRACTEDVALUE":
 	
 	inputValue=this.getValueByAttribute(value, objectType);
-	//System.out.println("xpath..."+value+"-----extracted------"+inputValue);
 	this.setTextWithoutEnter(p, objectType, inputValue);
 	break;
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-default:
+default :
 	    System.out.println("operations not  performed");
-	    break;
+	  
 } 
 }
 catch(StaleElementReferenceException e)
