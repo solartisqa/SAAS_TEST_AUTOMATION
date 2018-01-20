@@ -76,7 +76,7 @@ public class TestngListener implements ITestListener
 	public void onTestFailure(ITestResult result)
 	{
 		System.out.println("***** Error "+result.getName()+" test has failed *****");
-		if(result.getName().equals("UITest"))
+		if(result.getName()=="UITest")
 		{
 			UIMainscript.outputrow.put("overall_status", "Fail");
 			UIMainscript.inputrow.put("Flag_for_execution", "Fail");
@@ -109,7 +109,7 @@ public class TestngListener implements ITestListener
 	public void onTestSuccess(ITestResult arg0) 
 	{
 		System.out.println(arg0.getName()+"......Test Success");
-		if(arg0.getName().equals("UITest"))
+		if(arg0.getName()=="UITest")
 		{
 			UIMainscript.outputrow.put("overall_status", "pass");
 		}
