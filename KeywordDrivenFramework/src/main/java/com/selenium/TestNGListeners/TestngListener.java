@@ -79,8 +79,12 @@ public class TestngListener implements ITestListener
 	public void onTestFailure(ITestResult result)
 	{
 		System.out.println("***** Error "+result.getName()+" test has failed *****");
-		UIMainscript.outputrow.put("overall_status", "Fail");
-		UIMainscript.inputrow.put("Flag_for_execution", "Fail");
+		if(result.getName().equals("UITest"))
+		{
+			UIMainscript.outputrow.put("overall_status", "Fail");
+			UIMainscript.inputrow.put("Flag_for_execution", "Fail");
+		}
+		
 		String testClassName = getTestClassName(result.getInstanceName()).trim();
     	String methodName=result.getName().toString().trim();
     	Object []parameter = result.getParameters();
@@ -110,7 +114,11 @@ public class TestngListener implements ITestListener
 	{
 		// TODO Auto-generated method stub
 		System.out.println("Test Success");
-		UIMainscript.outputrow.put("overall_status", "pass");
+		if(arg0.getName().equals("UITest"))
+		{
+			UIMainscript.outputrow.put("overall_status", "pass");
+		}
+		
 		long millisec = arg0.getEndMillis();
 		System.out.println(millisec);
 		
