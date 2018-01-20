@@ -109,11 +109,11 @@ public class TestngListener implements ITestListener
 	public void onTestSuccess(ITestResult arg0) 
 	{
 		System.out.println(arg0.getName()+"......Test Success");
-		if(arg0.getName().contains("UITest"))
+	/*	if(arg0.getName().contains("UITest"))
 		{
 			UIMainscript.outputrow.put("overall_status", "pass");
 		}
-		
+		*/
 		long millisec = arg0.getEndMillis();
 		System.out.println(millisec);
 		
