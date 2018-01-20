@@ -23,8 +23,7 @@ public class TestngListener implements ITestListener
 	
 	public void onFinish(ITestContext context) 
 	{
-		// TODO Auto-generated method stub
-		// Code to avoid duplicate test run due to retry
+		
 		Set<ITestResult> skippedTests = context.getSkippedTests().getAllResults();
 		Set<ITestResult> failedTests = context.getFailedTests().getAllResults();
 		//failedTests.addAll(skippedTests);
@@ -61,18 +60,16 @@ public class TestngListener implements ITestListener
 
 	public void onStart(ITestContext arg0) 
 	{
-		// TODO Auto-generated method stub
 		Set<String> attributeNames = arg0.getAttributeNames();
 		for(String sttributeName: attributeNames)
 		{
 			System.out.println(sttributeName);
 		}
-		System.out.println("Test Started");
+		System.out.println(arg0.getName()+"......Started");
 	}
 
 	public void onTestFailedButWithinSuccessPercentage(ITestResult arg0) 
 	{
-		// TODO Auto-generated method stub
 		System.out.println("FailedButWithinSuccessPercentage");
 	}
 
@@ -96,13 +93,12 @@ public class TestngListener implements ITestListener
 
 	public void onTestSkipped(ITestResult arg0) 
 	{
-		// TODO Auto-generated method stub	
-		
+		System.out.println(arg0.getName()+" test has Skipped *****");
 	}
 
 	public void onTestStart(ITestResult arg0) 
 	{
-		// TODO Auto-generated method stub
+		System.out.println(arg0.getName()+"......Test Started");
 		Set<String> sttributeNames = arg0.getAttributeNames();
 		for(String sttributeName: sttributeNames)
 		{
@@ -112,8 +108,7 @@ public class TestngListener implements ITestListener
 
 	public void onTestSuccess(ITestResult arg0) 
 	{
-		// TODO Auto-generated method stub
-		System.out.println("Test Success");
+		System.out.println(arg0.getName()+"......Test Success");
 		if(arg0.getName().equals("UITest"))
 		{
 			UIMainscript.outputrow.put("overall_status", "pass");
