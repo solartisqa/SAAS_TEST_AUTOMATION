@@ -73,12 +73,11 @@ public class UIMainscript
 				{  
 				  System.out.println("Executing main script");
 				  objDriver.executeTestScript(inputrow, outputrow);
-				   //objDriver.comparisonScript(inputrow, outputrow);
-				  inputrow.put("Flag_for_execution", inputrow.get("Flag_for_execution")+"Completed");
+				  inputrow.put("Flag_for_execution", "Completed");
 				  outputrow.put("Flag_for_execution", "Completed");
 			   }		   
-		  input.UpdateRow(RowIterator, inputrow);
-		  output.UpdateRow(RowIterator, outputrow);
+		   input.UpdateRow(RowIterator, inputrow);
+		   output.UpdateRow(RowIterator, outputrow);
     }
 	@AfterTest
 	public void close() throws DatabaseException
