@@ -37,6 +37,7 @@ public class browserLaunching extends ConditionsChecking{
 				cap.setBrowserName("firefox");
 				//cap.setPlatform(Platform.WINDOWS);
 				driver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
+				driver.manage().window().maximize();
 			} 
 		 else if (browser.equals("chrome"))
 			{
@@ -44,6 +45,7 @@ public class browserLaunching extends ConditionsChecking{
 				cap.setBrowserName("chrome");
 				//cap.setPlatform(Platform.WINDOWS);
 				driver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
+				driver.manage().window().maximize();
 			} 
 		 else if(browser.equals("IE"))
 		 {
@@ -62,6 +64,7 @@ public class browserLaunching extends ConditionsChecking{
 				cap.setCapability(InternetExplorerDriver.ENABLE_ELEMENT_CACHE_CLEANUP,true);
 				cap.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS,false);
 				driver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
+				driver.manage().window().maximize();
 		 }
 		 
 			driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
