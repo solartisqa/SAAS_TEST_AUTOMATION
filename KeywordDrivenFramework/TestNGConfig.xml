@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Parallel test suite" parallel="tests">
-  <test name="ChromeTest1">
+  <test name="AssistTest">
     <classes>
       <class name="com.selenium.Test.UIMainscript"/>
     </classes>

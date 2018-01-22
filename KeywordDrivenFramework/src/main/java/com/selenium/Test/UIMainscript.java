@@ -105,8 +105,7 @@ public class UIMainscript
 				Entry<Integer, LinkedHashMap<String, String>> outputentry = outputtableiterator.next();
 		        LinkedHashMap<String, String> inputrow = inputentry.getValue();
 		        LinkedHashMap<String, String> outputrow = outputentry.getValue();
-		        if(inputrow.get("Flag_for_execution").equals("Y"))
-		        {
+		     
 		         inputtableobjectMapper = new ObjectMapper();
 				 Object inputtablerowobject = inputtableobjectMapper.convertValue(inputrow, Object.class);
 				 outputtableobjectMapper = new ObjectMapper();
@@ -115,7 +114,6 @@ public class UIMainscript
 				 combined[rowIterator][1] = inputtablerowobject;
 				 combined[rowIterator][2] = outputtablerowobject;
 				 rowIterator++;
-		        }
 			}  
 		 return combined;
 	 }
