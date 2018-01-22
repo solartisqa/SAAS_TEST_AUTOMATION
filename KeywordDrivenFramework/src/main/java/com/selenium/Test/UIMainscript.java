@@ -75,6 +75,7 @@ public class UIMainscript
 				  objDriver.executeTestScript(inputrow, outputrow);
 				  inputrow.put("Flag_for_execution", "Completed");
 				  outputrow.put("Flag_for_execution", "Completed");
+				  outputrow.put("Flag_for_execution", "Pass");
 			   }	
 			 
 		   input.UpdateRow(RowIterator, inputrow);
