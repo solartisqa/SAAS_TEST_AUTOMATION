@@ -18,7 +18,7 @@ public class UIMainscript
     	databaseOperartions objectInput = new databaseOperartions();
 		databaseOperartions objectOutput = new databaseOperartions();
 		
-		propertiesHandle configFile = new propertiesHandle("A:/1 Projects/20 CHIC_UI/Release1/Configuration/Config_C1128.properties");
+		propertiesHandle configFile = new propertiesHandle("A:/1Projects/13StarrAssist/Release24/Configuration/Config_C1128.properties");
 		databaseOperartions.conn_setup(configFile);
 		System.setProperty("jsse.enableSNIExtension", "false");	
 		BaseDriverScript objDriver=new BaseDriverScript(configFile);
@@ -34,8 +34,8 @@ public class UIMainscript
 				 objDriver.login(objectInput, objectOutput);
 				 loginStatus=false;
 			   }
-			 String testdata=objectInput.read_data("Test_data_id");
-			 System.out.println(testdata);
+			// String testdata=objectInput.read_data("Test_data_id");
+			// System.out.println(testdata);
 			 if(objectInput.read_data("flag_for_execution").equals(configFile.getProperty("flagForExecution")))
 				{  
 				  objDriver.executeTestScript(objectInput, objectOutput);
