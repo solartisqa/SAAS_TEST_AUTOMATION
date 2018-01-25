@@ -98,7 +98,7 @@ public class UIMainscript
 		 outputtable = output.GetDataObjects(configFile.getProperty("outputQuery"));
 		 Iterator<Entry<Integer, LinkedHashMap<String,String>>> outputtableiterator = outputtable.entrySet().iterator();
 		 int rowIterator = 0;
-		 Object[][] combined = new Object[inputtable.size()][3];
+		 Object[][] combined=null;
 		 while (inputtableiterator.hasNext() && outputtableiterator.hasNext()) 
 			{
 				Entry<Integer, LinkedHashMap<String, String>> inputentry = inputtableiterator.next();
@@ -107,6 +107,7 @@ public class UIMainscript
 		        LinkedHashMap<String, String> outputrow = outputentry.getValue();
 		        if(inputrow.get("Flag_for_execution").equals(configFile.getProperty("flagForExecution")))
 				{  
+		         combined = new Object[rowIterator][3];
 		         inputtableobjectMapper = new ObjectMapper();
 				 Object inputtablerowobject = inputtableobjectMapper.convertValue(inputrow, Object.class);
 				 outputtableobjectMapper = new ObjectMapper();
