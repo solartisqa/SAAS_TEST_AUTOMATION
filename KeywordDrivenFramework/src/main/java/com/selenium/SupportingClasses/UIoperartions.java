@@ -499,6 +499,19 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 				}
 				if(i==3)
 				{
+					switch(value1[1])
+					{
+					    case "01":  value1[1] = "1";        break;
+			            case "02":  value1[1] = "2";        break;
+			            case "03":  value1[1] = "3";        break;
+			            case "04":  value1[1] = "4";        break;
+			            case "05":  value1[1] = "5";        break;
+			            case "06":  value1[1] = "6";        break;
+			            case "07":  value1[1] = "7";        break;
+			            case "08":  value1[1] = "8";        break;
+			            case "09":  value1[1] = "9";        break;
+			            default: value1[0] = "Invaliddate "; break;
+					}
 					p=property[i].replace("!",value1[1]);
 				}
 				 
