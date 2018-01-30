@@ -5,9 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ComposeEmailPage 
+import BasePage.BasePage;
+
+public class ComposeEmailPage extends BasePage
 {
-	private WebDriver driver;
 	
 	 @FindBy(xpath="//table/tbody[@id='TravelerList:TravelerForm:TravelerDatatable_data']/tr/td[1]/div[@class='ui-row-toggler ui-icon ui-icon-circle-triangle-e']")WebElement FillinInfo;
 	 @FindBy(id="TravelerList:TravelerForm:TravelerDatatable:0:Object__Traveler__FirstName")WebElement FirstName;
@@ -30,11 +31,6 @@ public class ComposeEmailPage
 	
 	 public ComposeEmailPage(WebDriver driver)
 	 {
-		 this.driver=driver;
-		 if(driver==null)
-		 {
-			 System.out.println("driver is null in get a Quote page");
-		 }
-		 PageFactory.initElements(driver, this);
+		 super(driver);
 	 }
 }

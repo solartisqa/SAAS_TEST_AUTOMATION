@@ -15,7 +15,7 @@ import BasePage.BasePage;
 
 public class GetAQuotePage extends BasePage
 {
-	 private WebDriver driver;
+	
 	 @FindBy(id="Get_Quote:travelform:Object__Insured__State__Resident__Code")WebElement StateOfResidence;
 	 @FindBy(id="Get_Quote:travelform:Object__Quote__Plan")WebElement PlanName;
 	 @FindBy(id="Get_Quote:travelform:Object__Risk__Trip__DestinationCountry")WebElement DestinationCountry;

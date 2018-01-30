@@ -6,10 +6,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-public class PaymentInformationPage 
+import BasePage.BasePage;
+
+public class PaymentInformationPage extends BasePage
 {
-	private WebDriver driver;
-	
+
 	 @FindBy(id="Payment:PaymentInformation:Object__PaymentDetail__PaymentMethod")WebElement PaymentMethod;
 	 @FindBy(id="Payment:PaymentInformation:Object__CardDetail__CardType")WebElement CardType;
 	 @FindBy(id="Payment:PaymentInformation:Object__CardDetail__CardNumber")WebElement CardNumber;
@@ -25,13 +26,8 @@ public class PaymentInformationPage
 	
 	
 	 public PaymentInformationPage(WebDriver driver)
-	 {
-		 this.driver=driver;
-		 if(driver==null)
-		 {
-			 System.out.println("driver is null in get a Quote page");
-		 }
-		 PageFactory.initElements(driver, this);
+	 { 
+		 super(driver);
 	 }
 	 
 	 public void selectPaymentMethod(String paymentMethod)

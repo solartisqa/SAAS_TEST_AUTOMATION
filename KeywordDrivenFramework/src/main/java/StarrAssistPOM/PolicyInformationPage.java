@@ -5,9 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class PolicyInformationPage 
+import BasePage.BasePage;
+
+public class PolicyInformationPage extends BasePage
 {
-	private WebDriver driver;
 	
 	 @FindBy(xpath="//tbody[contains(@id,'BatchTravalerInformation')]//a[contains(@title,'Policy Summary')]")WebElement PolicyNumber;
 	 @FindBy(id="endorsement:EndorsementForm:AddEndorsement")WebElement AddEndorsement;
@@ -20,12 +21,7 @@ public class PolicyInformationPage
 	
 	 public PolicyInformationPage(WebDriver driver)
 	 {
-		 this.driver=driver;
-		 if(driver==null)
-		 {
-			 System.out.println("driver is null in get a Quote page");
-		 }
-		 PageFactory.initElements(driver, this);
+		 super(driver);
 	 }
 	 
 	 
