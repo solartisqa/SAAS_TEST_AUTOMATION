@@ -4,7 +4,7 @@ package CucumberRunnerClass;
 import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 import org.testng.annotations.Test;
-@CucumberOptions(features = {"src/main/java/FeatureFiles"},glue = "StepDefinition")
+//import cucumber.api.testng.AbstractTestNGCucumberTests.features;
 public class RunCucumber extends AbstractTestNGCucumberTests
 {
   @Test
