@@ -21,11 +21,11 @@ import org.openqa.selenium.remote.CapabilityType;
 public class browserLaunching extends ConditionsChecking{
 	
 	
-	protected WebDriver driver = null;
+	protected WebDriver wdriver = null;
 	//protected RemoteWebDriver wdriver=null;
 	//protected WebDriver wdriver=null;
-	//protected EventFiringWebDriver driver=null;
-	//protected TheEventListener eventListerner=null;
+	protected EventFiringWebDriver driver=null;
+	protected TheEventListener eventListerner=null;
 	protected WebDriverWait wait=null; 
 	
 	 public WebDriver launch_browser(String browser) throws MalformedURLException
@@ -36,7 +36,10 @@ public class browserLaunching extends ConditionsChecking{
 				DesiredCapabilities cap = new DesiredCapabilities().firefox();
 				cap.setBrowserName("firefox");
 				//cap.setPlatform(Platform.WINDOWS);
-				driver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
+				wdriver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
+				driver=new EventFiringWebDriver(wdriver);
+			    eventListerner=new TheEventListener();
+				driver.register(eventListerner);
 				driver.manage().window().maximize();
 			} 
 		 else if (browser.equals("chrome"))
@@ -44,7 +47,10 @@ public class browserLaunching extends ConditionsChecking{
 				DesiredCapabilities cap = new DesiredCapabilities().chrome();
 				cap.setBrowserName("chrome");
 				//cap.setPlatform(Platform.WINDOWS);
-				driver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
+				wdriver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
+				driver=new EventFiringWebDriver(wdriver);
+			    eventListerner=new TheEventListener();
+				driver.register(eventListerner);
 				driver.manage().window().maximize();
 			} 
 		 else if(browser.equals("IE"))
@@ -63,8 +69,12 @@ public class browserLaunching extends ConditionsChecking{
 				cap.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
 				cap.setCapability(InternetExplorerDriver.ENABLE_ELEMENT_CACHE_CLEANUP,true);
 				cap.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS,false);
-				driver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
+				wdriver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
+				driver=new EventFiringWebDriver(wdriver);
+			    eventListerner=new TheEventListener();
+				driver.register(eventListerner);
 				driver.manage().window().maximize();
+				
 		 }
 		 
 			driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
