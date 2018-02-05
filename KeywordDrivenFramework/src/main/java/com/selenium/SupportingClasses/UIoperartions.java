@@ -193,6 +193,12 @@ case "SETEXTRACTEDVALUE":
 	this.setTextWithoutEnter(p, objectType, inputValue);
 	break;
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+case "WEBELEMENTLIST":
+    
+    inputValue=this.getInputValue(dataFlag, InputData, value, dbcolumn_name);
+    this.selectFromelementlist(p, objectType, inputValue);
+    break;
+    
 default :
 	    System.out.println("operations not  performed");
 	  
@@ -566,7 +572,30 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 		 r.keyRelease(KeyEvent.VK_ENTER);
  }
 
- 
+ private void selectFromelementlist(String p, String objectType, String inputValue) throws InterruptedException
+ {
+    List<WebElement> elementList = driver.findElements(this.getObject(p,objectType));
+    String[] inputlist=inputValue.split(",");
+    for(int i=0;i<inputlist.length;i++)
+    {
+        System.out.println("----inputlist"+inputlist.length);
+        for(int j=0;j<elementList.size();j++)
+        {
+            System.out.println("------elementlist"+elementList.size());
+            System.out.println("-------RHS"+inputlist[i]);
+            System.out.println("-------lHS"+elementList.get(j).getAttribute("value"));
+            if(elementList.get(j).getAttribute("value").equals(inputlist[i]))
+            {
+                System.out.println("condition satisfied in if loop");
+                Thread.sleep(1000);
+                
+                elementList.get(j).click();
+                break;
+            }
+        }
+    }
+    
+ }
 
 /*public void launch_browser(String browser, propertiesHandle configFile) {
 	// TODO Auto-generated method stub
