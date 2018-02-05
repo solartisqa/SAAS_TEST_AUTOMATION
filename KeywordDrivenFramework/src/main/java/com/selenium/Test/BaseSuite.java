@@ -27,6 +27,7 @@ protected   String TestFlag;
 	@BeforeTest
 	public  void setUp(String browser,String driverType,String FlagForTest) throws MalformedURLException
     {
+    	System.out.println("Before Test........");
 		if(driverType.equals("Local"))
 		{
 			this.lauchLocalBrowser(browser);

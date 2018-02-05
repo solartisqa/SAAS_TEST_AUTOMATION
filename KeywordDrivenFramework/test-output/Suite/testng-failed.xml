@@ -3,11 +3,14 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
   <test name="Test(failed)">
     <classes>
-      <class name="selenide.LoginSelenide">
+      <class name="CucumberRunnerClass.RunCucumber">
         <methods>
-          <include name="login"/>
+          <include name="Test"/>
+          <include name="setUpClass"/>
+          <include name="feature"/>
+          <include name="tearDownClass"/>
         </methods>
-      </class> <!-- selenide.LoginSelenide -->
+      </class> <!-- CucumberRunnerClass.RunCucumber -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

@@ -4,17 +4,21 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import cucumber.api.java.en.Then;
 
-import com.selenium.Test.BaseSuite;
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
+import org.openqa.selenium.By;
 
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.But;
 
-public class Login extends BaseSuite
+
+public class Login
 {
   @Given("^user navicate to StarrAssist URL$")
   public void given() throws Throwable
   {
 	  System.out.println("hiiiiiiiiiiiiiiiiiiiiii...........");
+	
+		$(By.id("loginForm:login_username")).setValue("csruser");
   }
 
   @When("^user is on Login Page$")
