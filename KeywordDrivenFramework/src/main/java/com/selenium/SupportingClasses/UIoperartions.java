@@ -200,7 +200,7 @@ case "WEBELEMENTLIST":
     break;
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "WEBELEMENTLISTBYTEXT":
-    
+    System.out.println("By text.......");
     inputValue=this.getInputValue(dataFlag, InputData, value, dbcolumn_name);
     this.selectFromelementlistByText(p, objectType, inputValue);
     break;   
@@ -613,7 +613,7 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
            {
                System.out.println("------elementlist"+elementList.size());
                System.out.println("-------RHS"+inputlist[i]);
-               System.out.println("-------lHS"+elementList.get(j).getAttribute("value"));
+               System.out.println("-------lHS"+elementList.get(j).getText());
             //if(elementList.get(j).getAttribute("value").equals(inputlist[i]))
               if(elementList.get(j).getText().equals(inputlist[i]))
                {
