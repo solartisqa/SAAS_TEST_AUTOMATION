@@ -584,8 +584,8 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
             System.out.println("------elementlist"+elementList.size());
             System.out.println("-------RHS"+inputlist[i]);
             System.out.println("-------lHS"+elementList.get(j).getAttribute("value"));
-          //  if(elementList.get(j).getAttribute("value").equals(inputlist[i]))
-            if(elementList.get(j).getText().equals(inputlist[i]))
+         if(elementList.get(j).getAttribute("value").equals(inputlist[i]))
+           // if(elementList.get(j).getText().equals(inputlist[i]))
             {
                 System.out.println("condition satisfied in if loop");
                 Thread.sleep(1000);
