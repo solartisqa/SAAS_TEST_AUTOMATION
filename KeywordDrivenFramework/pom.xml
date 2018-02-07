@@ -180,6 +180,8 @@
 		                        <dbPassword>${dbPassword}</dbPassword>
 		                        <FlagForExecution>${FlagForExecution}</FlagForExecution>
 		                        <ScreenshotPath>${ScreenshotPath}</ScreenshotPath>
+		                         <Remoteip>${Remoteip}</Remoteip>
+		                          <Port>${Port}</Port>
 		          </systemPropertyVariables>
 		        </configuration>
 			</plugin>

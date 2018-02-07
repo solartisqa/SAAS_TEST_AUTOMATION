@@ -31,11 +31,12 @@ public class PropertiesHandle extends Properties
 	protected String dbPassword;
 	protected String FlagForExecution;
 	protected String ScreenshotPath;
+	protected String remoteIP;
+	protected String Port;
 	
-
 	static DatabaseOperation ConfigQuery = new DatabaseOperation();
 			
-	    public PropertiesHandle(String browser,String AppURL,String TestSctiptFilePath,String LoginSheetName,String TestScriptSheetName,String inpuTableName,String outputtableName,String jdbcDriver,String dbURL,String dbusername,String dbPassword,String FlagForExecution,String ScreenshotPath) throws DatabaseException, PropertiesHandleException
+	    public PropertiesHandle(String browser,String AppURL,String TestSctiptFilePath,String LoginSheetName,String TestScriptSheetName,String inpuTableName,String outputtableName,String jdbcDriver,String dbURL,String dbusername,String dbPassword,String FlagForExecution,String ScreenshotPath,String remoteIP,String Port) throws DatabaseException, PropertiesHandleException
 		{
 			this.browser = browser;
 			this.AppURL =AppURL;
@@ -51,14 +52,14 @@ public class PropertiesHandle extends Properties
 			this.dbPassword=dbPassword;
 			this.FlagForExecution=FlagForExecution;
 			this.ScreenshotPath=ScreenshotPath;
+			this.remoteIP=remoteIP;
+			this.Port=Port;
 			WriteProperty();
 			
 		}
 		
 		protected void WriteProperty() throws DatabaseException, PropertiesHandleException
 		{
-			
-			
 		   this.browser();
 		   this.AppURL();
 		   this.TestSctiptFilePath();
@@ -69,6 +70,7 @@ public class PropertiesHandle extends Properties
 		    this.DBdetails();
 		    this.FlagForExecution();
 		    this.ScreenshotPath();
+		    this.remoteServer();
 		 
 		}
 		
@@ -127,6 +129,12 @@ public class PropertiesHandle extends Properties
 	    protected void ScreenshotPath() throws PropertiesHandleException
 	    {
 	    	this.put("ScreenShotPath",ScreenshotPath );
+	    }
+	    
+	    
+	    protected void remoteServer()
+	    {
+	    	this.put("server",remoteIP+":"+Port );
 	    }
 		public PropertiesHandle(String path) throws PropertiesHandleException
 		{

@@ -44,7 +44,7 @@ public class UIMainscript
 	public void loadconfig() throws DatabaseException, ClassNotFoundException, SQLException, PropertiesHandleException, MalformedURLException
 	{
 		System.setProperty("jsse.enableSNIExtension", "false");
-		configFile = new PropertiesHandle(System.getProperty("browser"),System.getProperty("AppURL"),System.getProperty("TestSctiptFilePath"),System.getProperty("LoginSheetName"),System.getProperty("TestScriptSheetName"),System.getProperty("inpuTableName"),System.getProperty("outputtableName"),System.getProperty("jdbcDriver"), System.getProperty("dbURL"), System.getProperty("dbusername"), System.getProperty("dbPassword"),System.getProperty("FlagForExecution"),System.getProperty("ScreenshotPath"));		
+		configFile = new PropertiesHandle(System.getProperty("browser"),System.getProperty("AppURL"),System.getProperty("TestSctiptFilePath"),System.getProperty("LoginSheetName"),System.getProperty("TestScriptSheetName"),System.getProperty("inpuTableName"),System.getProperty("outputtableName"),System.getProperty("jdbcDriver"), System.getProperty("dbURL"), System.getProperty("dbusername"), System.getProperty("dbPassword"),System.getProperty("FlagForExecution"),System.getProperty("ScreenshotPath"),System.getProperty("Remoteip"),System.getProperty("Port"));		
 
 		DatabaseOperation.ConnectionSetup(configFile);
 		objDriver=new BaseDriverScript(configFile);

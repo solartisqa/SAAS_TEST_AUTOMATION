@@ -48,7 +48,7 @@ public BaseDriverScript(PropertiesHandle configFile) throws SQLException, ClassN
 public WebDriver launchBrowser() throws MalformedURLException
 {
 	    String browser = configFile.getProperty("browser");
-		return this.launch_browser(browser);
+		return this.launch_browser(browser,configFile.getProperty("server"));
 			
 }
 //==============================================Function to login===================================================================================================
