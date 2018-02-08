@@ -7,8 +7,10 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -198,13 +200,25 @@ case "WEBELEMENTLIST":
     inputValue=this.getInputValue(dataFlag, InputData, value, dbcolumn_name);
     this.selectFromelementlistByValue(p, objectType, inputValue);
     break;
+    
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "WEBELEMENTLISTBYTEXT":
     System.out.println("By text.......");
     inputValue=this.getInputValue(dataFlag, InputData, value, dbcolumn_name);
     this.selectFromelementlistByText(p, objectType, inputValue);
-    break;   
+    break;  
     
+    //------------------------------------------------------------------------------------------------------------------------------------------------------
+case "DOWNLOAD":
+	   this.download(value);
+	   break;
+	   
+	//------------------------------------------------------------------------------------------------------------------------------------------------------
+case "SWITCHWINDOW":
+	this.switchwindow();
+	break;
+	   
+	       
 default :
 	    System.out.println("operations not  performed");
 	  
@@ -625,11 +639,61 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
                }
            }
        }
-    
  }
+    
+    private void download(String inputValue) throws AWTException, InterruptedException
+    {
+   	    
+   	    StringSelection ss = new StringSelection(inputValue);
+   		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+   	    Thread.sleep(3500);  
+   		 Robot r1 = new Robot();
+   		 r1.keyPress(KeyEvent.VK_CONTROL);
+         
+         r1.keyPress(KeyEvent.VK_V);
+         
+         
+         r1.keyRelease(KeyEvent.VK_CONTROL);
+         
+         r1.keyRelease(KeyEvent.VK_V);
+         
+         Thread.sleep(3500);     
+         r1.keyPress(KeyEvent.VK_ENTER);            
+         
+         r1.keyRelease(KeyEvent.VK_ENTER);
+         System.out.println("Vk_Enter" +" cliecked");
+    }
 
-/*public void launch_browser(String browser, propertiesHandle configFile) {
-	// TODO Auto-generated method stub
-	
-}*/
+private void switchwindow() throws AWTException, InterruptedException
+{
+	String parent=driver.getWindowHandle();
+	 
+	// This will return the number of windows opened by Webdriver and will return Set of St//rings
+	Set<String>s1=driver.getWindowHandles();
+	 
+	// Now we will iterate using Iterator
+	Iterator<String> I1= s1.iterator();
+	 
+	while(I1.hasNext())
+	{
+	 
+	   String child_window=I1.next();
+	 
+	// Here we will compare if parent window is not equal to child window then we            will close
+	 
+	if(!parent.equals(child_window))
+	{
+	driver.switchTo().window(child_window);
+	 
+	System.out.println("ChildWindowsTitle---"+driver.switchTo().window(child_window).getTitle());
+	this.click("plugin", "id");
+	this.click("Download", "id");
+	 this.download("E:\\Downloads\\EAA\\");
+	//driver.close();
+	}
+	 
+	}
+	// once all pop up closed now switch to parent window
+	driver.switchTo().window(parent);
+}
 }

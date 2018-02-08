@@ -84,7 +84,7 @@ public class UIMainscript
 	@AfterTest
 	public void close() throws DatabaseException
 	{
-		objDriver.closeBrowser();
+		//objDriver.closeBrowser();
 		DatabaseOperation.CloseConn();
 	}
 //========================================================================data provider=========================================================================================
