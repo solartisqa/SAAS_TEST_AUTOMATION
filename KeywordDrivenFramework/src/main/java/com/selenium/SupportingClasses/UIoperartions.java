@@ -162,7 +162,15 @@ case "WAITFORTEXT":
 case "DYNAMICDATEPICKER":
 	
 	inputValue = this.getInputValue(dataFlag, InputData, value, dbcolumn_name);
-	this.dynamicDatePicker(p, objectType, inputValue);
+	if(value=="Type1")
+	{
+		this.dynamicDatePicker(p, objectType, inputValue);
+	}
+	else if(value=="Type2")
+	{
+		this.DynamicDateSelector(p, objectType, inputValue);
+	}
+	
 	break;
 	
 	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -696,4 +704,68 @@ private void switchwindow() throws AWTException, InterruptedException
 	// once all pop up closed now switch to parent window
 	driver.switchTo().window(parent);
 }
+
+
+
+protected void DynamicDateSelector(String p,String objectType,String value) throws InterruptedException
+{
+	 String[] objtype=objectType.split(";");
+		String[] property=p.split(";");
+		String[] value1=value.split("/");
+		int totElements=objtype.length;
+		for(int i=0;i<totElements;i++)
+		{
+			p=property[i];
+			if(objtype[i].equalsIgnoreCase("DYNAMICXPATH"))
+			{ 
+				if(i==2)
+				{
+					p=property[i].replace("!",value1[3]);
+				}
+				if(i==3)
+				{
+			        switch (value1[2]) 
+			        {
+			            case "01":  value1[2] = "Jan";        break;
+			            case "02":  value1[2] = "Feb";        break;
+			            case "03":  value1[2] = "Mar";        break;
+			            case "04":  value1[2] = "Apr";        break;
+			            case "05":  value1[2] = "May";        break;
+			            case "06":  value1[2] = "Jun";        break;
+			            case "07":  value1[2] = "Jul";        break;
+			            case "08":  value1[2] = "Aug";        break;
+			            case "09":  value1[2] = "Sep";        break;
+			            case "10": value1[2] = "Oct";         break;
+			            case "11": value1[2] = "Nov";         break;
+			            case "12": value1[2] = "Dec";         break;
+			            default: value1[2] = "Invalid month"; break;
+			        }
+			        p=property[i].replace("!",value1[0]);
+				}
+				if(i==1)
+				{
+					switch(value1[1])
+					{
+					    case "01":  value1[1] = "1";        break;
+			            case "02":  value1[1] = "2";        break;
+			            case "03":  value1[1] = "3";        break;
+			            case "04":  value1[1] = "4";        break;
+			            case "05":  value1[1] = "5";        break;
+			            case "06":  value1[1] = "6";        break;
+			            case "07":  value1[1] = "7";        break;
+			            case "08":  value1[1] = "8";        break;
+			            case "09":  value1[1] = "9";        break;
+			            default: value1[0] = "Invaliddate "; break;
+					}
+					p=property[i].replace("!",value1[1]);
+				}
+				 
+				 //System.out.println(p);
+			}
+			
+			driver.findElement(this.getObject(p,objtype[i])).click();
+			Thread.sleep(1000);
+		}
+}
+
 }
