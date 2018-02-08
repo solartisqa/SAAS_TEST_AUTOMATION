@@ -2,11 +2,13 @@ package com.selenium.SupportingClasses;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -28,7 +30,7 @@ public class browserLaunching extends ConditionsChecking{
 	protected TheEventListener eventListerner=null;
 	protected WebDriverWait wait=null; 
 	
-	 public WebDriver launch_browser(String browser) throws MalformedURLException
+	 public WebDriver launch_browser(String browser,String serverip) throws MalformedURLException
 	 {
 		
 		 if (browser.equals("firefox"))
@@ -36,18 +38,27 @@ public class browserLaunching extends ConditionsChecking{
 				DesiredCapabilities cap = new DesiredCapabilities().firefox();
 				cap.setBrowserName("firefox");
 				//cap.setPlatform(Platform.WINDOWS);
-				wdriver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
+				wdriver = new RemoteWebDriver(new URL("http://"+serverip+"/wd/hub"), cap);
 				driver=new EventFiringWebDriver(wdriver);
 			    eventListerner=new TheEventListener();
 				driver.register(eventListerner);
 				driver.manage().window().maximize();
 			} 
+		 
 		 else if (browser.equals("chrome"))
 			{
+			 String downloadFilepath = "E:\\Downloads\\";
+			 HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+			 chromePrefs.put("profile.default_content_settings.popups", 0);
+			 chromePrefs.put("download.default_directory", downloadFilepath);
+			 ChromeOptions options = new ChromeOptions();
+			 HashMap<String, Object> chromeOptionsMap = new HashMap<String, Object>();
+			 options.setExperimentalOption("prefs", chromePrefs);
+			 options.addArguments("--test-type");
 				DesiredCapabilities cap = new DesiredCapabilities().chrome();
 				cap.setBrowserName("chrome");
 				//cap.setPlatform(Platform.WINDOWS);
-				wdriver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
+				wdriver = new RemoteWebDriver(new URL("http://"+serverip+"/wd/hub"), cap);
 				driver=new EventFiringWebDriver(wdriver);
 			    eventListerner=new TheEventListener();
 				driver.register(eventListerner);
@@ -69,12 +80,11 @@ public class browserLaunching extends ConditionsChecking{
 				cap.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
 				cap.setCapability(InternetExplorerDriver.ENABLE_ELEMENT_CACHE_CLEANUP,true);
 				cap.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS,false);
-				wdriver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
+				wdriver = new RemoteWebDriver(new URL("http://"+serverip+"/wd/hub"), cap);
 				driver=new EventFiringWebDriver(wdriver);
 			    eventListerner=new TheEventListener();
 				driver.register(eventListerner);
-				driver.manage().window().maximize();
-				
+				driver.manage().window().maximize();	
 		 }
 		 
 			driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
@@ -165,13 +175,5 @@ public class browserLaunching extends ConditionsChecking{
 			driver.quit();
 		}
 	
-
-	 
-		public static void main(String args[]) throws MalformedURLException
-		{
-			browserLaunching br=new browserLaunching();
-			br.launch_browser("chrome");
-			
-		}
 	 
 }
