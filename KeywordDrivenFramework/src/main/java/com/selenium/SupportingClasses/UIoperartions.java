@@ -44,6 +44,8 @@ public void perform(String p,String operation,String objectType,String value,Str
 {
 	long waitingTimeinseconds=Long.parseLong(waitingTime);
 	wait = new WebDriverWait(driver, waitingTimeinseconds);
+	
+	System.out.println(operation);
 try
 {
 switch (operation.toUpperCase())
@@ -161,14 +163,17 @@ case "WAITFORTEXT":
  //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "DYNAMICDATEPICKER":
 	
+	System.out.println("Coming to datepicker");
 	inputValue = this.getInputValue(dataFlag, InputData, value, dbcolumn_name);
-	if(value=="Type1")
+	System.out.println(value);
+	if(value.equals("Type1"))
 	{
-		this.dynamicDatePicker(p, objectType, inputValue);
+	this.dynamicDatePicker(p, objectType, inputValue);
 	}
-	else if(value=="Type2")
+	else if(value.equals("Type2"))
 	{
-		this.DynamicDateSelector(p, objectType, inputValue);
+	System.out.println("Coming to datepicker");
+	this.DynamicDateSelector(p, objectType, inputValue);
 	}
 	
 	break;
@@ -225,6 +230,14 @@ case "DOWNLOAD":
 case "SWITCHWINDOW":
 	this.switchwindow();
 	break;
+	
+case "DOWNARROW":
+	  inputValue=this.getInputValue(dataFlag, InputData, value, dbcolumn_name);
+	  System.out.println(inputValue);
+	 this.downarrow(p, objectType, inputValue);
+	 break;
+	 
+	
 	   
 	       
 default :
@@ -657,7 +670,7 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
    	    Thread.sleep(3500);  
    		 Robot r1 = new Robot();
    		 r1.keyPress(KeyEvent.VK_CONTROL);
-         
+   		 
          r1.keyPress(KeyEvent.VK_V);
          
          
@@ -720,29 +733,29 @@ protected void DynamicDateSelector(String p,String objectType,String value) thro
 			{ 
 				if(i==2)
 				{
-					p=property[i].replace("!",value1[3]);
+					p=property[i].replace("!",value1[2]);
 				}
 				if(i==3)
 				{
-			        switch (value1[2]) 
+			        switch (value1[0]) 
 			        {
-			            case "01":  value1[2] = "Jan";        break;
-			            case "02":  value1[2] = "Feb";        break;
-			            case "03":  value1[2] = "Mar";        break;
-			            case "04":  value1[2] = "Apr";        break;
-			            case "05":  value1[2] = "May";        break;
-			            case "06":  value1[2] = "Jun";        break;
-			            case "07":  value1[2] = "Jul";        break;
-			            case "08":  value1[2] = "Aug";        break;
-			            case "09":  value1[2] = "Sep";        break;
-			            case "10": value1[2] = "Oct";         break;
-			            case "11": value1[2] = "Nov";         break;
-			            case "12": value1[2] = "Dec";         break;
-			            default: value1[2] = "Invalid month"; break;
+			            case "01":  value1[0] = "Jan";        break;
+			            case "02":  value1[0] = "Feb";        break;
+			            case "03":  value1[0] = "Mar";        break;
+			            case "04":  value1[0] = "Apr";        break;
+			            case "05":  value1[0] = "May";        break;
+			            case "06":  value1[0] = "Jun";        break;
+			            case "07":  value1[0] = "Jul";        break;
+			            case "08":  value1[0] = "Aug";        break;
+			            case "09":  value1[0] = "Sep";        break;
+			            case "10": value1[0] = "Oct";         break;
+			            case "11": value1[0] = "Nov";         break;
+			            case "12": value1[0] = "Dec";         break;
+			            default: value1[0] = "Invalid month"; break;
 			        }
 			        p=property[i].replace("!",value1[0]);
 				}
-				if(i==1)
+				if(i==5)
 				{
 					switch(value1[1])
 					{
@@ -755,7 +768,7 @@ protected void DynamicDateSelector(String p,String objectType,String value) thro
 			            case "07":  value1[1] = "7";        break;
 			            case "08":  value1[1] = "8";        break;
 			            case "09":  value1[1] = "9";        break;
-			            default: value1[0] = "Invaliddate "; break;
+			            default: value1[1] = value1[1]; break;
 					}
 					p=property[i].replace("!",value1[1]);
 				}
@@ -768,4 +781,22 @@ protected void DynamicDateSelector(String p,String objectType,String value) thro
 		}
 }
 
+
+public void downarrow(String p,String objectType,String value) throws AWTException, InterruptedException
+{
+	int num=Integer.parseInt(value);
+	System.out.println(p+objectType);
+ 	element = driver.findElement(this.getObject(p,objectType));
+ 	element.click();
+	 Robot r = new Robot();
+	
+	for(int i=1;i<=num;i++)
+	{    
+		System.out.println("Pressing down");
+		 r.keyPress(KeyEvent.VK_DOWN);
+	      Thread.sleep(1000);
+	}
+	//element.sendKeys(Keys.ENTER);
+	r.keyPress(KeyEvent.VK_ENTER);
+}
 }

@@ -36,6 +36,7 @@ public BaseDriverScript(PropertiesHandle configFile) throws SQLException, ClassN
 {
 	this.configFile = configFile;
 	event=new TheEventListener();
+	System.out.println(this.configFile.getProperty("TestScriptPath"));
 	objectLoginScript = new ExcelOperationsJXL(this.configFile.getProperty("TestScriptPath"));
 	objectLoginScript.getsheets(this.configFile.getProperty("loginSheetName"));
 	objectTestScript = new ExcelOperationsJXL(this.configFile.getProperty("TestScriptPath"));
