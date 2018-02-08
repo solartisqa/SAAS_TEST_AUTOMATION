@@ -50,6 +50,10 @@ public class browserLaunching extends ConditionsChecking{
 			 String downloadFilepath = "E:\\Downloads\\";
 			 HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
 			 chromePrefs.put("profile.default_content_settings.popups", 0);
+			 chromePrefs.put("pdfjs.disabled", true);
+			 chromePrefs.put("download.prompt_for_download", false);
+			 chromePrefs.put("download.directory_upgrade", true);
+			 chromePrefs.put("plugins.always_open_pdf_externally", true);
 			 chromePrefs.put("download.default_directory", downloadFilepath);
 			 ChromeOptions options = new ChromeOptions();
 			 HashMap<String, Object> chromeOptionsMap = new HashMap<String, Object>();
@@ -57,6 +61,8 @@ public class browserLaunching extends ConditionsChecking{
 			 options.addArguments("--test-type");
 				DesiredCapabilities cap = new DesiredCapabilities().chrome();
 				cap.setBrowserName("chrome");
+				cap.setCapability(ChromeOptions.CAPABILITY, chromeOptionsMap);
+				cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 				//cap.setPlatform(Platform.WINDOWS);
 				wdriver = new RemoteWebDriver(new URL("http://"+serverip+"/wd/hub"), cap);
 				driver=new EventFiringWebDriver(wdriver);
