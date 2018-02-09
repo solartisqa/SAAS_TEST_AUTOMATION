@@ -642,7 +642,7 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
     private void selectFromelementlistByText(String p, String objectType, String inputValue) throws InterruptedException
     {
        List<WebElement> elementList = driver.findElements(this.getObject(p,objectType));
-       String[] inputlist=inputValue.split(",");
+       String[] inputlist=inputValue.split(";");
        for(int i=0;i<inputlist.length;i++)
        {
            System.out.println("----inputlist"+inputlist.length);

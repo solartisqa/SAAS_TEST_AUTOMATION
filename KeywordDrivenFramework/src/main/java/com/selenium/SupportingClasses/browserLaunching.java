@@ -15,9 +15,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import com.selenium.Configuration.PropertiesHandle;
-
 import org.openqa.selenium.remote.CapabilityType;
 
 public class browserLaunching extends ConditionsChecking{
@@ -56,9 +54,11 @@ public class browserLaunching extends ConditionsChecking{
 			 chromePrefs.put("plugins.always_open_pdf_externally", true);
 			 chromePrefs.put("download.default_directory", downloadFilepath);
 			 ChromeOptions options = new ChromeOptions();
+			 
 			 HashMap<String, Object> chromeOptionsMap = new HashMap<String, Object>();
 			 options.setExperimentalOption("prefs", chromePrefs);
 			 options.addArguments("--test-type");
+			
 				DesiredCapabilities cap = new DesiredCapabilities().chrome();
 				cap.setBrowserName("chrome");
 				cap.setCapability(ChromeOptions.CAPABILITY, chromeOptionsMap);
