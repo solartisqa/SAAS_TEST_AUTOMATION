@@ -47,7 +47,7 @@ public class browserLaunching extends ConditionsChecking{
 		 
 		 else if (browser.equals("chrome"))
 			{
-			 String downloadFilepath = "E:\\Downloads\\";
+			 String downloadFilepath = "E:\\Downloads\\EAA\\";
 			 HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
 			 chromePrefs.put("profile.default_content_settings.popups", 0);
 			 chromePrefs.put("pdfjs.disabled", true);
@@ -63,7 +63,7 @@ public class browserLaunching extends ConditionsChecking{
 				cap.setBrowserName("chrome");
 				cap.setCapability(ChromeOptions.CAPABILITY, chromeOptionsMap);
 				cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-				//cap.setPlatform(Platform.WINDOWS);
+				cap.setCapability(ChromeOptions.CAPABILITY, options);
 				wdriver = new RemoteWebDriver(new URL("http://"+serverip+"/wd/hub"), cap);
 				driver=new EventFiringWebDriver(wdriver);
 			    eventListerner=new TheEventListener();
@@ -73,14 +73,9 @@ public class browserLaunching extends ConditionsChecking{
 		 else if(browser.equals("IE"))
 		 {
 			   DesiredCapabilities cap = new DesiredCapabilities().internetExplorer();
-				cap.setBrowserName("IE");
-				cap.setPlatform(Platform.WINDOWS);
+
 				cap.setCapability("ignoreZoomSetting", true);
 				cap.setCapability("javascriptEnabled", true);
-				cap.setCapability("platform", "WINDOWS");
-				cap.setCapability("ignoreProtectedModeSettings", true);
-				cap.setCapability("ie.ensureCleanSession", true);
-				cap.setCapability("browserName", "internet explorer");
 				cap.setCapability(InternetExplorerDriver.UNEXPECTED_ALERT_BEHAVIOR,"dismiss");
 				cap.setCapability(InternetExplorerDriver.ELEMENT_SCROLL_BEHAVIOR,0);
 				cap.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);

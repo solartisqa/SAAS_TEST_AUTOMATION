@@ -526,7 +526,8 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 				}
 				if(i==2)
 				{
-			        switch (value1[0]) 
+					value1[0]=this.monthString(value1[0]);
+			        /*switch (value1[0]) 
 			        {
 			            case "01":  value1[0] = "Jan";        break;
 			            case "02":  value1[0] = "Feb";        break;
@@ -541,12 +542,13 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 			            case "11": value1[0] = "Nov";         break;
 			            case "12": value1[0] = "Dec";         break;
 			            default: value1[0] = "Invalid month"; break;
-			        }
+			        }*/
 			        p=property[i].replace("!",value1[0]);
 				}
 				if(i==3)
 				{
-					switch(value1[1])
+					value1[1]=this.dateLookup(value1[1]);
+					/*switch(value1[1])
 					{
 					    case "01":  value1[1] = "1";        break;
 			            case "02":  value1[1] = "2";        break;
@@ -557,8 +559,8 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 			            case "07":  value1[1] = "7";        break;
 			            case "08":  value1[1] = "8";        break;
 			            case "09":  value1[1] = "9";        break;
-			            default: value1[0] = "Invaliddate "; break;
-					}
+			            default: value1[1] = value1[1]; break;
+					}*/
 					p=property[i].replace("!",value1[1]);
 				}
 				 
@@ -737,7 +739,8 @@ protected void DynamicDateSelector(String p,String objectType,String value) thro
 				}
 				if(i==3)
 				{
-			        switch (value1[0]) 
+					value1[0]=this.monthString(value1[0]);
+			       /* switch (value1[0]) 
 			        {
 			            case "01":  value1[0] = "Jan";        break;
 			            case "02":  value1[0] = "Feb";        break;
@@ -752,12 +755,13 @@ protected void DynamicDateSelector(String p,String objectType,String value) thro
 			            case "11": value1[0] = "Nov";         break;
 			            case "12": value1[0] = "Dec";         break;
 			            default: value1[0] = "Invalid month"; break;
-			        }
+			        }*/
 			        p=property[i].replace("!",value1[0]);
 				}
 				if(i==5)
 				{
-					switch(value1[1])
+					value1[1]=this.dateLookup(value1[1]);
+					/*switch(value1[1])
 					{
 					    case "01":  value1[1] = "1";        break;
 			            case "02":  value1[1] = "2";        break;
@@ -769,7 +773,7 @@ protected void DynamicDateSelector(String p,String objectType,String value) thro
 			            case "08":  value1[1] = "8";        break;
 			            case "09":  value1[1] = "9";        break;
 			            default: value1[1] = value1[1]; break;
-					}
+					}*/
 					p=property[i].replace("!",value1[1]);
 				}
 				 
@@ -799,4 +803,54 @@ public void downarrow(String p,String objectType,String value) throws AWTExcepti
 	//element.sendKeys(Keys.ENTER);
 	r.keyPress(KeyEvent.VK_ENTER);
 }
+
+
+
+public String monthString(String monthNumber)
+{
+	String monthStirng=null;
+	 switch (monthNumber) 
+     {
+         case "01":  monthStirng = "Jan";        return monthStirng;
+         case "02":  monthStirng = "Feb";         return monthStirng;
+         case "03":  monthStirng = "Mar";         return monthStirng;
+         case "04":  monthStirng = "Apr";         return monthStirng;
+         case "05":  monthStirng = "May";         return monthStirng;
+         case "06":  monthStirng = "Jun";         return monthStirng;
+         case "07":  monthStirng = "Jul";         return monthStirng;
+         case "08":  monthStirng = "Aug";         return monthStirng;
+         case "09":  monthStirng = "Sep";         return monthStirng;
+         case "10":  monthStirng = "Oct";          return monthStirng;
+         case "11":  monthStirng = "Nov";          return monthStirng;
+         case "12":  monthStirng= "Dec";          return monthStirng;
+         default:    monthStirng = "Invalid month"; break;
+     }
+	
+	 return monthStirng;
+}
+
+public String dateLookup(String date)
+{
+	String lookupdate=null;
+	switch(date)
+	{
+	    case "01":  lookupdate = "1";        return lookupdate;
+        case "02":  lookupdate = "2";        return lookupdate;
+        case "03":  lookupdate = "3";        return lookupdate;
+        case "04":  lookupdate = "4";        return lookupdate;
+        case "05":  lookupdate = "5";        return lookupdate;
+        case "06":  lookupdate = "6";        return lookupdate;
+        case "07":  lookupdate = "7";        return lookupdate;
+        case "08":  lookupdate = "8";        return lookupdate;
+        case "09":  lookupdate = "9";        return lookupdate;
+        default: lookupdate = date; break;
+	}
+	return  lookupdate;
+	
+}
+
+
+
+
+
 }
