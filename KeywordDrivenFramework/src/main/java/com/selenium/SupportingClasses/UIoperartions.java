@@ -186,7 +186,7 @@ case "DYNAMICCLICK":
 	
 	//-------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-case "UPLOAD":
+case "ROBOTUPLOAD":
 	   this.upload(value);
 	   break;
 	//--------------------------------------------------------------------------------------------------------------------------------------------------   
@@ -235,6 +235,11 @@ case "DOWNARROW":
 	  inputValue=this.getInputValue(dataFlag, InputData, value, dbcolumn_name);
 	  System.out.println(inputValue);
 	 this.downarrow(p, objectType, inputValue);
+	 break;
+	 
+case "UPLOAD":
+	 inputValue=this.getInputValue(dataFlag, InputData, value, dbcolumn_name);
+	 this.uploadusingSendKeys(p, objectType,inputValue);
 	 break;
 	 
 	
@@ -806,7 +811,12 @@ public String dateLookup(String date)
 }
 
 
-
+public void uploadusingSendKeys(String p,String objectType,String value)
+{
+	System.out.println("upload using send keys----"+value);
+	element = driver.findElement(this.getObject(p,objectType));
+ 	element.sendKeys(value);
+}
 
 
 }
