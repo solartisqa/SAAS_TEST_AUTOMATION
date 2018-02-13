@@ -527,44 +527,16 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 				if(i==2)
 				{
 					value1[0]=this.monthString(value1[0]);
-			        /*switch (value1[0]) 
-			        {
-			            case "01":  value1[0] = "Jan";        break;
-			            case "02":  value1[0] = "Feb";        break;
-			            case "03":  value1[0] = "Mar";        break;
-			            case "04":  value1[0] = "Apr";        break;
-			            case "05":  value1[0] = "May";        break;
-			            case "06":  value1[0] = "Jun";        break;
-			            case "07":  value1[0] = "Jul";        break;
-			            case "08":  value1[0] = "Aug";        break;
-			            case "09":  value1[0] = "Sep";        break;
-			            case "10": value1[0] = "Oct";         break;
-			            case "11": value1[0] = "Nov";         break;
-			            case "12": value1[0] = "Dec";         break;
-			            default: value1[0] = "Invalid month"; break;
-			        }*/
+			     
 			        p=property[i].replace("!",value1[0]);
 				}
 				if(i==3)
 				{
 					value1[1]=this.dateLookup(value1[1]);
-					/*switch(value1[1])
-					{
-					    case "01":  value1[1] = "1";        break;
-			            case "02":  value1[1] = "2";        break;
-			            case "03":  value1[1] = "3";        break;
-			            case "04":  value1[1] = "4";        break;
-			            case "05":  value1[1] = "5";        break;
-			            case "06":  value1[1] = "6";        break;
-			            case "07":  value1[1] = "7";        break;
-			            case "08":  value1[1] = "8";        break;
-			            case "09":  value1[1] = "9";        break;
-			            default: value1[1] = value1[1]; break;
-					}*/
+				
 					p=property[i].replace("!",value1[1]);
 				}
 				 
-				 //System.out.println(p);
 			}
 			
 			driver.findElement(this.getObject(p,objtype[i])).click();
@@ -740,44 +712,16 @@ protected void DynamicDateSelector(String p,String objectType,String value) thro
 				if(i==3)
 				{
 					value1[0]=this.monthString(value1[0]);
-			       /* switch (value1[0]) 
-			        {
-			            case "01":  value1[0] = "Jan";        break;
-			            case "02":  value1[0] = "Feb";        break;
-			            case "03":  value1[0] = "Mar";        break;
-			            case "04":  value1[0] = "Apr";        break;
-			            case "05":  value1[0] = "May";        break;
-			            case "06":  value1[0] = "Jun";        break;
-			            case "07":  value1[0] = "Jul";        break;
-			            case "08":  value1[0] = "Aug";        break;
-			            case "09":  value1[0] = "Sep";        break;
-			            case "10": value1[0] = "Oct";         break;
-			            case "11": value1[0] = "Nov";         break;
-			            case "12": value1[0] = "Dec";         break;
-			            default: value1[0] = "Invalid month"; break;
-			        }*/
+			     
 			        p=property[i].replace("!",value1[0]);
 				}
 				if(i==5)
 				{
 					value1[1]=this.dateLookup(value1[1]);
-					/*switch(value1[1])
-					{
-					    case "01":  value1[1] = "1";        break;
-			            case "02":  value1[1] = "2";        break;
-			            case "03":  value1[1] = "3";        break;
-			            case "04":  value1[1] = "4";        break;
-			            case "05":  value1[1] = "5";        break;
-			            case "06":  value1[1] = "6";        break;
-			            case "07":  value1[1] = "7";        break;
-			            case "08":  value1[1] = "8";        break;
-			            case "09":  value1[1] = "9";        break;
-			            default: value1[1] = value1[1]; break;
-					}*/
+				
 					p=property[i].replace("!",value1[1]);
 				}
 				 
-				 //System.out.println(p);
 			}
 			
 			driver.findElement(this.getObject(p,objtype[i])).click();

@@ -37,9 +37,7 @@ public class UIMainscript
 	public static boolean loginStatus;
 	public  static WebDriver driver=null;
 	public static String exceptionScreenshotPath=null;
-	
 
-	
 	@BeforeTest//(alwaysRun=true)
 	public void loadconfig() throws DatabaseException, ClassNotFoundException, SQLException, PropertiesHandleException, MalformedURLException
 	{
@@ -55,9 +53,8 @@ public class UIMainscript
 	@Test//(alwaysRun=true)
 	public void Login() throws SQLException, IOException, InterruptedException, AWTException
 	{
-	
 		driver.get(configFile.getProperty("EnvURL"));
-		 objDriver.login(inputrow, outputrow);
+		objDriver.login(inputrow, outputrow);
 		
 	}
 	
@@ -105,7 +102,6 @@ public class UIMainscript
 				Entry<Integer, LinkedHashMap<String, String>> outputentry = outputtableiterator.next();
 		        LinkedHashMap<String, String> inputrow = inputentry.getValue();
 		        LinkedHashMap<String, String> outputrow = outputentry.getValue();
-		     
 		         inputtableobjectMapper = new ObjectMapper();
 				 Object inputtablerowobject = inputtableobjectMapper.convertValue(inputrow, Object.class);
 				 outputtableobjectMapper = new ObjectMapper();
