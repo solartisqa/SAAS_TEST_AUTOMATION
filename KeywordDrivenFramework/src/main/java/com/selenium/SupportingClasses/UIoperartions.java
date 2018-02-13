@@ -322,6 +322,7 @@ catch(StaleElementReferenceException e)
 		 if(driver.findElements(this.getObject(p,objectType)).get(i).isDisplayed())
 		 {
 			 driver.findElements(this.getObject(p,objectType)).get(i).click();
+			 System.out.println("visible element clicked");
 			 break;
 		 }
 		
