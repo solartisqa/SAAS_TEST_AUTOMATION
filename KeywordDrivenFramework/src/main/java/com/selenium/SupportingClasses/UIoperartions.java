@@ -319,8 +319,10 @@ catch(StaleElementReferenceException e)
 	  int var_ele_size= driver.findElements(this.getObject(p,objectType)).size();
 	 for(int i=0;i<var_ele_size;i++)
 	 {
+		 System.out.println("coming into for loop");
 		 if(driver.findElements(this.getObject(p,objectType)).get(i).isDisplayed())
 		 {
+			 System.out.println("coming into if loop");
 			 driver.findElements(this.getObject(p,objectType)).get(i).click();
 			 System.out.println("visible element clicked");
 			 break;
