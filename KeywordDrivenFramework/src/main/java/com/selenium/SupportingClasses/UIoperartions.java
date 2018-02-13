@@ -317,7 +317,16 @@ catch(StaleElementReferenceException e)
   protected void clickVisibleElement(String p,String objectType)throws StaleElementReferenceException, InterruptedException
   {  
 	  int var_ele_size= driver.findElements(this.getObject(p,objectType)).size();
-	  driver.findElements(this.getObject(p,objectType)).get(var_ele_size-1).click();
+	 for(int i=0;i<var_ele_size;i++)
+	 {
+		 if(driver.findElements(this.getObject(p,objectType)).get(i).isDisplayed())
+		 {
+			 driver.findElements(this.getObject(p,objectType)).get(i).click();
+			 break;
+		 }
+		
+	 }
+	//  driver.findElements(this.getObject(p,objectType)).get(var_ele_size-1).click();
 	  
   }
     
