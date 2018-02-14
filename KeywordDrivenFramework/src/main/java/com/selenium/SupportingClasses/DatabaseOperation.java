@@ -31,6 +31,7 @@ public class DatabaseOperation
 		DB_URL = config.getProperty("db_url");
 		USER=config.getProperty("db_username");
 		PASS =config.getProperty("db_password");
+		System.out.println(config.getProperty("jdbc_driver")+config.getProperty("db_url")+config.getProperty("db_username")+config.getProperty("db_password"));
 		if(conn == null)
 		{
 			try 

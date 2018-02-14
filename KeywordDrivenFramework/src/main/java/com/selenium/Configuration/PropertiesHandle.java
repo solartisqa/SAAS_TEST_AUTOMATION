@@ -33,12 +33,33 @@ public class PropertiesHandle extends Properties
 	protected String ScreenshotPath;
 	protected String remoteIP;
 	protected String Port;
+	protected String ResultsChoice;
+	protected String RMConfigtable;
+	protected String lookuptable;
+	protected String RMPath;
+	protected String RMResultsPath;
+	protected String MacroClassName;
+	protected String Comparisontable;
+	protected String queryresult;
+
 	
+	protected String Project;
+	protected String Flow;
+	protected String Env;
+	
+	protected String JDBC_DRIVER;
+	protected String DB_URL;
+	protected String USER;
+	protected String password;
+	protected String priority;
+
+	protected String ResultChoice;
 	static DatabaseOperation ConfigQuery = new DatabaseOperation();
 			
-	    public PropertiesHandle(String browser,String AppURL,String TestSctiptFilePath,String LoginSheetName,String TestScriptSheetName,String inpuTableName,String outputtableName,String jdbcDriver,String dbURL,String dbusername,String dbPassword,String FlagForExecution,String ScreenshotPath,String remoteIP,String Port) throws DatabaseException, PropertiesHandleException
-		{
-			this.browser = browser;
+	   // public PropertiesHandle(String browser,String AppURL,String TestSctiptFilePath,String LoginSheetName,String TestScriptSheetName,String inpuTableName,String outputtableName,String jdbcDriver,String dbURL,String dbusername,String dbPassword,String FlagForExecution,String ScreenshotPath,String remoteIP,String Port,String ResultsChoice,String RMConfigtable,String lookuptable,String RMPath,String RMResultsPath,String MacroClassName,String Comparisontable) throws DatabaseException, PropertiesHandleException
+	public PropertiesHandle(String Project,String Flow, String Env ,String FlagForExecution, String JDBC_DRIVER, String DB_URL, String USER, String password, String browser,String ResultChoice,String remoteIP,String Port) throws DatabaseException, PropertiesHandleException	
+	{
+			/*this.browser = browser;
 			this.AppURL =AppURL;
 			this.TestSctiptFilePath=TestSctiptFilePath;
 			this.LoginSheetName=LoginSheetName;
@@ -54,88 +75,94 @@ public class PropertiesHandle extends Properties
 			this.ScreenshotPath=ScreenshotPath;
 			this.remoteIP=remoteIP;
 			this.Port=Port;
+			this.ResultsChoice=ResultsChoice;
+			this.RMConfigtable= RMConfigtable;
+			this.lookuptable= lookuptable;
+			this.RMPath= RMPath;
+			this.RMResultsPath= RMResultsPath;
+			this.MacroClassName= MacroClassName;
+			this.Comparisontable= Comparisontable;*/
+		this.Project = Project;
+		this.Flow=Flow;
+		this.Env=Env;
+		this.FlagForExecution=FlagForExecution;
+		this.JDBC_DRIVER=JDBC_DRIVER;
+		this.DB_URL=DB_URL;
+		this.USER=USER;
+		this.password=password;
+		this.browser=browser;
+		this.ResultChoice=ResultChoice;
+		this.remoteIP=remoteIP;
+		this.Port=Port;
 			WriteProperty();
 			
 		}
 		
 		protected void WriteProperty() throws DatabaseException, PropertiesHandleException
 		{
-		   this.browser();
-		   this.AppURL();
-		   this.TestSctiptFilePath();
-		   this.LoginSheetName();
-		   this.TestScriptSheetName();
-		   this.InputQuery();
-		   this.OutputQuery();
-		    this.DBdetails();
-		    this.FlagForExecution();
-		    this.ScreenshotPath();
-		    this.remoteServer();
+			DatabaseOperation.ConnectionSetup(JDBC_DRIVER, DB_URL, USER, password);
+			this.put("browser", browser);
+			this.put("EnvURL", this.RdbmsValue("URL"));
+			this.put("TestScriptPath", this.RdbmsValue("RootFolder")+this.RdbmsValue("ProjectName")+"/"+this.RdbmsValue("FlowName")+"/Script/"+this.RdbmsValue("FileName"));
+			this.put("loginSheetName", this.RdbmsValue("LoginSheetName"));
+			this.put("ScriptSheetName", this.RdbmsValue("ScriptSheetName"));
+			this.put("flagForExecution", FlagForExecution);
+			this.put("inputQuery",  this.RdbmsQuery("InputTable"));
+			this.put("outputQuery", this.RdbmsQuery("OutputTable"));
+			this.put("jdbc_driver",this.RdbmsValue("JDCDriver"));
+			
+			this.put("db_url",this.RdbmsValue("DB_URL")+this.RdbmsValue("ProjectDBName"));
+			this.put("db_username",this.RdbmsValue("DB_UserName"));
+			this.put("db_password",this.RdbmsValue("DB_Password"));
+			this.put("ScreenShotPath",this.RdbmsValue("RootFolder")+this.RdbmsValue("ProjectName")+"/"+this.RdbmsValue("FlowName")+"/Screenshots/");
+			this.put("server",remoteIP+":"+Port );
+			this.put("ResultsChoice",ResultChoice);
+			this.put("RMconfig_query",this.RdbmsQuery("MacroMappingTable"));
+	    	this.put("lookup_query",this.RdbmsQuery("MacroTranslationTable"));
+	    	this.put("RatingModelPath",this.RdbmsValue("RootFolder")+this.RdbmsValue("ProjectName")+"/"+this.RdbmsValue("FlowName")+"/SampleRatingModel/");
+	    	this.put("ExpectedRMPath",this.RdbmsValue("RootFolder")+this.RdbmsValue("ProjectName")+"/"+this.RdbmsValue("FlowName")+"/RatingModelResults/");
+	    	this.put("MacroClassName",this.RdbmsValue("MacroClassName"));
+	    	this.put("comparisonTableQuery",this.RdbmsQuery("ComaparisonTableName"));
+	    	DatabaseOperation.CloseConn();
 		 
 		}
-		
-		protected void browser() throws PropertiesHandleException// FUNCTION FOR SAMPLEREQUEST PATH
+		protected String RdbmsQuery(String OutputColoumn) throws PropertiesHandleException
 		{
-			this.put("browser", browser);
+			try
+			{
+				LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdbmsQuery =  ConfigQuery.GetDataObjects("SELECT ComaparisonTableName,MacroClassName,MacroMappingTable,MacroTranslationTable,ProjectName,FlowName,ProjectDBName, DriverPath,RootFolder,FileName,ScriptSheetName,LoginSheetName,InputTable,OutputTable,UserDBName,JDCDriver,DB_URL,DB_UserName,DB_Password,Env_Name,URL FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN Flow_CONFIG ON Project_CONFIG.ProjectID = Flow_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON Flow_CONFIG.FlowID = Environment_CONFIG.FlowID INNER JOIN Version_CONFIG ON Environment_CONFIG.Env_ID = Version_CONFIG.Env_ID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.FlowID = Flow_CONFIG.FlowID)WHERE Project_CONFIG.ProjectName ='" +Project+ "' AND Flow_CONFIG.FlowName = '" +Flow+ "' AND Environment_CONFIG.Env_Name = '" +Env+ "' ORDER BY Version_CONFIG.Version DESC LIMIT 1");
+				for (Entry<Integer, LinkedHashMap<String, String>> entry : tableRdbmsQuery.entrySet())	
+				{
+					LinkedHashMap<String, String> rowRdbmsQuery = entry.getValue();
+					queryresult =  rowRdbmsQuery.get(OutputColoumn);
+				}
+				return "SELECT * FROM " + queryresult;		
+			}
+			catch(DatabaseException e)
+			{
+				throw new PropertiesHandleException("ERROR IN SQL - QUERY -- " + OutputColoumn, e);
+			}
 		}
 		
-		protected void AppURL() throws PropertiesHandleException// FUNCTION FOR SAMPLEREQUEST PATH
+		protected String RdbmsValue(String OutputColoumn) throws PropertiesHandleException
 		{
-			this.put("EnvURL", AppURL);
-		}
-		
-		protected void TestSctiptFilePath() throws PropertiesHandleException// FUNCTION FOR RESPONSE TO SAVE PATH
-		{
-			this.put("TestScriptPath", TestSctiptFilePath);
-		}
-		protected void LoginSheetName() throws PropertiesHandleException// FUNCTION FOR EXPECTED RATING MODEL PATH
-		{
-			this.put("loginSheetName", LoginSheetName);
-		}
-		
-		protected void TestScriptSheetName() throws PropertiesHandleException// FUNCTION TO GET RESULT SET FROM MACRO MAPPING TABLE 
-		{
-			this.put("ScriptSheetName", TestScriptSheetName);
-		}
-		
-		protected void FlagForExecution() throws PropertiesHandleException// FUNCTION TO GET RESULT SET FROM MACRO TRNSLATION TABLE 
-		{
-			this.put("flagForExecution", FlagForExecution);
-		}
-
-	
-		protected void InputQuery() throws PropertiesHandleException// FUNCTION FOR INPUTQUERY
-		{
-			this.put("inputQuery",  "SELECT * From "+inpuTableName);//+" where "+ this.RdmsValue("InputTable")+".Flag_for_execution='"+FlagForExecution+"'");
-			
-		}
-		
-		protected void OutputQuery() throws PropertiesHandleException// FUNCTION FOR OUTPUTQUERY
-		{
-			this.put("outputQuery", "SELECT * From "+outputtableName);
+			try
+			{
+				LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdbmsValue = ConfigQuery.GetDataObjects("SELECT ComaparisonTableName,MacroClassName,MacroMappingTable,MacroTranslationTable,ProjectName,FlowName,ProjectDBName, DriverPath,RootFolder,FileName,ScriptSheetName,LoginSheetName,InputTable,OutputTable,UserDBName,JDCDriver,DB_URL,DB_UserName,DB_Password,Env_Name,URL FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN Flow_CONFIG ON Project_CONFIG.ProjectID = Flow_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON Flow_CONFIG.FlowID = Environment_CONFIG.FlowID INNER JOIN Version_CONFIG ON Environment_CONFIG.Env_ID = Version_CONFIG.Env_ID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.FlowID = Flow_CONFIG.FlowID)WHERE Project_CONFIG.ProjectName ='" +Project+ "' AND Flow_CONFIG.FlowName = '" +Flow+ "' AND Environment_CONFIG.Env_Name = '" +Env+ "' ORDER BY Version_CONFIG.Version DESC LIMIT 1");
+				for (Entry<Integer, LinkedHashMap<String, String>> entry : tableRdbmsValue.entrySet())	
+				{
+					LinkedHashMap<String, String> rowRdbmsValue = entry.getValue();
+					queryresult = rowRdbmsValue.get(OutputColoumn);
+				}
+				return queryresult;
+			}
+			catch(DatabaseException e)
+			{
+				throw new PropertiesHandleException("ERROR IN RETRIVING DATA FROM -- " + OutputColoumn, e);
+			}
 		}
 		
 	
-	    protected void DBdetails() throws PropertiesHandleException// FUNCTION FOR DB-DETAILS
-		{
-			this.put("jdbc_driver",jdbcDriver);
-			System.out.println("----"+dbURL);
-			this.put("db_url",dbURL);
-			this.put("db_username",dbusername);
-			this.put("db_password",dbPassword);
-		}	
-		
-	    
-	    protected void ScreenshotPath() throws PropertiesHandleException
-	    {
-	    	this.put("ScreenShotPath",ScreenshotPath );
-	    }
-	    
-	    
-	    protected void remoteServer()
-	    {
-	    	this.put("server",remoteIP+":"+Port );
-	    }
 		public PropertiesHandle(String path) throws PropertiesHandleException
 		{
 			this.path = path;
@@ -202,10 +229,30 @@ public class PropertiesHandle extends Properties
 			};
 		}
 		
-		/*public static void main(String args[]) throws DatabaseException, PropertiesHandleException
+		public static void main(String args[]) throws DatabaseException, PropertiesHandleException
 		{
 			System.setProperty("jsse.enableSNIExtension", "false");
-			PropertiesHandle configFile = new PropertiesHandle("CHIC","Quote","QA","Y","com.mysql.jdbc.Driver","jdbc:mysql://192.168.35.2:3391/SeleniumConfig","root","password","Chrome","ActualOnly");
+			PropertiesHandle configFile = new PropertiesHandle("NITIC","Quote","QA","Y","com.mysql.jdbc.Driver","jdbc:mysql://192.168.84.225:3700/SeleniumConfig","root","redhat","Chrome","ActualOnly","192.168.4.131","5561");
+			System.out.println(configFile.getProperty("browser"));
 			System.out.println(configFile.getProperty("EnvURL"));
-		}*/
+			System.out.println(configFile.getProperty("TestScriptPath"));
+			System.out.println(configFile.getProperty("loginSheetName"));
+			System.out.println(configFile.getProperty("ScriptSheetName"));
+			System.out.println(configFile.getProperty("flagForExecution"));
+			System.out.println(configFile.getProperty("inputQuery"));
+			System.out.println(configFile.getProperty("outputQuery"));
+			System.out.println(configFile.getProperty("jdbc_driver"));
+			System.out.println(configFile.getProperty("db_url"));
+			System.out.println(configFile.getProperty("db_username"));
+			System.out.println(configFile.getProperty("db_password"));
+			System.out.println(configFile.getProperty("ScreenShotPath"));
+			System.out.println(configFile.getProperty("server"));
+			System.out.println(configFile.getProperty("ResultsChoice"));
+			System.out.println(configFile.getProperty("RMconfig_query"));
+			System.out.println(configFile.getProperty("lookup_query"));
+			System.out.println(configFile.getProperty("RatingModelPath"));
+			System.out.println(configFile.getProperty("ExpectedRMPath"));
+			System.out.println(configFile.getProperty("MacroClassName"));
+			System.out.println(configFile.getProperty("comparisonTableQuery"));
+		}
 }

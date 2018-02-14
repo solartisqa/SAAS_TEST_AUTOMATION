@@ -2,6 +2,7 @@ package com.selenium.Test;
 
 import java.awt.AWTException;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.Iterator;
@@ -17,6 +18,8 @@ import com.selenium.Configuration.PropertiesHandle;
 import com.selenium.DriverPackage.*;
 import com.selenium.SupportingClasses.DatabaseOperation;
 import com.selenium.exception.DatabaseException;
+import com.selenium.exception.MacroException;
+import com.selenium.exception.POIException;
 import com.selenium.exception.PropertiesHandleException;
 
 public class UIMainscript
@@ -42,8 +45,9 @@ public class UIMainscript
 	public void loadconfig() throws DatabaseException, ClassNotFoundException, SQLException, PropertiesHandleException, MalformedURLException
 	{
 		System.setProperty("jsse.enableSNIExtension", "false");
-		configFile = new PropertiesHandle(System.getProperty("browser"),System.getProperty("AppURL"),System.getProperty("TestSctiptFilePath"),System.getProperty("LoginSheetName"),System.getProperty("TestScriptSheetName"),System.getProperty("inpuTableName"),System.getProperty("outputtableName"),System.getProperty("jdbcDriver"), System.getProperty("dbURL"), System.getProperty("dbusername"), System.getProperty("dbPassword"),System.getProperty("FlagForExecution"),System.getProperty("ScreenshotPath"),System.getProperty("Remoteip"),System.getProperty("Port"));		
-
+		System.out.println(System.getProperty("Project")+System.getProperty("Flow")+System.getProperty("Env")+System.getProperty("FlagForExecution")+System.getProperty("JDBC_DRIVER")+System.getProperty("DB_URL")+System.getProperty("USER")+System.getProperty("password")+System.getProperty("browser")+ System.getProperty("ResultChoice")+System.getProperty("remoteIP")+ System.getProperty("Port"));
+		configFile = new PropertiesHandle(System.getProperty("Project"),System.getProperty("Flow"),System.getProperty("Env"),System.getProperty("FlagForExecution"),System.getProperty("JDBC_DRIVER"),System.getProperty("DB_URL"),System.getProperty("USER"),System.getProperty("password"),System.getProperty("browser"), System.getProperty("ResultChoice"), System.getProperty("remoteIP"), System.getProperty("Port"));		
+		
 		DatabaseOperation.ConnectionSetup(configFile);
 		objDriver=new BaseDriverScript(configFile);
 		driver=objDriver.launchBrowser();
@@ -60,16 +64,25 @@ public class UIMainscript
 	
 	@SuppressWarnings("unchecked")
 	@Test(dataProvider="UITestData",dependsOnMethods = { "Login" })
-    public void UITest(Integer RowIterator, Object inputtablerowobj, Object outputtablerowobj) throws ClassNotFoundException, SQLException, IOException, InterruptedException, AWTException, DatabaseException
+    public void UITest(Integer RowIterator, Object inputtablerowobj, Object outputtablerowobj) throws ClassNotFoundException, SQLException, IOException, InterruptedException, AWTException, DatabaseException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, MacroException, POIException
     {
 		LinkedHashMap<String, String> inputrow = inputtableobjectMapper.convertValue(inputtablerowobj, LinkedHashMap.class);
 		LinkedHashMap<String, String> outputrow = outputtableobjectMapper.convertValue(outputtablerowobj, LinkedHashMap.class);
-    	
-			 System.out.println(RowIterator);
+		
 			 if(inputrow.get("Flag_for_execution").equals(configFile.getProperty("flagForExecution")))
 				{  
+				 String ExecutionChoice=configFile.getProperty("ResultsChoice");
 				  System.out.println("Executing main script");
+				  if(ExecutionChoice.equals("Comparison"))
+				  {
+					  objDriver.generatExpectedResult(inputrow, outputrow);
+				  }
+				  
 				  objDriver.executeTestScript(inputrow, outputrow);
+				  if(ExecutionChoice.equals("Comparison"))
+				  {
+					  objDriver.CompareExpectedWithActual(outputrow);
+				  }
 				  inputrow.put("Flag_for_execution", "Completed");
 				  outputrow.put("Flag_for_execution", "Completed");
 				  outputrow.put("Flag_for_execution", "Pass");

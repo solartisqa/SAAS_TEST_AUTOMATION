@@ -117,6 +117,36 @@
     <type>pom</type>
 </dependency>
 	
+	  <dependency>
+	    <groupId>org.apache.poi</groupId>
+	    <artifactId>poi</artifactId>
+	    <version>3.15</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.apache.poi</groupId>
+	    <artifactId>poi-ooxml</artifactId>
+	    <version>3.16</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.apache.poi</groupId>
+	    <artifactId>poi-ooxml-schemas</artifactId>
+	    <version>3.7</version>
+	</dependency>
+	 <dependency>
+         <groupId>org.apache.poi</groupId>
+         <artifactId>openxml4j</artifactId>
+         <version>1.0-beta</version>
+     </dependency>
+     <dependency>
+          <groupId>org.apache.poi</groupId>
+          <artifactId>poi-scratchpad</artifactId>
+          <version>3.9</version>
+     </dependency>  
+     <dependency>
+		  <groupId>org.apache.xmlbeans</groupId>
+		  <artifactId>xmlbeans</artifactId>
+		  <version>2.4.0</version>
+     </dependency>
 	
   </dependencies>
   
@@ -167,21 +197,21 @@
 		          </suiteXmlFiles>
 		          
 		          <systemPropertyVariables>
-		                       <browser>${browser}</browser>
-		                        <AppURL>${AppURL}</AppURL>
-		                        <TestSctiptFilePath>${TestSctiptFilePath}</TestSctiptFilePath>
-		                        <LoginSheetName>${LoginSheetName}</LoginSheetName>
-		                        <TestScriptSheetName>${TestScriptSheetName}</TestScriptSheetName>
-		                        <inpuTableName>${inpuTableName}</inpuTableName>
+		                       <Project>${Project}</Project>
+		                        <Flow>${Flow}</Flow>
+		                        <Env>${Env}</Env>
+		                        <FlagForExecution>${FlagForExecution}</FlagForExecution>
+		                        <JDBC_DRIVER>${JDBC_DRIVER}</JDBC_DRIVER>
+		                        <DB_URL>${DB_URL}</DB_URL>
 		                        <outputtableName>${outputtableName}</outputtableName>
 		                        <jdbcDriver>${jdbcDriver}</jdbcDriver>
 		                        <dbURL>${dbURL}</dbURL>
-		                        <dbusername>${dbusername}</dbusername>
-		                        <dbPassword>${dbPassword}</dbPassword>
-		                        <FlagForExecution>${FlagForExecution}</FlagForExecution>
-		                        <ScreenshotPath>${ScreenshotPath}</ScreenshotPath>
-		                         <Remoteip>${Remoteip}</Remoteip>
-		                          <Port>${Port}</Port>
+		                        <USER>${USER}</USER>
+		                        <password>${password}</password>
+		                        <browser>${browser}</browser>
+		                        <ResultChoice>${ResultChoice}</ResultChoice>
+		                        <remoteIP>${remoteIP}</remoteIP>
+		                        <Port>${Port}</Port>  
 		          </systemPropertyVariables>
 		        </configuration>
 			</plugin>
