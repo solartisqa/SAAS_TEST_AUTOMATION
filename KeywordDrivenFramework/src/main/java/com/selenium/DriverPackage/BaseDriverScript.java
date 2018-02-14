@@ -143,6 +143,7 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
  }*/
 
 //============================================Function to close the browser===============================================================================
+public void generatExpectedResult(LinkedHashMap<String, String> inputrow,LinkedHashMap<String, String> outputrow ) throws ClassNotFoundException, MacroException, DatabaseException, POIException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException
 {
 	//System.out.println(configFile.getProperty("comparison")+"-----------"+this.Project+"Macro");
 	
@@ -153,6 +154,7 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 		  macro.LoadSampleRatingmodel(configFile, inputrow);
 		  macro.GenerateExpected(inputrow, configFile);
 		  macro.PumpinData(inputrow, configFile);
+		  macro.PumpoutData(outputrow, inputrow, configFile);
 	
 }
 

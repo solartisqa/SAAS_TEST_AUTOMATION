@@ -56,6 +56,7 @@ public class NITICMacro implements MacroInterface
 		//configFile = new PropertiesHandle("A:/1 Projects/09 StarrGL/Release_24_UAT/RatingTrial/configuration_file/config_json.properties");
 		try 
 		{
+			configTable.GetDataObjects(configFile.getProperty("RMconfig_query"));
 		}
 		catch (DatabaseException e) 
 		{
@@ -69,6 +70,7 @@ public class NITICMacro implements MacroInterface
 	{
 		try
 		{
+			String RateingModelName =configFile.getProperty("RatingModelPath")+"NITICRatingModel.xls" ;
 			
 			Samplepath= RateingModelName;
 			sampleexcel= new ExcelOperationsPOI(Samplepath);
@@ -102,6 +104,7 @@ public class NITICMacro implements MacroInterface
 		try
 		{
 			//DatabaseOperation configTable = new DatabaseOperation();
+			LinkedHashMap<Integer, LinkedHashMap<String, String>> tablePumpinData = configTable.GetDataObjects(configFile.getProperty("RMconfig_query"));
 			ExcelOperationsPOI excel=new ExcelOperationsPOI(Targetpath);
 			trans= new NITICMacro(configFile);
 			for (Entry<Integer, LinkedHashMap<String, String>> entry : tablePumpinData.entrySet())	
@@ -157,11 +160,13 @@ public class NITICMacro implements MacroInterface
 		}
 	}
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public void PumpoutData(LinkedHashMap<String, String> outputData,LinkedHashMap<String, String> inputData,PropertiesHandle configFile) throws MacroException    
 	{
 		trans= new NITICMacro(configFile);
 		try
 		{
 			ExcelOperationsPOI excel=new ExcelOperationsPOI(Targetpath);
+			LinkedHashMap<Integer, LinkedHashMap<String, String>> tablePumpoutData = configTable.GetDataObjects(configFile.getProperty("RMconfig_query"));
 			excel.refresh();
 		for (Entry<Integer, LinkedHashMap<String, String>> entry : tablePumpoutData.entrySet())	
 		{
@@ -186,9 +191,11 @@ public class NITICMacro implements MacroInterface
 					else
 					{
 						outputData.put(Datacolumntowrite, Datatowrite);
+					
 					}
 				}
 			}
+			//outputData.UpdateRow(,outputData);
 		}
 		
 		excel.save();
