@@ -56,32 +56,8 @@ public class PropertiesHandle extends Properties
 	protected String ResultChoice;
 	static DatabaseOperation ConfigQuery = new DatabaseOperation();
 			
-	   // public PropertiesHandle(String browser,String AppURL,String TestSctiptFilePath,String LoginSheetName,String TestScriptSheetName,String inpuTableName,String outputtableName,String jdbcDriver,String dbURL,String dbusername,String dbPassword,String FlagForExecution,String ScreenshotPath,String remoteIP,String Port,String ResultsChoice,String RMConfigtable,String lookuptable,String RMPath,String RMResultsPath,String MacroClassName,String Comparisontable) throws DatabaseException, PropertiesHandleException
 	public PropertiesHandle(String Project,String Flow, String Env ,String FlagForExecution, String JDBC_DRIVER, String DB_URL, String USER, String password, String browser,String ResultChoice,String remoteIP,String Port) throws DatabaseException, PropertiesHandleException	
 	{
-			/*this.browser = browser;
-			this.AppURL =AppURL;
-			this.TestSctiptFilePath=TestSctiptFilePath;
-			this.LoginSheetName=LoginSheetName;
-			this.TestScriptSheetName=TestScriptSheetName;
-			this.inpuTableName=inpuTableName;
-			this.outputtableName=outputtableName;
-			this.jdbcDriver=jdbcDriver;
-			System.out.println("1---------"+dbURL);
-			this.dbURL=dbURL;
-			this.dbusername=dbusername;
-			this.dbPassword=dbPassword;
-			this.FlagForExecution=FlagForExecution;
-			this.ScreenshotPath=ScreenshotPath;
-			this.remoteIP=remoteIP;
-			this.Port=Port;
-			this.ResultsChoice=ResultsChoice;
-			this.RMConfigtable= RMConfigtable;
-			this.lookuptable= lookuptable;
-			this.RMPath= RMPath;
-			this.RMResultsPath= RMResultsPath;
-			this.MacroClassName= MacroClassName;
-			this.Comparisontable= Comparisontable;*/
 		this.Project = Project;
 		this.Flow=Flow;
 		this.Env=Env;
