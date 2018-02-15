@@ -49,7 +49,6 @@ public void perform(String p,String operation,String objectType,String value,Str
 try
 {
 switch (operation.toUpperCase())
-
 {
 //-------------------------------click operation-------------------------------------------------------------------------------
 case "CLICK": 
