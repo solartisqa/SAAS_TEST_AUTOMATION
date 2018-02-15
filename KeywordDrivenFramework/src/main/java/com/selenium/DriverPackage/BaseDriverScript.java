@@ -261,7 +261,9 @@ protected static boolean premium_comp(String expected,String actual)
 		expected = expected.replaceAll("\\.[0-9]*", "");
 		actual = actual.replaceAll("\\.[0-9]*", "");
 		actual=actual.replace("$","");
-		actual=actual.replace(",", "");
+		actual=actual.replace(",","");
+		expected=expected.replace("$","");
+		expected=expected.replace(",","");
 		if(expected.equals(actual))
 		{
 			System.out.println(expected+"---------------------------------"+actual);
