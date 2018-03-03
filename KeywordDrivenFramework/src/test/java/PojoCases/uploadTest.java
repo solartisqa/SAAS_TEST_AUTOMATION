@@ -13,8 +13,8 @@ public class uploadTest extends BaseSuite
 @Test
 public void upload() throws InterruptedException
 {
-	driver.get("https://saqa2.solartis.net/");
-	System.out.println(driver.getTitle());
+	driver.get("https://saqa.solartis.net/");
+	/*System.out.println(driver.getTitle());
 	Thread.sleep(1000);
 	log=new LoginPage(driver);
 	log.setUserName("csruser");
@@ -22,7 +22,7 @@ public void upload() throws InterruptedException
 	log.setPassword("Welcome*1");
 	
 	hmpage=log.ClickLogin();
-	hmpage.upload();
+	hmpage.upload();*/
 	
 	
 System.out.println("hi.............");

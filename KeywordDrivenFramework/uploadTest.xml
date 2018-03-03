@@ -3,8 +3,8 @@
   <test name="Test">
    <classes>
     <parameters>
-     <parameter name="browser" value="chrome"/>
-     <parameter name="driverType" value="Local"/>
+     <parameter name="browser" value="firefox"/>
+     <parameter name="driverType" value="Remote"/>
     <parameter name="FlagForTest" value="Y"/>
     </parameters>
       <class name="PojoCases.uploadTest"/>

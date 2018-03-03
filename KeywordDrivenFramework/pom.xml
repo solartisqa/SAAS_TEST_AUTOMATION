@@ -22,11 +22,6 @@
     <version>1.72</version>
 </dependency>
   
-   <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-    </dependency> 
     
   <!-- https://mvnrepository.com/artifact/org.testng/testng -->
 <!-- https://mvnrepository.com/artifact/org.testng/testng -->
@@ -209,8 +204,14 @@
     <artifactId>velocity-dep</artifactId>
     <version>1.4</version>
 </dependency>
+<dependency>
+<groupId>org.codehaus.groovy</groupId> 
+<artifactId>groovy</artifactId>  
+<version>2.4.5</version>
+</dependency>
 
   </dependencies>
+  
   
   <build>
         <sourceDirectory>src/main/java</sourceDirectory>
@@ -274,5 +275,6 @@
 			</plugin>
         </plugins>
     </build>
+  
   
 </project>

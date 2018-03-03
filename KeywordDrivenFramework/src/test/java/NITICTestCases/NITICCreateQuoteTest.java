@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
@@ -30,20 +31,20 @@ public class NITICCreateQuoteTest extends BaseSuite
 	public static  LinkedHashMap<Integer, LinkedHashMap<String, String>> inputtable;
 	public static  LinkedHashMap<Integer, LinkedHashMap<String, String>> outputtable;
 
-	public LoginPage log;
-	public HomePage hmpage;
-	public BusinessPage BusPage;
-	public CoveragePage CovPage;
-	public VehiclePage VehPage;
-	public DriverPage drPage;
-	public AdditionalInsuredPage AIPage;
-	public PriorCarrierPage PCPage;
-    public ShareholderPage SHPage;
-    public QuoteSummaryPage QSPage;
-    public DocumentsPage DocPage;
-    public FindQuotePage FQPage;
-    public FindPolicyPage FPPage;
-    public PolicySummaryPage PSPage;
+	public static LoginPage log;
+	public static HomePage hmpage;
+	public static BusinessPage BusPage;
+	public static CoveragePage CovPage;
+	public static VehiclePage VehPage;
+	public static DriverPage drPage;
+	public static AdditionalInsuredPage AIPage;
+	public static PriorCarrierPage PCPage;
+    public static ShareholderPage SHPage;
+    public static QuoteSummaryPage QSPage;
+    public static DocumentsPage DocPage;
+    public static FindQuotePage FQPage;
+    public static FindPolicyPage FPPage;
+    public static PolicySummaryPage PSPage;
     
     
     
@@ -61,9 +62,10 @@ public class NITICCreateQuoteTest extends BaseSuite
     }
     
     @Parameters({"EnvURL","userName","password"})
-	@Test
+	@BeforeMethod
 	public void Login(String EnvURL,String userName,String password) throws InterruptedException
 	{
+    	
 		driver.get(EnvURL);
 		log=new LoginPage(driver);
 		log.setUserName(userName);
@@ -71,7 +73,7 @@ public class NITICCreateQuoteTest extends BaseSuite
 		hmpage=log.ClickLogin();
 	}
 	
-    @Test(dataProvider="UITestData",dependsOnMethods = { "Login" })
+    @Test(dataProvider="UITestData")//,dependsOnMethods = { "Login" })
     public void createQuote(Integer RowIterator, Object inputtablerowobj, Object outputtablerowobj) throws DatabaseException, InterruptedException, AWTException, IOException
     {
     	LinkedHashMap<String, String> inputrow = inputtableobjectMapper.convertValue(inputtablerowobj, LinkedHashMap.class);
@@ -109,6 +111,9 @@ public class NITICCreateQuoteTest extends BaseSuite
 			 DocPage.AttachFile3(inputrow);
 			 QSPage.ClickIssuePolicy();
 			 PSPage=QSPage.ClickIssuePolicyYes();
+			// PSPage.getdetailsFromPolicySummary(outputrow);
+			 System.out.println(PSPage.getPolicyNumber());
+			 outputrow.put("PolicyNumber", PSPage.getPolicyNumber());
 	
 			 Thread.sleep(1000);
 			 inputrow.put("Flag_for_execution", "completed");

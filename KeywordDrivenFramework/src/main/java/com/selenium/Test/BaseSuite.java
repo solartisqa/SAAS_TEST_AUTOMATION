@@ -14,17 +14,18 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
 public class BaseSuite 
 {
 //protected  RemoteWebDriver Rdriver=null;
-protected  WebDriver driver;
+protected  static WebDriver driver;
 protected   String TestFlag;
 
     @Parameters({"browser","driverType","FlagForTest"})
-	@BeforeTest
+	@BeforeMethod
 	public  void setUp(String browser,String driverType,String FlagForTest) throws MalformedURLException
     {
     	System.out.println("Before Test........");
@@ -101,14 +102,14 @@ protected   String TestFlag;
 				DesiredCapabilities cap = new DesiredCapabilities().firefox();
 				cap.setBrowserName("firefox");
 				cap.setPlatform(Platform.WINDOWS);
-				driver = new RemoteWebDriver(new URL("http://192.168.4.48:4444/wd/hub"), cap);
+				driver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
 			} 
 		 else if (browser.equals("chrome"))
 			{
 				DesiredCapabilities cap = new DesiredCapabilities().chrome();
 				cap.setBrowserName("chrome");
 				cap.setPlatform(Platform.LINUX);
-				driver = new RemoteWebDriver(new URL("http://192.168.4.48:4444/wd/hub"), cap);
+				driver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
 			} 
 		 else if(browser.equals("IE"))
 		 {

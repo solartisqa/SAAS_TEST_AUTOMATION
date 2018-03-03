@@ -1,12 +1,12 @@
 
 <suite name="Suite" parallel="tests" thread-count="5">
         <parameter name="jdbcDriver" value="com.mysql.jdbc.Driver"/>
-  		<parameter name="dburl" value="jdbc:mysql://192.168.35.2:3391/NITIC"/>
+  		<parameter name="dburl" value="jdbc:mysql://192.168.84.225:3700/NITIC_UI"/>
    		<parameter name="dbUsername" value="root"/>
-  		<parameter name="dbPassword" value="password"/>
+  		<parameter name="dbPassword" value="redhat"/>
   		<parameter name="EnvURL" value="https://niticqa.solartis.net/NITIC/NITIC/Login.xhtml"/>
-  		<parameter name="inputtableName" value="NITIC_Input_Quote"/>
-  		<parameter name="outputtableName" value="NITIC_Output_Quote"/>
+  		<parameter name="inputtableName" value="NITIC_Input"/>
+  		<parameter name="outputtableName" value="NITIC_Output"/>
   		<parameter name="userName" value="nitic_uw"/>
   		<parameter name="password" value="welcome1"/>
   		
@@ -17,7 +17,7 @@
      <parameter name="driverType" value="Local"/>
     <parameter name="FlagForTest" value="Y"/>
     </parameters>
-      <class name="POMWithTestNG.TestCases.NITICCreateQuoteTest"/>
+      <class name="NITICTestCases.NITICCreateQuoteTest"/>
     </classes>
   </test> 
 </suite>

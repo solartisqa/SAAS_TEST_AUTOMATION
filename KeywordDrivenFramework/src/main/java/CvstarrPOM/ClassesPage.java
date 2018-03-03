@@ -1,4 +1,4 @@
-package CvstarrPOM;
+/*package CvstarrPOM;
 
 import static org.testng.AssertJUnit.assertTrue;
 import static org.testng.AssertJUnit.assertTrue;
@@ -297,3 +297,4 @@ public class ClassesPage extends basePage{
 	
 
 }
+*/

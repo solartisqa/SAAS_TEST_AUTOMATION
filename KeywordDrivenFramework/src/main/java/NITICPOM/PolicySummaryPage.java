@@ -1,5 +1,6 @@
 package NITICPOM;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -179,7 +180,11 @@ public class PolicySummaryPage extends BasePage
 	 }
 	
 	
-	
+public void getdetailsFromPolicySummary(LinkedHashMap<String, String> outputrow)
+{
+	System.out.println("policyNumber"+this.getPolicyNumber());
+	outputrow.put("PolicyNumber", this.getPolicyNumber());
+}
 	
 	
 	

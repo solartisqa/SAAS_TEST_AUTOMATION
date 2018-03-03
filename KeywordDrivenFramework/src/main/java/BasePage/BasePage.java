@@ -22,7 +22,9 @@ import org.openqa.selenium.winium.WiniumDriver;
 
 import com.selenium.SupportingClasses.browserLaunching;
 
-public class BasePage
+import selenide.CukHooks;
+
+public class BasePage 
 {
  static WiniumDriver d;
   public WebDriverWait wait;

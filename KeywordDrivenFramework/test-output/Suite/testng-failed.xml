@@ -5,9 +5,8 @@
     <classes>
       <class name="CucumberRunnerClass.RunCucumber">
         <methods>
-          <include name="Test"/>
           <include name="setUpClass"/>
-          <include name="feature"/>
+          <include name="feature" invocation-numbers="0"/>
           <include name="tearDownClass"/>
         </methods>
       </class> <!-- CucumberRunnerClass.RunCucumber -->
