@@ -92,26 +92,82 @@ public WebDriver launchBrowser() throws MalformedURLException
 public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHashMap<String, String> outputData) throws SQLException, IOException, InterruptedException, AWTException, DatabaseException
 {
 	objectTestScript.set_rownumber(1);
+	int n=0;
+	int l=0;
+	String[] actionKeyword=null;
+	String[] ObjectType=null;
+	String[] PropertyString=null;
+	String[] dbcolumnNmae=null;
+	String[] value=null;
+	String[] dataProvidingFlag=null;
+	String[] waitingTime=null;
+	String[] condition=null;
+	String[] status=null;
 	while(objectTestScript.has_next_row())
 	{
+		boolean loopFlag=false;
 		String conditions=objectTestScript.read_data(objectTestScript.get_rownumber(),7);
 		if(objectTestScript.read_data(objectTestScript.get_rownumber(),8).toString().equals("enabled")&& this.ConditionReading(conditions, InputData))
 		{	
-			   //System.out.println("condition true for "+objectTestScript.read_data(objectTestScript.get_rownumber(),1));
-				//String pageName = objectTestScript.read_data(objectTestScript.get_rownumber(),0);
-				//String fieldName = objectTestScript.read_data(objectTestScript.get_rownumber(),1);
-				String actionKeyword = objectTestScript.read_data(objectTestScript.get_rownumber(),2);
-				String ObjectType = objectTestScript.read_data(objectTestScript.get_rownumber(),3);
-				String PropertyString= objectTestScript.read_data(objectTestScript.get_rownumber(),4);
-				String dbcolumnNmae = objectTestScript.read_data(objectTestScript.get_rownumber(),5);
-				String value = objectTestScript.read_data(objectTestScript.get_rownumber(),6);
-			    //String condtions1=objectTestScript.read_data(objectTestScript.get_rownumber(),7);
-				String dataProvidingFlag=objectTestScript.read_data(objectTestScript.get_rownumber(),9);
-				String  waitingTime=objectTestScript.read_data(objectTestScript.get_rownumber(),10);
-				//System.out.println(fieldName);
-				this.perform(PropertyString,actionKeyword,ObjectType,value,dbcolumnNmae,dataProvidingFlag,InputData,outputData,waitingTime);
+			
+			if(objectTestScript.read_data(objectTestScript.get_rownumber(),11).toString().equals("loop"))
+			{
+				n=Integer.parseInt(InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5)));
+				actionKeyword=new String[n-1];
+				ObjectType=new String[n-1];
+				PropertyString=new String[n-1];
+				dbcolumnNmae=new String[n-1];
+				value=new String[n-1];
+				dataProvidingFlag=new String[n-1];
+				waitingTime=new String[n-1];
+				condition=new String[n-1];
+				status=new String[n-1];
+				do
+				{
+					condition[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),8);
+					status[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),7);
+					actionKeyword[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),2);
+					ObjectType[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),3);
+					PropertyString[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),4);
+					dbcolumnNmae[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),5);
+					value[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),6);
+					dataProvidingFlag[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),9);
+					waitingTime[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),10);
+					l++;
+					objectTestScript.next_row();
+				}while(objectTestScript.read_data(objectTestScript.get_rownumber(),11).toString().equals("end"));
+				loopFlag=true;
+			}
+			
+			 if(loopFlag)
+			 {
+				 for(int i=0;1<n;i++)
+				 {
+					 if(status[i].equals("enabled")&& this.ConditionReading(condition[i], InputData))
+					 {
+					System.out.println("In True Flag........"+PropertyString[i]+actionKeyword[i]+ObjectType[i]+value[i]+dbcolumnNmae[i]+dataProvidingFlag[i]+waitingTime[i]);
+
+						this.perform(PropertyString[i],actionKeyword[i],ObjectType[i],value[i],dbcolumnNmae[i],dataProvidingFlag[i],InputData,outputData,waitingTime[i]);
+					 }
+
+				 }
+			 }
+			 if(!loopFlag)
+			 {
+				 
+				String actionKeyword1 = objectTestScript.read_data(objectTestScript.get_rownumber(),2);
+				String ObjectType1 = objectTestScript.read_data(objectTestScript.get_rownumber(),3);
+				String PropertyString1= objectTestScript.read_data(objectTestScript.get_rownumber(),4);
+				String dbcolumnNmae1 = objectTestScript.read_data(objectTestScript.get_rownumber(),5);
+				String value1 = objectTestScript.read_data(objectTestScript.get_rownumber(),6);
+				String dataProvidingFlag1=objectTestScript.read_data(objectTestScript.get_rownumber(),9);
+				String  waitingTime1=objectTestScript.read_data(objectTestScript.get_rownumber(),10);
+				System.out.println("In False Flag........"+PropertyString1+actionKeyword1+ObjectType1+value1+dbcolumnNmae1+dataProvidingFlag1+waitingTime1);
+				this.perform(PropertyString1,actionKeyword1,ObjectType1,value1,dbcolumnNmae1,dataProvidingFlag1,InputData,outputData,waitingTime1);
+				objectTestScript.next_row();
+		     }
+		//objectTestScript.next_row();
 		}
-		objectTestScript.next_row();
 	} //end of while 
 }
 //==================================Function to compare  the results========================================================================================================
