@@ -78,7 +78,14 @@ public class UIMainscript
 					  objDriver.generatExpectedResult(inputrow, outputrow);
 				  }
 				  
+				  try
+				  {
 				  objDriver.executeTestScript(inputrow, outputrow);
+				  }
+				  catch(Exception e)
+				  {
+					  e.printStackTrace();
+				  }
 				  if(ExecutionChoice.equals("Comparison"))
 				  {
 					  objDriver.CompareExpectedWithActual(outputrow);

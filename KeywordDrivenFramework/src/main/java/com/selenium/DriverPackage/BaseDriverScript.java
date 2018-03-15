@@ -68,6 +68,7 @@ public WebDriver launchBrowser() throws MalformedURLException
 //==============================================Function to login===================================================================================================
   public void login(LinkedHashMap<String, String> InputData,LinkedHashMap<String, String> outputData) throws SQLException, IOException, InterruptedException, AWTException
   {
+	  
 	  objectLoginScript.set_rownumber(1);
 	  while(objectLoginScript.has_next_row())
 		{
@@ -105,6 +106,7 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 	String[] status=null;
 	while(objectTestScript.has_next_row())
 	{
+		System.out.println("coming to while loop");
 		boolean loopFlag=false;
 		String conditions=objectTestScript.read_data(objectTestScript.get_rownumber(),7);
 		if(objectTestScript.read_data(objectTestScript.get_rownumber(),8).toString().equals("enabled")&& this.ConditionReading(conditions, InputData))
@@ -112,48 +114,69 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 			
 			if(objectTestScript.read_data(objectTestScript.get_rownumber(),11).toString().equals("loop"))
 			{
+				//System.out.println("=======coming to loop");
 				n=Integer.parseInt(InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5)));
-				actionKeyword=new String[n-1];
-				ObjectType=new String[n-1];
-				PropertyString=new String[n-1];
-				dbcolumnNmae=new String[n-1];
-				value=new String[n-1];
-				dataProvidingFlag=new String[n-1];
-				waitingTime=new String[n-1];
-				condition=new String[n-1];
-				status=new String[n-1];
-				do
+				int rows=Integer.parseInt(objectTestScript.read_data(objectTestScript.get_rownumber(),6));
+				//System.out.println("=======no of looping"+n+"========="+(n-1));
+				actionKeyword=new String[rows];
+				ObjectType=new String[rows];
+				PropertyString=new String[rows];
+				dbcolumnNmae=new String[rows];
+				value=new String[rows];
+				dataProvidingFlag=new String[rows];
+				waitingTime=new String[rows];
+				condition=new String[rows];
+				status=new String[rows];
+				//do
+				while((objectTestScript.read_data(objectTestScript.get_rownumber(),11).toString().equals("loop")))
 				{
-					condition[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),8);
-					status[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),7);
+					//System.out.println("===========comming to do loop with l value is"+l);
+					condition[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),7);
+					status[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),8);
 					actionKeyword[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),2);
 					ObjectType[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),3);
+					
 					PropertyString[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),4);
+					//System.out.println(PropertyString[l]);
 					dbcolumnNmae[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),5);
 					value[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),6);
 					dataProvidingFlag[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),9);
 					waitingTime[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),10);
 					l++;
 					objectTestScript.next_row();
-				}while(objectTestScript.read_data(objectTestScript.get_rownumber(),11).toString().equals("end"));
+
+				}
+				//while(!(objectTestScript.read_data(objectTestScript.get_rownumber(),11).toString().equals("end")));
 				loopFlag=true;
 			}
 			
 			 if(loopFlag)
 			 {
-				 for(int i=0;1<n;i++)
+				 System.out.println("==========comming to true loop");
+				 
+				 for(int i=0;i<n;i++)
 				 {
-					 if(status[i].equals("enabled")&& this.ConditionReading(condition[i], InputData))
+					 System.out.println("Endorsement........."+i);
+					 System.out.println("l value is........."+l);
+					 for(int j=0;j<l;j++)
 					 {
-					System.out.println("In True Flag........"+PropertyString[i]+actionKeyword[i]+ObjectType[i]+value[i]+dbcolumnNmae[i]+dataProvidingFlag[i]+waitingTime[i]);
+					//System.out.println("=========coming to multiendorseloop"+status[j]);
+					  System.out.println(this.ConditionReading(condition[j], InputData));
+					 if(status[j].equals("enabled")&& this.ConditionReading(condition[j], InputData))
+					 {
+					 // System.out.println("=========coming to condition satisfied loop");	 
+					  System.out.println("In True Flag........"+PropertyString[j]+actionKeyword[j]+ObjectType[j]+value[j]+dbcolumnNmae[j]+dataProvidingFlag[j]+waitingTime[j]);
 
-						this.perform(PropertyString[i],actionKeyword[i],ObjectType[i],value[i],dbcolumnNmae[i],dataProvidingFlag[i],InputData,outputData,waitingTime[i]);
+						this.perform(PropertyString[j],actionKeyword[j],ObjectType[j],value[j],dbcolumnNmae[j],dataProvidingFlag[j],InputData,outputData,waitingTime[j]);
 					 }
-
+					 }
+					// objectTestScript.next_row();
 				 }
+				 
 			 }
 			 if(!loopFlag)
 			 {
+				 System.out.println("=====coming to false loop");
 				 
 				String actionKeyword1 = objectTestScript.read_data(objectTestScript.get_rownumber(),2);
 				String ObjectType1 = objectTestScript.read_data(objectTestScript.get_rownumber(),3);
@@ -167,6 +190,10 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 				objectTestScript.next_row();
 		     }
 		//objectTestScript.next_row();
+		}
+		else
+		{
+			objectTestScript.next_row();
 		}
 	} //end of while 
 }
