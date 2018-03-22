@@ -106,7 +106,6 @@ public class HomePage extends BasePage
 	 public void waitForLoading()
 	 {
 		 wait.until(ExpectedConditions.visibilityOfAllElements(LoadingIcon));
-		 wait.until(ExpectedConditions.invisibilityOfAllElements(LoadingIcon));
 	 }
 	 public void upload() throws InterruptedException
 	 {

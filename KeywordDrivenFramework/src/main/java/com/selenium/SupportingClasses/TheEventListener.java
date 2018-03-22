@@ -53,17 +53,7 @@ public class TheEventListener implements WebDriverEventListener
 		
 	}
 
-	@Override
-	public void beforeNavigateRefresh(WebDriver driver) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void afterNavigateRefresh(WebDriver driver) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void beforeFindBy(By by, WebElement element, WebDriver driver) {

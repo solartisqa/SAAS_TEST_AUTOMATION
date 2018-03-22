@@ -1,17 +1,19 @@
 package com.selenium.Test;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.testng.annotations.Test;
 
 
 import StarrAssistPOM.*;
-
-public class uploadTest extends BaseSuite
+public class uploadTest
 {
 	public LoginPage log;
 	public HomePage hmpage;
 @Test
 public void upload() throws InterruptedException
 {
+	WebDriver driver = new HtmlUnitDriver();
 	driver.get("https://saqa2.solartis.net/");
 	System.out.println(driver.getTitle());
 	Thread.sleep(1000);

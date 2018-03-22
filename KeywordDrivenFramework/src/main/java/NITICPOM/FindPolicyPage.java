@@ -77,7 +77,6 @@ public class FindPolicyPage extends BasePage
 	 {
 		 try{
 		 wait.until(ExpectedConditions.visibilityOfAllElements(LoadingIcon));
-		 wait.until(ExpectedConditions.invisibilityOfAllElements(LoadingIcon));
 		 }
 		 catch(Exception e)
 		 {
