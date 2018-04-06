@@ -58,7 +58,14 @@ public class UIMainscript
 	public void Login() throws SQLException, IOException, InterruptedException, AWTException
 	{
 		driver.get(configFile.getProperty("EnvURL"));
+		try
+		{
 		objDriver.login(inputrow, outputrow);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		
 	}
 	
