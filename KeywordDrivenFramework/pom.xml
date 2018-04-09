@@ -216,6 +216,8 @@
 		                        <ResultChoice>${ResultChoice}</ResultChoice>
 		                        <remoteIP>${remoteIP}</remoteIP>
 		                        <Port>${Port}</Port>  
+		                        <userLogin>${userLogin}</userLogin>
+		                        
 		          </systemPropertyVariables>
 		        </configuration>
 			</plugin>

@@ -54,9 +54,10 @@ public class PropertiesHandle extends Properties
 	protected String priority;
 
 	protected String ResultChoice;
+	protected String userlogin;
 	static DatabaseOperation ConfigQuery = new DatabaseOperation();
 			
-	public PropertiesHandle(String Project,String Flow, String Env ,String FlagForExecution, String JDBC_DRIVER, String DB_URL, String USER, String password, String browser,String ResultChoice,String remoteIP,String Port) throws DatabaseException, PropertiesHandleException	
+	public PropertiesHandle(String Project,String Flow, String Env ,String FlagForExecution, String JDBC_DRIVER, String DB_URL, String USER, String password, String browser,String ResultChoice,String remoteIP,String Port,String userlogin) throws DatabaseException, PropertiesHandleException	
 	{
 		this.Project = Project;
 		this.Flow=Flow;
@@ -70,6 +71,7 @@ public class PropertiesHandle extends Properties
 		this.ResultChoice=ResultChoice;
 		this.remoteIP=remoteIP;
 		this.Port=Port;
+		this.userlogin=userlogin;
 			WriteProperty();
 			
 		}
@@ -106,7 +108,7 @@ public class PropertiesHandle extends Properties
 		{
 			try
 			{
-				LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdbmsQuery =  ConfigQuery.GetDataObjects("SELECT ComaparisonTableName,MacroClassName,MacroMappingTable,MacroTranslationTable,ProjectName,FlowName,ProjectDBName,RootFolder,FileName,ScriptSheetName,LoginSheetName,InputTable,OutputTable,UserDBName,JDCDriver,DB_URL,DB_UserName,DB_Password,Env_Name,URL FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN Flow_CONFIG ON Project_CONFIG.ProjectID = Flow_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON Flow_CONFIG.FlowID = Environment_CONFIG.FlowID INNER JOIN Version_CONFIG ON Environment_CONFIG.Env_ID = Version_CONFIG.Env_ID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.FlowID = Flow_CONFIG.FlowID)WHERE Project_CONFIG.ProjectName ='" +Project+ "' AND Flow_CONFIG.FlowName = '" +Flow+ "' AND Environment_CONFIG.Env_Name = '" +Env+ "' ORDER BY Version_CONFIG.Version DESC LIMIT 1");
+				LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdbmsQuery =  ConfigQuery.GetDataObjects("SELECT ComaparisonTableName,MacroClassName,MacroMappingTable,MacroTranslationTable,ProjectName,FlowName,ProjectDBName,RootFolder,FileName,ScriptSheetName,LoginSheetName,InputTable,OutputTable,UserDBName,JDCDriver,DB_URL,DB_UserName,DB_Password,Env_Name,URL FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN Flow_CONFIG ON Project_CONFIG.ProjectID = Flow_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON Project_CONFIG.ProjectID = Environment_CONFIG.ProjectID INNER JOIN Version_CONFIG ON Flow_CONFIG.FlowID = Version_CONFIG.FlowID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.FlowID = Flow_CONFIG.FlowID)WHERE Project_CONFIG.ProjectName ='" +Project+ "' AND Flow_CONFIG.FlowName = '" +Flow+"' AND Environment_CONFIG.Env_Name = '" +Env+ "' AND UserFolder_CONFIG.User_ID = '" + userlogin + "'  ORDER BY Version_CONFIG.Version DESC LIMIT 1");
 				for (Entry<Integer, LinkedHashMap<String, String>> entry : tableRdbmsQuery.entrySet())	
 				{
 					LinkedHashMap<String, String> rowRdbmsQuery = entry.getValue();
@@ -124,7 +126,7 @@ public class PropertiesHandle extends Properties
 		{
 			try
 			{
-				LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdbmsValue = ConfigQuery.GetDataObjects("SELECT ComaparisonTableName,MacroClassName,MacroMappingTable,MacroTranslationTable,ProjectName,FlowName,ProjectDBName,RootFolder,FileName,ScriptSheetName,LoginSheetName,InputTable,OutputTable,UserDBName,JDCDriver,DB_URL,DB_UserName,DB_Password,Env_Name,URL FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN Flow_CONFIG ON Project_CONFIG.ProjectID = Flow_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON Flow_CONFIG.FlowID = Environment_CONFIG.FlowID INNER JOIN Version_CONFIG ON Environment_CONFIG.Env_ID = Version_CONFIG.Env_ID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.FlowID = Flow_CONFIG.FlowID)WHERE Project_CONFIG.ProjectName ='" +Project+ "' AND Flow_CONFIG.FlowName = '" +Flow+ "' AND Environment_CONFIG.Env_Name = '" +Env+ "' ORDER BY Version_CONFIG.Version DESC LIMIT 1");
+				LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdbmsValue = ConfigQuery.GetDataObjects("SELECT ComaparisonTableName,MacroClassName,MacroMappingTable,MacroTranslationTable,ProjectName,FlowName,ProjectDBName,RootFolder,FileName,ScriptSheetName,LoginSheetName,InputTable,OutputTable,UserDBName,JDCDriver,DB_URL,DB_UserName,DB_Password,Env_Name,URL FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN Flow_CONFIG ON Project_CONFIG.ProjectID = Flow_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON Project_CONFIG.ProjectID = Environment_CONFIG.ProjectID INNER JOIN Version_CONFIG ON Flow_CONFIG.FlowID = Version_CONFIG.FlowID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.FlowID = Flow_CONFIG.FlowID)WHERE Project_CONFIG.ProjectName ='" +Project+ "' AND Flow_CONFIG.FlowName = '" +Flow+"' AND Environment_CONFIG.Env_Name = '" +Env+ "' AND UserFolder_CONFIG.User_ID = '" + userlogin + "' ORDER BY Version_CONFIG.Version DESC LIMIT 1");
 				for (Entry<Integer, LinkedHashMap<String, String>> entry : tableRdbmsValue.entrySet())	
 				{
 					LinkedHashMap<String, String> rowRdbmsValue = entry.getValue();
@@ -207,8 +209,8 @@ public class PropertiesHandle extends Properties
 		
 		public static void main(String args[]) throws DatabaseException, PropertiesHandleException
 		{
-			System.setProperty("jsse.enableSNIExtension", "false");
-			PropertiesHandle configFile = new PropertiesHandle("NITIC","Quote","QA","Y","com.mysql.jdbc.Driver","jdbc:mysql://192.168.84.225:3700/SeleniumConfig","root","redhat","Chrome","ActualOnly","192.168.4.131","5561");
+			/*System.setProperty("jsse.enableSNIExtension", "false");
+		PropertiesHandle configFile = new PropertiesHandle("NITIC","Quote","QA","Y","com.mysql.jdbc.Driver","jdbc:mysql://192.168.84.225:3700/SeleniumConfig","root","redhat","Chrome","ActualOnly","192.168.4.131","5561");
 			System.out.println(configFile.getProperty("browser"));
 			System.out.println(configFile.getProperty("EnvURL"));
 			System.out.println(configFile.getProperty("TestScriptPath"));
@@ -229,6 +231,6 @@ public class PropertiesHandle extends Properties
 			System.out.println(configFile.getProperty("RatingModelPath"));
 			System.out.println(configFile.getProperty("ExpectedRMPath"));
 			System.out.println(configFile.getProperty("MacroClassName"));
-			System.out.println(configFile.getProperty("comparisonTableQuery"));
+			System.out.println(configFile.getProperty("comparisonTableQuery"));*/
 		}
 }

@@ -45,7 +45,7 @@ public class browserLaunching extends ConditionsChecking{
 		 
 		 else if (browser.equals("chrome"))
 			{
-			 String downloadFilepath = "E:\\Downloads\\EAA\\";
+			 String downloadFilepath = "R:\\SeleniumConfig\\STARR-ASSIST\\Cancel\\PDF";
 			 HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
 			 chromePrefs.put("profile.default_content_settings.popups", 0);
 			 chromePrefs.put("pdfjs.disabled", true);

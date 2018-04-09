@@ -240,7 +240,10 @@ case "UPLOAD":
 	 inputValue=this.getInputValue(dataFlag, InputData, value, dbcolumn_name);
 	 this.uploadusingSendKeys(p, objectType,inputValue);
 	 break;
-	 
+	
+case "PAGINATION_LASTPAGE":
+	 this.gotolastPageinPagination(p, objectType,inputValue);
+	 break;
 	
 	   
 	       
@@ -818,4 +821,15 @@ public void uploadusingSendKeys(String p,String objectType,String value)
 }
 
 
+public void gotolastPageinPagination(String p,String objectType,String value)
+{
+	List<WebElement> elements = driver.findElements(this.getObject(p,objectType));
+	
+	int size=elements.size();
+	System.out.println("element size is"+size);
+	if(size>1)
+	{
+	elements.get(size-1).click();
+	}
+}
 }
