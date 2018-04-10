@@ -49,7 +49,7 @@ public BaseDriverScript(PropertiesHandle configFile) throws SQLException, ClassN
 {
 	this.configFile = configFile;
 	event=new TheEventListener();
-	System.out.println(this.configFile.getProperty("TestScriptPath"));
+	//System.out.println(this.configFile.getProperty("TestScriptPath"));
 	objectLoginScript = new ExcelOperationsJXL(this.configFile.getProperty("TestScriptPath"));
 	objectLoginScript.getsheets(this.configFile.getProperty("loginSheetName"));
 	objectTestScript = new ExcelOperationsJXL(this.configFile.getProperty("TestScriptPath"));
@@ -106,7 +106,7 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 	String[] status=null;
 	while(objectTestScript.has_next_row())
 	{
-		System.out.println("coming to while loop");
+		//System.out.println("coming to while loop");
 		boolean loopFlag=false;
 		String conditions=objectTestScript.read_data(objectTestScript.get_rownumber(),7);
 		if(objectTestScript.read_data(objectTestScript.get_rownumber(),8).toString().equals("enabled")&& this.ConditionReading(conditions, InputData))
@@ -114,7 +114,9 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 			
 			if(objectTestScript.read_data(objectTestScript.get_rownumber(),11).toString().equals("loop"))
 			{
-				//System.out.println("=======coming to loop");
+				//System.out.println(objectTestScript.read_data(objectTestScript.get_rownumber(),1));
+				//System.out.println(objectTestScript.read_data(objectTestScript.get_rownumber(),5));
+				//System.out.println(InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5)));
 				n=Integer.parseInt(InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5)));
 				int rows=Integer.parseInt(objectTestScript.read_data(objectTestScript.get_rownumber(),6));
 				//System.out.println("=======no of looping"+n+"========="+(n-1));
@@ -152,20 +154,20 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 			
 			 if(loopFlag)
 			 {
-				 System.out.println("==========comming to true loop");
+				 //System.out.println("==========comming to true loop");
 				 
 				 for(int i=0;i<n;i++)
 				 {
-					 System.out.println("Endorsement........."+i);
-					 System.out.println("l value is........."+l);
+					// System.out.println("Endorsement........."+i);
+					// System.out.println("l value is........."+l);
 					 for(int j=0;j<l;j++)
 					 {
 					//System.out.println("=========coming to multiendorseloop"+status[j]);
-					  System.out.println(this.ConditionReading(condition[j], InputData));
+					  //System.out.println(this.ConditionReading(condition[j], InputData));
 					 if(status[j].equals("enabled")&& this.ConditionReading(condition[j], InputData))
 					 {
 					 // System.out.println("=========coming to condition satisfied loop");	 
-					  System.out.println("In True Flag........"+PropertyString[j]+actionKeyword[j]+ObjectType[j]+value[j]+dbcolumnNmae[j]+dataProvidingFlag[j]+waitingTime[j]);
+					 // System.out.println("In True Flag........"+PropertyString[j]+actionKeyword[j]+ObjectType[j]+value[j]+dbcolumnNmae[j]+dataProvidingFlag[j]+waitingTime[j]);
 
 						this.perform(PropertyString[j],actionKeyword[j],ObjectType[j],value[j],dbcolumnNmae[j],dataProvidingFlag[j],InputData,outputData,waitingTime[j]);
 					 }
@@ -176,7 +178,7 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 			 }
 			 if(!loopFlag)
 			 {
-				 System.out.println("=====coming to false loop");
+				 //System.out.println("=====coming to false loop");
 				 
 				String actionKeyword1 = objectTestScript.read_data(objectTestScript.get_rownumber(),2);
 				String ObjectType1 = objectTestScript.read_data(objectTestScript.get_rownumber(),3);
@@ -185,7 +187,7 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 				String value1 = objectTestScript.read_data(objectTestScript.get_rownumber(),6);
 				String dataProvidingFlag1=objectTestScript.read_data(objectTestScript.get_rownumber(),9);
 				String  waitingTime1=objectTestScript.read_data(objectTestScript.get_rownumber(),10);
-				System.out.println("In False Flag........"+PropertyString1+actionKeyword1+ObjectType1+value1+dbcolumnNmae1+dataProvidingFlag1+waitingTime1);
+				//System.out.println("In False Flag........"+PropertyString1+actionKeyword1+ObjectType1+value1+dbcolumnNmae1+dataProvidingFlag1+waitingTime1);
 				this.perform(PropertyString1,actionKeyword1,ObjectType1,value1,dbcolumnNmae1,dataProvidingFlag1,InputData,outputData,waitingTime1);
 				objectTestScript.next_row();
 		     }
@@ -252,7 +254,7 @@ public void CompareExpectedWithActual(LinkedHashMap<String, String> outputrow) t
 			LinkedHashMap<String, String> comparisonrow = entry.getValue();
 			if (comparisonrow.get("Comaparision_Flag").equals("Y"))
 			{
-				System.out.println("coming to comparison");
+				//System.out.println("coming to comparison");
 			   outputrow=this.CompareFunction(outputrow,comparisonrow);
 			}
 		}
@@ -272,25 +274,25 @@ public LinkedHashMap<String, String> CompareFunction(LinkedHashMap<String, Strin
   try
   {
 	  ConditionsChecking Conditonchecking = new ConditionsChecking();
-  	System.out.println("coming to Before CompareFunction");
+  //	System.out.println("coming to Before CompareFunction");
   	if(comparisonrow.get("Comaparision_Flag").equalsIgnoreCase("Y"))
 		{
-	    	System.out.println("coming to CompareFunction");
+	    	//System.out.println("coming to CompareFunction");
 			String ExpectedColumn = comparisonrow.get("ExpectedColumn");
 			String ActualColumn = comparisonrow.get("OutputColumn");
 			String StatusColumn = comparisonrow.get("StatusColumn");
 			if(!(StatusColumn.equals("")) && !(ExpectedColumn.equals("")))
 			{
-				System.out.println(ExpectedColumn+"---------------"+ActualColumn);
-				System.out.println(outputrow.get(ExpectedColumn)+"--------------"+outputrow.get(ActualColumn));
+				//System.out.println(ExpectedColumn+"---------------"+ActualColumn);
+				//System.out.println(outputrow.get(ExpectedColumn)+"--------------"+outputrow.get(ActualColumn));
 				if(premium_comp(outputrow.get(ExpectedColumn),outputrow.get(ActualColumn)))
 				{
-					System.out.println("coming to PASS");
+					//System.out.println("coming to PASS");
 					outputrow.put(StatusColumn, "Pass");
 				}
 				else
 				{
-					System.out.println("coming to FAIL");
+					//System.out.println("coming to FAIL");
 					outputrow.put(StatusColumn, "Fail");
 					//outputrow.UpdateRow();
 					analyse(comparisonrow,outputrow);
@@ -349,7 +351,7 @@ protected static boolean premium_comp(String expected,String actual)
 		expected=expected.replace(",","");
 		if(expected.equals(actual))
 		{
-			System.out.println(expected+"---------------------------------"+actual);
+			//System.out.println(expected+"---------------------------------"+actual);
 			status = true;
 		}
 	}

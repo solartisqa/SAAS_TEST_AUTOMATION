@@ -45,7 +45,7 @@ public void perform(String p,String operation,String objectType,String value,Str
 	long waitingTimeinseconds=Long.parseLong(waitingTime);
 	wait = new WebDriverWait(driver, waitingTimeinseconds);
 	
-	System.out.println(operation);
+	//System.out.println(operation);
 try
 {
 switch (operation.toUpperCase())
@@ -162,16 +162,16 @@ case "WAITFORTEXT":
  //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "DYNAMICDATEPICKER":
 	
-	System.out.println("Coming to datepicker");
+	//System.out.println("Coming to datepicker");
 	inputValue = this.getInputValue(dataFlag, InputData, value, dbcolumn_name);
-	System.out.println(value);
+	//System.out.println(value);
 	if(value.equals("Type1"))
 	{
 	this.dynamicDatePicker(p, objectType, inputValue);
 	}
 	else if(value.equals("Type2"))
 	{
-	System.out.println("Coming to datepicker");
+	//System.out.println("Coming to datepicker");
 	this.DynamicDateSelector(p, objectType, inputValue);
 	}
 	
@@ -215,7 +215,7 @@ case "WEBELEMENTLIST":
     
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "WEBELEMENTLISTBYTEXT":
-    System.out.println("By text.......");
+   // System.out.println("By text.......");
     inputValue=this.getInputValue(dataFlag, InputData, value, dbcolumn_name);
     this.selectFromelementlistByText(p, objectType, inputValue);
     break;  
@@ -232,7 +232,7 @@ case "SWITCHWINDOW":
 	
 case "DOWNARROW":
 	  inputValue=this.getInputValue(dataFlag, InputData, value, dbcolumn_name);
-	  System.out.println(inputValue);
+	  //System.out.println(inputValue);
 	 this.downarrow(p, objectType, inputValue);
 	 break;
 	 
@@ -326,12 +326,12 @@ catch(StaleElementReferenceException e)
 	  int var_ele_size= driver.findElements(this.getObject(p,objectType)).size();
 	 for(int i=0;i<var_ele_size;i++)
 	 {
-		 System.out.println("coming into for loop");
+		// System.out.println("coming into for loop");
 		 if(driver.findElements(this.getObject(p,objectType)).get(i).isDisplayed())
 		 {
-			 System.out.println("coming into if loop");
+			// System.out.println("coming into if loop");
 			 driver.findElements(this.getObject(p,objectType)).get(i).click();
-			 System.out.println("visible element clicked");
+			// System.out.println("visible element clicked");
 			 break;
 		 }
 		
@@ -612,12 +612,12 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
     String[] inputlist=inputValue.split(",");
     for(int i=0;i<inputlist.length;i++)
     {
-        System.out.println("----inputlist"+inputlist.length);
+       // System.out.println("----inputlist"+inputlist.length);
         for(int j=0;j<elementList.size();j++)
         {
-            System.out.println("------elementlist"+elementList.size());
-            System.out.println("-------RHS"+inputlist[i]);
-            System.out.println("-------lHS"+elementList.get(j).getAttribute("value"));
+           // System.out.println("------elementlist"+elementList.size());
+            //System.out.println("-------RHS"+inputlist[i]);
+            //System.out.println("-------lHS"+elementList.get(j).getAttribute("value"));
          if(elementList.get(j).getAttribute("value").equals(inputlist[i]))
            // if(elementList.get(j).getText().equals(inputlist[i]))
             {
@@ -645,7 +645,7 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
             //if(elementList.get(j).getAttribute("value").equals(inputlist[i]))
               if(elementList.get(j).getText().equals(inputlist[i]))
                {
-                   System.out.println("condition satisfied in if loop");
+                  // System.out.println("condition satisfied in if loop");
                    Thread.sleep(1000);
                    
                    elementList.get(j).click();
@@ -675,7 +675,7 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
          r1.keyPress(KeyEvent.VK_ENTER);            
          
          r1.keyRelease(KeyEvent.VK_ENTER);
-         System.out.println("Vk_Enter" +" cliecked");
+         //System.out.println("Vk_Enter" +" cliecked");
     }
 
 private void switchwindow() throws AWTException, InterruptedException
@@ -699,7 +699,7 @@ private void switchwindow() throws AWTException, InterruptedException
 	{
 	driver.switchTo().window(child_window);
 	 
-	System.out.println("ChildWindowsTitle---"+driver.switchTo().window(child_window).getTitle());
+	//System.out.println("ChildWindowsTitle---"+driver.switchTo().window(child_window).getTitle());
 	this.click("plugin", "id");
 	this.click("Download", "id");
 	 this.download("E:\\Downloads\\EAA\\");
@@ -752,14 +752,14 @@ protected void DynamicDateSelector(String p,String objectType,String value) thro
 public void downarrow(String p,String objectType,String value) throws AWTException, InterruptedException
 {
 	int num=Integer.parseInt(value);
-	System.out.println(p+objectType);
+	//System.out.println(p+objectType);
  	element = driver.findElement(this.getObject(p,objectType));
  	element.click();
 	 Robot r = new Robot();
 	
 	for(int i=1;i<=num;i++)
 	{    
-		System.out.println("Pressing down");
+		//System.out.println("Pressing down");
 		 r.keyPress(KeyEvent.VK_DOWN);
 	      Thread.sleep(1000);
 	}
@@ -815,7 +815,7 @@ public String dateLookup(String date)
 
 public void uploadusingSendKeys(String p,String objectType,String value)
 {
-	System.out.println("upload using send keys----"+value);
+	//System.out.println("upload using send keys----"+value);
 	element = driver.findElement(this.getObject(p,objectType));
  	element.sendKeys(value);
 }
@@ -826,7 +826,7 @@ public void gotolastPageinPagination(String p,String objectType,String value)
 	List<WebElement> elements = driver.findElements(this.getObject(p,objectType));
 	
 	int size=elements.size();
-	System.out.println("element size is"+size);
+	//System.out.println("element size is in pagination"+size);
 	if(size>1)
 	{
 	elements.get(size-1).click();
