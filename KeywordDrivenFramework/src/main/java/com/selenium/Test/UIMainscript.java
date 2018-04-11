@@ -110,7 +110,7 @@ public class UIMainscript
 		}
 		catch(Exception e)
 		{
-			 inputrow.put("Flag_for_execution", "Fail");
+			  inputrow.put("Flag_for_execution", "Fail");
 			  outputrow.put("Flag_for_execution", "Fail");
 		}
 			 

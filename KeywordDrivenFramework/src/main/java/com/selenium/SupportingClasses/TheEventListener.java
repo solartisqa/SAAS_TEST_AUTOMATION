@@ -89,7 +89,7 @@ public class TheEventListener implements WebDriverEventListener
 	public void afterClickOn(WebElement element, WebDriver driver) {
 		// TODO Auto-generated method stub
 		logInfo.info(element);
-		System.out.println(element);
+		//System.out.println(element);
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class TheEventListener implements WebDriverEventListener
 	public void afterChangeValueOf(WebElement element, WebDriver driver) {
 		// TODO Auto-generated method stub
 		logInfo.info(element);
-		System.out.println(element);
+		//System.out.println(element);
 	}
 
 	@Override
