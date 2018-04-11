@@ -81,7 +81,8 @@ public class UIMainscript
     {
 		LinkedHashMap<String, String> inputrow = inputtableobjectMapper.convertValue(inputtablerowobj, LinkedHashMap.class);
 		LinkedHashMap<String, String> outputrow = outputtableobjectMapper.convertValue(outputtablerowobj, LinkedHashMap.class);
-		
+		try
+		{
 			 if(inputrow.get("Flag_for_execution").equals(configFile.getProperty("flagForExecution")))
 				{  
 				 String ExecutionChoice=configFile.getProperty("ResultsChoice");
@@ -104,9 +105,14 @@ public class UIMainscript
 					  objDriver.CompareExpectedWithActual(outputrow);
 				  }
 				  inputrow.put("Flag_for_execution", "Completed");
-				  outputrow.put("Flag_for_execution", "Completed");
 				  outputrow.put("Flag_for_execution", "Pass");
-			   }	
+			   }
+		}
+		catch(Exception e)
+		{
+			 inputrow.put("Flag_for_execution", "Fail");
+			  outputrow.put("Flag_for_execution", "Fail");
+		}
 			 
 		   input.UpdateRow(RowIterator, inputrow);
 		   output.UpdateRow(RowIterator, outputrow);
