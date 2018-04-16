@@ -77,8 +77,8 @@ public class PropertiesHandle extends Properties
 		}
 		
 		protected void WriteProperty() throws DatabaseException, PropertiesHandleException
-		{
-			DatabaseOperation.ConnectionSetup(JDBC_DRIVER, DB_URL, USER, password);
+		{DatabaseOperation db=new DatabaseOperation();
+			db.ConnectionSetup(JDBC_DRIVER, DB_URL, USER, password);
 			this.put("browser", browser);
 			this.put("EnvURL", this.RdbmsValue("URL"));
 			this.put("TestScriptPath", this.RdbmsValue("RootFolder")+this.RdbmsValue("ProjectName")+"/"+this.RdbmsValue("FlowName")+"/Script/"+this.RdbmsValue("FileName"));

@@ -199,7 +199,8 @@
 		          
 		            <suiteXmlFile>TestNGConfig.xml</suiteXmlFile>
 		          </suiteXmlFiles>
-		          
+		           <forkCount>5</forkCount>
+                    <reuseForks>false</reuseForks>
 		          <systemPropertyVariables>
 		                       <Project>${Project}</Project>
 		                        <Flow>${Flow}</Flow>

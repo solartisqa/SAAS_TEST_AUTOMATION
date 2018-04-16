@@ -19,7 +19,7 @@ public class TestngListener implements ITestListener
 {
 	
 	WebDriver driver=null;
-	String filePath=null;
+	public  String filePath=null;
 	
 	public void onFinish(ITestContext context) 
 	{
@@ -126,10 +126,10 @@ public class TestngListener implements ITestListener
 	
 	 public void takeScreenShot(String methodName,String testNo,String className) 
 	 {
-		 //UIMainscript ob=new UIMainscript();
+		 UIMainscript ob=new UIMainscript();
 		 System.out.println("Taking ScreenShot");
-	    	driver=UIMainscript.driver;
-	    	filePath= UIMainscript.exceptionScreenshotPath;
+	    	driver=ob.driver;
+	    	filePath= ob.exceptionScreenshotPath;
 	    	System.out.println("file path: "+filePath);
 	            try
 	            {

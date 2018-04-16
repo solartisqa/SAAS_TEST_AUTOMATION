@@ -34,8 +34,8 @@ import org.openqa.selenium.WebDriver;
 public class UIoperartions extends browserLaunching
 {
 	
-	 protected String inputValue;
-	 protected String outputValue;
+	 public String inputValue;
+	 public String outputValue;
 	 public WebElement element;
 	 public Document document;
 	
