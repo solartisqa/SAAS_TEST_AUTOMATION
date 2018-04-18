@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Suite]">
-  <test name="Test(failed)">
-    <parameter name="browser" value="firefox"/>
+<suite thread-count="-1" name="Failed suite [Suite]">
+  <parameter name="EnvURL" value="https://niticqa.solartis.net/NITIC/NITIC/Login.xhtml"/>
+  <parameter name="jdbcDriver" value="com.mysql.jdbc.Driver"/>
+  <parameter name="dbUsername" value="root"/>
+  <parameter name="password" value="welcome1"/>
+  <parameter name="outputtableName" value="NITIC_Output_Quote"/>
+  <parameter name="userName" value="nitic_uw"/>
+  <parameter name="dburl" value="jdbc:mysql://192.168.84.225:3700/NITIC_UI"/>
+  <parameter name="dbPassword" value="redhat"/>
+  <parameter name="inputtableName" value="NITIC_Input_Quote"/>
+  <test name="Test1(failed)">
+    <parameter name="browser" value="chrome"/>
     <parameter name="FlagForTest" value="Y"/>
     <parameter name="driverType" value="Remote"/>
     <classes>
-      <class name="com.selenium.Test.uploadTest">
+      <class name="NITICTestCases.NITICCreateQuoteTest">
         <methods>
-          <include name="upload"/>
+          <include name="createQuote"/>
+          <include name="loadConfig"/>
+          <include name="Login"/>
+          <include name="setUp"/>
+          <include name="tearDown"/>
         </methods>
-      </class> <!-- com.selenium.Test.uploadTest -->
+      </class> <!-- NITICTestCases.NITICCreateQuoteTest -->
     </classes>
-  </test> <!-- Test(failed) -->
+  </test> <!-- Test1(failed) -->
 </suite> <!-- Failed suite [Suite] -->

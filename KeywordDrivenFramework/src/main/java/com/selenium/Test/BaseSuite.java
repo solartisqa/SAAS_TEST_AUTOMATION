@@ -102,14 +102,14 @@ protected   String TestFlag;
 				DesiredCapabilities cap = new DesiredCapabilities().firefox();
 				cap.setBrowserName("firefox");
 				cap.setPlatform(Platform.WINDOWS);
-				driver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
+				driver = new RemoteWebDriver(new URL("http://192.168.4.75:4444/wd/hub"), cap);
 			} 
 		 else if (browser.equals("chrome"))
 			{
 				DesiredCapabilities cap = new DesiredCapabilities().chrome();
 				cap.setBrowserName("chrome");
 				cap.setPlatform(Platform.LINUX);
-				driver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
+				driver = new RemoteWebDriver(new URL("http://192.168.4.75:4444/wd/hub"), cap);
 			} 
 		 else if(browser.equals("IE"))
 		 {
@@ -127,7 +127,7 @@ protected   String TestFlag;
 				cap.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
 				cap.setCapability(InternetExplorerDriver.ENABLE_ELEMENT_CACHE_CLEANUP,true);
 				cap.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS,false);
-				driver = new RemoteWebDriver(new URL("http://192.168.4.131:4444/wd/hub"), cap);
+				driver = new RemoteWebDriver(new URL("http://192.168.4.75:4444/wd/hub"), cap);
 		 }
 		 
 			driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);

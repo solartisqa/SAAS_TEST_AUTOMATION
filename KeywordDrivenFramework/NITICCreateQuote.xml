@@ -5,8 +5,8 @@
    		<parameter name="dbUsername" value="root"/>
   		<parameter name="dbPassword" value="redhat"/>
   		<parameter name="EnvURL" value="https://niticqa.solartis.net/NITIC/NITIC/Login.xhtml"/>
-  		<parameter name="inputtableName" value="NITIC_Input"/>
-  		<parameter name="outputtableName" value="NITIC_Output"/>
+  		<parameter name="inputtableName" value="NITIC_Input_Quote"/>
+  		<parameter name="outputtableName" value="NITIC_Output_Quote"/>
   		<parameter name="userName" value="nitic_uw"/>
   		<parameter name="password" value="welcome1"/>
   		
@@ -14,7 +14,7 @@
     <classes>
     <parameters>
      <parameter name="browser" value="chrome"/>
-     <parameter name="driverType" value="Local"/>
+     <parameter name="driverType" value="Remote"/>
     <parameter name="FlagForTest" value="Y"/>
     </parameters>
       <class name="NITICTestCases.NITICCreateQuoteTest"/>

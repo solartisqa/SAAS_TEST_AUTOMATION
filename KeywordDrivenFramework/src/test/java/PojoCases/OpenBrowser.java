@@ -10,6 +10,6 @@ public class OpenBrowser extends BaseSuite
 	@Test
 	public void Hello()
 	{
-		System.out.println("hello");
+	System.out.println("hello");
 	}
 }
