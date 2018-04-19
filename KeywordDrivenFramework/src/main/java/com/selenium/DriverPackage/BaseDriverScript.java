@@ -116,10 +116,13 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 			{
 				//System.out.println(objectTestScript.read_data(objectTestScript.get_rownumber(),1));
 				//System.out.println(objectTestScript.read_data(objectTestScript.get_rownumber(),5));
-				//System.out.println(InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5)));
-				if(InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5)).equals("")&&InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5)).equals(null))
+				String str1=InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5));
+				String str2=null;
+				System.out.println("-----------------"+InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5)));
+				//if((InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5))==null) && (InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5)).equals("")))		{
+				if(str1==null)	
 				{
-					System.out.println("no looping");
+				System.out.println("no looping");
 				}
 				else
 				{
