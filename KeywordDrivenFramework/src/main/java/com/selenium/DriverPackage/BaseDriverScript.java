@@ -117,7 +117,11 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 				//System.out.println(objectTestScript.read_data(objectTestScript.get_rownumber(),1));
 				//System.out.println(objectTestScript.read_data(objectTestScript.get_rownumber(),5));
 				//System.out.println(InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5)));
-				if((!InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5)).equals(""))&&(!InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5)).equals(null)))
+				if(InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5)).equals("")&&InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5)).equals(null))
+				{
+					System.out.println("no looping");
+				}
+				else
 				{
 				n=Integer.parseInt(InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5)));
 				

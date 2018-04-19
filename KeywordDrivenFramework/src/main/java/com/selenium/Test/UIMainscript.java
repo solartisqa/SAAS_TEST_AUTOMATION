@@ -58,6 +58,7 @@ public class UIMainscript
 		objDriver=new BaseDriverScript(configFile);
 		driver=objDriver.launchBrowser();
 		exceptionScreenshotPath=configFile.getProperty("ScreenShotPath");
+		
 	}
 		
 	@Test//(alwaysRun=true)
