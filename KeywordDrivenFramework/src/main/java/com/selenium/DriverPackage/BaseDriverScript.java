@@ -20,6 +20,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 
@@ -83,7 +84,9 @@ public WebDriver launchBrowser() throws MalformedURLException
 				String dataProvidingFlag=objectLoginScript.read_data(objectLoginScript.get_rownumber(),9);
 				String  waitingTime=objectLoginScript.read_data(objectLoginScript.get_rownumber(),10);
 				//System.out.println(fieldName);
+				System.out.println("action started");
 				this.perform(PropertyString,actionKeyword,ObjectType,value,dbcolumnNmae,dataProvidingFlag,InputData,outputData,waitingTime);
+				System.out.println("action ended");
 				
 			}
 			objectLoginScript.next_row();
@@ -179,7 +182,7 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 					 {
 					 // System.out.println("=========coming to condition satisfied loop");	 
 					 // System.out.println("In True Flag........"+PropertyString[j]+actionKeyword[j]+ObjectType[j]+value[j]+dbcolumnNmae[j]+dataProvidingFlag[j]+waitingTime[j]);
-
+                       
 						this.perform(PropertyString[j],actionKeyword[j],ObjectType[j],value[j],dbcolumnNmae[j],dataProvidingFlag[j],InputData,outputData,waitingTime[j]);
 					 }
 					 }
@@ -199,7 +202,15 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 				String dataProvidingFlag1=objectTestScript.read_data(objectTestScript.get_rownumber(),9);
 				String  waitingTime1=objectTestScript.read_data(objectTestScript.get_rownumber(),10);
 				//System.out.println("In False Flag........"+PropertyString1+actionKeyword1+ObjectType1+value1+dbcolumnNmae1+dataProvidingFlag1+waitingTime1);
+				long start = System.currentTimeMillis();
 				this.perform(PropertyString1,actionKeyword1,ObjectType1,value1,dbcolumnNmae1,dataProvidingFlag1,InputData,outputData,waitingTime1);
+				if(dataProvidingFlag1.equals("CheckResTime"))
+				{
+					long end = System.currentTimeMillis();
+					//long seconds = TimeUnit.MILLISECONDS.toSeconds(end-start);
+					System.out.println("Round trip response time = " + (end-start) + " Millis");
+					System.out.println("Round trip response time = " + (((end-start)/1000)%60) + " Soconds");
+				}
 				objectTestScript.next_row();
 		     }
 		//objectTestScript.next_row();

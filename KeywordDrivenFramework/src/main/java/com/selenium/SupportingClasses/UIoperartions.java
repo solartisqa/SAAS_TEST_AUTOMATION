@@ -1,4 +1,8 @@
 package com.selenium.SupportingClasses;
+
+
+import static org.testng.Assert.assertTrue;
+
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.Toolkit;
@@ -26,6 +30,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.time.StopWatch;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -244,9 +249,53 @@ case "UPLOAD":
 case "PAGINATION_LASTPAGE":
 	 this.gotolastPageinPagination(p, objectType,inputValue);
 	 break;
-	
+	 
+case "CLICKQUOTENUMBER":	
+	 System.out.println(outputData.get("QuoteNumber"));
+		inputValue = this.getInputValue(dataFlag, outputData, value, dbcolumn_name);
+		this.dynamicClick(p, objectType, inputValue);
+		break;
+	 
+case "ASSERTTEXTPRESENT":
+	  assertTrue(driver.getPageSource().contains(value));
+	  break;
 	   
-	       
+/*case "CHECKRESPONSETIME":	
+	
+	  this.click(p, objectType);
+	  long start = System.currentTimeMillis();
+	  assertTrue(driver.getPageSource().contains(value));
+	  long end = System.currentTimeMillis();
+		//long seconds = TimeUnit.MILLISECONDS.toSeconds(end-start);
+		System.out.println("Round trip response time = " + (end-start) + " Millis");
+		System.out.println("Round trip response time = " + (((end-start)/1000)) + " Soconds");
+      break;
+      */
+case "CHECKRESPONSETIME":
+	 StopWatch pageLoad = new StopWatch();
+	 pageLoad.start();
+	 this.click(p, objectType);
+	if(driver.getPageSource().contains(value))
+	{
+		 pageLoad.stop();
+	     long pageLoadTime_ms = pageLoad.getTime();
+	     long pageLoadTime_Seconds =pageLoadTime_ms / 1000;
+	     long pageLoadTime_Seconds1 = (pageLoadTime_ms % 1000);
+	     System.out.println("Total Page Load Time: " + pageLoadTime_ms + " milliseconds");
+	     System.out.println("Total Page Load Time: " + pageLoadTime_Seconds + " seconds");
+	    // String milliOutputcolum=dbcolumn_name+"InMillis";
+	     //String SecondsOutputcolum=dbcolumn_name+"InSeconds";
+	     //outputData.put(milliOutputcolum, String.valueOf(pageLoadTime_ms));
+	    // outputData.put(SecondsOutputcolum, String.valueOf(pageLoadTime_Seconds)+"."+pageLoadTime_Seconds1);
+	     outputData.put(dbcolumn_name, String.valueOf(pageLoadTime_ms)+" , "+String.valueOf(pageLoadTime_Seconds)+"."+pageLoadTime_Seconds1);
+	}
+	else
+	{
+		System.out.println("Text not Found");
+	}
+    
+    break;
+    
 default :
 	    System.out.println("operations not  performed");
 	  
