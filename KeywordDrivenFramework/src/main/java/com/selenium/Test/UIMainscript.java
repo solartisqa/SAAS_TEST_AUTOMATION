@@ -82,10 +82,11 @@ public class UIMainscript
     {
 		LinkedHashMap<String, String> inputrow = inputtableobjectMapper.convertValue(inputtablerowobj, LinkedHashMap.class);
 		LinkedHashMap<String, String> outputrow = outputtableobjectMapper.convertValue(outputtablerowobj, LinkedHashMap.class);
-		try
-		{
+		
 			 if(inputrow.get("Flag_for_execution").equals(configFile.getProperty("flagForExecution")))
 				{  
+				 try
+				 {
 				 String ExecutionChoice=configFile.getProperty("ResultsChoice");
 				  System.out.println("Executing main script");
 				  if(ExecutionChoice.equals("Comparison"))
@@ -93,30 +94,30 @@ public class UIMainscript
 					  objDriver.generatExpectedResult(inputrow, outputrow);
 				  }
 				  
-				  try
-				  {
 				  objDriver.executeTestScript(inputrow, outputrow);
-				  }
-				  catch(Exception e)
-				  {
-					  e.printStackTrace();
-				  }
+				
 				  if(ExecutionChoice.equals("Comparison"))
 				  {
 					  objDriver.CompareExpectedWithActual(outputrow);
 				  }
 				  inputrow.put("Flag_for_execution", "Completed");
 				  outputrow.put("Flag_for_execution", "Pass");
+				 }
+				 catch(Exception e)
+				 {
+					e.printStackTrace();
+					String message=e.getMessage().toString();
+					System.out.println("-------1"+message+"--------------1");
+				    String error=message.substring(0,message.indexOf("For"));
+				   // System.out.println("error message---"+error);
+					 inputrow.put("Flag_for_execution", "Fail");
+					 outputrow.put("Result", "Failed");
+					 outputrow.put("ErrorMessage", error);
+				 }
+				  input.UpdateRow(RowIterator, inputrow);
+				  output.UpdateRow(RowIterator, outputrow);
 			   }
-		}
-		catch(Exception e)
-		{
-			  inputrow.put("Flag_for_execution", "Fail");
-			  outputrow.put("Flag_for_execution", "Fail");
-		}
-			 
-		   input.UpdateRow(RowIterator, inputrow);
-		   output.UpdateRow(RowIterator, outputrow);
+		
     }
 	@AfterTest
 	public void close() throws DatabaseException
