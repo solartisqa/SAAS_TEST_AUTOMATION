@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite thread-count="-1" guice-stage="DEVELOPMENT" name="Failed suite [vfr6-ui-tests]">
-  <test name="parallel-test-firefox(failed)">
-    <parameter name="browser" value="chrome"/>
+<suite thread-count="-1" guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
     <classes>
-      <class name="PojoCases.ParallelTest">
+      <class name="CucumberRunnerClass.RunCucumber">
         <methods>
-          <include name="afterMethod"/>
-          <include name="beforeMethod"/>
-          <include name="parallelSeleniumTest" invocation-numbers="1 7 4 0 2 3 6 9 8 5 12 10 11"/>
+          <include name="setUpClass"/>
+          <include name="feature"/>
+          <include name="tearDownClass"/>
         </methods>
-      </class> <!-- PojoCases.ParallelTest -->
+      </class> <!-- CucumberRunnerClass.RunCucumber -->
     </classes>
-  </test> <!-- parallel-test-firefox(failed) -->
-</suite> <!-- Failed suite [vfr6-ui-tests] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

@@ -11,12 +11,6 @@ import java.util.Properties;
 public class propertiesHandle extends Properties 
 {
 	
-	
-		
-
-		/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String path = null;
 	
