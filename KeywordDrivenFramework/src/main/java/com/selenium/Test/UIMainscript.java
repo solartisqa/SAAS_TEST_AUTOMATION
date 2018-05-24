@@ -35,20 +35,50 @@ public class UIMainscript
 	public static ObjectMapper outputtableobjectMapper;
 	public static LinkedHashMap<String, String> inputrow;
 	public static LinkedHashMap<String, String> outputrow;
-	public static BaseDriverScript objDriver;
-	public static PropertiesHandle configFile;
-	public static boolean loginStatus;
-	public  static WebDriver driver=null;
-	public static String exceptionScreenshotPath=null;
-
+	public  BaseDriverScript objDriver;
+	public  PropertiesHandle configFile;
+	public  boolean loginStatus;
+	public   WebDriver driver=null;
+	public  String exceptionScreenshotPath=null;
+	public  String Project;
+	public  String Flow;
+	public  String Env;
+	public  String FlagForExecution;
+	public  String JDBC_DRIVER;
+	public  String DB_URL;
+	public  String USER;
+	public  String password;
+	public  String browser;
+	public  String ResultChoice;
+	public  String remoteIP;
+	public  String Port,userlogin;
+	
+	public UIMainscript(String Project,String Flow,String Env,String FlagForExecution,String JDBC_DRIVER,String DB_URL,String USER,String password,String browser,String ResultChoice,String remoteIP,String Port,String userlogin)
+	{
+		this.Project=Project;
+		this.Flow=Flow;
+		this.Env=Env;
+		this.FlagForExecution=FlagForExecution;
+		this.JDBC_DRIVER=JDBC_DRIVER;
+		this.DB_URL=DB_URL;
+		this.USER=USER;
+		this.password=password;
+		this.browser=browser;
+		this.ResultChoice=ResultChoice;
+		this.remoteIP=remoteIP;
+		this.Port=Port;
+		this.userlogin=userlogin;
+		
+	}
+	
 	@BeforeTest//(alwaysRun=true)
 	public void loadconfig() throws DatabaseException, ClassNotFoundException, SQLException, PropertiesHandleException, MalformedURLException
 	{
 		System.setProperty("jsse.enableSNIExtension", "false");
-		System.out.println(System.getProperty("Project")+System.getProperty("Flow")+System.getProperty("Env")+System.getProperty("FlagForExecution")+System.getProperty("JDBC_DRIVER")+System.getProperty("DB_URL")+System.getProperty("USER")+System.getProperty("password")+System.getProperty("browser")+ System.getProperty("ResultChoice")+System.getProperty("remoteIP")+ System.getProperty("Port"));
+		//System.out.println(System.getProperty("Project")+System.getProperty("Flow")+System.getProperty("Env")+System.getProperty("FlagForExecution")+System.getProperty("JDBC_DRIVER")+System.getProperty("DB_URL")+System.getProperty("USER")+System.getProperty("password")+System.getProperty("browser")+ System.getProperty("ResultChoice")+System.getProperty("remoteIP")+ System.getProperty("Port"));
 		try
 		{
-		configFile = new PropertiesHandle(System.getProperty("Project"),System.getProperty("Flow"),System.getProperty("Env"),System.getProperty("FlagForExecution"),System.getProperty("JDBC_DRIVER"),System.getProperty("DB_URL"),System.getProperty("USER"),System.getProperty("password"),System.getProperty("browser"), System.getProperty("ResultChoice"), System.getProperty("remoteIP"), System.getProperty("Port"),System.getProperty("userLogin"));		
+		configFile = new PropertiesHandle(Project,Flow,Env,FlagForExecution,JDBC_DRIVER,DB_URL,USER, password,browser,ResultChoice, remoteIP, Port,userlogin);		
 		}
 		catch(Exception e)
 		{

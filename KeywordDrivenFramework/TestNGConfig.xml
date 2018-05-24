@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Parallel test suite" parallel="tests">
+<suite name="Parallel test suite" verbose="2"  parallel="instances" thread-count="5">
   <test name="AssistTest">
     <classes>
-      <class name="com.selenium.Test.UIMainscript"/>
+      <class name="com.selenium.Test.BaseSuite"/>
     </classes>
   </test> 
  
-  <listeners>
-      <!--   <listener class-name="com.selenium.TestNGListeners.RetryListener"/> -->
+ <!--  <listeners>
+        <listener class-name="com.selenium.TestNGListeners.RetryListener"/>
         <listener class-name="com.selenium.TestNGListeners.TestngListener"/>
         <listener class-name="com.selenium.TestNGReport.TestNGCustomReportListener" />     
-  </listeners>
+  </listeners> -->
 </suite> <!-- Suite -->
