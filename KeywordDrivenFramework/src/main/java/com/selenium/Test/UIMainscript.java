@@ -107,12 +107,12 @@ public class UIMainscript
 				 {
 					e.printStackTrace();
 					String message=e.getMessage().toString();
-					System.out.println("-------1"+message+"--------------1");
-				    String error=message.substring(0,message.indexOf("For"));
+					//System.out.println("-------1"+message+"--------------1");
+				   // String error=message.substring(0,message.indexOf("For"));
 				   // System.out.println("error message---"+error);
 					 inputrow.put("Flag_for_execution", "Fail");
 					 outputrow.put("Result", "Failed");
-					 outputrow.put("ErrorMessage", error);
+					// outputrow.put("ErrorMessage", error);
 				 }
 				  input.UpdateRow(RowIterator, inputrow);
 				  output.UpdateRow(RowIterator, outputrow);

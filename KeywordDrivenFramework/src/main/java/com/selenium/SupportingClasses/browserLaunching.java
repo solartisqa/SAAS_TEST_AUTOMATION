@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -68,6 +69,9 @@ public class browserLaunching extends ConditionsChecking{
 				driver=new EventFiringWebDriver(wdriver);
 			    eventListerner=new TheEventListener();
 				driver.register(eventListerner);
+				//Dimension d = new Dimension(420,600);
+				//Resize the current window to the given dimension
+				//driver.manage().window().setSize(d);
 				driver.manage().window().maximize();
 			} 
 		 else if(browser.equals("IE"))
