@@ -3,6 +3,7 @@
   <test name="Test1">     
     <classes>
       <class name="StarrAssistTestCases.StarrAssistSuite">
+      
       </class>
     </classes>
   </test> 

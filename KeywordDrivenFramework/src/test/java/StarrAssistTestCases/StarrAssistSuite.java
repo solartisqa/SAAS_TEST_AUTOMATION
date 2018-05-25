@@ -25,13 +25,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.selenium.Configuration.PropertiesHandle;
 import com.selenium.SupportingClasses.DatabaseOperation;
 import com.selenium.SupportingClasses.browserLaunching;
+import com.selenium.Test.BaseTest;
 import com.selenium.exception.DatabaseException;
 import com.selenium.exception.PropertiesHandleException;
 import StarrAssistPOM.*;
 
 public class StarrAssistSuite 
 {
-	public static ThreadLocal<RemoteWebDriver> dr = new ThreadLocal<RemoteWebDriver>();
+	//public static ThreadLocal<RemoteWebDriver> dr = new ThreadLocal<RemoteWebDriver>();
 	public static Connection conn = null;
 	
 	@BeforeTest
@@ -40,26 +41,25 @@ public class StarrAssistSuite
 		conn=DatabaseOperation.ConnectionSetup("com.mysql.jdbc.Driver","jdbc:mysql://192.168.84.225:3700/TestDB_Starr","root","redhat");
 	}
 	
-	
-	
 	@Test(dataProvider="datafromdb")
 	public void Login(Integer RowIterator, Object inputtablerowobj) throws InterruptedException, MalformedURLException, SQLException
 	{
-		RemoteWebDriver driver = null;
-		WebDriver wdriver = null;
+		//RemoteWebDriver driver = null;
+		BaseTest base=new BaseTest();
+		WebDriver wdriver = base.launchRemoteBrowser("chrome");
 	     ObjectMapper inputtableobjectMapper= new ObjectMapper();
 	     @SuppressWarnings("unchecked")
 	     LinkedHashMap<String, String> inputrow = inputtableobjectMapper.convertValue(inputtablerowobj, LinkedHashMap.class);
-		 DesiredCapabilities cap = null;
+	/*	 DesiredCapabilities cap = null;
 		 cap = DesiredCapabilities.chrome();
 		 cap.setBrowserName("chrome");
 		 cap.setPlatform(Platform.WINDOWS);
-		 driver = new RemoteWebDriver(new URL("http://192.168.4.75:4444/wd/hub"), cap);
-		 setWebDriver(driver);
-		 wdriver=getDriver(); 
-		 wdriver.manage().window().maximize();
-		 wdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		 wdriver.get("https://saqa.solartis.net/");
+		// driver = new RemoteWebDriver(new URL("http://192.168.4.75:4444/wd/hub"), cap);
+		 //setWebDriver(driver);
+		// wdriver=getDriver();
+		//wdriver.manage().window().maximize();
+		 //wdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+*/		 wdriver.get("https://saqa.solartis.net/");
 		 Thread.sleep(2000);
 		 Statement stmt = conn.createStatement();
 		 stmt.executeUpdate("update ParallelTest set status='pass' where S_No="+RowIterator);
@@ -68,7 +68,7 @@ public class StarrAssistSuite
 		 log.setPassword(inputrow.get("password"));
 		 log.ClickLogin();
 		 
-		 driver.quit();	
+		 wdriver.quit();	
 	}
 	
 	@AfterTest
@@ -76,14 +76,14 @@ public class StarrAssistSuite
 	{
 		
 	}
-	public WebDriver getDriver()
+/*	public WebDriver getDriver()
 	{
         return dr.get();
     }
  
     public void setWebDriver(RemoteWebDriver driver) {
         dr.set(driver);
-    }
+    }*/
 
 
 	
@@ -117,7 +117,7 @@ public class StarrAssistSuite
 		   ResultSetMetaData meta = null;
 		   Statement stmt =null;
 		   int rs_row = 1;
-		   try
+		/*   try
 		   {
 		  // Class.forName("com.mysql.jdbc.Driver");
 		  // conn = DriverManager.getConnection("jdbc:mysql://192.168.84.225:3700/TestDB_Starr","root","redhat");
@@ -125,9 +125,7 @@ public class StarrAssistSuite
 		   catch(Exception e)
 		   {
 			   System.out.println("Error in connection settings");
-		   }
-		 
-			
+		   }*/
 			LinkedHashMap<String, String> row = null;
 			try 
 			{

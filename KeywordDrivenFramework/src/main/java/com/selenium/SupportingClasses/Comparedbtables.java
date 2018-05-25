@@ -22,7 +22,7 @@ public class Comparedbtables
 		   ResultSetMetaData meta1 = null;
 		   ResultSetMetaData meta2 = null;
 		   Statement stmt1 =null;
-		   Statement stmt2 =null;
+		  Statement stmt2 =null;
 		   int rs_row = 1;
 		   try
 		   {
