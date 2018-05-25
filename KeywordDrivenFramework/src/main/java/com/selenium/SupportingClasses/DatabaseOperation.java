@@ -63,7 +63,7 @@ public class DatabaseOperation
 		}		
 	}
 	
-	public static void ConnectionSetup(String JDBC_DRIVER, String DB_URL, String USER, String password) throws DatabaseException 
+	public static Connection ConnectionSetup(String JDBC_DRIVER, String DB_URL, String USER, String password) throws DatabaseException 
 	{
 		if(conn == null)
 		{
@@ -85,6 +85,7 @@ public class DatabaseOperation
 				throw new DatabaseException("ERROR IN DB - URL / USERNAME / PASSWORD", e);	
 			}	
 		}		
+		return conn;
 	}
 	
 	public static void CloseConn() throws DatabaseException

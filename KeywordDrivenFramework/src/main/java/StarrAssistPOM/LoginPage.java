@@ -34,6 +34,7 @@ public class LoginPage extends BasePage
 		 }
 		 catch(StaleElementReferenceException e)
 		 {
+			 UserName.sendKeys(username);
 			 
 		 }
 	 }
