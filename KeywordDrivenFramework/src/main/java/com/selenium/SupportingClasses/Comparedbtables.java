@@ -56,7 +56,7 @@ public class Comparedbtables
 		               if(value1.equals(value2))
 		               {
 		            	  
-		            	  System.out.println("No diffenece");
+		            	  System.out.println("No difference");
 		               }
 		               else
 		               {

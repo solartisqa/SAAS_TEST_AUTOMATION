@@ -28,8 +28,8 @@ public class BaseTest
 					{
 						DesiredCapabilities cap = new DesiredCapabilities().chrome();
 						cap.setBrowserName("chrome");
-						cap.setPlatform(Platform.LINUX);
-						driver = new RemoteWebDriver(new URL("http://192.168.4.48:4444/wd/hub"), cap);
+						cap.setPlatform(Platform.WINDOWS);
+						driver = new RemoteWebDriver(new URL("http://192.168.4.75:4444/wd/hub"), cap);
 					} 
 				 else if(browser.equals("IE"))
 				 {

@@ -1,11 +1,17 @@
-<suite name="Suite" parallel="tests"  thread-count="5">
-<tests>      
+<suite name="Suite" parallel="classes"  thread-count="10">
+      
   <test name="Test1">     
     <classes>
-      <class name="StarrAssistTestCases.StarrAssistSuite">
+      <class name="StarrAssistTestCases.StarrAssistSuite"/>
+       <class name="StarrAssistTestCases.AssistQuoteCreation"/>
+    </classes>
+  </test> 
+  <!-- <test name="Test2">     
+    <classes>
+      <class name="StarrAssistTestCases.AssistQuoteCreation">
       
       </class>
     </classes>
   </test> 
-</tests>
+ -->
 </suite> <!-- Suite -->

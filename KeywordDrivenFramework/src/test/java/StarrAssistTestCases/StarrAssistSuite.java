@@ -30,7 +30,7 @@ import com.selenium.exception.DatabaseException;
 import com.selenium.exception.PropertiesHandleException;
 import StarrAssistPOM.*;
 
-public class StarrAssistSuite 
+public class StarrAssistSuite extends BaseTest
 {
 	//public static ThreadLocal<RemoteWebDriver> dr = new ThreadLocal<RemoteWebDriver>();
 	public static Connection conn = null;
@@ -45,8 +45,8 @@ public class StarrAssistSuite
 	public void Login(Integer RowIterator, Object inputtablerowobj) throws InterruptedException, MalformedURLException, SQLException
 	{
 		//RemoteWebDriver driver = null;
-		BaseTest base=new BaseTest();
-		WebDriver wdriver = base.launchRemoteBrowser("chrome");
+		//BaseTest base=new BaseTest();
+		WebDriver wdriver = launchRemoteBrowser("chrome");
 	     ObjectMapper inputtableobjectMapper= new ObjectMapper();
 	     @SuppressWarnings("unchecked")
 	     LinkedHashMap<String, String> inputrow = inputtableobjectMapper.convertValue(inputtablerowobj, LinkedHashMap.class);
