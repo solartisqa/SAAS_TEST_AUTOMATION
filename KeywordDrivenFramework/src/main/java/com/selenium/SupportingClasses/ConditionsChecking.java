@@ -6,7 +6,7 @@ import com.selenium.exception.DatabaseException;
 
 
 
-public class ConditionsChecking extends DatabaseOperation 
+public class ConditionsChecking  
 {
 	protected String CondColName;
 	
@@ -16,7 +16,7 @@ public class ConditionsChecking extends DatabaseOperation
 			return ConditionReading(row.get(CondColName),row);
 	}
 
-	protected boolean ConditionReading(String condition,LinkedHashMap<String, String> row) throws DatabaseException
+	public static boolean ConditionReading(String condition,LinkedHashMap<String, String> row) throws DatabaseException
 	{
 		boolean ConditionReading=false;
 		

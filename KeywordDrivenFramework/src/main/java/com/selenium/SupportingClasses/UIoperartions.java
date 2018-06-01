@@ -29,6 +29,10 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import com.mysql.jdbc.Statement;
+import com.selenium.Test.UIMainscript;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.time.StopWatch;
 import org.openqa.selenium.TakesScreenshot;
@@ -43,12 +47,14 @@ public class UIoperartions extends browserLaunching
 	 protected String outputValue;
 	 public WebElement element;
 	 public Document document;
+	 WebDriverWait	wait =null;
+	 Statement stmt = null;
 	
 //**************************************UI operations***************************************************************************
 public void perform(String p,String operation,String objectType,String value,String dbcolumn_name,String dataFlag,LinkedHashMap<String, String> InputData,LinkedHashMap<String, String> outputData,String waitingTime) throws SQLException, IOException, InterruptedException, AWTException
 {
 	long waitingTimeinseconds=Long.parseLong(waitingTime);
-	wait = new WebDriverWait(driver, waitingTimeinseconds);
+	wait = new WebDriverWait(wdriver, waitingTimeinseconds);
 	
 	//System.out.println(operation);
 try
@@ -72,12 +78,17 @@ case "CLICK":
  //-------------------------------------------------------GET ATTRIBUTE-------------------------------------------------------------	 
  case "GETATTRIBUTE":
 	     outputValue=this.getValueByAttribute(p, objectType);
-	     outputData.put(dbcolumn_name, outputValue);
+	    // outputData.put(dbcolumn_name, outputValue);
+	     Statement stmt = (Statement) UIMainscript.conn.createStatement();
+		 stmt.executeUpdate("update "+UIMainscript.configFile.getProperty("outputTable")+" set "+dbcolumn_name+"='"+outputValue+"' where Testdata='"+InputData.get("Testdata")+"'");
          break;
  //------------------------------------------------------GET TEXT----------------------------------------------------------------------                 
  case "GETTEXT":
 	     outputValue=this.getValueByText(p, objectType);
-	     outputData.put(dbcolumn_name, outputValue);
+	    // outputData.put(dbcolumn_name, outputValue);
+	     Statement stmt1 = (Statement) UIMainscript.conn.createStatement();
+	     System.out.println("update "+UIMainscript.configFile.getProperty("outputTable")+" set "+dbcolumn_name+"='"+outputValue+"' where Testdata='"+InputData.get("Testdata")+"'");
+		 stmt1.executeUpdate("update "+UIMainscript.configFile.getProperty("outputTable")+" set "+dbcolumn_name+"='"+outputValue+"' where Testdata='"+InputData.get("Testdata")+"'");
 	     break;
   //----------------------------------------------------SELECT OPERATION------------------------------------------------------------------------- 
  case "SELECT":
@@ -157,7 +168,7 @@ case "WAIT":
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "WAITFORTEXT":
 	
-	element = driver.findElement(this.getObject(p,objectType));
+	element = wdriver.findElement(this.getObject(p,objectType));
 	if(element.isEnabled() && element.isDisplayed())
 	{
 	String expectedText=element.getText();
@@ -257,8 +268,16 @@ case "CLICKQUOTENUMBER":
 		break;
 	 
 case "ASSERTTEXTPRESENT":
-	  assertTrue(driver.getPageSource().contains(value));
-	  break;
+	try
+	{
+	  assertTrue(wdriver.getPageSource().contains(value));
+	}
+	catch(Exception e)
+	{
+		System.out.println("error in assert text");
+	}
+	break;
+	
 	   
 /*case "CHECKRESPONSETIME":	
 	
@@ -275,7 +294,7 @@ case "CHECKRESPONSETIME":
 	 StopWatch pageLoad = new StopWatch();
 	 pageLoad.start();
 	 this.click(p, objectType);
-	if(driver.getPageSource().contains(value))
+	if(wdriver.getPageSource().contains(value))
 	{
 		 pageLoad.stop();
 	     long pageLoadTime_ms = pageLoad.getTime();
@@ -296,6 +315,12 @@ case "CHECKRESPONSETIME":
     
     break;
     
+    
+case "CLOSEBROWSER":
+	wdriver.quit();
+	break;
+	
+	
 default :
 	    System.out.println("operations not  performed");
 	  
@@ -364,7 +389,7 @@ catch(StaleElementReferenceException e)
 	 
 	  	this.waitWithClickable(p, objectType);
 
-	  	element = driver.findElement(this.getObject(p,objectType));
+	  	element = wdriver.findElement(this.getObject(p,objectType));
 	  	element.click(); 	
   }
   
@@ -372,21 +397,16 @@ catch(StaleElementReferenceException e)
   
   protected void clickVisibleElement(String p,String objectType)throws StaleElementReferenceException, InterruptedException
   {  
-	  int var_ele_size= driver.findElements(this.getObject(p,objectType)).size();
+	  int var_ele_size= wdriver.findElements(this.getObject(p,objectType)).size();
 	 for(int i=0;i<var_ele_size;i++)
 	 {
-		// System.out.println("coming into for loop");
-		 if(driver.findElements(this.getObject(p,objectType)).get(i).isDisplayed())
+		 if(wdriver.findElements(this.getObject(p,objectType)).get(i).isDisplayed())
 		 {
-			// System.out.println("coming into if loop");
-			 driver.findElements(this.getObject(p,objectType)).get(i).click();
-			// System.out.println("visible element clicked");
+			 wdriver.findElements(this.getObject(p,objectType)).get(i).click();
 			 break;
 		 }
 		
-	 }
-	//  driver.findElements(this.getObject(p,objectType)).get(var_ele_size-1).click();
-	  
+	 }	  
   }
     
   
@@ -398,14 +418,14 @@ catch(StaleElementReferenceException e)
 	  //JavascriptExecutor executor = (JavascriptExecutor)driver;
 	  //executor.executeScript("arguments[0].click()", element);
 	  Element var=document.getElementById(p);
-	  ((JavascriptExecutor)driver).executeScript(var+".click();");
+	  ((JavascriptExecutor)wdriver).executeScript(var+".click();");
   }
   
   //===================================================================================================================================================
    protected void setTextWithEnter(String p,String objectType,String inputValue) throws StaleElementReferenceException
    {
 	   	this.waitWithClickable(p, objectType);
-	   	element = driver.findElement(this.getObject(p,objectType));
+	   	element = wdriver.findElement(this.getObject(p,objectType));
 	   	element.clear();
 	   	element.sendKeys(Keys.ENTER);
 	   	element.sendKeys(inputValue);
@@ -416,7 +436,7 @@ catch(StaleElementReferenceException e)
    protected void setTextWithoutEnter(String p,String objectType,String inputValue) throws StaleElementReferenceException
    {
 	   	this.waitWithClickable(p, objectType);
-	   	element = driver.findElement(this.getObject(p,objectType));
+	   	element = wdriver.findElement(this.getObject(p,objectType));
 	   	element.clear();
 	   	element.sendKeys(inputValue);
    }
@@ -425,7 +445,7 @@ catch(StaleElementReferenceException e)
    private void setTexThenEnter(String p, String objectType, String inputValue) 
    {
 	   this.waitWithClickable(p, objectType);
-	   	element = driver.findElement(this.getObject(p,objectType));
+	   	element = wdriver.findElement(this.getObject(p,objectType));
 	   	element.clear();
 	   	element.sendKeys(inputValue);
 	   	element.sendKeys(Keys.ENTER);		
@@ -435,22 +455,21 @@ catch(StaleElementReferenceException e)
   //==================================================================================================================================================== 
  protected void goToURL(String inputURL )
  {
-	 	driver.get(inputValue); 	
+	 	wdriver.get(inputValue); 	
  }
-    
- 
+   
  //======================================================================================================================================================
  protected String getValueByText(String p,String objectType) throws StaleElementReferenceException
  {
 	   	this.waitWithoutClickable(p, objectType);
-	   	element = driver.findElement(this.getObject(p,objectType));
+	   	element = wdriver.findElement(this.getObject(p,objectType));
 	   	String label=element.getText();
 	   	return label;
  }
  protected String getValueByAttribute(String p,String objectType) throws StaleElementReferenceException
  {
 	 	this.waitWithoutClickable(p, objectType);
-	 	element = driver.findElement(this.getObject(p,objectType));
+	 	element = wdriver.findElement(this.getObject(p,objectType));
 	 	String label=element.getAttribute("value"); 
 	 	return label;
  }
@@ -458,7 +477,7 @@ catch(StaleElementReferenceException e)
  protected void select(String p,String objectType,String inputValue) throws StaleElementReferenceException
  {
 	    this.waitWithClickable(p, objectType);
-	    element = driver.findElement(this.getObject(p,objectType));
+	    element = wdriver.findElement(this.getObject(p,objectType));
 		Select dropdown = new Select(element);
 		dropdown.selectByVisibleText(inputValue);
  }
@@ -466,15 +485,15 @@ catch(StaleElementReferenceException e)
  protected void mouseHover(String p,String objectType) throws StaleElementReferenceException
  {
 	    this.waitWithClickable(p, objectType);
-	    element = driver.findElement(this.getObject(p,objectType));
-	    Actions mouse_hover = new Actions(driver);
+	    element = wdriver.findElement(this.getObject(p,objectType));
+	    Actions mouse_hover = new Actions(wdriver);
 		mouse_hover.moveToElement(element).build().perform();
  }
  
  protected void autoComplete(String p,String objectType,String inputValue) throws StaleElementReferenceException
  {
 	 	this.waitWithClickable(p, objectType);
-	 	element = driver.findElement(this.getObject(p,objectType));
+	 	element = wdriver.findElement(this.getObject(p,objectType));
 	 	element.sendKeys(inputValue);
 	 	element.sendKeys(Keys.DOWN);
 	 	element.sendKeys(Keys.ENTER);
@@ -498,7 +517,7 @@ catch(StaleElementReferenceException e)
 protected void radioButton(String p,String objectType,String inputValue) throws StaleElementReferenceException
 {
 		this.waitWithClickable(p, objectType);
-		List<WebElement> RadButtonList =driver.findElements(this.getObject(p,objectType));
+		List<WebElement> RadButtonList =wdriver.findElements(this.getObject(p,objectType));
 			for(int i=0; i< RadButtonList.size() ; i++)
 			{
 				//System.out.println(((WebElement) RadButtonList.get(i)).getAttribute("value"));
@@ -513,7 +532,7 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
  protected void datePicker(String p,String objectType,String inputValue) throws StaleElementReferenceException
  {
 	 	this.waitWithClickable(p, objectType);
-	 	element = driver.findElement(this.getObject(p,objectType));
+	 	element = wdriver.findElement(this.getObject(p,objectType));
 	 	element.clear();
 	 	element.sendKeys(inputValue);
 	 	element.sendKeys(Keys.ENTER);
@@ -523,15 +542,15 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
  private void datePickerWithoutEnter(String p, String objectType, String inputValue2)
  {
 	    this.waitWithClickable(p, objectType);
-	 	element = driver.findElement(this.getObject(p,objectType));
+	 	element = wdriver.findElement(this.getObject(p,objectType));
 	 	element.sendKeys(inputValue);
 }
  
  protected void contSendkeysOperation(String p,String objectType,String inputValue) 
  {
 	 	this.waitWithClickable(p, objectType);
-	 	element = driver.findElement(this.getObject(p,objectType));
-	 	Actions builder = new Actions(driver);
+	 	element = wdriver.findElement(this.getObject(p,objectType));
+	 	Actions builder = new Actions(wdriver);
 	 	Actions seriesOfActions = builder.moveToElement(element).click().sendKeys(element, inputValue);
 	 	seriesOfActions.perform();
  }
@@ -551,7 +570,7 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
  protected void waitLoad(String p,String objectType) 
  {
 	    this.waitWithClickable(p, objectType);
-	    element = driver.findElement(this.getObject(p,objectType));
+	    element = wdriver.findElement(this.getObject(p,objectType));
 		element.isDisplayed();
  }
  
@@ -559,7 +578,7 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
  {
 	   	boolean status = false;
 	   	this.waitWithoutClickable(p, objectType);
-	   	element = driver.findElement(this.getObject(p,objectType));
+	   	element = wdriver.findElement(this.getObject(p,objectType));
 	   	String actualText = element.getText();
 	   	if(actualText.equals(expectedText))
 	   	{
@@ -571,7 +590,7 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
  
  protected void takeScreenShot() throws SQLException, IOException
  {
-	 	File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+	 	File scrFile = ((TakesScreenshot)wdriver).getScreenshotAs(OutputType.FILE);
 	 	FileUtils.copyFile(scrFile, new File("D:\\Exception\\screenshots\\"+".png"));	
    	 
  }
@@ -607,7 +626,7 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 				 
 			}
 			
-			driver.findElement(this.getObject(p,objtype[i])).click();
+			wdriver.findElement(this.getObject(p,objtype[i])).click();
 			Thread.sleep(1000);
 		}
  }
@@ -634,7 +653,7 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
  {
 	    p=p.replace("#", inputValue);
 	    this.waitWithClickable(p, objectType);
-	  	element = driver.findElement(this.getObject(p,objectType));
+	  	element = wdriver.findElement(this.getObject(p,objectType));
 	  	element.click(); 
 		
  }
@@ -657,7 +676,7 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 
  private void selectFromelementlistByValue(String p, String objectType, String inputValue) throws InterruptedException
  {
-    List<WebElement> elementList = driver.findElements(this.getObject(p,objectType));
+    List<WebElement> elementList = wdriver.findElements(this.getObject(p,objectType));
     String[] inputlist=inputValue.split(",");
     for(int i=0;i<inputlist.length;i++)
     {
@@ -681,7 +700,7 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
  }
     private void selectFromelementlistByText(String p, String objectType, String inputValue) throws InterruptedException
     {
-       List<WebElement> elementList = driver.findElements(this.getObject(p,objectType));
+       List<WebElement> elementList = wdriver.findElements(this.getObject(p,objectType));
        String[] inputlist=inputValue.split(";");
        for(int i=0;i<inputlist.length;i++)
        {
@@ -729,10 +748,10 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 
 private void switchwindow() throws AWTException, InterruptedException
 {
-	String parent=driver.getWindowHandle();
+	String parent=wdriver.getWindowHandle();
 	 
 	// This will return the number of windows opened by Webdriver and will return Set of St//rings
-	Set<String>s1=driver.getWindowHandles();
+	Set<String>s1=wdriver.getWindowHandles();
 	 
 	// Now we will iterate using Iterator
 	Iterator<String> I1= s1.iterator();
@@ -746,7 +765,7 @@ private void switchwindow() throws AWTException, InterruptedException
 	 
 	if(!parent.equals(child_window))
 	{
-	driver.switchTo().window(child_window);
+	wdriver.switchTo().window(child_window);
 	 
 	//System.out.println("ChildWindowsTitle---"+driver.switchTo().window(child_window).getTitle());
 	this.click("plugin", "id");
@@ -757,7 +776,7 @@ private void switchwindow() throws AWTException, InterruptedException
 	 
 	}
 	// once all pop up closed now switch to parent window
-	driver.switchTo().window(parent);
+	wdriver.switchTo().window(parent);
 }
 
 
@@ -792,7 +811,7 @@ protected void DynamicDateSelector(String p,String objectType,String value) thro
 				 
 			}
 			
-			driver.findElement(this.getObject(p,objtype[i])).click();
+			wdriver.findElement(this.getObject(p,objtype[i])).click();
 			Thread.sleep(1000);
 		}
 }
@@ -802,7 +821,7 @@ public void downarrow(String p,String objectType,String value) throws AWTExcepti
 {
 	int num=Integer.parseInt(value);
 	//System.out.println(p+objectType);
- 	element = driver.findElement(this.getObject(p,objectType));
+ 	element = wdriver.findElement(this.getObject(p,objectType));
  	element.click();
 	 Robot r = new Robot();
 	
@@ -865,14 +884,14 @@ public String dateLookup(String date)
 public void uploadusingSendKeys(String p,String objectType,String value)
 {
 	//System.out.println("upload using send keys----"+value);
-	element = driver.findElement(this.getObject(p,objectType));
+	element = wdriver.findElement(this.getObject(p,objectType));
  	element.sendKeys(value);
 }
 
 
 public void gotolastPageinPagination(String p,String objectType,String value)
 {
-	List<WebElement> elements = driver.findElements(this.getObject(p,objectType));
+	List<WebElement> elements = wdriver.findElements(this.getObject(p,objectType));
 	
 	int size=elements.size();
 	//System.out.println("element size is in pagination"+size);

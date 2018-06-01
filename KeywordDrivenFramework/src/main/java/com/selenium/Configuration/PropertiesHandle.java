@@ -88,7 +88,6 @@ public class PropertiesHandle extends Properties
 			this.put("inputQuery",  this.RdbmsQuery("InputTable"));
 			this.put("outputQuery", this.RdbmsQuery("OutputTable"));
 			this.put("jdbc_driver",this.RdbmsValue("JDCDriver"));
-			
 			this.put("db_url",this.RdbmsValue("DB_URL")+this.RdbmsValue("ProjectDBName"));
 			this.put("db_username",this.RdbmsValue("DB_UserName"));
 			this.put("db_password",this.RdbmsValue("DB_Password"));
@@ -101,6 +100,8 @@ public class PropertiesHandle extends Properties
 	    	this.put("ExpectedRMPath",this.RdbmsValue("RootFolder")+this.RdbmsValue("ProjectName")+"/"+this.RdbmsValue("FlowName")+"/RatingModelResults/");
 	    	this.put("MacroClassName",this.RdbmsValue("MacroClassName"));
 	    	this.put("comparisonTableQuery",this.RdbmsQuery("ComaparisonTableName"));
+	    	this.put("inputTable",  this.RdbmsValue("InputTable"));
+			this.put("outputTable", this.RdbmsValue("OutputTable"));
 	    	DatabaseOperation.CloseConn();
 		 
 		}

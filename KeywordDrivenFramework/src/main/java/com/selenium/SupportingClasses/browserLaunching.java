@@ -19,83 +19,79 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.selenium.Configuration.PropertiesHandle;
 import org.openqa.selenium.remote.CapabilityType;
 
-public class browserLaunching extends ConditionsChecking{
+public class browserLaunching{
 	
 	
-	protected WebDriver wdriver = null;
-	//protected RemoteWebDriver wdriver=null;
-	//protected WebDriver wdriver=null;
-	protected EventFiringWebDriver driver=null;
-	protected TheEventListener eventListerner=null;
-	protected WebDriverWait wait=null; 
-	
+	public static ThreadLocal<RemoteWebDriver> dr = new ThreadLocal<RemoteWebDriver>();
+	WebDriver wdriver = null;
 	 public WebDriver launch_browser(String browser,String serverip) throws MalformedURLException
 	 {
 		
-		 if (browser.equals("firefox"))
-			{
-				DesiredCapabilities cap = new DesiredCapabilities().firefox();
-				cap.setBrowserName("firefox");
-				//cap.setPlatform(Platform.WINDOWS);
-				wdriver = new RemoteWebDriver(new URL("http://"+serverip+"/wd/hub"), cap);
-				driver=new EventFiringWebDriver(wdriver);
-			    eventListerner=new TheEventListener();
-				driver.register(eventListerner);
-				driver.manage().window().maximize();
-			} 
-		 
-		 else if (browser.equals("chrome"))
-			{
-			 String downloadFilepath = "R:\\SeleniumConfig\\STARR-ASSIST\\Cancel\\PDF";
-			 HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
-			 chromePrefs.put("profile.default_content_settings.popups", 0);
-			 chromePrefs.put("pdfjs.disabled", true);
-			 chromePrefs.put("download.prompt_for_download", false);
-			 chromePrefs.put("download.directory_upgrade", true);
-			 chromePrefs.put("plugins.always_open_pdf_externally", true);
-			 chromePrefs.put("download.default_directory", downloadFilepath);
-			 ChromeOptions options = new ChromeOptions();
-			 
-			 HashMap<String, Object> chromeOptionsMap = new HashMap<String, Object>();
-			 options.setExperimentalOption("prefs", chromePrefs);
-			 options.addArguments("--test-type");
+		 RemoteWebDriver driver = null;
 			
-				DesiredCapabilities cap = new DesiredCapabilities().chrome();
-				cap.setBrowserName("chrome");
-				cap.setCapability(ChromeOptions.CAPABILITY, chromeOptionsMap);
-				cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-				cap.setCapability(ChromeOptions.CAPABILITY, options);
-				wdriver = new RemoteWebDriver(new URL("http://"+serverip+"/wd/hub"), cap);
-				driver=new EventFiringWebDriver(wdriver);
-			    eventListerner=new TheEventListener();
-				driver.register(eventListerner);
-				//Dimension d = new Dimension(420,600);
-				//Resize the current window to the given dimension
-				//driver.manage().window().setSize(d);
-				driver.manage().window().maximize();
-			} 
-		 else if(browser.equals("IE"))
-		 {
-			   DesiredCapabilities cap = new DesiredCapabilities().internetExplorer();
+				 if (browser.equals("firefox"))
+					{
+					 DesiredCapabilities cap = new DesiredCapabilities().firefox();
+						cap.setBrowserName("firefox");
+						//cap.setPlatform(Platform.WINDOWS);
+						driver = new RemoteWebDriver(new URL("http://"+serverip+"/wd/hub"), cap);
+						//driver=new EventFiringWebDriver(wdriver);
+					  //  eventListerner=new TheEventListener();
+						//driver.register(eventListerner);
+						driver.manage().window().maximize();
+					} 
+				 else if (browser.equals("chrome"))
+					{
+					 String downloadFilepath = "R:\\SeleniumConfig\\STARR-ASSIST\\Cancel\\PDF";
+					 HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+					 chromePrefs.put("profile.default_content_settings.popups", 0);
+					 chromePrefs.put("pdfjs.disabled", true);
+					 chromePrefs.put("download.prompt_for_download", false);
+					 chromePrefs.put("download.directory_upgrade", true);
+					 chromePrefs.put("plugins.always_open_pdf_externally", true);
+					 chromePrefs.put("download.default_directory", downloadFilepath);
+					 ChromeOptions options = new ChromeOptions();
+					 
+					 HashMap<String, Object> chromeOptionsMap = new HashMap<String, Object>();
+					 options.setExperimentalOption("prefs", chromePrefs);
+					 options.addArguments("--test-type");
+					
+						DesiredCapabilities cap = new DesiredCapabilities().chrome();
+						cap.setBrowserName("chrome");
+						cap.setCapability(ChromeOptions.CAPABILITY, chromeOptionsMap);
+						cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+						cap.setCapability(ChromeOptions.CAPABILITY, options);
+						driver = new RemoteWebDriver(new URL("http://"+serverip+"/wd/hub"), cap);
+					} 
+				 else if(browser.equals("IE"))
+				 {
+					 DesiredCapabilities cap = new DesiredCapabilities().internetExplorer();
 
-				cap.setCapability("ignoreZoomSetting", true);
-				cap.setCapability("javascriptEnabled", true);
-				cap.setCapability(InternetExplorerDriver.UNEXPECTED_ALERT_BEHAVIOR,"dismiss");
-				cap.setCapability(InternetExplorerDriver.ELEMENT_SCROLL_BEHAVIOR,0);
-				cap.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
-				cap.setCapability(InternetExplorerDriver.ENABLE_ELEMENT_CACHE_CLEANUP,true);
-				cap.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS,false);
-				wdriver = new RemoteWebDriver(new URL("http://"+serverip+"/wd/hub"), cap);
-				driver=new EventFiringWebDriver(wdriver);
-			    eventListerner=new TheEventListener();
-				driver.register(eventListerner);
-				driver.manage().window().maximize();	
-		 }
-		 
-			driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
-			return driver;
+						cap.setCapability("ignoreZoomSetting", true);
+						cap.setCapability("javascriptEnabled", true);
+						cap.setCapability(InternetExplorerDriver.UNEXPECTED_ALERT_BEHAVIOR,"dismiss");
+						cap.setCapability(InternetExplorerDriver.ELEMENT_SCROLL_BEHAVIOR,0);
+						cap.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
+						cap.setCapability(InternetExplorerDriver.ENABLE_ELEMENT_CACHE_CLEANUP,true);
+						cap.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS,false);
+						driver = new RemoteWebDriver(new URL("http://"+serverip+"/wd/hub"), cap);
+				 }
+				 
+					driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+					 setWebDriver(driver);
+					 wdriver=getDriver(); 
+					 wdriver.manage().window().maximize();
+					 wdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+					 return wdriver;
 	 }
-	 
+	  public WebDriver getDriver()
+			{
+		        return dr.get();
+		    }
+		 
+		    public void setWebDriver(RemoteWebDriver driver) {
+		        dr.set(driver);
+		    }
 	   /*switch(browser.toUpperCase()) 
 		{
 					
@@ -177,7 +173,7 @@ public class browserLaunching extends ConditionsChecking{
 
 	 public void stop_browser()
 		{
-			driver.quit();
+		// dr.quit();
 		}
 	
 	 

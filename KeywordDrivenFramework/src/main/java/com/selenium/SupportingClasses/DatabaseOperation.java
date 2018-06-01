@@ -25,7 +25,7 @@ public class DatabaseOperation
 	protected LinkedHashMap<Integer, LinkedHashMap<String, String>> table = null;
 	protected ResultSetMetaData meta = null;
 	
-	public static void ConnectionSetup(PropertiesHandle config) throws DatabaseException 
+	public static Connection ConnectionSetup(PropertiesHandle config) throws DatabaseException 
 	{
 		JDBC_DRIVER =config.getProperty("jdbc_driver");
 		DB_URL = config.getProperty("db_url");
@@ -50,7 +50,8 @@ public class DatabaseOperation
 			{
 				throw new DatabaseException("ERROR IN DB - URL / USERNAME / PASSWORD", e);	
 			}	
-		}		
+		}	
+		return conn;
 	}
 	
 	public static void ConnectionSetup(String JDBC_DRIVER, String DB_URL, String USER, String password) throws DatabaseException 

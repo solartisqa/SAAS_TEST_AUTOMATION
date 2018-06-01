@@ -20,7 +20,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 
@@ -50,14 +49,11 @@ public BaseDriverScript(PropertiesHandle configFile) throws SQLException, ClassN
 {
 	this.configFile = configFile;
 	event=new TheEventListener();
-	//System.out.println(this.configFile.getProperty("TestScriptPath"));
 	objectLoginScript = new ExcelOperationsJXL(this.configFile.getProperty("TestScriptPath"));
 	objectLoginScript.getsheets(this.configFile.getProperty("loginSheetName"));
 	objectTestScript = new ExcelOperationsJXL(this.configFile.getProperty("TestScriptPath"));
 	objectTestScript.getsheets(this.configFile.getProperty("ScriptSheetName"));
-	//objectComparisonScript = new ExcelOperationsJXL(this.configFile.getProperty("Test_script_path")+this.configFile.getProperty("ScriptFileName"));
-	//objectComparisonScript.getsheets(this.configFile.getProperty("ComparisonSheetName"));
-	
+
 }
 //====================================Function to launch browser====================================================================================================
 public WebDriver launchBrowser() throws MalformedURLException
@@ -75,7 +71,6 @@ public WebDriver launchBrowser() throws MalformedURLException
 		{
 			if(objectLoginScript.read_data(objectLoginScript.get_rownumber(),8).toString().equals("enabled"))
 			{
-				//String fieldName = objectTestScript.read_data(objectTestScript.get_rownumber(),1);
 				String actionKeyword = objectLoginScript.read_data(objectLoginScript.get_rownumber(),2);
 				String ObjectType = objectLoginScript.read_data(objectLoginScript.get_rownumber(),3);
 				String PropertyString= objectLoginScript.read_data(objectLoginScript.get_rownumber(),4);
@@ -83,7 +78,6 @@ public WebDriver launchBrowser() throws MalformedURLException
 				String value = objectLoginScript.read_data(objectLoginScript.get_rownumber(),6);
 				String dataProvidingFlag=objectLoginScript.read_data(objectLoginScript.get_rownumber(),9);
 				String  waitingTime=objectLoginScript.read_data(objectLoginScript.get_rownumber(),10);
-				//System.out.println(fieldName);
 				System.out.println("action started");
 				this.perform(PropertyString,actionKeyword,ObjectType,value,dbcolumnNmae,dataProvidingFlag,InputData,outputData,waitingTime);
 				System.out.println("action ended");
@@ -109,20 +103,16 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 	String[] status=null;
 	while(objectTestScript.has_next_row())
 	{
-		//System.out.println("coming to while loop");
 		boolean loopFlag=false;
 		String conditions=objectTestScript.read_data(objectTestScript.get_rownumber(),7);
-		if(objectTestScript.read_data(objectTestScript.get_rownumber(),8).toString().equals("enabled")&& this.ConditionReading(conditions, InputData))
+		if(objectTestScript.read_data(objectTestScript.get_rownumber(),8).toString().equals("enabled")&& ConditionsChecking.ConditionReading(conditions, InputData))
 		{	
 			
 			if(objectTestScript.read_data(objectTestScript.get_rownumber(),11).toString().equals("loop"))
 			{
-				//System.out.println(objectTestScript.read_data(objectTestScript.get_rownumber(),1));
-				//System.out.println(objectTestScript.read_data(objectTestScript.get_rownumber(),5));
 				String str1=InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5));
-				String str2=null;
+			//	String str2=null;
 				System.out.println("-----------------"+InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5)));
-				//if((InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5))==null) && (InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5)).equals("")))		{
 				if(str1==null)	
 				{
 				System.out.println("no looping");
@@ -132,7 +122,6 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 				n=Integer.parseInt(InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5)));
 				
 				int rows=Integer.parseInt(objectTestScript.read_data(objectTestScript.get_rownumber(),6));
-				//System.out.println("=======no of looping"+n+"========="+(n-1));
 				actionKeyword=new String[rows];
 				ObjectType=new String[rows];
 				PropertyString=new String[rows];
@@ -142,17 +131,13 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 				waitingTime=new String[rows];
 				condition=new String[rows];
 				status=new String[rows];
-				//do
 				while((objectTestScript.read_data(objectTestScript.get_rownumber(),11).toString().equals("loop")))
 				{
-					//System.out.println("===========comming to do loop with l value is"+l);
 					condition[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),7);
 					status[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),8);
 					actionKeyword[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),2);
 					ObjectType[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),3);
-					
 					PropertyString[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),4);
-					//System.out.println(PropertyString[l]);
 					dbcolumnNmae[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),5);
 					value[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),6);
 					dataProvidingFlag[l]=objectTestScript.read_data(objectTestScript.get_rownumber(),9);
@@ -161,39 +146,28 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 					objectTestScript.next_row();
 
 				}
-				//while(!(objectTestScript.read_data(objectTestScript.get_rownumber(),11).toString().equals("end")));
 				loopFlag=true;
 				}
 			}
 			
 			 if(loopFlag)
 			 {
-				 //System.out.println("==========comming to true loop");
 				 
 				 for(int i=0;i<n;i++)
 				 {
-					// System.out.println("Endorsement........."+i);
-					// System.out.println("l value is........."+l);
 					 for(int j=0;j<l;j++)
 					 {
-					//System.out.println("=========coming to multiendorseloop"+status[j]);
-					  //System.out.println(this.ConditionReading(condition[j], InputData));
-					 if(status[j].equals("enabled")&& this.ConditionReading(condition[j], InputData))
+					 if(status[j].equals("enabled")&& ConditionsChecking.ConditionReading(condition[j], InputData))
 					 {
-					 // System.out.println("=========coming to condition satisfied loop");	 
-					 // System.out.println("In True Flag........"+PropertyString[j]+actionKeyword[j]+ObjectType[j]+value[j]+dbcolumnNmae[j]+dataProvidingFlag[j]+waitingTime[j]);
                        
 						this.perform(PropertyString[j],actionKeyword[j],ObjectType[j],value[j],dbcolumnNmae[j],dataProvidingFlag[j],InputData,outputData,waitingTime[j]);
 					 }
 					 }
-					// objectTestScript.next_row();
 				 }
 				 
 			 }
 			 if(!loopFlag)
-			 {
-				 //System.out.println("=====coming to false loop");
-				 
+			 {				 
 				String actionKeyword1 = objectTestScript.read_data(objectTestScript.get_rownumber(),2);
 				String ObjectType1 = objectTestScript.read_data(objectTestScript.get_rownumber(),3);
 				String PropertyString1= objectTestScript.read_data(objectTestScript.get_rownumber(),4);
@@ -201,25 +175,22 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 				String value1 = objectTestScript.read_data(objectTestScript.get_rownumber(),6);
 				String dataProvidingFlag1=objectTestScript.read_data(objectTestScript.get_rownumber(),9);
 				String  waitingTime1=objectTestScript.read_data(objectTestScript.get_rownumber(),10);
-				//System.out.println("In False Flag........"+PropertyString1+actionKeyword1+ObjectType1+value1+dbcolumnNmae1+dataProvidingFlag1+waitingTime1);
 				long start = System.currentTimeMillis();
 				this.perform(PropertyString1,actionKeyword1,ObjectType1,value1,dbcolumnNmae1,dataProvidingFlag1,InputData,outputData,waitingTime1);
 				if(dataProvidingFlag1.equals("CheckResTime"))
 				{
 					long end = System.currentTimeMillis();
-					//long seconds = TimeUnit.MILLISECONDS.toSeconds(end-start);
 					System.out.println("Round trip response time = " + (end-start) + " Millis");
 					System.out.println("Round trip response time = " + (((end-start)/1000)%60) + " Soconds");
 				}
 				objectTestScript.next_row();
 		     }
-		//objectTestScript.next_row();
 		}
 		else
 		{
 			objectTestScript.next_row();
 		}
-	} //end of while 
+	} 
 }
 //==================================Function to compare  the results========================================================================================================
 /*public void comparisonScript(DatabaseOperation objectInput,DatabaseOperation objectOutput) throws SQLException
@@ -295,28 +266,20 @@ public LinkedHashMap<String, String> CompareFunction(LinkedHashMap<String, Strin
 {		
   try
   {
-	  ConditionsChecking Conditonchecking = new ConditionsChecking();
-  //	System.out.println("coming to Before CompareFunction");
   	if(comparisonrow.get("Comaparision_Flag").equalsIgnoreCase("Y"))
 		{
-	    	//System.out.println("coming to CompareFunction");
 			String ExpectedColumn = comparisonrow.get("ExpectedColumn");
 			String ActualColumn = comparisonrow.get("OutputColumn");
 			String StatusColumn = comparisonrow.get("StatusColumn");
 			if(!(StatusColumn.equals("")) && !(ExpectedColumn.equals("")))
 			{
-				//System.out.println(ExpectedColumn+"---------------"+ActualColumn);
-				//System.out.println(outputrow.get(ExpectedColumn)+"--------------"+outputrow.get(ActualColumn));
 				if(premium_comp(outputrow.get(ExpectedColumn),outputrow.get(ActualColumn)))
 				{
-					//System.out.println("coming to PASS");
 					outputrow.put(StatusColumn, "Pass");
 				}
 				else
 				{
-					//System.out.println("coming to FAIL");
 					outputrow.put(StatusColumn, "Fail");
-					//outputrow.UpdateRow();
 					analyse(comparisonrow,outputrow);
 				}
 			}
@@ -373,7 +336,6 @@ protected static boolean premium_comp(String expected,String actual)
 		expected=expected.replace(",","");
 		if(expected.equals(actual))
 		{
-			//System.out.println(expected+"---------------------------------"+actual);
 			status = true;
 		}
 	}
