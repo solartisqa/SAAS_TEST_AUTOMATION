@@ -55,8 +55,6 @@ public void perform(String p,String operation,String objectType,String value,Str
 {
 	long waitingTimeinseconds=Long.parseLong(waitingTime);
 	wait = new WebDriverWait(wdriver, waitingTimeinseconds);
-	
-	//System.out.println(operation);
 try
 {
 switch (operation.toUpperCase())
@@ -178,16 +176,13 @@ case "WAITFORTEXT":
  //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "DYNAMICDATEPICKER":
 	
-	//System.out.println("Coming to datepicker");
 	inputValue = this.getInputValue(dataFlag, InputData, value, dbcolumn_name);
-	//System.out.println(value);
 	if(value.equals("Type1"))
 	{
 	this.dynamicDatePicker(p, objectType, inputValue);
 	}
 	else if(value.equals("Type2"))
 	{
-	//System.out.println("Coming to datepicker");
 	this.DynamicDateSelector(p, objectType, inputValue);
 	}
 	
@@ -231,7 +226,6 @@ case "WEBELEMENTLIST":
     
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "WEBELEMENTLISTBYTEXT":
-   // System.out.println("By text.......");
     inputValue=this.getInputValue(dataFlag, InputData, value, dbcolumn_name);
     this.selectFromelementlistByText(p, objectType, inputValue);
     break;  
@@ -245,28 +239,32 @@ case "DOWNLOAD":
 case "SWITCHWINDOW":
 	this.switchwindow();
 	break;
+	//------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 case "DOWNARROW":
 	  inputValue=this.getInputValue(dataFlag, InputData, value, dbcolumn_name);
-	  //System.out.println(inputValue);
 	 this.downarrow(p, objectType, inputValue);
 	 break;
-	 
+		//------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
 case "UPLOAD":
 	 inputValue=this.getInputValue(dataFlag, InputData, value, dbcolumn_name);
 	 this.uploadusingSendKeys(p, objectType,inputValue);
 	 break;
-	
+		//------------------------------------------------------------------------------------------------------------------------------------------------------
+
 case "PAGINATION_LASTPAGE":
 	 this.gotolastPageinPagination(p, objectType,inputValue);
 	 break;
+		//------------------------------------------------------------------------------------------------------------------------------------------------------
 	 
 case "CLICKQUOTENUMBER":	
 	 System.out.println(outputData.get("QuoteNumber"));
 		inputValue = this.getInputValue(dataFlag, outputData, value, dbcolumn_name);
 		this.dynamicClick(p, objectType, inputValue);
 		break;
-	 
+		//------------------------------------------------------------------------------------------------------------------------------------------------------
+
 case "ASSERTTEXTPRESENT":
 	try
 	{
@@ -277,7 +275,8 @@ case "ASSERTTEXTPRESENT":
 		System.out.println("error in assert text");
 	}
 	break;
-	
+	//------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	   
 /*case "CHECKRESPONSETIME":	
 	
@@ -290,6 +289,8 @@ case "ASSERTTEXTPRESENT":
 		System.out.println("Round trip response time = " + (((end-start)/1000)) + " Soconds");
       break;
       */
+	//------------------------------------------------------------------------------------------------------------------------------------------------------
+
 case "CHECKRESPONSETIME":
 	 StopWatch pageLoad = new StopWatch();
 	 pageLoad.start();
@@ -314,16 +315,19 @@ case "CHECKRESPONSETIME":
 	}
     
     break;
-    
+	//------------------------------------------------------------------------------------------------------------------------------------------------------
+
     
 case "CLOSEBROWSER":
 	wdriver.quit();
 	break;
-	
+	//------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	
 default :
 	    System.out.println("operations not  performed");
-	  
+		//------------------------------------------------------------------------------------------------------------------------------------------------------
+
 } 
 }
 catch(StaleElementReferenceException e)
@@ -466,6 +470,8 @@ catch(StaleElementReferenceException e)
 	   	String label=element.getText();
 	   	return label;
  }
+ //=================================================================================================================================================== 
+
  protected String getValueByAttribute(String p,String objectType) throws StaleElementReferenceException
  {
 	 	this.waitWithoutClickable(p, objectType);
@@ -473,7 +479,8 @@ catch(StaleElementReferenceException e)
 	 	String label=element.getAttribute("value"); 
 	 	return label;
  }
- 
+ //=================================================================================================================================================== 
+
  protected void select(String p,String objectType,String inputValue) throws StaleElementReferenceException
  {
 	    this.waitWithClickable(p, objectType);
@@ -481,7 +488,8 @@ catch(StaleElementReferenceException e)
 		Select dropdown = new Select(element);
 		dropdown.selectByVisibleText(inputValue);
  }
- 
+ //=================================================================================================================================================== 
+
  protected void mouseHover(String p,String objectType) throws StaleElementReferenceException
  {
 	    this.waitWithClickable(p, objectType);
@@ -489,7 +497,8 @@ catch(StaleElementReferenceException e)
 	    Actions mouse_hover = new Actions(wdriver);
 		mouse_hover.moveToElement(element).build().perform();
  }
- 
+ //=================================================================================================================================================== 
+
  protected void autoComplete(String p,String objectType,String inputValue) throws StaleElementReferenceException
  {
 	 	this.waitWithClickable(p, objectType);
@@ -499,7 +508,8 @@ catch(StaleElementReferenceException e)
 	 	element.sendKeys(Keys.ENTER);
  }
  
- 
+ //=================================================================================================================================================== 
+
  protected void waitWithClickable(String p,String objectType) 
  {
 	 	wait.until(ExpectedConditions.presenceOfElementLocated(this.getObject(p,objectType)));
@@ -507,28 +517,29 @@ catch(StaleElementReferenceException e)
 	 	wait.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(p,objectType)));
 
  }
- 
+ //=================================================================================================================================================== 
+
  protected void waitWithoutClickable(String p,String objectType)
  {
 	    wait.until(ExpectedConditions.presenceOfElementLocated(this.getObject(p,objectType)));
 	    wait.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(p,objectType)));
  }
- 
+ //=================================================================================================================================================== 
+
 protected void radioButton(String p,String objectType,String inputValue) throws StaleElementReferenceException
 {
 		this.waitWithClickable(p, objectType);
 		List<WebElement> RadButtonList =wdriver.findElements(this.getObject(p,objectType));
 			for(int i=0; i< RadButtonList.size() ; i++)
 			{
-				//System.out.println(((WebElement) RadButtonList.get(i)).getAttribute("value"));
 			if(((WebElement) RadButtonList.get(i)).getAttribute("value").equals(inputValue))
 			{
-				//System.out.println("radio button clicked");
 			   ((WebElement) RadButtonList.get(i)).click();	
 			}
 			}	
 }
- 
+//=================================================================================================================================================== 
+
  protected void datePicker(String p,String objectType,String inputValue) throws StaleElementReferenceException
  {
 	 	this.waitWithClickable(p, objectType);
@@ -538,14 +549,16 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 	 	element.sendKeys(Keys.ENTER);
  }
  
- 
+ //=================================================================================================================================================== 
+
  private void datePickerWithoutEnter(String p, String objectType, String inputValue2)
  {
 	    this.waitWithClickable(p, objectType);
 	 	element = wdriver.findElement(this.getObject(p,objectType));
 	 	element.sendKeys(inputValue);
 }
- 
+ //=================================================================================================================================================== 
+
  protected void contSendkeysOperation(String p,String objectType,String inputValue) 
  {
 	 	this.waitWithClickable(p, objectType);
@@ -554,7 +567,8 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 	 	Actions seriesOfActions = builder.moveToElement(element).click().sendKeys(element, inputValue);
 	 	seriesOfActions.perform();
  }
- 
+ //=================================================================================================================================================== 
+
  protected void waitTillInvisible(String p,String objectType)
  {
 	 try
@@ -567,13 +581,16 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 		 
 	 }
  }
+ //=================================================================================================================================================== 
+
  protected void waitLoad(String p,String objectType) 
  {
 	    this.waitWithClickable(p, objectType);
 	    element = wdriver.findElement(this.getObject(p,objectType));
 		element.isDisplayed();
  }
- 
+ //=================================================================================================================================================== 
+
  protected  boolean assertText(String p,String objectType,String expectedText)
  {
 	   	boolean status = false;
@@ -587,7 +604,8 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 	   	return status;
  }
   
- 
+ //=================================================================================================================================================== 
+
  protected void takeScreenShot() throws SQLException, IOException
  {
 	 	File scrFile = ((TakesScreenshot)wdriver).getScreenshotAs(OutputType.FILE);
@@ -595,7 +613,8 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
    	 
  }
  
- 
+ //=================================================================================================================================================== 
+
  protected void dynamicDatePicker(String p,String objectType,String value) throws InterruptedException
  {
 	 String[] objtype=objectType.split(";");
@@ -625,12 +644,12 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 				}
 				 
 			}
-			
 			wdriver.findElement(this.getObject(p,objtype[i])).click();
 			Thread.sleep(1000);
 		}
  }
- 
+ //=================================================================================================================================================== 
+
  
  protected String getInputValue(String dataFlag,LinkedHashMap<String, String> InputData,String value,String dbcolumn_name) throws SQLException
  {
@@ -644,10 +663,10 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 	 			inputValue = value;
 	 			break;
 	 	}
-	 //System.out.println(inputValue);
 	 	return inputValue;
 	 	
  }
+ //=================================================================================================================================================== 
 
  private void dynamicClick(String p, String objectType, String inputValue) 
  {
@@ -657,10 +676,10 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 	  	element.click(); 
 		
  }
- 
- private void upload(String inputValue) throws AWTException
- {
-	    
+ //=================================================================================================================================================== 
+
+private void upload(String inputValue) throws AWTException
+{
 	    StringSelection ss = new StringSelection(inputValue);
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
 		 Robot r = new Robot();
@@ -673,21 +692,17 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
 		 r.keyPress(KeyEvent.VK_ENTER);
 		 r.keyRelease(KeyEvent.VK_ENTER);
  }
+//=================================================================================================================================================== 
 
- private void selectFromelementlistByValue(String p, String objectType, String inputValue) throws InterruptedException
- {
+private void selectFromelementlistByValue(String p, String objectType, String inputValue) throws InterruptedException
+{
     List<WebElement> elementList = wdriver.findElements(this.getObject(p,objectType));
     String[] inputlist=inputValue.split(",");
     for(int i=0;i<inputlist.length;i++)
     {
-       // System.out.println("----inputlist"+inputlist.length);
         for(int j=0;j<elementList.size();j++)
         {
-           // System.out.println("------elementlist"+elementList.size());
-            //System.out.println("-------RHS"+inputlist[i]);
-            //System.out.println("-------lHS"+elementList.get(j).getAttribute("value"));
          if(elementList.get(j).getAttribute("value").equals(inputlist[i]))
-           // if(elementList.get(j).getText().equals(inputlist[i]))
             {
                 System.out.println("condition satisfied in if loop");
                 Thread.sleep(1000);
@@ -697,9 +712,11 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
             }
         }
     }
- }
-    private void selectFromelementlistByText(String p, String objectType, String inputValue) throws InterruptedException
-    {
+}
+//=================================================================================================================================================== 
+
+private void selectFromelementlistByText(String p, String objectType, String inputValue) throws InterruptedException
+ {
        List<WebElement> elementList = wdriver.findElements(this.getObject(p,objectType));
        String[] inputlist=inputValue.split(";");
        for(int i=0;i<inputlist.length;i++)
@@ -710,76 +727,54 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
                System.out.println("------elementlist"+elementList.size());
                System.out.println("-------RHS"+inputlist[i]);
                System.out.println("-------lHS"+elementList.get(j).getText());
-            //if(elementList.get(j).getAttribute("value").equals(inputlist[i]))
               if(elementList.get(j).getText().equals(inputlist[i]))
                {
-                  // System.out.println("condition satisfied in if loop");
                    Thread.sleep(1000);
-                   
                    elementList.get(j).click();
                    break;
                }
            }
        }
  }
-    
+//=================================================================================================================================================== 
+
     private void download(String inputValue) throws AWTException, InterruptedException
     {
-   	    
    	    StringSelection ss = new StringSelection(inputValue);
    		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
    	    Thread.sleep(3500);  
    		 Robot r1 = new Robot();
    		 r1.keyPress(KeyEvent.VK_CONTROL);
-   		 
          r1.keyPress(KeyEvent.VK_V);
-         
-         
          r1.keyRelease(KeyEvent.VK_CONTROL);
-         
          r1.keyRelease(KeyEvent.VK_V);
-         
          Thread.sleep(3500);     
          r1.keyPress(KeyEvent.VK_ENTER);            
-         
          r1.keyRelease(KeyEvent.VK_ENTER);
-         //System.out.println("Vk_Enter" +" cliecked");
     }
+    //=================================================================================================================================================== 
 
 private void switchwindow() throws AWTException, InterruptedException
 {
 	String parent=wdriver.getWindowHandle();
-	 
-	// This will return the number of windows opened by Webdriver and will return Set of St//rings
 	Set<String>s1=wdriver.getWindowHandles();
-	 
-	// Now we will iterate using Iterator
 	Iterator<String> I1= s1.iterator();
-	 
 	while(I1.hasNext())
 	{
-	 
-	   String child_window=I1.next();
-	 
-	// Here we will compare if parent window is not equal to child window then we            will close
-	 
+	   String child_window=I1.next();	 
 	if(!parent.equals(child_window))
 	{
 	wdriver.switchTo().window(child_window);
 	 
-	//System.out.println("ChildWindowsTitle---"+driver.switchTo().window(child_window).getTitle());
 	this.click("plugin", "id");
 	this.click("Download", "id");
 	 this.download("E:\\Downloads\\EAA\\");
-	//driver.close();
 	}
 	 
 	}
-	// once all pop up closed now switch to parent window
 	wdriver.switchTo().window(parent);
 }
-
-
+//=================================================================================================================================================== 
 
 protected void DynamicDateSelector(String p,String objectType,String value) throws InterruptedException
 {
@@ -815,27 +810,23 @@ protected void DynamicDateSelector(String p,String objectType,String value) thro
 			Thread.sleep(1000);
 		}
 }
-
+//=================================================================================================================================================== 
 
 public void downarrow(String p,String objectType,String value) throws AWTException, InterruptedException
 {
 	int num=Integer.parseInt(value);
-	//System.out.println(p+objectType);
  	element = wdriver.findElement(this.getObject(p,objectType));
  	element.click();
 	 Robot r = new Robot();
 	
 	for(int i=1;i<=num;i++)
 	{    
-		//System.out.println("Pressing down");
 		 r.keyPress(KeyEvent.VK_DOWN);
 	      Thread.sleep(1000);
 	}
-	//element.sendKeys(Keys.ENTER);
 	r.keyPress(KeyEvent.VK_ENTER);
 }
-
-
+//=================================================================================================================================================== 
 
 public String monthString(String monthNumber)
 {
@@ -859,6 +850,7 @@ public String monthString(String monthNumber)
 	
 	 return monthStirng;
 }
+//=================================================================================================================================================== 
 
 public String dateLookup(String date)
 {
@@ -880,24 +872,25 @@ public String dateLookup(String date)
 	
 }
 
+//=================================================================================================================================================== 
 
 public void uploadusingSendKeys(String p,String objectType,String value)
 {
-	//System.out.println("upload using send keys----"+value);
 	element = wdriver.findElement(this.getObject(p,objectType));
  	element.sendKeys(value);
 }
 
+//=================================================================================================================================================== 
 
 public void gotolastPageinPagination(String p,String objectType,String value)
 {
 	List<WebElement> elements = wdriver.findElements(this.getObject(p,objectType));
-	
 	int size=elements.size();
-	//System.out.println("element size is in pagination"+size);
 	if(size>1)
 	{
 	elements.get(size-1).click();
 	}
 }
+//=================================================================================================================================================== 
+
 }
