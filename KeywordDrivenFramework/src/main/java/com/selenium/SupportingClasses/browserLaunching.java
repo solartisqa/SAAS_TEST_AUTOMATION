@@ -40,7 +40,7 @@ public class browserLaunching{
 						//driver.register(eventListerner);
 						driver.manage().window().maximize();
 					} 
-				 else if (browser.equals("chrome"))
+				 else if(browser.equals("chrome"))
 					{
 					 String downloadFilepath = "R:\\SeleniumConfig\\STARR-ASSIST\\Cancel\\PDF";
 					 HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
@@ -65,8 +65,7 @@ public class browserLaunching{
 					} 
 				 else if(browser.equals("IE"))
 				 {
-					 DesiredCapabilities cap = new DesiredCapabilities().internetExplorer();
-
+					   DesiredCapabilities cap = new DesiredCapabilities().internetExplorer();
 						cap.setCapability("ignoreZoomSetting", true);
 						cap.setCapability("javascriptEnabled", true);
 						cap.setCapability(InternetExplorerDriver.UNEXPECTED_ALERT_BEHAVIOR,"dismiss");
