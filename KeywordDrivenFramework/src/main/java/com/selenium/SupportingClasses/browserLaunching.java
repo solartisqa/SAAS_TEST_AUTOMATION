@@ -33,7 +33,7 @@ public class browserLaunching{
 					{
 					 DesiredCapabilities cap = new DesiredCapabilities().firefox();
 						cap.setBrowserName("firefox");
-						//cap.setPlatform(Platform.WINDOWS);
+						//cap.setPlatform(Platform.LINUX);
 						driver = new RemoteWebDriver(new URL("http://"+serverip+"/wd/hub"), cap);
 						//driver=new EventFiringWebDriver(wdriver);
 					  //  eventListerner=new TheEventListener();
@@ -55,13 +55,20 @@ public class browserLaunching{
 					 HashMap<String, Object> chromeOptionsMap = new HashMap<String, Object>();
 					 options.setExperimentalOption("prefs", chromePrefs);
 					 options.addArguments("--test-type");
+					// options.addArguments("start-maximized"); // open Browser in maximized mode
+					 options.addArguments("disable-infobars"); // disabling infobars
+					 options.addArguments("--disable-extensions"); // disabling extensions
+					 options.addArguments("--disable-gpu"); // applicable to windows os only
+					 options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+					 options.addArguments("--no-sandbox"); // Bypass OS security model
 					
-						DesiredCapabilities cap = new DesiredCapabilities().chrome();
+						/*DesiredCapabilities cap = new DesiredCapabilities().chrome();
 						cap.setBrowserName("chrome");
+						cap.setPlatform(Platform.LINUX);
 						cap.setCapability(ChromeOptions.CAPABILITY, chromeOptionsMap);
 						cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-						cap.setCapability(ChromeOptions.CAPABILITY, options);
-						driver = new RemoteWebDriver(new URL("http://"+serverip+"/wd/hub"), cap);
+						cap.setCapability(ChromeOptions.CAPABILITY, options);*/
+						driver = new RemoteWebDriver(new URL("http://"+serverip+"/wd/hub"), options);
 					} 
 				 else if(browser.equals("IE"))
 				 {
@@ -79,7 +86,7 @@ public class browserLaunching{
 					driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 					 setWebDriver(driver);
 					 wdriver=getDriver(); 
-					 wdriver.manage().window().maximize();
+					 //wdriver.manage().window().maximize();
 					 wdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 					 return wdriver;
 	 }

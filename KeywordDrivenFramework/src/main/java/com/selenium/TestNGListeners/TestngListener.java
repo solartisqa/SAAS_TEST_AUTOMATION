@@ -15,7 +15,7 @@ import org.testng.ITestResult;
 import com.selenium.Test.UIMainscript;
 import org.apache.commons.io.FileUtils;
 import com.selenium.Test.*;
-public class TestngListener implements ITestListener
+public class TestngListener extends UIMainscript implements ITestListener
 {
 	
 	WebDriver driver=null;
@@ -88,7 +88,7 @@ public class TestngListener implements ITestListener
     	String test=String.valueOf(parameter[0]);
     	System.out.println(String.valueOf(parameter[0]));
     	takeScreenShot(methodName,test,testClassName);
-    	
+    	wdriver.quit();
 	}
 
 	public void onTestSkipped(ITestResult arg0) 

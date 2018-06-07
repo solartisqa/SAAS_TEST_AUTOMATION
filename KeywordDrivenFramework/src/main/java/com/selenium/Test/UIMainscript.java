@@ -28,7 +28,7 @@ public class UIMainscript
 {
 	public static DatabaseOperation input;
 	public static DatabaseOperation output;
-
+	protected WebDriver wdriver = null;
 	public static LinkedHashMap<Integer, LinkedHashMap<String, String>> inputtable;
 	public static LinkedHashMap<Integer, LinkedHashMap<String, String>> outputtable;
 	public static Iterator<Entry<Integer, LinkedHashMap<String, String>>> inputtableiterator;
@@ -72,7 +72,7 @@ public class UIMainscript
 				 try
 				 {
 					 BaseDriverScript objDriver=new BaseDriverScript(configFile);
-					 objDriver.launchBrowser();
+					 wdriver=objDriver.launchBrowser();
 				 String ExecutionChoice=configFile.getProperty("ResultsChoice");
 				  System.out.println("Executing main script");
 				  if(ExecutionChoice.equals("Comparison"))
