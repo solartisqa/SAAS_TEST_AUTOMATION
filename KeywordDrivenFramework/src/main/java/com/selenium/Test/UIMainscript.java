@@ -43,6 +43,7 @@ public class UIMainscript
 	public  static WebDriver driver=null;
 	public static String exceptionScreenshotPath=null;
 	public static Connection conn = null;
+	public     Statement stmt=null;
 	@BeforeTest//(alwaysRun=true)
 	public void loadconfig() throws DatabaseException, ClassNotFoundException, SQLException, PropertiesHandleException, MalformedURLException
 	{
@@ -66,7 +67,7 @@ public class UIMainscript
     public void UITest(Integer RowIterator, Object inputtablerowobj) throws ClassNotFoundException, SQLException, IOException, InterruptedException, AWTException, DatabaseException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, MacroException, POIException
     {
 		LinkedHashMap<String, String> inputrow = inputtableobjectMapper.convertValue(inputtablerowobj, LinkedHashMap.class);
-		
+		 stmt = (Statement) conn.createStatement();
 			 if(inputrow.get("Flag_for_execution").equals(configFile.getProperty("flagForExecution")))
 				{  
 				 try
@@ -86,14 +87,20 @@ public class UIMainscript
 				  {
 					  objDriver.CompareExpectedWithActual(outputrow);
 				  }
-				    Statement stmt = (Statement) conn.createStatement();
+				   
 					stmt.executeUpdate("update "+configFile.getProperty("inputTable")+" set Flag_for_execution='Completed' where S_No="+RowIterator);
 					stmt.executeUpdate("update "+configFile.getProperty("outputTable")+" set Result='Completed' where S_No="+RowIterator);
 				 }
 				 catch(Exception e)
 				 {
-					e.printStackTrace();
-					String message=e.getMessage().toString();
+					    //e.printStackTrace();
+						String message=e.getMessage().toString().replace("'", "\\'");
+						//wdriver.close();
+					    stmt.executeUpdate("update "+configFile.getProperty("inputTable")+" set Flag_for_execution='Fail' where S_No="+RowIterator);
+					    stmt.executeUpdate("update "+configFile.getProperty("outputTable")+" set Result='Fail' where S_No="+RowIterator);
+					    controllerScript.addExceptionReport(conn,stmt,"Exceptions",inputrow.get("Testdata"),message);
+					   // wdriver.quit();
+					   
 				 }	
 			   }
 		

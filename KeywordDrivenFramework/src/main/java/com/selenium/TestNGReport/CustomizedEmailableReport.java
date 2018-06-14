@@ -46,7 +46,8 @@ public class CustomizedEmailableReport implements IReporter {
         out.close();
     }
 
-    protected PrintWriter createWriter(String outdir) throws IOException {
+    protected PrintWriter createWriter(String outdir) throws IOException 
+    {
 
         new File(outdir).mkdirs();
 		/*File eReport=new File(outdir, "emailable-report.html" );

@@ -1,4 +1,4 @@
-package com.selenium.SupportingClasses;
+/*package com.selenium.SupportingClasses;
 
 import java.io.File;
 
@@ -23,7 +23,7 @@ public class createTestNg
 public static void GenerateTestNG()
 {
 	
-     /*   try {
+       try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory
                     .newInstance();
             DocumentBuilder dbBuilder = dbFactory.newDocumentBuilder();
@@ -85,7 +85,8 @@ public static void GenerateTestNG()
         } catch (FilloException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }*/
+        }
     }
 
 }
+*/

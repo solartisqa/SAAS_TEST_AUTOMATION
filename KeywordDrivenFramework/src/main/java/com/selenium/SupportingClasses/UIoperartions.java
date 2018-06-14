@@ -31,6 +31,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.mysql.jdbc.Statement;
+import com.selenium.Configuration.PropertiesHandle;
 import com.selenium.Test.UIMainscript;
 
 import org.apache.commons.io.FileUtils;
@@ -49,10 +50,11 @@ public class UIoperartions extends browserLaunching
 	 public Document document;
 	 WebDriverWait	wait =null;
 	 Statement stmt = null;
-	
+	 PropertiesHandle config=null;
 //**************************************UI operations***************************************************************************
-public void perform(String p,String operation,String objectType,String value,String dbcolumn_name,String dataFlag,LinkedHashMap<String, String> InputData,LinkedHashMap<String, String> outputData,String waitingTime) throws SQLException, IOException, InterruptedException, AWTException
+public void perform(PropertiesHandle config,String p,String operation,String objectType,String value,String dbcolumn_name,String dataFlag,LinkedHashMap<String, String> InputData,LinkedHashMap<String, String> outputData,String waitingTime) throws SQLException, IOException, InterruptedException, AWTException
 {
+	this.config=config;
 	long waitingTimeinseconds=Long.parseLong(waitingTime);
 	wait = new WebDriverWait(wdriver, waitingTimeinseconds);
 try
@@ -70,7 +72,8 @@ case "CLICK":
          break;  		 
  //------------------------------------------------GO TO URL--------------------------------------------------------------------------    
  case "GOTOURL":	 
-		 inputValue = value;
+		 inputValue = this.getInputValue(dataFlag, InputData, value, dbcolumn_name);
+		// System.out.println("url is......"+inputValue);
          this.goToURL(inputValue); 
          break;
  //-------------------------------------------------------GET ATTRIBUTE-------------------------------------------------------------	 
@@ -332,7 +335,7 @@ default :
 }
 catch(StaleElementReferenceException e)
 {
-  this.perform(p, operation, objectType, value, dbcolumn_name, dataFlag, InputData, outputData, waitingTime);
+  this.perform(config,p, operation, objectType, value, dbcolumn_name, dataFlag, InputData, outputData, waitingTime);
 }
 
 }
@@ -653,15 +656,25 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
  
  protected String getInputValue(String dataFlag,LinkedHashMap<String, String> InputData,String value,String dbcolumn_name) throws SQLException
  {
+	 //System.out.println(dataFlag);
 	 switch(dataFlag)
 	 	{
 	 		case "Read":
+	 			//System.out.println("reading input from db");
 	 			inputValue = InputData.get(dbcolumn_name) ;
 	 			break;
     		
 	 		case "Default":	
+	 			//System.out.println("reading default value");
 	 			inputValue = value;
 	 			break;
+	 			
+	 		case "config":
+	 			//System.out.println("reading data from config");
+	 			inputValue=config.getProperty(dbcolumn_name);
+	 			break;
+	 	   default:
+	 		   System.out.println("input value is null");
 	 	}
 	 	return inputValue;
 	 	

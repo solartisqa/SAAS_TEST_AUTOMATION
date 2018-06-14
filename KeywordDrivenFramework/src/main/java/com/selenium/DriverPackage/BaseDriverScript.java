@@ -79,7 +79,7 @@ public WebDriver launchBrowser() throws MalformedURLException
 				String dataProvidingFlag=objectLoginScript.read_data(objectLoginScript.get_rownumber(),9);
 				String  waitingTime=objectLoginScript.read_data(objectLoginScript.get_rownumber(),10);
 				System.out.println("action started");
-				this.perform(PropertyString,actionKeyword,ObjectType,value,dbcolumnNmae,dataProvidingFlag,InputData,outputData,waitingTime);
+				//this.perform(PropertyString,actionKeyword,ObjectType,value,dbcolumnNmae,dataProvidingFlag,InputData,outputData,waitingTime);
 				System.out.println("action ended");
 				
 			}
@@ -101,6 +101,7 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 	String[] waitingTime=null;
 	String[] condition=null;
 	String[] status=null;
+
 	while(objectTestScript.has_next_row())
 	{
 		boolean loopFlag=false;
@@ -111,7 +112,6 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 			if(objectTestScript.read_data(objectTestScript.get_rownumber(),11).toString().equals("loop"))
 			{
 				String str1=InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5));
-			//	String str2=null;
 				System.out.println("-----------------"+InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5)));
 				if(str1==null)	
 				{
@@ -120,7 +120,6 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 				else
 				{
 				n=Integer.parseInt(InputData.get(objectTestScript.read_data(objectTestScript.get_rownumber(),5)));
-				
 				int rows=Integer.parseInt(objectTestScript.read_data(objectTestScript.get_rownumber(),6));
 				actionKeyword=new String[rows];
 				ObjectType=new String[rows];
@@ -160,7 +159,7 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 					 if(status[j].equals("enabled")&& ConditionsChecking.ConditionReading(condition[j], InputData))
 					 {
                        
-						this.perform(PropertyString[j],actionKeyword[j],ObjectType[j],value[j],dbcolumnNmae[j],dataProvidingFlag[j],InputData,outputData,waitingTime[j]);
+						this.perform(configFile,PropertyString[j],actionKeyword[j],ObjectType[j],value[j],dbcolumnNmae[j],dataProvidingFlag[j],InputData,outputData,waitingTime[j]);
 					 }
 					 }
 				 }
@@ -176,7 +175,7 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 				String dataProvidingFlag1=objectTestScript.read_data(objectTestScript.get_rownumber(),9);
 				String  waitingTime1=objectTestScript.read_data(objectTestScript.get_rownumber(),10);
 				long start = System.currentTimeMillis();
-				this.perform(PropertyString1,actionKeyword1,ObjectType1,value1,dbcolumnNmae1,dataProvidingFlag1,InputData,outputData,waitingTime1);
+				this.perform(configFile,PropertyString1,actionKeyword1,ObjectType1,value1,dbcolumnNmae1,dataProvidingFlag1,InputData,outputData,waitingTime1);
 				if(dataProvidingFlag1.equals("CheckResTime"))
 				{
 					long end = System.currentTimeMillis();
@@ -223,7 +222,6 @@ public void executeTestScript(LinkedHashMap<String, String> InputData,LinkedHash
 //============================================Function to close the browser===============================================================================
 public void generatExpectedResult(LinkedHashMap<String, String> inputrow,LinkedHashMap<String, String> outputrow ) throws ClassNotFoundException, MacroException, DatabaseException, POIException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException
 {
-	//System.out.println(configFile.getProperty("comparison")+"-----------"+this.Project+"Macro");
 	
 		  String classname = "com.solartis.selenium.macroPackage."+configFile.getProperty("MacroClassName");
 		  Class<?> classobj=Class.forName(classname);
