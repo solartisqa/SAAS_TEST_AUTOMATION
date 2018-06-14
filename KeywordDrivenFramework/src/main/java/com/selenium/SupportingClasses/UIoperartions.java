@@ -112,7 +112,7 @@ case "ASSERTTEXT":
 	  	 break; 	   
 //------------------------------------------------SCREENSHOT------------------------------------------------------------------   	
 case "SCREENSHOT":
-    	 this.takeScreenShot();
+    	 this.takeScreenShot(value);
     	 break;	   	
  //-----------------------------------------CLICK RADIO BUTTON BY ITS VALUE-------------------------------------------------------------------------------
     	   		
@@ -609,10 +609,10 @@ protected void radioButton(String p,String objectType,String inputValue) throws 
   
  //=================================================================================================================================================== 
 
- protected void takeScreenShot() throws SQLException, IOException
+ protected void takeScreenShot(String screenshotpath) throws SQLException, IOException
  {
 	 	File scrFile = ((TakesScreenshot)wdriver).getScreenshotAs(OutputType.FILE);
-	 	FileUtils.copyFile(scrFile, new File("D:\\Exception\\screenshots\\"+".png"));	
+	 	FileUtils.copyFile(scrFile, new File(screenshotpath+".png"));	
    	 
  }
  
