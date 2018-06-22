@@ -58,7 +58,7 @@ public class UIMainscript
 			e.printStackTrace();
 		}
 		conn=(Connection) DatabaseOperation.ConnectionSetup(configFile);
-		//exceptionScreenshotPath=configFile.getProperty("ScreenShotPath");
+		exceptionScreenshotPath=configFile.getProperty("ScreenShotPath");
 		
 	}
 		
@@ -99,7 +99,7 @@ public class UIMainscript
 					    stmt.executeUpdate("update "+configFile.getProperty("inputTable")+" set Flag_for_execution='Fail' where S_No="+RowIterator);
 					    stmt.executeUpdate("update "+configFile.getProperty("outputTable")+" set Result='Fail' where S_No="+RowIterator);
 					    controllerScript.addExceptionReport(conn,stmt,"Exceptions",inputrow.get("Testdata"),message);
-					   // wdriver.quit();
+					    controllerScript.takeScreenShot(wdriver, exceptionScreenshotPath, inputrow.get("Testdata"));
 					   
 				 }	
 			   }

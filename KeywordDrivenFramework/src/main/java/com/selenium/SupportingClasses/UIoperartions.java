@@ -128,7 +128,6 @@ case "DATEPICKER":
 
 //-------------------------------------------------------------WAIT FOR LOAD--------------------------------------------------------------------
 case "DATEPICKER_WITHOUT_ENTER":
-	
 	  inputValue = this.getInputValue(dataFlag, InputData, value, dbcolumn_name);
 	  this.datePickerWithoutEnter(p, objectType, inputValue);
       break;
@@ -266,7 +265,7 @@ case "CLICKQUOTENUMBER":
 		inputValue = this.getInputValue(dataFlag, outputData, value, dbcolumn_name);
 		this.dynamicClick(p, objectType, inputValue);
 		break;
-		//------------------------------------------------------------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------------------------------------------------------------
 
 case "ASSERTTEXTPRESENT":
 	try

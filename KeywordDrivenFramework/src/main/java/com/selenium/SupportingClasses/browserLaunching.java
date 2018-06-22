@@ -82,6 +82,12 @@ public class browserLaunching{
 						cap.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS,false);
 						driver = new RemoteWebDriver(new URL("http://"+serverip+"/wd/hub"), cap);
 				 }
+				 else if(browser.equals("phantom"))
+				 {
+					   DesiredCapabilities cap = new DesiredCapabilities().phantomjs();
+					
+						driver = new RemoteWebDriver(new URL("http://"+serverip+"/wd/hub"), cap);
+				 }
 				 
 					driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 					 setWebDriver(driver);

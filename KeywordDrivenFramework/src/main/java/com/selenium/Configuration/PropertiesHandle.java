@@ -41,18 +41,14 @@ public class PropertiesHandle extends Properties
 	protected String MacroClassName;
 	protected String Comparisontable;
 	protected String queryresult;
-
-	
 	protected String Project;
 	protected String Flow;
 	protected String Env;
-	
 	protected String JDBC_DRIVER;
 	protected String DB_URL;
 	protected String USER;
 	protected String password;
 	protected String priority;
-
 	protected String ResultChoice;
 	protected String userlogin;
 	static DatabaseOperation ConfigQuery = new DatabaseOperation();
@@ -73,7 +69,6 @@ public class PropertiesHandle extends Properties
 		this.Port=Port;
 		this.userlogin=userlogin;
 			WriteProperty();
-			
 		}
 		
 		protected void WriteProperty() throws DatabaseException, PropertiesHandleException
@@ -91,7 +86,7 @@ public class PropertiesHandle extends Properties
 			this.put("db_url",this.RdbmsValue("DB_URL")+this.RdbmsValue("ProjectDBName"));
 			this.put("db_username",this.RdbmsValue("DB_UserName"));
 			this.put("db_password",this.RdbmsValue("DB_Password"));
-			this.put("ScreenShotPath",this.RdbmsValue("RootFolder")+this.RdbmsValue("ProjectName")+"/"+this.RdbmsValue("FlowName")+"/Screenshots/");
+			this.put("ScreenShotPath",this.RdbmsValue("RootFolder")+this.RdbmsValue("ProjectName")+"/"+this.RdbmsValue("FlowName")+"/ScreenShots/");
 			this.put("server",remoteIP+":"+Port );
 			this.put("ResultsChoice",ResultChoice);
 			this.put("RMconfig_query",this.RdbmsQuery("MacroMappingTable"));
@@ -105,7 +100,6 @@ public class PropertiesHandle extends Properties
 			this.put("AppUserName", this.RdbmsValue("AppUserName"));
 			this.put("AppPassword", this.RdbmsValue("AppPassword"));
 	    	DatabaseOperation.CloseConn();
-		 
 		}
 		protected String RdbmsQuery(String OutputColoumn) throws PropertiesHandleException
 		{
