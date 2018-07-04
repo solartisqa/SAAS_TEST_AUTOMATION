@@ -33,25 +33,21 @@ import org.testng.Reporter;
 import org.testng.collections.Lists;
 import org.testng.internal.Utils;
 import org.testng.xml.XmlSuite;
-public class TestNGCustomReportListener implements IReporter
-{
+
+public class TestNGCustomReportListener implements IReporter {
 	protected PrintWriter writer;
 	protected int m_row;
 	protected Integer m_testIndex;
 	protected int m_methodIndex;
-	protected String reportTitle= "TestNG Customized Report";
+	protected String reportTitle = "TestNG Customized Report";
 	protected String reportFileName = "custom-report.html";
 
 	/** Creates summary of the run */
-	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites,
-			String outdir) 
-	{
+	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outdir) {
 		System.out.println("Calling Report Class");
-		try 
-		{
+		try {
 			writer = createWriter(outdir);
-		} catch (IOException e) 
-		{
+		} catch (IOException e) {
 			System.err.println("Unable to create output file");
 			e.printStackTrace();
 			return;
@@ -67,37 +63,34 @@ public class TestNGCustomReportListener implements IReporter
 		writer.close();
 	}
 
-	protected PrintWriter createWriter(String outdir) throws IOException 
-	{
+	protected PrintWriter createWriter(String outdir) throws IOException {
 		new File(outdir).mkdirs();
 		return new PrintWriter(new BufferedWriter(new FileWriter(new File(outdir, reportFileName))));
 	}
 
 	/**
-	 * Creates a table showing the highlights of each test method with links to
-	 * the method details
+	 * Creates a table showing the highlights of each test method with links to the
+	 * method details
 	 */
-	protected void generateMethodSummaryReport(List<ISuite> suites) 
-	{
+	protected void generateMethodSummaryReport(List<ISuite> suites) {
 		m_methodIndex = 0;
 		startResultSummaryTable("methodOverview");
 		int testIndex = 1;
-		for (ISuite suite : suites) 
-		{
-			if (suites.size() >= 1) 
-			{
+		for (ISuite suite : suites) {
+			if (suites.size() >= 1) {
 				titleRow(suite.getName(), 5);
 			}
-	
+
 			Map<String, ISuiteResult> r = suite.getResults();
-			for (ISuiteResult r2 : r.values()) 
-			{
+			for (ISuiteResult r2 : r.values()) {
 				ITestContext testContext = r2.getTestContext();
 				String testName = testContext.getName();
 				m_testIndex = testIndex;
-				resultSummary(suite, testContext.getFailedConfigurations(), testName, "failed", " (configuration methods)");
+				resultSummary(suite, testContext.getFailedConfigurations(), testName, "failed",
+						" (configuration methods)");
 				resultSummary(suite, testContext.getFailedTests(), testName, "failed", "");
-				resultSummary(suite, testContext.getSkippedConfigurations(), testName, "skipped", " (configuration methods)");
+				resultSummary(suite, testContext.getSkippedConfigurations(), testName, "skipped",
+						" (configuration methods)");
 				resultSummary(suite, testContext.getSkippedTests(), testName, "skipped", "");
 				resultSummary(suite, testContext.getPassedTests(), testName, "passed", "");
 				testIndex++;
@@ -105,19 +98,15 @@ public class TestNGCustomReportListener implements IReporter
 		}
 		writer.println("</table>");
 	}
-   
+
 	/** Creates a section showing known results for each method */
-	protected void generateMethodDetailReport(List<ISuite> suites) 
-	{
+	protected void generateMethodDetailReport(List<ISuite> suites) {
 		m_methodIndex = 0;
-		for (ISuite suite : suites) 
-		{
+		for (ISuite suite : suites) {
 			Map<String, ISuiteResult> r = suite.getResults();
-			for (ISuiteResult r2 : r.values()) 
-			{
+			for (ISuiteResult r2 : r.values()) {
 				ITestContext testContext = r2.getTestContext();
-				if (r.values().size() > 0) 
-				{
+				if (r.values().size() > 0) {
 					writer.println("<h1>" + testContext.getName() + "</h1>");
 				}
 				resultDetail(testContext.getFailedConfigurations());
@@ -132,39 +121,28 @@ public class TestNGCustomReportListener implements IReporter
 	/**
 	 * @param tests
 	 */
-	protected void resultSummary(ISuite suite, IResultMap tests, String testname,
-			String style, String details) 
-	{
-		
-		if (tests.getAllResults().size() > 0) 
-		{
+	protected void resultSummary(ISuite suite, IResultMap tests, String testname, String style, String details) {
+
+		if (tests.getAllResults().size() > 0) {
 			StringBuffer buff = new StringBuffer();
 			String lastClassName = "";
 			int mq = 0;
 			int cq = 0;
-			for (ITestNGMethod method : getMethodSet(tests, suite)) 
-			{
+			for (ITestNGMethod method : getMethodSet(tests, suite)) {
 				m_row += 1;
 				m_methodIndex += 1;
 				ITestClass testClass = method.getTestClass();
 				String className = testClass.getName();
-				if (mq == 0) 
-				{
-					String id = (m_testIndex == null ? null : "t"
-							+ Integer.toString(m_testIndex));
+				if (mq == 0) {
+					String id = (m_testIndex == null ? null : "t" + Integer.toString(m_testIndex));
 					titleRow(testname + " &#8212; " + style + details, 5, id);
 					m_testIndex = null;
 				}
-				if (!className.equalsIgnoreCase(lastClassName)) 
-				{
-					if (mq > 0) 
-					{
+				if (!className.equalsIgnoreCase(lastClassName)) {
+					if (mq > 0) {
 						cq += 1;
-						writer.print("<tr class=\"" + style
-								+ (cq % 2 == 0 ? "even" : "odd") + "\">"
-								+ "<td");
-						if (mq > 1) 
-						{
+						writer.print("<tr class=\"" + style + (cq % 2 == 0 ? "even" : "odd") + "\">" + "<td");
+						if (mq > 1) {
 							writer.print(" rowspan=\"" + mq + "\"");
 						}
 						writer.println(">" + lastClassName + "</td>" + buff);
@@ -176,24 +154,21 @@ public class TestNGCustomReportListener implements IReporter
 				Set<ITestResult> resultSet = tests.getResults(method);
 				long end = Long.MIN_VALUE;
 				long start = Long.MAX_VALUE;
-				long startMS=0;
-				String firstLine="";
-				
+				long startMS = 0;
+				String firstLine = "";
+
 				for (ITestResult testResult : tests.getResults(method)) {
-					if (testResult.getEndMillis() > end) 
-					{
-						end = testResult.getEndMillis()/1000;
+					if (testResult.getEndMillis() > end) {
+						end = testResult.getEndMillis() / 1000;
 					}
-					if (testResult.getStartMillis() < start) 
-					{
+					if (testResult.getStartMillis() < start) {
 						startMS = testResult.getStartMillis();
-						start =startMS/1000;
+						start = startMS / 1000;
 					}
-					
-					Throwable exception=testResult.getThrowable();
+
+					Throwable exception = testResult.getThrowable();
 					boolean hasThrowable = exception != null;
-					if(hasThrowable)
-					{
+					if (hasThrowable) {
 						@SuppressWarnings("deprecation")
 						String str = Utils.stackTrace(exception, true)[0];
 						@SuppressWarnings("resource")
@@ -203,96 +178,73 @@ public class TestNGCustomReportListener implements IReporter
 				}
 				DateFormat formatter = new SimpleDateFormat("hh:mm:ss");
 				Calendar calendar = Calendar.getInstance();
-			    calendar.setTimeInMillis(startMS);
-			     
+				calendar.setTimeInMillis(startMS);
+
 				mq += 1;
-				if (mq > 1) 
-				{
-					buff.append("<tr class=\"" + style
-							+ (cq % 2 == 0 ? "odd" : "even") + "\">");
+				if (mq > 1) {
+					buff.append("<tr class=\"" + style + (cq % 2 == 0 ? "odd" : "even") + "\">");
 				}
 				String description = method.getDescription();
-				String testInstanceName = resultSet
-						.toArray(new ITestResult[] {})[0].getTestName();
-				buff.append("<td><a href=\"#m"
-						+ m_methodIndex
-						+ "\">"
-						+ qualifiedName(method)
-						+ " "
-						+ (description != null && description.length() > 0 ? "(\""
-								+ description + "\")"
-								: "")
-								+ "</a>"
-								+ (null == testInstanceName ? "" : "<br>("
-										+ testInstanceName + ")") + "</td>"
-										+ "<td class=\"numi\" style=\"text-align:left;padding-right:2em\">" + firstLine+"<br/></td>"
-										+ "<td style=\"text-align:right\">" + formatter.format(calendar.getTime()) + "</td>" + "<td class=\"numi\">"
-										+ timeConversion(end - start) + "</td>" + "</tr>");
-				
+				String testInstanceName = resultSet.toArray(new ITestResult[] {})[0].getTestName();
+				buff.append("<td><a href=\"#m" + m_methodIndex + "\">" + qualifiedName(method) + " "
+						+ (description != null && description.length() > 0 ? "(\"" + description + "\")" : "") + "</a>"
+						+ (null == testInstanceName ? "" : "<br>(" + testInstanceName + ")") + "</td>"
+						+ "<td class=\"numi\" style=\"text-align:left;padding-right:2em\">" + firstLine + "<br/></td>"
+						+ "<td style=\"text-align:right\">" + formatter.format(calendar.getTime()) + "</td>"
+						+ "<td class=\"numi\">" + timeConversion(end - start) + "</td>" + "</tr>");
+
 			}
-			if (mq > 0) 
-			{
+			if (mq > 0) {
 				cq += 1;
 				writer.print("<tr class=\"" + style + (cq % 2 == 0 ? "even" : "odd") + "\">" + "<td");
-				if (mq > 1) 
-				{
+				if (mq > 1) {
 					writer.print(" rowspan=\"" + mq + "\"");
 				}
 				writer.println(">" + lastClassName + "</td>" + buff);
 			}
 		}
 	}
-    
-	
-	protected String timeConversion(long seconds) 
-	{
 
-	    final int MINUTES_IN_AN_HOUR = 60;
-	    final int SECONDS_IN_A_MINUTE = 60;
+	protected String timeConversion(long seconds) {
 
-	    int minutes = (int) (seconds / SECONDS_IN_A_MINUTE);
-	    seconds -= minutes * SECONDS_IN_A_MINUTE;
+		final int MINUTES_IN_AN_HOUR = 60;
+		final int SECONDS_IN_A_MINUTE = 60;
 
-	    int hours = minutes / MINUTES_IN_AN_HOUR;
-	    minutes -= hours * MINUTES_IN_AN_HOUR;
+		int minutes = (int) (seconds / SECONDS_IN_A_MINUTE);
+		seconds -= minutes * SECONDS_IN_A_MINUTE;
 
-	    return prefixZeroToDigit(hours) + ":" + prefixZeroToDigit(minutes) + ":" + prefixZeroToDigit((int)seconds);
+		int hours = minutes / MINUTES_IN_AN_HOUR;
+		minutes -= hours * MINUTES_IN_AN_HOUR;
+
+		return prefixZeroToDigit(hours) + ":" + prefixZeroToDigit(minutes) + ":" + prefixZeroToDigit((int) seconds);
 	}
-	
-	protected String prefixZeroToDigit(int num)
-	{
-		int number=num;
-		if(number<=9)
-		{
-			String sNumber="0"+number;
+
+	protected String prefixZeroToDigit(int num) {
+		int number = num;
+		if (number <= 9) {
+			String sNumber = "0" + number;
 			return sNumber;
-		}
-		else
-			return ""+number;
-		
+		} else
+			return "" + number;
+
 	}
-	
+
 	/** Starts and defines columns result summary table */
-	protected void startResultSummaryTable(String style) 
-	{
+	protected void startResultSummaryTable(String style) {
 		tableStart(style, "summary");
 		writer.println("<tr><th>Class</th>"
 				+ "<th>Method</th><th>Exception Info</th><th>Start Time </th><th>Execution Time<br/>(hh:mm:ss)</th></tr>");
 		m_row = 0;
 	}
 
-	protected String qualifiedName(ITestNGMethod method) 
-	{
+	protected String qualifiedName(ITestNGMethod method) {
 		StringBuilder addon = new StringBuilder();
 		String[] groups = method.getGroups();
 		int length = groups.length;
-		if (length > 0 && !"basic".equalsIgnoreCase(groups[0])) 
-		{
+		if (length > 0 && !"basic".equalsIgnoreCase(groups[0])) {
 			addon.append("(");
-			for (int i = 0; i < length; i++) 
-			{
-				if (i > 0) 
-				{
+			for (int i = 0; i < length; i++) {
+				if (i > 0) {
 					addon.append(", ");
 				}
 				addon.append(groups[i]);
@@ -303,20 +255,17 @@ public class TestNGCustomReportListener implements IReporter
 		return "<b>" + method.getMethodName() + "</b> " + addon;
 	}
 
-	protected void resultDetail(IResultMap tests) 
-	{
-		Set<ITestResult> testResults=tests.getAllResults();
+	protected void resultDetail(IResultMap tests) {
+		Set<ITestResult> testResults = tests.getAllResults();
 		List<ITestResult> testResultsList = new ArrayList<ITestResult>(testResults);
 		System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
 		System.setProperty("java.util.Collections.useLegacyMergeSort", "true");
 		Collections.sort(testResultsList, new TestResultsSorter());
-		for (ITestResult result : testResultsList) 
-		{
+		for (ITestResult result : testResultsList) {
 			ITestNGMethod method = result.getMethod();
 			m_methodIndex++;
 			String cname = method.getTestClass().getName();
-			writer.println("<h2 id=\"m" + m_methodIndex + "\">" + cname + ":"
-					+ method.getMethodName() + "</h2>");
+			writer.println("<h2 id=\"m" + m_methodIndex + "\">" + cname + ":" + method.getMethodName() + "</h2>");
 			Set<ITestResult> resultSet = tests.getResults(method);
 			generateResult(result, method, resultSet.size());
 			writer.println("<p class=\"totop\"><a href=\"#summary\">back to summary</a></p>");
@@ -324,24 +273,19 @@ public class TestNGCustomReportListener implements IReporter
 		}
 	}
 
-	protected void generateResult(ITestResult ans, ITestNGMethod method,
-			int resultSetSize) 
-	{
+	protected void generateResult(ITestResult ans, ITestNGMethod method, int resultSetSize) {
 		Object[] parameters = ans.getParameters();
 		boolean hasParameters = parameters != null && parameters.length > 0;
-		if (hasParameters) 
-		{
+		if (hasParameters) {
 			tableStart("result", null);
 			writer.print("<tr class=\"param\">");
-			for (int x = 1; x <= parameters.length; x++) 
-			{
+			for (int x = 1; x <= parameters.length; x++) {
 				writer.print("<th>Param." + x + "</th>");
 			}
 			writer.println("</tr>");
 			writer.print("<tr class=\"param stripe\">");
-			for (Object p : parameters) 
-			{
-				writer.println("<td>" + Utils.escapeHtml(String.valueOf(p))	+ "</td>");
+			for (Object p : parameters) {
+				writer.println("<td>" + Utils.escapeHtml(String.valueOf(p)) + "</td>");
 			}
 			writer.println("</tr>");
 		}
@@ -349,59 +293,44 @@ public class TestNGCustomReportListener implements IReporter
 		boolean hasReporterOutput = msgs.size() > 0;
 		Throwable exception = ans.getThrowable();
 		boolean hasThrowable = exception != null;
-		if (hasReporterOutput || hasThrowable) 
-		{
-			if (hasParameters) 
-			{
+		if (hasReporterOutput || hasThrowable) {
+			if (hasParameters) {
 				writer.print("<tr><td");
-				if (parameters.length > 1) 
-				{
+				if (parameters.length > 1) {
 					writer.print(" colspan=\"" + parameters.length + "\"");
 				}
 				writer.println(">");
-			} else 
-			{
+			} else {
 				writer.println("<div>");
 			}
-			if (hasReporterOutput) 
-			{
-				if (hasThrowable) 
-				{
+			if (hasReporterOutput) {
+				if (hasThrowable) {
 					writer.println("<h3>Test Messages</h3>");
 				}
-				for (String line : msgs) 
-				{
+				for (String line : msgs) {
 					writer.println(line + "<br/>");
 				}
 			}
-			if (hasThrowable) 
-			{
+			if (hasThrowable) {
 				boolean wantsMinimalOutput = ans.getStatus() == ITestResult.SUCCESS;
-				if (hasReporterOutput) 
-				{
-					writer.println("<h3>"
-							+ (wantsMinimalOutput ? "Expected Exception"
-									: "Failure") + "</h3>");
+				if (hasReporterOutput) {
+					writer.println("<h3>" + (wantsMinimalOutput ? "Expected Exception" : "Failure") + "</h3>");
 				}
 				generateExceptionReport(exception, method);
 			}
-			if (hasParameters) 
-			{
+			if (hasParameters) {
 				writer.println("</td></tr>");
-			} else 
-			{
+			} else {
 				writer.println("</div>");
 			}
 		}
-		if (hasParameters) 
-		{
+		if (hasParameters) {
 			writer.println("</table>");
 		}
 	}
 
 	@SuppressWarnings("deprecation")
-	protected void generateExceptionReport(Throwable exception, ITestNGMethod method) 
-	{
+	protected void generateExceptionReport(Throwable exception, ITestNGMethod method) {
 		writer.print("<div class=\"stacktrace\">");
 		writer.print(Utils.stackTrace(exception, true)[0]);
 		writer.println("</div>");
@@ -411,44 +340,37 @@ public class TestNGCustomReportListener implements IReporter
 	 * Since the methods will be sorted chronologically, we want to return the
 	 * ITestNGMethod from the invoked methods.
 	 */
-	protected Collection<ITestNGMethod> getMethodSet(IResultMap tests, ISuite suite) 
-	{
-		
+	protected Collection<ITestNGMethod> getMethodSet(IResultMap tests, ISuite suite) {
+
 		List<IInvokedMethod> r = Lists.newArrayList();
 		List<IInvokedMethod> invokedMethods = suite.getAllInvokedMethods();
-		for (IInvokedMethod im : invokedMethods) 
-		{
-			if (tests.getAllMethods().contains(im.getTestMethod())) 
-			{
+		for (IInvokedMethod im : invokedMethods) {
+			if (tests.getAllMethods().contains(im.getTestMethod())) {
 				r.add(im);
 			}
 		}
-		
+
 		System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
 		System.setProperty("java.util.Collections.useLegacyMergeSort", "true");
-		Collections.sort(r,new TestSorter());
+		Collections.sort(r, new TestSorter());
 		List<ITestNGMethod> result = Lists.newArrayList();
-		
+
 		// Add all the invoked methods
-		for (IInvokedMethod m : r) 
-		{
-			for (ITestNGMethod temp : result) 
-			{
+		for (IInvokedMethod m : r) {
+			for (ITestNGMethod temp : result) {
 				if (!temp.equals(m.getTestMethod()))
 					result.add(m.getTestMethod());
 			}
 		}
-		
+
 		// Add all the methods that weren't invoked (e.g. skipped) that we
 		// haven't added yet
-		Collection<ITestNGMethod> allMethodsCollection=tests.getAllMethods();
-		List<ITestNGMethod> allMethods=new ArrayList<ITestNGMethod>(allMethodsCollection);
+		Collection<ITestNGMethod> allMethodsCollection = tests.getAllMethods();
+		List<ITestNGMethod> allMethods = new ArrayList<ITestNGMethod>(allMethodsCollection);
 		Collections.sort(allMethods, new TestMethodSorter());
-		
-		for (ITestNGMethod m : allMethods) 
-		{
-			if (!result.contains(m)) 
-			{
+
+		for (ITestNGMethod m : allMethods) {
+			if (!result.contains(m)) {
 				result.add(m);
 			}
 		}
@@ -456,8 +378,7 @@ public class TestNGCustomReportListener implements IReporter
 	}
 
 	@SuppressWarnings("unused")
-	public void generateSuiteSummaryReport(List<ISuite> suites) 
-	{
+	public void generateSuiteSummaryReport(List<ISuite> suites) {
 		tableStart("testOverview", null);
 		writer.print("<tr>");
 		tableColumnStart("Test");
@@ -481,18 +402,15 @@ public class TestNGCustomReportListener implements IReporter
 		int qty_fail = 0;
 		long time_end = Long.MIN_VALUE;
 		m_testIndex = 1;
-		for (ISuite suite : suites) 
-		{
-			if (suites.size() >= 1) 
-			{
+		for (ISuite suite : suites) {
+			if (suites.size() >= 1) {
 				titleRow(suite.getName(), 10);
 			}
 			Map<String, ISuiteResult> tests = suite.getResults();
-			for (ISuiteResult r : tests.values()) 
-			{
+			for (ISuiteResult r : tests.values()) {
 				qty_tests += 1;
 				ITestContext overview = r.getTestContext();
-				
+
 				startSummaryRow(overview.getName());
 				int q = getMethodSet(overview.getPassedTests(), suite).size();
 				qty_pass_m += q;
@@ -503,30 +421,31 @@ public class TestNGCustomReportListener implements IReporter
 				q = getMethodSet(overview.getFailedTests(), suite).size();
 				qty_fail += q;
 				summaryCell(q, 0);
-				
+
 				// Write OS and Browser
 				summaryCell(suite.getParameter("browserType"), true);
 				writer.println("</td>");
-							
+
 				SimpleDateFormat summaryFormat = new SimpleDateFormat("hh:mm:ss");
-				summaryCell(summaryFormat.format(overview.getStartDate()),true);				
+				summaryCell(summaryFormat.format(overview.getStartDate()), true);
 				writer.println("</td>");
-				
-				summaryCell(summaryFormat.format(overview.getEndDate()),true);
+
+				summaryCell(summaryFormat.format(overview.getEndDate()), true);
 				writer.println("</td>");
 
 				time_start = Math.min(overview.getStartDate().getTime(), time_start);
 				time_end = Math.max(overview.getEndDate().getTime(), time_end);
-				summaryCell(timeConversion((overview.getEndDate().getTime() - overview.getStartDate().getTime()) / 1000), true);
-				
+				summaryCell(
+						timeConversion((overview.getEndDate().getTime() - overview.getStartDate().getTime()) / 1000),
+						true);
+
 				summaryCell(overview.getIncludedGroups());
 				summaryCell(overview.getExcludedGroups());
 				writer.println("</tr>");
 				m_testIndex++;
 			}
 		}
-		if (qty_tests > 1) 
-		{
+		if (qty_tests > 1) {
 			writer.println("<tr class=\"total\"><td>Total</td>");
 			summaryCell(qty_pass_m, Integer.MAX_VALUE);
 			summaryCell(qty_skip, 0);
@@ -539,88 +458,72 @@ public class TestNGCustomReportListener implements IReporter
 		}
 		writer.println("</table>");
 	}
-    
-	
-	protected void summaryCell(String[] val) 
-	{
+
+	protected void summaryCell(String[] val) {
 		StringBuffer b = new StringBuffer();
-		for (String v : val) 
-		{
+		for (String v : val) {
 			b.append(v + " ");
 		}
 		summaryCell(b.toString(), true);
 	}
 
-	protected void summaryCell(String v, boolean isgood) 
-	{
-		writer.print("<td class=\"numi" + (isgood ? "" : "_attn") + "\">" + v
-				+ "</td>");
+	protected void summaryCell(String v, boolean isgood) {
+		writer.print("<td class=\"numi" + (isgood ? "" : "_attn") + "\">" + v + "</td>");
 	}
 
-	protected void startSummaryRow(String label) 
-	{
+	protected void startSummaryRow(String label) {
 		m_row += 1;
-		writer.print("<tr"
-				+ (m_row % 2 == 0 ? " class=\"stripe\"" : "")
-				+ "><td style=\"text-align:left;padding-right:2em\"><a href=\"#t"
-				+ m_testIndex + "\"><b>\" + label + \"</b></a>\" + \"</td>");
-		
+		writer.print("<tr" + (m_row % 2 == 0 ? " class=\"stripe\"" : "")
+				+ "><td style=\"text-align:left;padding-right:2em\"><a href=\"#t" + m_testIndex
+				+ "\"><b>\" + label + \"</b></a>\" + \"</td>");
+
 	}
 
 	protected void summaryCell(int v, int maxexpected) {
 		summaryCell(String.valueOf(v), v <= maxexpected);
 	}
 
-	protected void tableStart(String cssclass, String id) 
-	{
+	protected void tableStart(String cssclass, String id) {
 		writer.println("<table cellspacing=\"0\" cellpadding=\"0\""
-				+ (cssclass != null ? " class=\"" + cssclass + "\""
-						: " style=\"padding-bottom:2em\"")
-						+ (id != null ? " id=\"" + id + "\"" : "") + ">");
+				+ (cssclass != null ? " class=\"" + cssclass + "\"" : " style=\"padding-bottom:2em\"")
+				+ (id != null ? " id=\"" + id + "\"" : "") + ">");
 		m_row = 0;
 	}
 
-	protected void tableColumnStart(String label) 
-	{
+	protected void tableColumnStart(String label) {
 		writer.print("<th>" + label + "</th>");
 	}
 
-	protected void titleRow(String label, int cq) 
-	{
+	protected void titleRow(String label, int cq) {
 		titleRow(label, cq, null);
 	}
 
-	protected void titleRow(String label, int cq, String id) 
-	{
+	protected void titleRow(String label, int cq, String id) {
 		writer.print("<tr");
-		if (id != null) 
-		{
+		if (id != null) {
 			writer.print(" id=\"" + id + "\"");
 		}
 		writer.println("><th colspan=\"" + cq + "\">" + label + "</th></tr>");
 		m_row = 0;
 	}
 
-	protected void writeReportTitle(String title) 
-	{
+	protected void writeReportTitle(String title) {
 		writer.print("<center><h1>" + title + " - " + getDateAsString() + "</h1></center>");
 	}
-	
 
 	/*
 	 * Method to get Date as String
 	 */
-	protected String getDateAsString() 
-	{
+	protected String getDateAsString() {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		return dateFormat.format(date);
 	}
-	
+
 	/** Starts HTML stream */
-	protected void startHtml(PrintWriter out) 
-	{
-		out.println("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">");
+	protected void startHtml(PrintWriter out) {
+		out.println(
+				"<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">");
 		out.println("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
 		out.println("<head>");
 		out.println("<title>TestNG Report</title>");
@@ -644,50 +547,43 @@ public class TestNGCustomReportListener implements IReporter
 		out.println("</style>");
 		out.println("</head>");
 		out.println("<body>");
-		
+
 	}
 
 	/** Finishes HTML stream */
-	protected void endHtml(PrintWriter out) 
-	{
+	protected void endHtml(PrintWriter out) {
 		out.println("<center> TestNG Report </center>");
 		out.println("</body></html>");
 	}
 
 	// ~ Inner Classes --------------------------------------------------------
 	/** Arranges methods by classname and method name */
-	protected class TestSorter implements Comparator<IInvokedMethod> 
-	{
+	protected class TestSorter implements Comparator<IInvokedMethod> {
 		// ~ Methods
 		// -------------------------------------------------------------
 
 		/** Arranges methods by classname and method name */
-		public int compare(IInvokedMethod obj1, IInvokedMethod obj2) 
-		{
-			int r = obj1.getTestMethod().getTestClass().getName().compareTo(obj2.getTestMethod().getTestClass().getName());
+		public int compare(IInvokedMethod obj1, IInvokedMethod obj2) {
+			int r = obj1.getTestMethod().getTestClass().getName()
+					.compareTo(obj2.getTestMethod().getTestClass().getName());
 			return r;
 		}
 	}
-	
-	protected class TestMethodSorter implements Comparator<ITestNGMethod> 
-	{
+
+	protected class TestMethodSorter implements Comparator<ITestNGMethod> {
 		public int compare(ITestNGMethod obj1, ITestNGMethod obj2) {
 			int r = obj1.getTestClass().getName().compareTo(obj2.getTestClass().getName());
-			if (r == 0) 
-			{
+			if (r == 0) {
 				r = obj1.getMethodName().compareTo(obj2.getMethodName());
 			}
 			return r;
 		}
 	}
 
-	protected class TestResultsSorter implements Comparator<ITestResult> 
-	{
-		public int compare(ITestResult obj1, ITestResult obj2) 
-		{
+	protected class TestResultsSorter implements Comparator<ITestResult> {
+		public int compare(ITestResult obj1, ITestResult obj2) {
 			int result = obj1.getTestClass().getName().compareTo(obj2.getTestClass().getName());
-			if (result == 0) 
-			{
+			if (result == 0) {
 				result = obj1.getMethod().getMethodName().compareTo(obj2.getMethod().getMethodName());
 			}
 			return result;

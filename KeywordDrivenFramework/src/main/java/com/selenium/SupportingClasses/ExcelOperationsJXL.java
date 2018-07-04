@@ -12,167 +12,130 @@ import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
-public class ExcelOperationsJXL 
-{
+public class ExcelOperationsJXL {
 	private Workbook workbook = null;
 	private String path_str = null;
 	private String sheet_name = null;
 	private int row_number;
 	private int column_number;
-	
+
 	private Sheet worksheet = null;
-	
-	public ExcelOperationsJXL(String path_str)
-	{
+
+	public ExcelOperationsJXL(String path_str) {
 		this.path_str = path_str;
-		
+
 		File workbook = new File(this.path_str);
 		try {
 			this.workbook = Workbook.getWorkbook(workbook);
-		} catch (BiffException e) 
-		{
+		} catch (BiffException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) 
-		{
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	public void getsheets(String sheet_name)
-	{
+
+	public void getsheets(String sheet_name) {
 		this.sheet_name = sheet_name;
-		worksheet =  workbook.getSheet(this.sheet_name);
+		worksheet = workbook.getSheet(this.sheet_name);
 		this.row_number = 0;
 		this.column_number = 0;
 	}
-	
-	public String read_data()
-	{
-		if (!(this.worksheet.getCell(this.column_number,this.row_number).getContents().toString().equals("end")))
-		{
-			return this.worksheet.getCell(this.column_number,this.row_number).getContents().toString();
-		}
-		else
-		{
+
+	public String read_data() {
+		if (!(this.worksheet.getCell(this.column_number, this.row_number).getContents().toString().equals("end"))) {
+			return this.worksheet.getCell(this.column_number, this.row_number).getContents().toString();
+		} else {
 			return null; // exception for end of line
 		}
 	}
-	
-	public String read_data(int row_number,int column_number)
-	{
-		if (!(this.worksheet.getCell(column_number,row_number).getContents().toString().equals("end")))
-		{
-			return this.worksheet.getCell(column_number,row_number).getContents().toString();
-		}
-		else
-		{
+
+	public String read_data(int row_number, int column_number) {
+		if (!(this.worksheet.getCell(column_number, row_number).getContents().toString().equals("end"))) {
+			return this.worksheet.getCell(column_number, row_number).getContents().toString();
+		} else {
 			return null; // exception for end of line
 		}
 	}
-	
-	public String get_sheetname()
-	{
-		if(this.sheet_name == null)
-		{
-			
+
+	public String get_sheetname() {
+		if (this.sheet_name == null) {
+
 		}
 		return this.sheet_name;
 	}
-	
-	public int get_rownumber()
-	{
+
+	public int get_rownumber() {
 		return this.row_number;
 	}
-	
-	public int get_columnnumber()
-	{
+
+	public int get_columnnumber() {
 		return this.column_number;
 	}
-	
-	public void set_rownumber(int row_number)
-	{
+
+	public void set_rownumber(int row_number) {
 		this.row_number = row_number;
 	}
-	
-	public void set_columnnumber(int column_number)
-	{
+
+	public void set_columnnumber(int column_number) {
 		this.column_number = column_number;
 	}
-	public void next_row()
-	{
+
+	public void next_row() {
 		row_number++;
 	}
-	
-	public void next_col()
-	{
+
+	public void next_col() {
 		column_number++;
 	}
-	
-	public boolean has_next_row()
-	{
+
+	public boolean has_next_row() {
 		boolean result;
-		if (this.worksheet.getCell(0,row_number).getContents().toString().equals("end"))
-		{
+		if (this.worksheet.getCell(0, row_number).getContents().toString().equals("end")) {
 			result = false;
-		}
-		else
-		{
+		} else {
 			result = true;
 		}
 		return result;
 	}
-	
-	public boolean has_next_column()
-	{
+
+	public boolean has_next_column() {
 		boolean result;
-		if (this.worksheet.getCell(column_number,0).getContents().toString().equals("end"))
-		{
+		if (this.worksheet.getCell(column_number, 0).getContents().toString().equals("end")) {
 			result = false;
-		}
-		else
-		{
+		} else {
 			result = true;
 		}
 		return result;
 	}
-	public void write_data(String strData)
-	{
+
+	public void write_data(String strData) {
 		WritableWorkbook wwbCopy = null;
 		WritableSheet shSheet = null;
-		try 
-		{
+		try {
 			wwbCopy = Workbook.createWorkbook(new File(path_str), this.workbook);
 			shSheet = wwbCopy.getSheet(this.sheet_name);
-			Label labTemp = new Label(this.column_number,this.row_number, strData);
+			Label labTemp = new Label(this.column_number, this.row_number, strData);
 			shSheet.addCell(labTemp);
 			wwbCopy.write();
-            wwbCopy.close();
-	        		//wwbCopy.write();
-		} catch (IOException e) 
-		{
+			wwbCopy.close();
+			// wwbCopy.write();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (RowsExceededException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (WriteException e) 
-		{
+		} catch (WriteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		finally
-		{
+		} finally {
 			wwbCopy = null;
 			shSheet = null;
-			
+
 		}
-		
-		
+
 	}
-	
-	
-	
-	
+
 }

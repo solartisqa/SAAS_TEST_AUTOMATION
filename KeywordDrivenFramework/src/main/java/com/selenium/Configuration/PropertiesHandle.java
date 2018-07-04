@@ -52,157 +52,141 @@ public class PropertiesHandle extends Properties
 	protected String ResultChoice;
 	protected String userlogin;
 	static DatabaseOperation ConfigQuery = new DatabaseOperation();
-			
-	public PropertiesHandle(String Project,String Flow, String Env ,String FlagForExecution, String JDBC_DRIVER, String DB_URL, String USER, String password, String browser,String ResultChoice,String remoteIP,String Port,String userlogin) throws DatabaseException, PropertiesHandleException	
-	{
+
+	public PropertiesHandle(String Project, String Flow, String Env, String FlagForExecution, String JDBC_DRIVER,
+			String DB_URL, String USER, String password, String browser, String ResultChoice, String remoteIP,
+			String Port, String userlogin) throws DatabaseException, PropertiesHandleException {
 		this.Project = Project;
-		this.Flow=Flow;
-		this.Env=Env;
-		this.FlagForExecution=FlagForExecution;
-		this.JDBC_DRIVER=JDBC_DRIVER;
-		this.DB_URL=DB_URL;
-		this.USER=USER;
-		this.password=password;
-		this.browser=browser;
-		this.ResultChoice=ResultChoice;
-		this.remoteIP=remoteIP;
-		this.Port=Port;
-		this.userlogin=userlogin;
-			WriteProperty();
+		this.Flow = Flow;
+		this.Env = Env;
+		this.FlagForExecution = FlagForExecution;
+		this.JDBC_DRIVER = JDBC_DRIVER;
+		this.DB_URL = DB_URL;
+		this.USER = USER;
+		this.password = password;
+		this.browser = browser;
+		this.ResultChoice = ResultChoice;
+		this.remoteIP = remoteIP;
+		this.Port = Port;
+		this.userlogin = userlogin;
+		WriteProperty();
+	}
+
+	protected void WriteProperty() throws DatabaseException, PropertiesHandleException {
+		DatabaseOperation.ConnectionSetup(JDBC_DRIVER, DB_URL, USER, password);
+		this.put("browser", browser);
+		this.put("EnvURL", this.RdbmsValue("URL"));
+		this.put("TestScriptPath", this.RdbmsValue("RootFolder") + this.RdbmsValue("ProjectName") + "/"
+				+ this.RdbmsValue("FlowName") + "/Script/" + this.RdbmsValue("FileName"));
+		this.put("loginSheetName", this.RdbmsValue("LoginSheetName"));
+		this.put("ScriptSheetName", this.RdbmsValue("ScriptSheetName"));
+		this.put("flagForExecution", FlagForExecution);
+		this.put("inputQuery", this.RdbmsQuery("InputTable"));
+		this.put("outputQuery", this.RdbmsQuery("OutputTable"));
+		this.put("jdbc_driver", this.RdbmsValue("JDCDriver"));
+		this.put("db_url", this.RdbmsValue("DB_URL") + this.RdbmsValue("ProjectDBName"));
+		this.put("db_username", this.RdbmsValue("DB_UserName"));
+		this.put("db_password", this.RdbmsValue("DB_Password"));
+		this.put("ScreenShotPath", this.RdbmsValue("RootFolder") + this.RdbmsValue("ProjectName") + "/"
+				+ this.RdbmsValue("FlowName") + "/ScreenShots/");
+		this.put("server", remoteIP + ":" + Port);
+		this.put("ResultsChoice", ResultChoice);
+		this.put("RMconfig_query", this.RdbmsQuery("MacroMappingTable"));
+		this.put("lookup_query", this.RdbmsQuery("MacroTranslationTable"));
+		this.put("RatingModelPath", this.RdbmsValue("RootFolder") + this.RdbmsValue("ProjectName") + "/"
+				+ this.RdbmsValue("FlowName") + "/SampleRatingModel/");
+		this.put("ExpectedRMPath", this.RdbmsValue("RootFolder") + this.RdbmsValue("ProjectName") + "/"
+				+ this.RdbmsValue("FlowName") + "/RatingModelResults/");
+		this.put("MacroClassName", this.RdbmsValue("MacroClassName"));
+		this.put("comparisonTableQuery", this.RdbmsQuery("ComaparisonTableName"));
+		this.put("inputTable", this.RdbmsValue("InputTable"));
+		this.put("outputTable", this.RdbmsValue("OutputTable"));
+		this.put("AppUserName", this.RdbmsValue("AppUserName"));
+		this.put("AppPassword", this.RdbmsValue("AppPassword"));
+		DatabaseOperation.CloseConn();
+	}
+
+	protected String RdbmsQuery(String OutputColoumn) throws PropertiesHandleException {
+		try {
+			LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdbmsQuery = ConfigQuery.GetDataObjects(
+					"SELECT ComaparisonTableName,MacroClassName,MacroMappingTable,MacroTranslationTable,ProjectName,FlowName,ProjectDBName,RootFolder,FileName,ScriptSheetName,LoginSheetName,InputTable,OutputTable,UserDBName,JDCDriver,DB_URL,DB_UserName,DB_Password,Env_Name,URL,AppUserName,AppPassword FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN Flow_CONFIG ON Project_CONFIG.ProjectID = Flow_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON Project_CONFIG.ProjectID = Environment_CONFIG.ProjectID INNER JOIN Version_CONFIG ON Flow_CONFIG.FlowID = Version_CONFIG.FlowID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.FlowID = Flow_CONFIG.FlowID)WHERE Project_CONFIG.ProjectName ='"
+							+ Project + "' AND Flow_CONFIG.FlowName = '" + Flow
+							+ "' AND Environment_CONFIG.Env_Name = '" + Env + "' AND UserFolder_CONFIG.User_ID = '"
+							+ userlogin + "'  ORDER BY Version_CONFIG.Version DESC LIMIT 1");
+			for (Entry<Integer, LinkedHashMap<String, String>> entry : tableRdbmsQuery.entrySet()) {
+				LinkedHashMap<String, String> rowRdbmsQuery = entry.getValue();
+				queryresult = rowRdbmsQuery.get(OutputColoumn);
+			}
+			return "SELECT * FROM " + queryresult;
+		} catch (DatabaseException e) {
+			throw new PropertiesHandleException("ERROR IN SQL - QUERY -- " + OutputColoumn, e);
 		}
-		
-		protected void WriteProperty() throws DatabaseException, PropertiesHandleException
-		{
-			DatabaseOperation.ConnectionSetup(JDBC_DRIVER, DB_URL, USER, password);
-			this.put("browser", browser);
-			this.put("EnvURL", this.RdbmsValue("URL"));
-			this.put("TestScriptPath", this.RdbmsValue("RootFolder")+this.RdbmsValue("ProjectName")+"/"+this.RdbmsValue("FlowName")+"/Script/"+this.RdbmsValue("FileName"));
-			this.put("loginSheetName", this.RdbmsValue("LoginSheetName"));
-			this.put("ScriptSheetName", this.RdbmsValue("ScriptSheetName"));
-			this.put("flagForExecution", FlagForExecution);
-			this.put("inputQuery",  this.RdbmsQuery("InputTable"));
-			this.put("outputQuery", this.RdbmsQuery("OutputTable"));
-			this.put("jdbc_driver",this.RdbmsValue("JDCDriver"));
-			this.put("db_url",this.RdbmsValue("DB_URL")+this.RdbmsValue("ProjectDBName"));
-			this.put("db_username",this.RdbmsValue("DB_UserName"));
-			this.put("db_password",this.RdbmsValue("DB_Password"));
-			this.put("ScreenShotPath",this.RdbmsValue("RootFolder")+this.RdbmsValue("ProjectName")+"/"+this.RdbmsValue("FlowName")+"/ScreenShots/");
-			this.put("server",remoteIP+":"+Port );
-			this.put("ResultsChoice",ResultChoice);
-			this.put("RMconfig_query",this.RdbmsQuery("MacroMappingTable"));
-	    	this.put("lookup_query",this.RdbmsQuery("MacroTranslationTable"));
-	    	this.put("RatingModelPath",this.RdbmsValue("RootFolder")+this.RdbmsValue("ProjectName")+"/"+this.RdbmsValue("FlowName")+"/SampleRatingModel/");
-	    	this.put("ExpectedRMPath",this.RdbmsValue("RootFolder")+this.RdbmsValue("ProjectName")+"/"+this.RdbmsValue("FlowName")+"/RatingModelResults/");
-	    	this.put("MacroClassName",this.RdbmsValue("MacroClassName"));
-	    	this.put("comparisonTableQuery",this.RdbmsQuery("ComaparisonTableName"));
-	    	this.put("inputTable",  this.RdbmsValue("InputTable"));
-			this.put("outputTable", this.RdbmsValue("OutputTable"));
-			this.put("AppUserName", this.RdbmsValue("AppUserName"));
-			this.put("AppPassword", this.RdbmsValue("AppPassword"));
-	    	DatabaseOperation.CloseConn();
+	}
+
+	protected String RdbmsValue(String OutputColoumn) throws PropertiesHandleException {
+		try {
+			LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdbmsValue = ConfigQuery.GetDataObjects(
+					"SELECT ComaparisonTableName,MacroClassName,MacroMappingTable,MacroTranslationTable,ProjectName,FlowName,ProjectDBName,RootFolder,FileName,ScriptSheetName,LoginSheetName,InputTable,OutputTable,UserDBName,JDCDriver,DB_URL,DB_UserName,DB_Password,Env_Name,URL,AppUserName,AppPassword FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN Flow_CONFIG ON Project_CONFIG.ProjectID = Flow_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON Project_CONFIG.ProjectID = Environment_CONFIG.ProjectID INNER JOIN Version_CONFIG ON Flow_CONFIG.FlowID = Version_CONFIG.FlowID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.FlowID = Flow_CONFIG.FlowID)WHERE Project_CONFIG.ProjectName ='"
+							+ Project + "' AND Flow_CONFIG.FlowName = '" + Flow
+							+ "' AND Environment_CONFIG.Env_Name = '" + Env + "' AND UserFolder_CONFIG.User_ID = '"
+							+ userlogin + "' ORDER BY Version_CONFIG.Version DESC LIMIT 1");
+			for (Entry<Integer, LinkedHashMap<String, String>> entry : tableRdbmsValue.entrySet()) {
+				LinkedHashMap<String, String> rowRdbmsValue = entry.getValue();
+				queryresult = rowRdbmsValue.get(OutputColoumn);
+			}
+			return queryresult;
+		} catch (DatabaseException e) {
+			throw new PropertiesHandleException("ERROR IN RETRIVING DATA FROM -- " + OutputColoumn, e);
 		}
-		protected String RdbmsQuery(String OutputColoumn) throws PropertiesHandleException
-		{
-			try
-			{
-				LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdbmsQuery =  ConfigQuery.GetDataObjects("SELECT ComaparisonTableName,MacroClassName,MacroMappingTable,MacroTranslationTable,ProjectName,FlowName,ProjectDBName,RootFolder,FileName,ScriptSheetName,LoginSheetName,InputTable,OutputTable,UserDBName,JDCDriver,DB_URL,DB_UserName,DB_Password,Env_Name,URL,AppUserName,AppPassword FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN Flow_CONFIG ON Project_CONFIG.ProjectID = Flow_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON Project_CONFIG.ProjectID = Environment_CONFIG.ProjectID INNER JOIN Version_CONFIG ON Flow_CONFIG.FlowID = Version_CONFIG.FlowID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.FlowID = Flow_CONFIG.FlowID)WHERE Project_CONFIG.ProjectName ='" +Project+ "' AND Flow_CONFIG.FlowName = '" +Flow+"' AND Environment_CONFIG.Env_Name = '" +Env+ "' AND UserFolder_CONFIG.User_ID = '" + userlogin + "'  ORDER BY Version_CONFIG.Version DESC LIMIT 1");
-				for (Entry<Integer, LinkedHashMap<String, String>> entry : tableRdbmsQuery.entrySet())	
-				{
-					LinkedHashMap<String, String> rowRdbmsQuery = entry.getValue();
-					queryresult =  rowRdbmsQuery.get(OutputColoumn);
-				}
-				return "SELECT * FROM " + queryresult;		
-			}
-			catch(DatabaseException e)
-			{
-				throw new PropertiesHandleException("ERROR IN SQL - QUERY -- " + OutputColoumn, e);
-			}
+	}
+
+	public PropertiesHandle(String path) throws PropertiesHandleException {
+		this.path = path;
+
+		FileInputStream configuration = null;
+
+		try {
+			configuration = new FileInputStream(path);
+		} catch (FileNotFoundException e) {
+			throw new PropertiesHandleException("CONFIGURATION FILE PATH DOES NOT CONTAINS CONFIG FILE", e);
 		}
-		
-		protected String RdbmsValue(String OutputColoumn) throws PropertiesHandleException
-		{
-			try
-			{
-				LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdbmsValue = ConfigQuery.GetDataObjects("SELECT ComaparisonTableName,MacroClassName,MacroMappingTable,MacroTranslationTable,ProjectName,FlowName,ProjectDBName,RootFolder,FileName,ScriptSheetName,LoginSheetName,InputTable,OutputTable,UserDBName,JDCDriver,DB_URL,DB_UserName,DB_Password,Env_Name,URL,AppUserName,AppPassword FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN Flow_CONFIG ON Project_CONFIG.ProjectID = Flow_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON Project_CONFIG.ProjectID = Environment_CONFIG.ProjectID INNER JOIN Version_CONFIG ON Flow_CONFIG.FlowID = Version_CONFIG.FlowID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.FlowID = Flow_CONFIG.FlowID)WHERE Project_CONFIG.ProjectName ='" +Project+ "' AND Flow_CONFIG.FlowName = '" +Flow+"' AND Environment_CONFIG.Env_Name = '" +Env+ "' AND UserFolder_CONFIG.User_ID = '" + userlogin + "' ORDER BY Version_CONFIG.Version DESC LIMIT 1");
-				for (Entry<Integer, LinkedHashMap<String, String>> entry : tableRdbmsValue.entrySet())	
-				{
-					LinkedHashMap<String, String> rowRdbmsValue = entry.getValue();
-					queryresult = rowRdbmsValue.get(OutputColoumn);
-				}
-				return queryresult;
-			}
-			catch(DatabaseException e)
-			{
-				throw new PropertiesHandleException("ERROR IN RETRIVING DATA FROM -- " + OutputColoumn, e);
-			}
+		try {
+			this.load(configuration);
+		} catch (IOException e) {
+			throw new PropertiesHandleException("ERROR IN LOADING A CONFIG FILE", e);
 		}
-		
-	
-		public PropertiesHandle(String path) throws PropertiesHandleException
-		{
-			this.path = path;
-			
-			FileInputStream configuration = null;
-			
-			try 
-			{
-				configuration = new FileInputStream(path);
-			} 
-			catch (FileNotFoundException e) 
-			{
-				throw new PropertiesHandleException("CONFIGURATION FILE PATH DOES NOT CONTAINS CONFIG FILE", e);
-			}
-			try 
-			{
-				this.load(configuration);
-			} 
-			catch (IOException e) 
-			{
-				throw new PropertiesHandleException("ERROR IN LOADING A CONFIG FILE", e);
-			}
+	}
+
+	public void store(String newpath) throws PropertiesHandleException {
+		Writer writer = null;
+		try {
+			writer = new FileWriter(newpath);
+		} catch (IOException e) {
+			throw new PropertiesHandleException("ERROR IN WRITING A CONFIG FILE", e);
 		}
-		
-		public void store(String newpath) throws PropertiesHandleException
-		{
-			Writer writer = null;
-			try 
-			{
-				 writer = new FileWriter(newpath);
-			} 
-			catch (IOException e) 
-			{
-				throw new PropertiesHandleException("ERROR IN WRITING A CONFIG FILE", e);
-			}
-			try 
-			{
-				this.store(writer, "File saved");
-			} 
-			catch (IOException e) 
-			{
-				throw new PropertiesHandleException("ERROR IN STORING A CONFIG FILE", e);
-			};
+		try {
+			this.store(writer, "File saved");
+		} catch (IOException e) {
+			throw new PropertiesHandleException("ERROR IN STORING A CONFIG FILE", e);
 		}
-		
-		public void store()
-		{
-			Writer writer = null;
-			try 
-			{
-				 writer = new FileWriter(this.path);
-			} catch (IOException e) 
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try 
-			{
-				this.store(writer, "File saved");
-			} catch (IOException e) 
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			};
+		;
+	}
+
+	public void store() {
+		Writer writer = null;
+		try {
+			writer = new FileWriter(this.path);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
-		
+		try {
+			this.store(writer, "File saved");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		;
+	}
+
 }
