@@ -71,6 +71,7 @@ public class browserLaunching {
 			 * cap.setCapability(ChromeOptions.CAPABILITY, options);
 			 */
 			driver = new RemoteWebDriver(new URL("http://" + serverip + "/wd/hub"), options);
+			driver.manage().window().maximize();
 		} else if (browser.equals("IE")) {
 			DesiredCapabilities cap = new DesiredCapabilities().internetExplorer();
 			cap.setCapability("ignoreZoomSetting", true);
