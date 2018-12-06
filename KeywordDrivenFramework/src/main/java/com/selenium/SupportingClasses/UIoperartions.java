@@ -82,21 +82,23 @@ public class UIoperartions extends browserLaunching {
 			// ATTRIBUTE-------------------------------------------------------------
 			case "GETATTRIBUTE":
 				outputValue = this.getValueByAttribute(p, objectType);
-				// outputData.put(dbcolumn_name, outputValue);
+				 outputData.put(dbcolumn_name, outputValue);
 				Statement stmt = (Statement) UIMainscript.conn.createStatement();
-				stmt.executeUpdate("update " + UIMainscript.configFile.getProperty("outputTable") + " set "
-						+ dbcolumn_name + "='" + outputValue + "' where Testdata='" + InputData.get("Testdata") + "'");
+				/*stmt.executeUpdate("update " + UIMainscript.configFile.getProperty("outputTable") + " set "
+						+ dbcolumn_name + "='" + outputValue + "' where Testdata='" + InputData.get("Testdata") + "'");*/
 				break;
 			// ------------------------------------------------------GET
 			// TEXT----------------------------------------------------------------------
 			case "GETTEXT":
 				outputValue = this.getValueByText(p, objectType);
 				// outputData.put(dbcolumn_name, outputValue);
-				Statement stmt1 = (Statement) UIMainscript.conn.createStatement();
+				System.out.println(outputData);
+				outputData.put(dbcolumn_name,outputValue);
+				/*Statement stmt1 = (Statement) UIMainscript.conn.createStatement();
 				System.out.println("update " + UIMainscript.configFile.getProperty("outputTable") + " set "
 						+ dbcolumn_name + "='" + outputValue + "' where Testdata='" + InputData.get("Testdata") + "'");
 				stmt1.executeUpdate("update " + UIMainscript.configFile.getProperty("outputTable") + " set "
-						+ dbcolumn_name + "='" + outputValue + "' where Testdata='" + InputData.get("Testdata") + "'");
+						+ dbcolumn_name + "='" + outputValue + "' where Testdata='" + InputData.get("Testdata") + "'");*/
 				break;
 			// ----------------------------------------------------SELECT
 			// OPERATION-------------------------------------------------------------------------

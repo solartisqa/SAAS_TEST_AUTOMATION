@@ -69,11 +69,13 @@ public class UIMainscript {
 
 	@SuppressWarnings("unchecked")
 	@Test(dataProvider = "UITestData")
-	public void UITest(Integer RowIterator, Object inputtablerowobj)
+	public void UITest(Integer RowIterator, Object inputtablerowobj, Object outputtablerowobj)
 			throws ClassNotFoundException, SQLException, IOException, InterruptedException, AWTException,
 			DatabaseException, InstantiationException, IllegalAccessException, IllegalArgumentException,
 			InvocationTargetException, NoSuchMethodException, SecurityException, MacroException, POIException {
 		LinkedHashMap<String, String> inputrow = inputtableobjectMapper.convertValue(inputtablerowobj,
+				LinkedHashMap.class);
+		LinkedHashMap<String, String> outputrow = outputtableobjectMapper.convertValue(outputtablerowobj,
 				LinkedHashMap.class);
 		stmt = (Statement) conn.createStatement();
 		if (inputrow.get("Flag_for_execution").equals(configFile.getProperty("flagForExecution"))) {
@@ -82,21 +84,21 @@ public class UIMainscript {
 				wdriver = objDriver.launchBrowser();
 				String ExecutionChoice = configFile.getProperty("ResultsChoice");
 				System.out.println("Executing main script");
-				if (ExecutionChoice.equals("Comparison")) {
+				if (ExecutionChoice.equals("Comparison")) {				
 					objDriver.generatExpectedResult(inputrow, outputrow);
 				}
-
-				objDriver.executeTestScript(inputrow, outputrow);
-
+				objDriver.executeTestScript(inputrow, outputrow);				
 				if (ExecutionChoice.equals("Comparison")) {
 					objDriver.CompareExpectedWithActual(outputrow);
 				}
-
+				output.UpdateRow(RowIterator, outputrow);
 				stmt.executeUpdate("update " + configFile.getProperty("inputTable")
 						+ " set Flag_for_execution='Completed' where S_No=" + RowIterator);
 				stmt.executeUpdate("update " + configFile.getProperty("outputTable")
 						+ " set Result='Completed' where S_No=" + RowIterator);
 			} catch (Exception e) {
+				System.out.println("Error Message ----------" + e);
+				e.printStackTrace();
 				String message = e.getMessage().toString().replace("'", "\\'");
 				stmt.executeUpdate("update " + configFile.getProperty("inputTable")
 						+ " set Flag_for_execution='Fail' where S_No=" + RowIterator);
@@ -124,16 +126,24 @@ public class UIMainscript {
 		input = new DatabaseOperation();
 		inputtable = input.GetDataObjects(configFile.getProperty("inputQuery"));
 		Iterator<Entry<Integer, LinkedHashMap<String, String>>> inputtableiterator = inputtable.entrySet().iterator();
-
+		output = new DatabaseOperation();
+		outputtable = output.GetDataObjects(configFile.getProperty("outputQuery"));
+		Iterator<Entry<Integer, LinkedHashMap<String, String>>> outputtableiterator = outputtable.entrySet().iterator();
+		System.out.println("Inside Data Provider");
 		int rowIterator = 0;
-		Object[][] combined = new Object[inputtable.size()][2];
+		Object[][] combined = new Object[inputtable.size()][3];
 		while (inputtableiterator.hasNext()) {
 			Entry<Integer, LinkedHashMap<String, String>> inputentry = inputtableiterator.next();
+			Entry<Integer, LinkedHashMap<String, String>> outputentry = outputtableiterator.next();
 			LinkedHashMap<String, String> inputrow = inputentry.getValue();
+			LinkedHashMap<String, String> outputrow = outputentry.getValue();
 			inputtableobjectMapper = new ObjectMapper();
+			outputtableobjectMapper = new ObjectMapper();
 			Object inputtablerowobject = inputtableobjectMapper.convertValue(inputrow, Object.class);
+			Object outputtablerowobject = outputtableobjectMapper.convertValue(outputrow, Object.class);
 			combined[rowIterator][0] = rowIterator + 1;
 			combined[rowIterator][1] = inputtablerowobject;
+			combined[rowIterator][2] = outputtablerowobject;
 			rowIterator++;
 		}
 		return combined;

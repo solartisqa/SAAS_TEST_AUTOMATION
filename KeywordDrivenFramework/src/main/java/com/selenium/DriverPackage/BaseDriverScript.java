@@ -227,6 +227,7 @@ public class BaseDriverScript extends UIoperartions implements UIScriptsInterfac
 		macro.GenerateExpected(inputrow, configFile);
 		macro.PumpinData(inputrow, configFile);
 		macro.PumpoutData(outputrow, inputrow, configFile);
+		System.out.println("After Pump out"+outputrow);
 
 	}
 
@@ -234,12 +235,10 @@ public class BaseDriverScript extends UIoperartions implements UIScriptsInterfac
 			throws SQLException, DatabaseException {
 		DatabaseOperation objectcomparison = new DatabaseOperation();
 		LinkedHashMap<Integer, LinkedHashMap<String, String>> comparisontable = objectcomparison
-				.GetDataObjects(configFile.getProperty("comparisonTableQuery"));// "select * from ComparisionCondition"
-
+				.GetDataObjects(configFile.getProperty("comparisonTableQuery"));// "SELECT * FROM NITICComparision"
 		for (Entry<Integer, LinkedHashMap<String, String>> entry : comparisontable.entrySet()) {
 			LinkedHashMap<String, String> comparisonrow = entry.getValue();
-			if (comparisonrow.get("Comaparision_Flag").equals("Y")) {
-				// System.out.println("coming to comparison");
+			if (comparisonrow.get("Comaparision_Flag").equals("Y")) {				
 				outputrow = this.CompareFunction(outputrow, comparisonrow);
 			}
 		}
