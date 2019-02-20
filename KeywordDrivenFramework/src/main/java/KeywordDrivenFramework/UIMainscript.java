@@ -4,7 +4,6 @@ import java.awt.AWTException;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import org.openqa.selenium.TimeoutException;
 import DriverPackages.*;
 //import SupportingClasses.TheEventListener;
 import SupportingClasses.databaseOperartions;
