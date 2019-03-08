@@ -69,41 +69,50 @@ public class UIMainscript {
 
 	@SuppressWarnings("unchecked")
 	@Test(dataProvider = "UITestData")
-	public void UITest(Integer RowIterator, Object inputtablerowobj, Object outputtablerowobj)
-			throws ClassNotFoundException, SQLException, IOException, InterruptedException, AWTException,
-			DatabaseException, InstantiationException, IllegalAccessException, IllegalArgumentException,
-			InvocationTargetException, NoSuchMethodException, SecurityException, MacroException, POIException {
-		LinkedHashMap<String, String> inputrow = inputtableobjectMapper.convertValue(inputtablerowobj,
-				LinkedHashMap.class);
-		LinkedHashMap<String, String> outputrow = outputtableobjectMapper.convertValue(outputtablerowobj,
-				LinkedHashMap.class);
+	public void UITest(Integer RowIterator, Object inputtablerowobj, Object outputtablerowobj) throws ClassNotFoundException, SQLException, IOException, InterruptedException, AWTException, DatabaseException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, MacroException, POIException 
+	{
+		LinkedHashMap<String, String> inputrow = inputtableobjectMapper.convertValue(inputtablerowobj, LinkedHashMap.class);
+		LinkedHashMap<String, String> outputrow = outputtableobjectMapper.convertValue(outputtablerowobj, LinkedHashMap.class);
 		stmt = (Statement) conn.createStatement();
-		if (inputrow.get("Flag_for_execution").equals(configFile.getProperty("flagForExecution"))) {
-			try {
-				BaseDriverScript objDriver = new BaseDriverScript(configFile);
-				wdriver = objDriver.launchBrowser();
+		if (inputrow.get("Flag_for_execution").equals(configFile.getProperty("flagForExecution"))) 
+		{
+			try 
+			{
 				String ExecutionChoice = configFile.getProperty("ResultsChoice");
-				System.out.println("Executing main script");
-				if (ExecutionChoice.equals("Comparison")) {				
-					objDriver.generatExpectedResult(inputrow, outputrow);
+				BaseDriverScript objDriver = new BaseDriverScript(configFile);
+				if (ExecutionChoice.equalsIgnoreCase("ActualOnly") || ExecutionChoice.equalsIgnoreCase("ActualAndCompare") ) 
+				{
+					wdriver = objDriver.launchBrowser();
 				}
-				objDriver.executeTestScript(inputrow, outputrow);				
-				if (ExecutionChoice.equals("Comparison")) {
+				
+				System.out.println("Executing main script");
+				if (ExecutionChoice.equalsIgnoreCase("Comparison") || ExecutionChoice.equalsIgnoreCase("ExpectedOnly") ) 
+				{				
+					objDriver.generatExpectedResult(inputrow, outputrow);
+					output.UpdateRow(RowIterator, outputrow);
+				}
+				
+				if (ExecutionChoice.equalsIgnoreCase("ActualOnly") || ExecutionChoice.equalsIgnoreCase("ActualAndCompare") ) 
+				{
+					objDriver.executeTestScript(inputrow, outputrow);
+					output.UpdateRow(RowIterator, outputrow);
+				}
+				
+				if (ExecutionChoice.equalsIgnoreCase("Comparison") || ExecutionChoice.equalsIgnoreCase("ActualAndCompare") ) 
+				{
 					objDriver.CompareExpectedWithActual(outputrow);
 				}
 				output.UpdateRow(RowIterator, outputrow);
-				stmt.executeUpdate("update " + configFile.getProperty("inputTable")
-						+ " set Flag_for_execution='Completed' where S_No=" + RowIterator);
-				stmt.executeUpdate("update " + configFile.getProperty("outputTable")
-						+ " set Result='Completed' where S_No=" + RowIterator);
-			} catch (Exception e) {
+				stmt.executeUpdate("update " + configFile.getProperty("inputTable")	+ " set Flag_for_execution='Completed' where S_No=" + RowIterator);
+				stmt.executeUpdate("update " + configFile.getProperty("outputTable") + " set Result='Completed' where S_No=" + RowIterator);
+			} 
+			catch (Exception e) 
+			{
 				System.out.println("Error Message ----------" + e);
 				e.printStackTrace();
 				String message = e.getMessage().toString().replace("'", "\\'");
-				stmt.executeUpdate("update " + configFile.getProperty("inputTable")
-						+ " set Flag_for_execution='Fail' where S_No=" + RowIterator);
-				stmt.executeUpdate("update " + configFile.getProperty("outputTable") + " set Result='Fail' where S_No="
-						+ RowIterator);
+				stmt.executeUpdate("update " + configFile.getProperty("inputTable")	+ " set Flag_for_execution='Fail' where S_No=" + RowIterator);
+				stmt.executeUpdate("update " + configFile.getProperty("outputTable") + " set Result='Fail' where S_No="	+ RowIterator);
 				controllerScript.addExceptionReport(conn, stmt, "Exceptions", inputrow.get("Testdata"), message);
 				controllerScript.takeScreenShot(wdriver, exceptionScreenshotPath, inputrow.get("Testdata"));
 
