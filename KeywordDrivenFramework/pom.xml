@@ -225,7 +225,7 @@
 		                        <remoteIP>${remoteIP}</remoteIP>
 		                        <Port>${Port}</Port>  
 		                        <userLogin>${userLogin}</userLogin>
-		                        
+		                        <Numberofbrowser>${Numberofbrowser}</Numberofbrowser>
 		          </systemPropertyVariables>
 		        </configuration>
 			</plugin>

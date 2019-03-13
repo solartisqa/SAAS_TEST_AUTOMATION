@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
@@ -45,9 +46,10 @@ public class UIMainscript {
 	public Statement stmt = null;
 
 	@BeforeTest // (alwaysRun=true)
-	public void loadconfig() throws DatabaseException, ClassNotFoundException, SQLException, PropertiesHandleException,
+	public void loadconfig(ITestContext context) throws DatabaseException, ClassNotFoundException, SQLException, PropertiesHandleException,
 			MalformedURLException {
 		System.setProperty("jsse.enableSNIExtension", "false");
+		context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(Integer.parseInt(System.getProperty("Numberofbrowser")));
 		System.out.println(System.getProperty("Project") + System.getProperty("Flow") + System.getProperty("Env")
 				+ System.getProperty("FlagForExecution") + System.getProperty("JDBC_DRIVER")
 				+ System.getProperty("DB_URL") + System.getProperty("USER") + System.getProperty("password")
