@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Properties;
 import java.util.Map.Entry;
@@ -51,11 +52,12 @@ public class PropertiesHandle extends Properties
 	protected String priority;
 	protected String ResultChoice;
 	protected String userlogin;
+	protected String Api;
 	static DatabaseOperation ConfigQuery = new DatabaseOperation();
 
 	public PropertiesHandle(String Project, String Flow, String Env, String FlagForExecution, String JDBC_DRIVER,
 			String DB_URL, String USER, String password, String browser, String ResultChoice, String remoteIP,
-			String Port, String userlogin) throws DatabaseException, PropertiesHandleException {
+			String Port, String userlogin,String Api) throws DatabaseException, PropertiesHandleException, SQLException {
 		this.Project = Project;
 		this.Flow = Flow;
 		this.Env = Env;
@@ -69,10 +71,11 @@ public class PropertiesHandle extends Properties
 		this.remoteIP = remoteIP;
 		this.Port = Port;
 		this.userlogin = userlogin;
+		this.Api = Api;
 		WriteProperty();
 	}
 
-	protected void WriteProperty() throws DatabaseException, PropertiesHandleException {
+	protected void WriteProperty() throws DatabaseException, PropertiesHandleException, SQLException {
 		DatabaseOperation.ConnectionSetup(JDBC_DRIVER, DB_URL, USER, password);
 		this.put("browser", browser);
 		this.put("EnvURL", this.RdbmsValue("URL"));
@@ -103,11 +106,33 @@ public class PropertiesHandle extends Properties
 		this.put("outputTable", this.RdbmsValue("OutputTable"));
 		this.put("AppUserName", this.RdbmsValue("AppUserName"));
 		this.put("AppPassword", this.RdbmsValue("AppPassword"));
+		
+		this.put("InputColQuery",this.APIRdmsQuery("InputConditonTable"));
+		this.put("OutputColQuery",this.APIRdmsQuery("OutputConditionTable"));
+		this.put("ClassName", this.APIRdmsValue("ClassName"));
+		this.put("AuthenticationToken", this.APIRdmsValue("AuthenticationToken"));
+		this.put("content_type", "application/"+this.APIRdmsValue("ServiceType"));
+		this.put("EventName", this.APIRdmsValue("EventName"));
+	    this.put("EventVersion", this.APIRdmsValue("EventVersion"));
+	    this.put("test_url", this.APIRdmsValue("URL"));
+	    this.put("Execution_Flag",ResultChoice);
+	    this.put("request_response_Location", this.RdbmsValue("RootFolder") + this.RdbmsValue("ProjectName") + "/"
+				+ this.RdbmsValue("FlowName") + "/");
+	    this.put("APIName", Api);
+		this.put("InputJsonPath", "InputJsonPath");
+	    this.put("OutputJsonPath", "OutputJsonPath");
+		this.put("InputColumn", "InputColumn");
+		this.put("OutputColumn", "OutputColumn");
+		this.put("InputCondColumn", "InputColumnCondtn");
+		this.put("OutputCondColumn", "OutputColumnCondtn");
+		this.put("ExpectedColumn", "ExpectedColumn");
+		this.put("StatusColumn", "StatusColumn");
 		DatabaseOperation.CloseConn();
 	}
 
 	protected String RdbmsQuery(String OutputColoumn) throws PropertiesHandleException {
 		try {
+			ConfigQuery.switchDB("SeleniumConfig");
 			LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdbmsQuery = ConfigQuery.GetDataObjects(
 					"SELECT ComaparisonTableName,MacroClassName,MacroMappingTable,MacroTranslationTable,ProjectName,FlowName,ProjectDBName,RootFolder,FileName,ScriptSheetName,LoginSheetName,InputTable,OutputTable,UserDBName,JDCDriver,DB_URL,DB_UserName,DB_Password,Env_Name,URL,AppUserName,AppPassword FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN Flow_CONFIG ON Project_CONFIG.ProjectID = Flow_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON Project_CONFIG.ProjectID = Environment_CONFIG.ProjectID INNER JOIN Version_CONFIG ON Flow_CONFIG.FlowID = Version_CONFIG.FlowID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.FlowID = Flow_CONFIG.FlowID)WHERE Project_CONFIG.ProjectName ='"
 							+ Project + "' AND Flow_CONFIG.FlowName = '" + Flow
@@ -122,9 +147,29 @@ public class PropertiesHandle extends Properties
 			throw new PropertiesHandleException("ERROR IN SQL - QUERY -- " + OutputColoumn, e);
 		}
 	}
+	
+	protected String APIRdmsQuery(String OutputColoumn) throws PropertiesHandleException, SQLException
+	{
+		try
+		{
+			ConfigQuery.switchDB("Starr_Config_Development");
+			LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdmsQuery =  ConfigQuery.GetDataObjects("SELECT UserFolder_CONFIG.RootFolder,UserFolder_CONFIG.JDCDriver,UserFolder_CONFIG.DB_URL,UserFolder_CONFIG.DB_UserName,UserFolder_CONFIG.DB_Password,UserFolder_CONFIG.UserDBName,Version_CONFIG.Version,Project_CONFIG.ProjectDBName,Project_CONFIG.ServiceType,Environment_CONFIG.URL,Project_CONFIG.Token,VersionDetail_CONFIG.EventName,VersionDetail_CONFIG.EventVersion,API_CONFIG.OutputInInputTable,VersionDetail_CONFIG.ClassName,VersionDetail_CONFIG.InputConditonTable,VersionDetail_CONFIG.InputTable,VersionDetail_CONFIG.OutputConditionTable,VersionDetail_CONFIG.OutputTable,VersionDetail_CONFIG.MacroMappingTable,VersionDetail_CONFIG.MacroTranslationTable FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN API_CONFIG ON Project_CONFIG.ProjectID = API_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON API_CONFIG.APIID = Environment_CONFIG.APIID INNER JOIN Version_CONFIG ON Environment_CONFIG.Env_ID = Version_CONFIG.Env_ID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.APIID = API_CONFIG.APIID)  WHERE Project_CONFIG.ProjectName ='" + Project +"' AND API_CONFIG.APIName = '" + Api + "' AND Environment_CONFIG.Env_Name = '" + Env + "' AND UserFolder_CONFIG.User_ID = '" + userlogin + "' ORDER BY Version_CONFIG.Version DESC LIMIT 1");
+			for (Entry<Integer, LinkedHashMap<String, String>> entry : tableRdmsQuery.entrySet())	
+			{
+				LinkedHashMap<String, String> rowRdmsQuery = entry.getValue();
+				queryresult =  rowRdmsQuery.get(OutputColoumn);
+			}
+			return "SELECT * FROM " + queryresult;		
+		}
+		catch(DatabaseException e)
+		{
+			throw new PropertiesHandleException("ERROR IN SQL - QUERY -- " + OutputColoumn, e);
+		}
+	}
 
 	protected String RdbmsValue(String OutputColoumn) throws PropertiesHandleException {
 		try {
+			ConfigQuery.switchDB("SeleniumConfig");
 			LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdbmsValue = ConfigQuery.GetDataObjects(
 					"SELECT ComaparisonTableName,MacroClassName,MacroMappingTable,MacroTranslationTable,ProjectName,FlowName,ProjectDBName,RootFolder,FileName,ScriptSheetName,LoginSheetName,InputTable,OutputTable,UserDBName,JDCDriver,DB_URL,DB_UserName,DB_Password,Env_Name,URL,AppUserName,AppPassword FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN Flow_CONFIG ON Project_CONFIG.ProjectID = Flow_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON Project_CONFIG.ProjectID = Environment_CONFIG.ProjectID INNER JOIN Version_CONFIG ON Flow_CONFIG.FlowID = Version_CONFIG.FlowID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.FlowID = Flow_CONFIG.FlowID)WHERE Project_CONFIG.ProjectName ='"
 							+ Project + "' AND Flow_CONFIG.FlowName = '" + Flow
@@ -136,6 +181,26 @@ public class PropertiesHandle extends Properties
 			}
 			return queryresult;
 		} catch (DatabaseException e) {
+			throw new PropertiesHandleException("ERROR IN RETRIVING DATA FROM -- " + OutputColoumn, e);
+		}
+	}
+	
+	protected String APIRdmsValue(String OutputColoumn) throws PropertiesHandleException, SQLException
+	{
+		try
+		{
+			ConfigQuery.switchDB("Starr_Config_Development");
+			LinkedHashMap<Integer, LinkedHashMap<String, String>> tableRdmsValue = ConfigQuery.GetDataObjects("SELECT UserFolder_CONFIG.RootFolder,UserFolder_CONFIG.JDCDriver,UserFolder_CONFIG.DB_URL,UserFolder_CONFIG.DB_UserName,UserFolder_CONFIG.DB_Password,UserFolder_CONFIG.UserDBName,Version_CONFIG.Version,Project_CONFIG.ProjectDBName,Project_CONFIG.ServiceType,Environment_CONFIG.URL,Environment_CONFIG.AuthenticationURL,Environment_CONFIG.OwnerID,Environment_CONFIG.Userneme,Environment_CONFIG.Password,Environment_CONFIG.AuthenticationToken,Project_CONFIG.Token,VersionDetail_CONFIG.EventName,VersionDetail_CONFIG.EventVersion,API_CONFIG.OutputInInputTable,VersionDetail_CONFIG.ClassName,VersionDetail_CONFIG.InputConditonTable,VersionDetail_CONFIG.InputTable,VersionDetail_CONFIG.OutputConditionTable,VersionDetail_CONFIG.OutputTable,VersionDetail_CONFIG.MacroMappingTable,VersionDetail_CONFIG.MacroTranslationTable FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN API_CONFIG ON Project_CONFIG.ProjectID = API_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON API_CONFIG.APIID = Environment_CONFIG.APIID INNER JOIN Version_CONFIG ON Environment_CONFIG.Env_ID = Version_CONFIG.Env_ID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.APIID = API_CONFIG.APIID)  WHERE Project_CONFIG.ProjectName ='" + Project +"' AND API_CONFIG.APIName = '" + Api + "' AND Environment_CONFIG.Env_Name = '" + Env + "' AND UserFolder_CONFIG.User_ID = '" + userlogin + "' ORDER BY Version_CONFIG.Version DESC LIMIT 1");
+			//System.out.println("SELECT UserFolder_CONFIG.RootFolder,UserFolder_CONFIG.JDCDriver,UserFolder_CONFIG.DB_URL,UserFolder_CONFIG.DB_UserName,UserFolder_CONFIG.DB_Password,UserFolder_CONFIG.UserDBName,Version_CONFIG.Version,Project_CONFIG.ProjectDBName,Project_CONFIG.ServiceType,Environment_CONFIG.URL,Environment_CONFIG.AuthenticationURL,Environment_CONFIG.OwnerID,Environment_CONFIG.Userneme,Environment_CONFIG.Password,Project_CONFIG.Token,VersionDetail_CONFIG.EventName,VersionDetail_CONFIG.EventVersion,API_CONFIG.OutputInInputTable,VersionDetail_CONFIG.ClassName,VersionDetail_CONFIG.InputConditonTable,VersionDetail_CONFIG.InputTable,VersionDetail_CONFIG.OutputConditionTable,VersionDetail_CONFIG.OutputTable,VersionDetail_CONFIG.MacroMappingTable,VersionDetail_CONFIG.MacroTranslationTable FROM Project_CONFIG INNER JOIN UserFolder_CONFIG INNER JOIN API_CONFIG ON Project_CONFIG.ProjectID = API_CONFIG.ProjectID INNER JOIN Environment_CONFIG ON API_CONFIG.APIID = Environment_CONFIG.APIID INNER JOIN Version_CONFIG ON Environment_CONFIG.Env_ID = Version_CONFIG.Env_ID INNER JOIN VersionDetail_CONFIG ON (VersionDetail_CONFIG.Verision = Version_CONFIG.Version and VersionDetail_CONFIG.APIID = API_CONFIG.APIID)  WHERE Project_CONFIG.ProjectName ='" + Project +"' AND API_CONFIG.APIName = '" + Api + "' AND Environment_CONFIG.Env_Name = '" + Env + "' AND UserFolder_CONFIG.User_ID = '" + UserName + "' ORDER BY Version_CONFIG.Version DESC LIMIT 1");
+			for (Entry<Integer, LinkedHashMap<String, String>> entry : tableRdmsValue.entrySet())	
+			{
+				LinkedHashMap<String, String> rowRdmsValue = entry.getValue();
+				queryresult = rowRdmsValue.get(OutputColoumn);
+			}
+			return queryresult;
+		}
+		catch(DatabaseException e)
+		{
 			throw new PropertiesHandleException("ERROR IN RETRIVING DATA FROM -- " + OutputColoumn, e);
 		}
 	}

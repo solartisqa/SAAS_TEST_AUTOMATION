@@ -14,13 +14,13 @@ import org.testng.ITestResult;
 
 import com.selenium.Test.UIMainscript;
 import org.apache.commons.io.FileUtils;
-import com.selenium.Test.*;
 
 public class TestngListener extends UIMainscript implements ITestListener {
 
 	WebDriver driver = null;
 	String filePath = null;
 
+	@SuppressWarnings("unused")
 	public void onFinish(ITestContext context) {
 
 		Set<ITestResult> skippedTests = context.getSkippedTests().getAllResults();
@@ -81,7 +81,7 @@ public class TestngListener extends UIMainscript implements ITestListener {
 	}
 
 	public void onTestStart(ITestResult arg0) {
-		System.out.println(arg0.getName() + "......Test Started");
+		//System.out.println(arg0.getName() + "......Test Started");
 		Set<String> sttributeNames = arg0.getAttributeNames();
 		for (String sttributeName : sttributeNames) {
 			System.out.println(sttributeName);
@@ -89,7 +89,7 @@ public class TestngListener extends UIMainscript implements ITestListener {
 	}
 
 	public void onTestSuccess(ITestResult arg0) {
-		System.out.println(arg0.getName() + "......Test Success");
+		//System.out.println(arg0.getName() + "......Test Success");
 		/*
 		 * if(arg0.getName().contains("UITest")) {
 		 * UIMainscript.outputrow.put("overall_status", "pass"); }

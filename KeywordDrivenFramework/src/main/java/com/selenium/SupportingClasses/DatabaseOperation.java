@@ -71,7 +71,19 @@ public class DatabaseOperation {
 		}
 		conn = null;
 	}
-
+	
+	public void switchDB(String db) throws DatabaseException
+	{
+		try
+		{
+			conn.setCatalog(db);
+		}
+		catch (SQLException e)
+		{
+			throw new DatabaseException("Error while switch DataBase", e);
+		}
+	}
+	
 	public LinkedHashMap<Integer, LinkedHashMap<String, String>> GetDataObjects(String query) throws DatabaseException {
 		this.query = query;
 		LinkedHashMap<String, String> row = null;

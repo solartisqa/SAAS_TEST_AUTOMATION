@@ -279,6 +279,7 @@ public class CustomizedEmailableReport implements IReporter {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void generateForResult(ITestResult ans, ITestNGMethod method, int resultSetSize) {
 		Object[] parameters = ans.getParameters();
 		boolean hasParameters = parameters != null && parameters.length > 0;
@@ -341,6 +342,7 @@ public class CustomizedEmailableReport implements IReporter {
 	 *
 	 * @param tests
 	 */
+	@SuppressWarnings("unused")
 	private void getParameters(IResultMap tests) {
 
 		for (ITestResult result : tests.getAllResults()) {
@@ -593,6 +595,7 @@ public class CustomizedEmailableReport implements IReporter {
 		// -------------------------------------------------------------
 
 		/** Arranges methods by classname and method name */
+		@SuppressWarnings("unchecked")
 		@Override
 		public int compare(IInvokedMethod o1, IInvokedMethod o2) {
 			// System.out.println("Comparing " + ((ITestNGMethod) o1).getMethodName() + " "

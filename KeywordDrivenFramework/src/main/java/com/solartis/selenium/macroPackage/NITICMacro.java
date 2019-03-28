@@ -30,7 +30,8 @@ public class NITICMacro implements MacroInterface {
 
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	public enum Alphabet {
-		A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, AA, AB, AC, AD, AE, AF, AG, AH, AI, AJ, AK, AL, AM, AN, AO, AP, AQ, AR, AS, AT, AU, AV, AW, AX, AY, AZ;
+		A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, AA, AB, AC, AD, AE, AF, AG, AH,
+		AI, AJ, AK, AL, AM, AN, AO, AP, AQ, AR, AS, AT, AU, AV, AW, AX, AY, AZ;
 
 		public static int getNum(String targ) {
 			return valueOf(targ).ordinal();
@@ -63,8 +64,8 @@ public class NITICMacro implements MacroInterface {
 	public void LoadSampleRatingmodel(PropertiesHandle configFile, LinkedHashMap<String, String> inputData)
 			throws MacroException {
 		try {
-			String RateingModelName = Lookup(inputData.get("Business"),configFile);			
-			Samplepath = configFile.getProperty("RatingModelPath") +RateingModelName+ ".xls";			
+			String RateingModelName = Lookup(inputData.get("Business"), configFile);
+			Samplepath = configFile.getProperty("RatingModelPath") + RateingModelName + ".xls";
 			sampleexcel = new ExcelOperationsPOI(Samplepath);
 		} catch (POIException e) {
 			System.out.println(e);
@@ -75,7 +76,8 @@ public class NITICMacro implements MacroInterface {
 	public void GenerateExpected(LinkedHashMap<String, String> inputData, PropertiesHandle configFile)
 			throws MacroException {
 		try {
-			System.out.println("E:\\SeleniumConfig\\NITIC\\Quote\\RatingModelResults\\" + inputData.get("Testdata") + ".xls");
+			System.out.println(
+					"E:\\SeleniumConfig\\NITIC\\Quote\\RatingModelResults\\" + inputData.get("Testdata") + ".xls");
 			Targetpath = configFile.getProperty("ExpectedRMPath") + inputData.get("Testdata") + ".xls";
 			sampleexcel.Copy(Samplepath, Targetpath);
 			sampleexcel.save();
@@ -86,6 +88,7 @@ public class NITICMacro implements MacroInterface {
 		}
 	}
 
+	@SuppressWarnings("static-access")
 	public void PumpinData(LinkedHashMap<String, String> inputData, PropertiesHandle configFile) throws MacroException {
 		try {
 			ConditionsChecking check = new ConditionsChecking();
@@ -97,7 +100,8 @@ public class NITICMacro implements MacroInterface {
 			for (Entry<Integer, LinkedHashMap<String, String>> entry : tablePumpinData.entrySet()) {
 				LinkedHashMap<String, String> rowPumpinData = entry.getValue();
 				String condition = rowPumpinData.get("Condition");
-				if (rowPumpinData.get("flag_for_execution").equalsIgnoreCase("Y")&& check.ConditionReading(condition,inputData)) {
+				if (rowPumpinData.get("flag_for_execution").equalsIgnoreCase("Y")
+						&& check.ConditionReading(condition, inputData)) {
 					if (rowPumpinData.get("Type").equals("input")) {
 						String Datacolumntowrite = rowPumpinData.get("Input_DB_column");
 						String CellAddress = rowPumpinData.get("Cell_Address");
@@ -109,7 +113,7 @@ public class NITICMacro implements MacroInterface {
 						System.out.println(columnNum + "----" + rowNum + "-----" + rowPumpinData.get("Sheet_Name")
 								+ "-----" + Datatowrite);
 						excel.getsheets(rowPumpinData.get("Sheet_Name"));
-					   //excel.getcell(rowNum, columnNum);
+						// excel.getcell(rowNum, columnNum);
 
 						if (rowPumpinData.get("Translation_Flag").equals("Y")) {
 							excel.write_data(rowNum - 1, columnNum,
@@ -118,7 +122,7 @@ public class NITICMacro implements MacroInterface {
 							if (trans.isInteger(Datatowrite)) {
 								int datadata = Integer.parseInt(Datatowrite);
 								excel.write_data(rowNum - 1, columnNum, datadata);
-						 	} else if (trans.isFloat(Datatowrite)) {
+							} else if (trans.isFloat(Datatowrite)) {
 								float floatdata = Float.parseFloat(Datatowrite);
 								excel.write_data(rowNum - 1, columnNum, floatdata);
 							} else {
@@ -140,34 +144,37 @@ public class NITICMacro implements MacroInterface {
 	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	public void PumpoutData(LinkedHashMap<String, String> outputData, LinkedHashMap<String, String> inputData,
 			PropertiesHandle configFile) throws MacroException {
-		
+
 		trans = new NITICMacro(configFile);
 		try {
 			ExcelOperationsPOI excel = new ExcelOperationsPOI(Targetpath);
 			LinkedHashMap<Integer, LinkedHashMap<String, String>> tablePumpoutData = configTable
 					.GetDataObjects(configFile.getProperty("RMconfig_query"));
-			//System.out.println((configFile.getProperty("RMconfig_query")));
+			// System.out.println((configFile.getProperty("RMconfig_query")));
 			excel.refresh();
 			for (Entry<Integer, LinkedHashMap<String, String>> entry : tablePumpoutData.entrySet()) {
 				LinkedHashMap<String, String> rowPumpoutData = entry.getValue();
 				if (rowPumpoutData.get("flag_for_execution").equals("Y")) {
-					if (rowPumpoutData.get("Type").equals("output") && rowPumpoutData.get("Condition").equals(("Business="+inputData.get("Business"))+";")) {
-						String Datacolumntowrite = rowPumpoutData.get("Input_DB_column");					
+					if (rowPumpoutData.get("Type").equals("output") && rowPumpoutData.get("Condition")
+							.equals(("Business=" + inputData.get("Business")) + ";")) {
+						String Datacolumntowrite = rowPumpoutData.get("Input_DB_column");
 						String CellAddress = rowPumpoutData.get("Cell_Address");
 						String[] part = CellAddress.split("(?<=\\D)(?=\\d)");
 						int columnNum = Alphabet.getNum(part[0].toUpperCase());
 						int rowNum = Integer.parseInt(part[1]);
 						excel.getsheets(rowPumpoutData.get("Sheet_Name"));
-						System.out.println("sheet Name --- "+rowPumpoutData.get("Sheet_Name"));
-						//excel.getcell(rowNum - 1, columnNum);
-						//System.out.println(Datacolumntowrite +  "--------" + rowNum+ "-------" + columnNum);
+						System.out.println("sheet Name --- " + rowPumpoutData.get("Sheet_Name"));
+						// excel.getcell(rowNum - 1, columnNum);
+						// System.out.println(Datacolumntowrite + "--------" + rowNum+ "-------" +
+						// columnNum);
 						String Datatowrite = excel.read_data(rowNum - 1, columnNum);
-						
+
 						if (rowPumpoutData.get("Translation_Flag").equals("Y")) {
-							outputData.put(Datacolumntowrite,trans.Translation1(Datatowrite, rowPumpoutData, configFile));
-						} else {						
-							outputData.put(Datacolumntowrite, Datatowrite);		
-						}					
+							outputData.put(Datacolumntowrite,
+									trans.Translation1(Datatowrite, rowPumpoutData, configFile));
+						} else {
+							outputData.put(Datacolumntowrite, Datatowrite);
+						}
 					}
 				}
 				// outputData.UpdateRow(outputData);

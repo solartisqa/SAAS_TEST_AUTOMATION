@@ -169,7 +169,6 @@ public class TestNGCustomReportListener implements IReporter {
 					Throwable exception = testResult.getThrowable();
 					boolean hasThrowable = exception != null;
 					if (hasThrowable) {
-						@SuppressWarnings("deprecation")
 						String str = Utils.stackTrace(exception, true)[0];
 						@SuppressWarnings("resource")
 						Scanner scanner = new Scanner(str);
@@ -329,7 +328,6 @@ public class TestNGCustomReportListener implements IReporter {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	protected void generateExceptionReport(Throwable exception, ITestNGMethod method) {
 		writer.print("<div class=\"stacktrace\">");
 		writer.print(Utils.stackTrace(exception, true)[0]);

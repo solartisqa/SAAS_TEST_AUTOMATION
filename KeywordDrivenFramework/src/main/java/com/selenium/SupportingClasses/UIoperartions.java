@@ -22,7 +22,6 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -37,7 +36,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.time.StopWatch;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 
 public class UIoperartions extends browserLaunching {
 
@@ -51,6 +49,7 @@ public class UIoperartions extends browserLaunching {
 
 	// **************************************UI
 	// operations***************************************************************************
+	@SuppressWarnings("unused")
 	public void perform(PropertiesHandle config, String p, String operation, String objectType, String value,
 			String dbcolumn_name, String dataFlag, LinkedHashMap<String, String> InputData,
 			LinkedHashMap<String, String> outputData, String waitingTime)

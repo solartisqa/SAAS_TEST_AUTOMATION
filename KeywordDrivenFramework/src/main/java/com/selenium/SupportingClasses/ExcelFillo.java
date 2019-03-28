@@ -9,6 +9,7 @@ import com.codoid.products.fillo.Recordset;
 
 public class ExcelFillo {
 	private static Connection connection = null;
+	@SuppressWarnings("unused")
 	private String strQuery = null;
 	private Recordset recordset = null;
 

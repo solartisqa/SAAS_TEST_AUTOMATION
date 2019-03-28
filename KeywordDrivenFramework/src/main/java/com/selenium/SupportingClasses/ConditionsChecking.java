@@ -2,7 +2,6 @@ package com.selenium.SupportingClasses;
 
 import java.util.LinkedHashMap;
 
-import com.selenium.SupportingClasses.DatabaseOperation;
 import com.selenium.exception.DatabaseException;
 
 public class ConditionsChecking {

@@ -6,10 +6,13 @@ import com.selenium.SupportingClasses.DatabaseOperation;
 import com.selenium.SupportingClasses.ExcelOperationsJXL;
 import com.selenium.SupportingClasses.TheEventListener;
 import com.selenium.SupportingClasses.UIoperartions;
+import com.selenium.exception.APIException;
 import com.selenium.exception.DatabaseException;
 import com.selenium.exception.MacroException;
 import com.selenium.exception.POIException;
 import com.solartis.selenium.macroPackage.MacroInterface;
+import com.solartis.test.apiPackage.API;
+
 import java.awt.AWTException;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -22,7 +25,7 @@ import java.util.Map.Entry;
 
 import org.openqa.selenium.WebDriver;
 
-public class BaseDriverScript extends UIoperartions implements UIScriptsInterface {
+public class BriteCoDriverScript extends UIoperartions implements UIScriptsInterface {
 	// ***************************global objects and
 	// variables****************************************
 	protected String dbColumnNmae = null;
@@ -38,13 +41,13 @@ public class BaseDriverScript extends UIoperartions implements UIScriptsInterfac
 	public static DatabaseOperation TestScript;
 	// ==========================================================================================================================================================
 
-	public BaseDriverScript() {
+	public BriteCoDriverScript() {
 
 	}
 
 	// ===========constructor to initialize
 	// objects======================================================================================================================
-	public BaseDriverScript(PropertiesHandle configFile) throws SQLException, ClassNotFoundException {
+	public BriteCoDriverScript(PropertiesHandle configFile) throws SQLException, ClassNotFoundException {
 		this.configFile = configFile;
 		event = new TheEventListener();
 		objectLoginScript = new ExcelOperationsJXL(this.configFile.getProperty("TestScriptPath"));
@@ -64,26 +67,15 @@ public class BaseDriverScript extends UIoperartions implements UIScriptsInterfac
 
 	// ==============================================Function to
 	// login===================================================================================================
-	@SuppressWarnings("unused")
 	public void login(LinkedHashMap<String, String> InputData, LinkedHashMap<String, String> outputData)
 			throws SQLException, IOException, InterruptedException, AWTException {
+		try {
+			System.out.println("Inside for Service TEsting");
+			generateSubmissionNumberBriteCo(InputData, outputData,"BriteCo.Submission");
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException | ClassNotFoundException | APIException e) {
 
-		objectLoginScript.set_rownumber(1);
-		while (objectLoginScript.has_next_row()) {
-			if (objectLoginScript.read_data(objectLoginScript.get_rownumber(), 8).toString().equals("enabled")) {
-				String actionKeyword = objectLoginScript.read_data(objectLoginScript.get_rownumber(), 2);
-				String ObjectType = objectLoginScript.read_data(objectLoginScript.get_rownumber(), 3);
-				String PropertyString = objectLoginScript.read_data(objectLoginScript.get_rownumber(), 4);
-				String dbcolumnNmae = objectLoginScript.read_data(objectLoginScript.get_rownumber(), 5);
-				String value = objectLoginScript.read_data(objectLoginScript.get_rownumber(), 6);
-				String dataProvidingFlag = objectLoginScript.read_data(objectLoginScript.get_rownumber(), 9);
-				String waitingTime = objectLoginScript.read_data(objectLoginScript.get_rownumber(), 10);
-				System.out.println("action started");
-				// this.perform(PropertyString,actionKeyword,ObjectType,value,dbcolumnNmae,dataProvidingFlag,InputData,outputData,waitingTime);
-				System.out.println("action ended");
-
-			}
-			objectLoginScript.next_row();
+			e.printStackTrace();
 		}
 	}
 
@@ -214,7 +206,24 @@ public class BaseDriverScript extends UIoperartions implements UIScriptsInterfac
 
 	// ============================================Function to close the
 	// browser===============================================================================
-	
+	public void generateSubmissionNumberBriteCo(LinkedHashMap<String, String> inputrow, LinkedHashMap<String, String> outputrow,String classname) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, APIException, NoSuchMethodException, SecurityException, ClassNotFoundException, IOException
+	{
+		LinkedHashMap<String, String> commonMap = new LinkedHashMap<String, String>();;
+		Class<?> cl = Class.forName("com.solartis.test.apiPackage."+classname);
+		Constructor<?> cons = cl.getConstructor(com.selenium.Configuration.PropertiesHandle.class);
+		API fireEventAPI = (API) cons.newInstance(configFile);
+		String Token=fireEventAPI.tokenGenerator(configFile);	//Generates Token
+		System.out.println(Token);
+		inputrow.put("Token", Token);
+		fireEventAPI.LoadSampleRequest(inputrow);				//LOADING SAMPLE REQUEST
+		fireEventAPI.PumpDataToRequest(commonMap,inputrow);		//PUMPING TESTDATA TO SAMPLEREQUEST s
+		fireEventAPI.RequestToString(Token);					//SHOWING REQUEST IN LOG
+		fireEventAPI.AddHeaders(Token);							//ADDING HEADER || TOKENS || EVENTS FOR HITTING REQUEST
+		fireEventAPI.SendAndReceiveData();						//RECIEVING AND STORING RESPONSE TO THE FILE
+		fireEventAPI.ResponseToString();						//SHOWING RESPONSE IN LOG 
+		outputrow = fireEventAPI.SendResponseDataToFile(outputrow);
+		inputrow.put("URL", outputrow.get("URL"));
+	}
 	
 	public void generatExpectedResult(LinkedHashMap<String, String> inputrow, LinkedHashMap<String, String> outputrow)
 			throws ClassNotFoundException, MacroException, DatabaseException, POIException, InstantiationException,

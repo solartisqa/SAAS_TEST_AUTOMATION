@@ -48,6 +48,7 @@ public class UIMainscript {
 	@BeforeTest // (alwaysRun=true)
 	public void loadconfig(ITestContext context) throws DatabaseException, ClassNotFoundException, SQLException, PropertiesHandleException,
 			MalformedURLException {
+		String APIName = "";
 		System.setProperty("jsse.enableSNIExtension", "false");
 		context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(Integer.parseInt(System.getProperty("Numberofbrowser")));
 		System.out.println(System.getProperty("Project") + System.getProperty("Flow") + System.getProperty("Env")
@@ -56,11 +57,16 @@ public class UIMainscript {
 				+ System.getProperty("browser") + System.getProperty("ResultChoice") + System.getProperty("remoteIP")
 				+ System.getProperty("Port"));
 		try {
+			if(System.getProperty("Project").equalsIgnoreCase("BriteCo"))
+			{
+				APIName = "Submission";
+			}
+			System.out.println(APIName);
 			configFile = new PropertiesHandle(System.getProperty("Project"), System.getProperty("Flow"),
 					System.getProperty("Env"), System.getProperty("FlagForExecution"),
 					System.getProperty("JDBC_DRIVER"), System.getProperty("DB_URL"), System.getProperty("USER"),
 					System.getProperty("password"), System.getProperty("browser"), System.getProperty("ResultChoice"),
-					System.getProperty("remoteIP"), System.getProperty("Port"), System.getProperty("userLogin"));
+					System.getProperty("remoteIP"), System.getProperty("Port"), System.getProperty("userLogin"),APIName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -81,10 +87,19 @@ public class UIMainscript {
 			try 
 			{
 				String ExecutionChoice = configFile.getProperty("ResultsChoice");
-				BaseDriverScript objDriver = new BaseDriverScript(configFile);
+				UIScriptsInterface objDriver = new BaseDriverScript(configFile);
+				if(System.getProperty("Project").equals("BriteCo"))
+				{
+					objDriver = new BriteCoDriverScript(configFile);
+				} else {
+					objDriver = new BaseDriverScript(configFile);
+				}
 				if (ExecutionChoice.equalsIgnoreCase("ActualOnly") || ExecutionChoice.equalsIgnoreCase("ActualAndCompare") ) 
 				{
+					objDriver.login(inputrow, outputrow);
 					wdriver = objDriver.launchBrowser();
+					input.UpdateRow(RowIterator, inputrow);
+					output.UpdateRow(RowIterator, outputrow);
 				}
 				
 				System.out.println("Executing main script");
@@ -140,7 +155,7 @@ public class UIMainscript {
 		output = new DatabaseOperation();
 		outputtable = output.GetDataObjects(configFile.getProperty("outputQuery"));
 		Iterator<Entry<Integer, LinkedHashMap<String, String>>> outputtableiterator = outputtable.entrySet().iterator();
-		System.out.println("Inside Data Provider");
+		//System.out.println("Inside Data Provider");
 		int rowIterator = 0;
 		Object[][] combined = new Object[inputtable.size()][3];
 		while (inputtableiterator.hasNext()) {
