@@ -103,13 +103,14 @@ public class UIMainscript {
 				}
 				
 				System.out.println("Executing main script");
-				if (ExecutionChoice.equalsIgnoreCase("Comparison") || ExecutionChoice.equalsIgnoreCase("ExpectedOnly") ) 
-				{				
+				if (ExecutionChoice.equalsIgnoreCase("Comparison") || ExecutionChoice.equalsIgnoreCase("ExpectedOnly")|| ExecutionChoice.equalsIgnoreCase("ActualAndCompare") ) 
+				{	
+					
 					objDriver.generatExpectedResult(inputrow, outputrow);
 					output.UpdateRow(RowIterator, outputrow);
 				}
 				
-				if (ExecutionChoice.equalsIgnoreCase("ActualOnly") || ExecutionChoice.equalsIgnoreCase("ActualAndCompare") ) 
+				if (ExecutionChoice.equalsIgnoreCase("ActualOnly") || ExecutionChoice.equalsIgnoreCase("ActualAndCompare")) 
 				{
 					objDriver.executeTestScript(inputrow, outputrow);
 					output.UpdateRow(RowIterator, outputrow);
