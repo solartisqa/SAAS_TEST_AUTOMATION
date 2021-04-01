@@ -318,7 +318,8 @@ catch(StaleElementReferenceException e)
 		Thread.sleep(1000);
 	   	element.sendKeys(inputValue);
 		Thread.sleep(1000);
-	   	element.sendKeys(Keys.ENTER);		
+	   	element.sendKeys(Keys.ENTER);
+		Thread.sleep(1000);
    }   
    
    
