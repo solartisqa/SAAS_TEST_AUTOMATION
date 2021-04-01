@@ -314,7 +314,10 @@ catch(StaleElementReferenceException e)
 	   this.waitWithClickable(p, objectType);
 	   	element = driver.findElement(this.getObject(p,objectType));
 	   	element.clear();
+		element.click();
+		Thread.sleep(1000);
 	   	element.sendKeys(inputValue);
+		Thread.sleep(1000);
 	   	element.sendKeys(Keys.ENTER);		
    }   
    
